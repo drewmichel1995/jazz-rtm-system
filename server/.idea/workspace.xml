@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/DataSync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataSync.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JazzHTTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JazzHTTP.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -14,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
+            <state relative-caret-position="365">
+              <caret line="229" column="80" selection-start-line="229" selection-start-column="80" selection-end-line="229" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -113,11 +114,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/DataSync.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
-              <caret line="414" column="73" selection-start-line="414" selection-start-column="73" selection-end-line="414" selection-end-column="73" />
+            <state relative-caret-position="640">
+              <caret line="447" column="20" selection-start-line="447" selection-start-column="20" selection-end-line="447" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#911#912#0" expanded="true" />
@@ -142,7 +143,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ServiceAccountManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1813">
+            <state relative-caret-position="504">
               <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -151,7 +152,6 @@
                 <element signature="method#getJsessionId#0;class#ServiceAccountManager#0" />
                 <element signature="method#authenticate#0;class#ServiceAccountManager#0" />
                 <element signature="method#deleteAccountFromProjectArea#0;class#ServiceAccountManager#0" />
-                <element signature="method#executeGet#0;class#ServiceAccountManager#0" />
               </folding>
             </state>
           </provider>
@@ -207,10 +207,10 @@
         <option value="$PROJECT_DIR$/src/main/java/ProjectArea.java" />
         <option value="$PROJECT_DIR$/src/main/resources/test.html" />
         <option value="$PROJECT_DIR$/src/main/resources/widget.html" />
-        <option value="$PROJECT_DIR$/src/main/java/JazzHTTP.java" />
         <option value="$PROJECT_DIR$/src/main/resources/test.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/config.cfg" />
         <option value="$PROJECT_DIR$/src/main/java/DataSync.java" />
+        <option value="$PROJECT_DIR$/src/main/java/JazzHTTP.java" />
       </list>
     </option>
   </component>
@@ -293,7 +293,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578510000030" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578516325952" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -529,46 +529,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/widget.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="200" lean-forward="true" selection-start-line="200" selection-end-line="200" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceAccountManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1813">
-          <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#499#500#0" expanded="true" />
-            <element signature="e#533#534#0" expanded="true" />
-            <element signature="method#getJsessionId#0;class#ServiceAccountManager#0" />
-            <element signature="method#authenticate#0;class#ServiceAccountManager#0" />
-            <element signature="method#deleteAccountFromProjectArea#0;class#ServiceAccountManager#0" />
-            <element signature="method#executeGet#0;class#ServiceAccountManager#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Config.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -588,8 +548,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DataSync.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="414" column="73" selection-start-line="414" selection-start-column="73" selection-end-line="414" selection-end-column="73" />
+        <state relative-caret-position="640">
+          <caret line="447" column="20" selection-start-line="447" selection-start-column="20" selection-end-line="447" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#911#912#0" expanded="true" />
@@ -597,6 +557,45 @@
             <element signature="method#JSONtoProjectArea#0;class#DataSync#0" />
             <element signature="method#getProjectJSON#0;class#DataSync#0" />
             <element signature="method#executePost#0;class#DataSync#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceAccountManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#499#500#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
+            <element signature="method#getJsessionId#0;class#ServiceAccountManager#0" />
+            <element signature="method#authenticate#0;class#ServiceAccountManager#0" />
+            <element signature="method#deleteAccountFromProjectArea#0;class#ServiceAccountManager#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/widget.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="200" lean-forward="true" selection-start-line="200" selection-end-line="200" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="229" column="80" selection-start-line="229" selection-start-column="80" selection-end-line="229" selection-end-column="80" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
