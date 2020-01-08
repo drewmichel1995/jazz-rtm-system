@@ -1,17 +1,10 @@
 import java.io.*;
 
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.json.*;
-import spark.Request;
 import spark.Response;
 
-import static j2html.TagCreator.*;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
@@ -145,7 +138,16 @@ public class JazzHTTP {
         get("/getWidget", (req, res) -> {
 
             System.out.println("Received Request /getWidget");
-            String file = "test.html";
+            String file = "test.xml";
+            getRes(res, "text/xml");
+
+            return readBytes(file);
+        });
+
+        get("/getHTMLWidget", (req, res) -> {
+
+            System.out.println("Received Request /getHTMLWidget");
+            String file = "widget.html";
             getRes(res, "text/html");
 
             return readBytes(file);
