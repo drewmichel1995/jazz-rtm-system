@@ -381,9 +381,9 @@ public class DataSync {
         while(!next.equals("")){
             String result = executeGet(next);
             System.out.println(next);
-
+            JSONObject jsonObject = XML.toJSONObject(result);
             try{
-                JSONObject jsonObject = XML.toJSONObject(result);
+
 
                 JSONArray jsonArtifacts = jsonObject.getJSONObject("ds:dataSource").getJSONArray("ds:artifact");
 
@@ -443,7 +443,8 @@ public class DataSync {
 
 
             } catch (Exception e) {
-                e.printStackTrace();
+               // e.printStackTrace();
+                System.out.println(jsonObject.toString());
             }
         }
 
