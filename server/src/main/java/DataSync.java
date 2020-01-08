@@ -444,7 +444,9 @@ public class DataSync {
 
             } catch (Exception e) {
                // e.printStackTrace();
-                System.out.println(jsonObject.toString());
+               // System.out.println(jsonObject.toString());
+                System.out.println("----------------------------------------------------------------------------------");
+                e.printStackTrace();
             }
         }
 
