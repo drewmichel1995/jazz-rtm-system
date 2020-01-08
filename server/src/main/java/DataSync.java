@@ -443,10 +443,6 @@ public class DataSync {
 
 
             } catch (Exception e) {
-
-                ServiceAccountManager svc = new ServiceAccountManager();
-                svc.
-
                 System.out.println("----------------------------------------------------------------------------------");
                 e.printStackTrace();
             }
