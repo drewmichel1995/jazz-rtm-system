@@ -395,7 +395,7 @@ public class DataSync {
                 for(int i = 0; i < jsonArtifacts.length(); i++){
                     JSONObject obj = jsonArtifacts.getJSONObject(i);
 
-                    String name = obj.getJSONObject("rrm:title").getString("content");
+                    String name = obj.getJSONObject("rrm:title").get("content").toString();
                     String id = Integer.toString(obj.getJSONObject("rrm:identifier").getInt("content"));
                     String artifactType = obj.getJSONObject("rrm:collaboration").getJSONObject("rrm:attributes").getJSONObject("attribute:objectType").getString("attribute:name");
                     String itemId = obj.getString("attribute:itemId");
