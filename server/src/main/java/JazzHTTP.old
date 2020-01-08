@@ -1,0 +1,995 @@
+import java.io.*;
+
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.HttpURLConnection;
+import java.net.HttpCookie;
+import java.net.URL;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.*;
+import com.mongodb.client.MongoClient;
+import org.json.*;
+
+import org.bson.Document;
+
+import static com.mongodb.client.model.Filters.eq;
+import static j2html.TagCreator.*;
+import static spark.Spark.get;
+import static spark.Spark.post;
+
+public class JazzHTTP {
+
+    public static void main(String[] args) {
+
+        MongoClient mongoClient = MongoClients.create();
+        //MongoClient mongoClient = MongoClients.create("mongodb://mbse-appld10.corp.saic.com");
+        MongoDatabase database = mongoClient.getDatabase("admin");
+        MongoCollection<Document> collection = database.getCollection("projectAreas");
+
+        get("/getCollection/:projectURI", (req, res) -> {
+            System.out.println("Received Request /getCollection");
+            String projectURI = req.params(":projectURI");
+            BasicDBObject whereQuery = new BasicDBObject();
+            whereQuery.put("ProjectAreaProjectURI", projectURI);
+            Document documents1 = collection.find(whereQuery).first();
+            JSONObject ret = new JSONObject(documents1.toJson());
+            drawHTML(loadDataFromJSON(ret), loadDataFromJSON(ret), "table.html", "name");
+            res.status(200);
+            res.type("text/html");
+            res.header("Access-Control-Allow-Origin", "*");
+            System.out.println("Leaving /getCollection");
+            return readBytes("table.html");
+        });
+
+        get("/getScope/:projectURI", (req, res) -> {
+            System.out.println("Received Request /getScope");
+            String projectURI = req.params(":projectURI");
+            BasicDBObject whereQuery = new BasicDBObject();
+            whereQuery.put("ProjectAreaProjectURI", projectURI);
+            Document documents1 = collection.find(whereQuery).first();
+            JSONObject ret = new JSONObject(documents1.toJson());
+            res.status(200);
+            res.type("application/json");
+            res.header("Access-Control-Allow-Origin", "*");
+            System.out.println("Leaving /getScope");
+            return getParentFolders(loadDataFromJSON(ret));
+        });
+
+        get("/getDependencies/:projectURI", (req, res) -> {
+            System.out.println("Received Request /getDependencies");
+            String projectURI = req.params(":projectURI");
+            BasicDBObject whereQuery = new BasicDBObject();
+            whereQuery.put("ProjectAreaProjectURI", projectURI);
+            Document documents1 = collection.find(whereQuery).first();
+            JSONObject ret = new JSONObject(documents1.toJson());
+            System.out.println("Accessing Data for " + ret.getString("ProjectAreaName"));
+            res.status(200);
+            res.type("application/json");
+            res.header("Access-Control-Allow-Origin", "*");
+            System.out.println("Leaving /getDependencies");
+            return getLinkTypes(loadDataFromJSON(ret));
+        });
+
+        get("/getArtifactTypes/:projectURI", (req, res) -> {
+            System.out.println("Received Request /getArtifactTypes");
+            String projectURI = req.params(":projectURI");
+            BasicDBObject whereQuery = new BasicDBObject();
+            whereQuery.put("ProjectAreaProjectURI", projectURI);
+            Document documents1 = collection.find(whereQuery).first();
+            JSONObject ret = new JSONObject(documents1.toJson());
+            res.status(200);
+            res.type("application/json");
+            res.header("Access-Control-Allow-Origin", "*");
+            System.out.println("Leaving /getArtifactTypes");
+            return getArtifactTypes(loadDataFromJSON(ret));
+        });
+
+        get("/getHeaderDisplay/:projectURI", (req, res) -> {
+            System.out.println("Received Request /getHeaderDisplay");
+            res.status(200);
+            res.type("application/json");
+            res.header("Access-Control-Allow-Origin", "*");
+            System.out.println("Leaving /getHeaderDisplay");
+            return new JSONArray("[\n" +
+                    " { \"name\": \"ID\" },\n" +
+                    " { \"name\": \"Name\"}\n" +
+                    "]");
+        });
+
+        post("/getTable/:projectURI", (req, res) -> {
+            String file = "";
+            try{
+                System.out.println("Received Request /getTable");
+                String projectURI = req.params(":projectURI");
+                System.out.println(req.body());
+                file = drawFilteredTable(projectURI, req.body(), collection);
+
+                res.status(200);
+                res.type("text/html");
+                res.header("Access-Control-Allow-Origin", "*");
+                System.out.println("Leaving /getTable");
+            }catch(Exception ex){
+                System.out.println(ex.toString());
+            }
+
+            return readBytes(file);
+        });
+
+
+    }
+
+    private static String drawFilteredTable(String projectURI, String body, MongoCollection<Document> collection){
+        BasicDBObject whereQuery = new BasicDBObject();
+        whereQuery.put("ProjectAreaProjectURI", projectURI);
+        Document documents1 = collection.find(whereQuery).first();
+        JSONObject projectArea = new JSONObject(documents1.toJson());
+        JSONObject scopes = new JSONObject(body);
+        JSONArray jRows = scopes.getJSONArray("rows");
+        JSONArray jCols = scopes.getJSONArray("columns");
+        JSONArray jRowTypes = scopes.getJSONArray("rowTypes");
+        JSONArray jColTypes = scopes.getJSONArray("columnTypes");
+        JSONArray jDependencies = scopes.getJSONArray("dependencies");
+        String showHeaders = scopes.getString("showHeader");
+        ArrayList<Artifact> rows = filterParentFolders(loadDataFromJSON(projectArea), JSONArrayToArrayList(jRows, "name"));
+        ArrayList<Artifact> columns = filterParentFolders(loadDataFromJSON(projectArea), JSONArrayToArrayList(jCols, "name"));
+        rows = filterArtifactTypes(rows, JSONArrayToArrayList(jRowTypes, "name"));
+        columns = filterArtifactTypes(columns, JSONArrayToArrayList(jColTypes, "name"));
+        rows = filterDependencies(rows, JSONArrayToArrayList(jDependencies, "name"));
+        columns = filterDependencies(columns, JSONArrayToArrayList(jDependencies, "name"));
+        String fileName = generateFilename(".html");
+        System.out.println("Num Columns: " + columns.size());
+        System.out.println("Num Rows: " + rows.size());
+        drawHTML(columns, rows, fileName, showHeaders);
+        return fileName;
+    }
+
+    private static ArrayList<Artifact> filterParentFolders(ArrayList<Artifact> artifacts, ArrayList<String> parentFolders){
+        ArrayList<Artifact> filteredArtifacts = new ArrayList<>();
+
+        if(parentFolders.size() < 1) return artifacts;
+
+        for(Artifact a: artifacts)
+            if (parentFolders.contains(a.parentFolder)) filteredArtifacts.add(a);
+
+        return filteredArtifacts;
+    }
+
+    private static ArrayList<Artifact> filterArtifactTypes(ArrayList<Artifact> artifacts, ArrayList<String> artifactTypes){
+        ArrayList<Artifact> filteredArtifacts = new ArrayList<>();
+
+        if(artifactTypes.size() < 1) return artifacts;
+
+        for(Artifact a: artifacts)
+            if (artifactTypes.contains(a.artifactType)) filteredArtifacts.add(a);
+
+        return filteredArtifacts;
+    }
+
+    private static ArrayList<Artifact> filterDependencies(ArrayList<Artifact> artifacts, ArrayList<String> dependencies){
+        ArrayList<Artifact> filteredArtifacts = new ArrayList<>();
+        if(dependencies.size() < 1) return artifacts;
+        for(Artifact a: artifacts)
+            for(Link l: a.links)
+                if (dependencies.contains(l.linkType) && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
+
+        return filteredArtifacts;
+    }
+
+    private static ArrayList<String> JSONArrayToArrayList(JSONArray array, String key){
+        ArrayList<String> list = new ArrayList<>();
+        for(int i = 0; i < array.length(); i++){
+            String name = array.getJSONObject(i).getString(key);
+            list.add(name);
+        }
+        return list;
+    }
+
+    private static JSONArray getArtifactTypes(ArrayList<Artifact> artifacts){
+        JSONArray artifactTypes = new JSONArray();
+        ArrayList<String> uniqueTypes = new ArrayList<>();
+        for(Artifact a: artifacts){
+            if(!uniqueTypes.contains(a.artifactType)){
+                uniqueTypes.add(a.artifactType);
+                artifactTypes.put(new JSONObject().put("name", a.artifactType));
+            }
+        }
+
+        return artifactTypes;
+    }
+
+    private static JSONArray getLinkTypes(ArrayList<Artifact> artifacts){
+        JSONArray linkTypes = new JSONArray();
+        ArrayList<String> uniqueLinks = new ArrayList<>();
+        for(Artifact a: artifacts){
+            for(Link l: a.links){
+                if(!uniqueLinks.contains(l.linkType)){
+                    uniqueLinks.add(l.linkType);
+                    linkTypes.put(new JSONObject().put("name", l.linkType));
+                }
+            }
+
+        }
+
+        return linkTypes;
+    }
+
+    private static JSONArray getParentFolders(ArrayList<Artifact> artifacts){
+        JSONArray parentFolders = new JSONArray();
+        ArrayList<String> uniqueParents = new ArrayList<>();
+        for(Artifact a: artifacts){
+            if(!uniqueParents.contains(a.parentFolder)){
+                uniqueParents.add(a.parentFolder);
+                parentFolders.put(new JSONObject().put("name", a.parentFolder));
+            }
+        }
+
+        return parentFolders;
+    }
+
+    private static void drawHTML(ArrayList<Artifact> columns, ArrayList<Artifact> rows, String filename, String showHeaders){
+        boolean stupidShowName = true;
+        if(showHeaders.equals("ID")){
+            stupidShowName = false;
+        }
+        final boolean showName = stupidShowName;
+        try{
+            FileWriter fileWriter = new FileWriter(filename);
+
+            fileWriter.write(getCSS());
+
+            table().withClass("table-resizable").with(
+                    thead().with(
+                            th(" ").withClass("deadCell"),
+                            th(" ").withClass("deadCell"),
+                            //Column Headers
+                            each(columns, i -> th(
+                                    a(div(div(iffElse(showName, i.name, i.id)))).withHref(i.url)
+                            ).withClasses("rotate", "context-header"))
+                    ),
+                    tbody(
+                            tr(th("").withClass("deadCell"),td("").withClass("edgeCountCell"),
+                                    //Column count cell
+                                    each(columns, i -> td(Integer.toString(i.links.size())).withClass("colCountCell"))),
+                            //Row Header
+                            each(rows, i -> tr(
+                                    th(a(div(div(iffElse(showName, i.name, i.id)).withClass("row-header-holder"))).withHref(i.url)).withClass("row-header"),
+                                    //Row count cell
+                                    td(Integer.toString(i.links.size())).withClass("rowCountCell"),
+                                    //Cell Creation j = columns
+                                    each(columns, j -> td(
+                                            each(j.links, l -> iffElse(i.itemId.equals(l.id), span().withClass("arrow"), span()))
+                                            )
+                                    ))
+                            )
+                    )
+            ).render(fileWriter);
+            fileWriter.close();
+
+        }catch(Exception ex){
+
+        }
+    }
+
+    private static ArrayList<String> getStringListCount(ArrayList<Artifact> artifacts){
+        ArrayList<String> returnList = new ArrayList<>();
+
+        ArrayList<String> parentFolderList = new ArrayList<>();
+        for(int i = 0; i < artifacts.size(); i++){
+            if(!parentFolderList.contains(artifacts.get(i).parentFolder)){
+                parentFolderList.add(artifacts.get(i).parentFolder);
+            }
+        }
+
+        parentFolderList.forEach(p -> {
+            try{
+                int total = 0;
+                for(int i = 0; i < artifacts.size(); i++){
+                    if(artifacts.get(i).parentFolder.equals(p)){
+                        total = total+1;
+                    }
+                }
+                if(total < 50){
+                  returnList.add(p);
+                }
+
+            }catch(Exception ex){
+            }
+        });
+        return returnList;
+    }
+
+    private static ArrayList<Artifact> loadDataFromJSON(ArrayList<JSONObject> projects){
+        JSONObject project = projects.get(0);
+        JSONArray tempArtifacts = project.getJSONArray("artifacts");
+
+        ArrayList<Artifact> artifacts = new ArrayList<>();
+
+        for(int i = 0; i < tempArtifacts.length(); i++){
+            JSONObject temp = tempArtifacts.getJSONObject(i);
+            JSONArray links = temp.getJSONArray("links");
+
+            Artifact tempArtifact = new Artifact(temp.getString("ArtifactType"), temp.getString("ArtifactID"), temp.getString("ArtifactItemID"), temp.getString("ArtifactName"), temp.getString("ArtifactParentFolder"), temp.getString("ArtifactURL"));
+
+            for(int j = 0; j < links.length(); j++){
+                JSONObject tempLink = links.getJSONObject(j);
+                boolean isParentLink = tempLink.getBoolean("LinkIsParentLink");
+                boolean isChildLink = tempLink.getBoolean("LinkIsChildLink");
+                String linkCategory = tempLink.getString("LinkCategory");
+                String linkType = tempLink.getString("LinkType");
+                String linkId = tempLink.getString("LinkID");
+
+                tempArtifact.addLink(new Link(linkId, linkType, linkCategory, isChildLink, isParentLink));
+            }
+
+            if(tempArtifact.links.size() > 0){
+                artifacts.add(tempArtifact);
+            }
+        }
+        ArrayList<String> parentFolderList = getStringListCount(artifacts);
+        ArrayList<Artifact> retArtifacts = new ArrayList<>();
+        for(Artifact a : artifacts){
+            if(parentFolderList.contains(a.parentFolder)){
+                retArtifacts.add(a);
+            }
+        }
+        artifacts = new ArrayList<>();
+        for(Artifact a : retArtifacts){
+            boolean add = false;
+            for (Link l : a.links){
+                for (Artifact b : retArtifacts){
+                    if (l.id.equals(b.itemId)) {
+                        add = true;
+                    }
+                }
+            }
+            if(add){
+                artifacts.add(a);
+            }
+        }
+
+        return artifacts;
+    }
+
+    private static ArrayList<Artifact> loadDataFromJSON(JSONObject project){
+        JSONArray tempArtifacts = project.getJSONArray("artifacts");
+
+        ArrayList<Artifact> artifacts = new ArrayList<>();
+
+        for(int i = 0; i < tempArtifacts.length(); i++){
+            JSONObject temp = tempArtifacts.getJSONObject(i);
+            JSONArray links = temp.getJSONArray("links");
+
+            Artifact tempArtifact = new Artifact(temp.getString("ArtifactType"), temp.getString("ArtifactID"), temp.getString("ArtifactItemID"), temp.getString("ArtifactName"), temp.getString("ArtifactParentFolder"), temp.getString("ArtifactURL"));
+
+            for(int j = 0; j < links.length(); j++){
+                JSONObject tempLink = links.getJSONObject(j);
+                boolean isParentLink = tempLink.getBoolean("LinkIsParentLink");
+                boolean isChildLink = tempLink.getBoolean("LinkIsChildLink");
+                String linkCategory = tempLink.getString("LinkCategory");
+                String linkType = tempLink.getString("LinkType");
+                String linkId = tempLink.getString("LinkID");
+
+                tempArtifact.addLink(new Link(linkId, linkType, linkCategory, isChildLink, isParentLink));
+            }
+
+            if(tempArtifact.links.size() > 0) artifacts.add(tempArtifact);
+        }
+        ArrayList<String> parentFolderList = getStringListCount(artifacts);
+        ArrayList<Artifact> retArtifacts = new ArrayList<>();
+
+        for(Artifact a : artifacts)
+            if (parentFolderList.contains(a.parentFolder)) retArtifacts.add(a);
+
+        artifacts = new ArrayList<>();
+
+        for(Artifact a : retArtifacts){
+            boolean add = false;
+            for (Link l : a.links)
+                for (Artifact b : retArtifacts)
+                    if (l.id.equals(b.itemId))
+                        add = true;
+
+            if(add)
+                artifacts.add(a);
+
+        }
+
+        return artifacts;
+    }
+
+    private static ArrayList<JSONObject> loadDataFromMongo(MongoCollection<Document> collection){
+        List<Document> documents = collection.find(eq("ProjectAreaProjectURI")).into(new ArrayList<>());
+
+        System.out.println("DOCUMENTS SIZE: " + documents.size());
+        ArrayList<JSONObject> projects = new ArrayList<>();
+        for(Document document : documents){
+            JSONObject temp = new JSONObject(document.toJson());
+            projects.add(temp);
+        }
+        return projects;
+    }
+
+    private static void insertDataToMongo(MongoCollection<Document> collection){
+        ArrayList<ProjectArea> projectAreas = getProjectAreas();
+        ArrayList<JSONObject> formattedProjects = getProjectJSON(projectAreas);
+        ArrayList<Document> documents = new ArrayList<>();
+        for (JSONObject p : formattedProjects) {
+            documents.add(Document.parse(p.toString()));
+        }
+        collection.insertMany(documents);
+    }
+
+    private static String getCSS(){
+        return "<style>\n" +
+                "\n" +
+                "span.arrow::after {\n" +
+                "  content: \"\\2197\";\n" +
+                "  text-align: center;\n" +
+                "  padding: 0px;\n" +
+                "}\n" +
+                "\n" +
+                "table, td, th { \n" +
+                "\tborder: 1px solid black;\n" +
+                "    border-collapse: collapse;\n" +
+                "    border-width: 1px;\n" +
+                "    table-layout: fixed;\n" +
+                "\ttext-align: center;\n" +
+                "\tempty-cells: show;\n" +
+                "}\n" +
+                "\n" +
+                "tr {\n" +
+                "\theight: 20px;\n" +
+                "}\n" +
+                "\n" +
+                "td:hover {\n" +
+                "  background-color: gainsboro;\n" +
+                "}\n" +
+                "\n" +
+                "th.rotate {\n" +
+                "\toverflow: visible;\n" +
+                "\tborder-right: 1px solid #ccc;\n" +
+                "\twidth: 20px;\n" +
+                "\theight: 140px;\n" +
+                "\twhite-space: nowrap;\n" +
+                "\tfont-size: 15px;\n" +
+                "}\n" +
+                "\n" +
+                "/*For column header label and tool tip containers*/\n" +
+                "th.rotate>a>div {\n" +
+                "\ttransform:   \n" +
+                "\ttranslate(0px, 55px)\n" +
+                "\trotate(270deg);\n" +
+                "\twidth: 20px;\n" +
+                "\ttext-overflow: ellipsis;\n" +
+                "\toverflow: visible;\n" +
+                "}\n" +
+                "\n" +
+                "/*For column header labels*/\n" +
+                "th.rotate>a>div>div {\n" +
+                "\twidth: 130px;\n" +
+                "\ttext-align: left;\n" +
+                "\twhite-space: nowrap;\n" +
+                "\ttext-overflow: ellipsis;\n" +
+                "\toverflow: hidden;\n" +
+                "}\n" +
+                "\n" +
+                "/*For the row-header tooltips*/\n" +
+                "  div.row-header-holder {\n" +
+                "\ttext-overflow: ellipsis;\n" +
+                "\t\n" +
+                "\tmax-width: 140px\n" +
+                "\toverflow:hidden;  \n" +
+                "\ttext-align: left;\n" +
+                "\twhite-space: no-wrap;\n" +
+                "\t\n" +
+                "}\n" +
+                "\n" +
+                "th.row-header {\n" +
+                "\tmax-width: 140px\n" +
+                "\toverflow:hidden;  \n" +
+                "\ttext-align: left;\n" +
+                "\twhite-space: no-wrap;\n" +
+                "}\n" +
+                "\n" +
+                ".rowCountCell {\n" +
+                "\tbackground-color: gainsboro;\n" +
+                "\tfont-size: 15px;\n" +
+                "\tborder-left: ridge;\n" +
+                "\tborder-right: ridge;\n" +
+                "\ttext-align: center;\n" +
+                "}\n" +
+                "\n" +
+                ".colCountCell {\n" +
+                "\tbackground-color: gainsboro;\n" +
+                "\tfont-size: 15px;\n" +
+                "\tborder-top: ridge;\n" +
+                "\tborder-bottom: ridge;\n" +
+                "\ttext-align: center;\n" +
+                "}\n" +
+                "\n" +
+                ".edgeCountCell {\n" +
+                "\tbackground-color: gainsboro;\n" +
+                "\tfont-size: 15px;\n" +
+                "\tborder-top: ridge;\n" +
+                "\tborder-left: ridge;\n" +
+                "\tpadding: 10px 10px;\n" +
+                "\ttext-align: center;\n" +
+                "}\n" +
+                "\n" +
+                "th.deadCell {\n" +
+                "\tborder-style: none;\n" +
+                "}\n" +
+                "\n" +
+                ".table-resizable {\n" +
+                "\t&.resizing {\n" +
+                "\t\tcursor: col-resize;\n" +
+                "\t\tuser-select: none;\n" +
+                "\t}\n" +
+                "\t\n" +
+                "\tth {\n" +
+                "\t\tposition: relative;\n" +
+                "\n" +
+                "\t\t// Show resize curson when hovering over column borders\n" +
+                "\t\t&::before {\n" +
+                "\t\t\t@extend .table-resizable.resizing;\n" +
+                "\t\t\tcontent: '';\n" +
+                "\t\t\tdisplay: block;\n" +
+                "\t\t\theight: 100%;\n" +
+                "\t\t\tposition: absolute;\n" +
+                "\t\t\tright: 0;\n" +
+                "\t\t\ttop: 0;\n" +
+                "\t\t\t\n" +
+                "\t\t}\n" +
+                "\n" +
+                "\t\t&:last-of-type::before {\n" +
+                "\t\t\tdisplay: none;\n" +
+                "\t\t}\n" +
+                "\t}\n" +
+                "\n" +
+                "\t// Add `th` to the selector below to allow shrinking a column all the way\n" +
+                "\ttd {\n" +
+                "\t\tmax-width: 0;\n" +
+                "\t\toverflow: hidden;\n" +
+                "\t\ttext-overflow: ellipsis;\n" +
+                "\t\twhite-space: nowrap;\n" +
+                "\t}\n" +
+                "}\n" +
+                "\n" +
+                "</style>";
+    }
+
+    private static ArrayList<JSONObject> getProjectJSON(ArrayList<ProjectArea> projectAreas){
+        ArrayList<JSONObject> formattedProjects = new ArrayList<>();
+        projectAreas.forEach(p -> {
+            JSONObject project = new JSONObject();
+            project.put("ProjectAreaName", p.name);
+            project.put("ProjectAreaProjectURI", p.projectUri);
+            project.put("ProjectAreaURL", p.url);
+
+            System.out.println("Project Area       : " + p.name);
+            System.out.println("Number of Artifacts: " + p.artifacts.size());
+
+            JSONArray artifactArray = new JSONArray();
+            p.artifacts.forEach(a -> {
+                JSONObject artifactObj = new JSONObject();
+                artifactObj.put("ArtifactName", a.name);
+                artifactObj.put("ArtifactParentFolder", a.parentFolder);
+                artifactObj.put("ArtifactID", a.id);
+                artifactObj.put("ArtifactItemID", a.itemId);
+                artifactObj.put("ArtifactType", a.artifactType);
+                artifactObj.put("ArtifactURL", a.url);
+
+                JSONArray linkArray = new JSONArray();
+                a.links.forEach(l -> {
+                    JSONObject linkObj = new JSONObject();
+                    linkObj.put("LinkID", l.id);
+                    linkObj.put("LinkType", l.linkType);
+                    linkObj.put("LinkCategory", l.linkCategory);
+                    linkObj.put("LinkIsChildLink", l.isChildLink);
+                    linkObj.put("LinkIsParentLink", l.isParentLink);
+
+                    linkArray.put(linkObj);
+                });
+
+                artifactObj.put("links", linkArray);
+                artifactArray.put(artifactObj);
+            });
+            project.put("artifacts", artifactArray);
+
+            formattedProjects.add(project);
+
+            //String jsonPrettyPrintString = project.toString(4);
+            //System.out.println(jsonPrettyPrintString);
+
+
+            //try{
+            //    //BufferedWriter writer = new BufferedWriter(new FileWriter(p.name + "-formatted.txt"));
+            //    //writer.write(jsonPrettyPrintString);
+            //   // writer.close();
+            //}catch(Exception ex){
+            //    ex.printStackTrace();
+            //}
+        });
+
+        return formattedProjects;
+    }
+
+    private static ArrayList<ProjectArea> getProjectAreas(){
+        JSONObject data = new JSONObject("{}");
+        try{
+            //Sign in
+
+            executePost("https://mbse-jtsdev.saic.com:9443/jts/j_security_check");
+
+            String result = executeGet("https://mbse-rmdev.saic.com:9443/rm/process/project-areas");
+            try{
+                BufferedWriter writer = new BufferedWriter(new FileWriter("projectAreas.txt"));
+                writer.write(result);
+                writer.close();
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+            data = XML.toJSONObject(result);
+
+            //String jsonPrettyPrintString = data.toString(4);
+            //System.out.println(jsonPrettyPrintString);
+        }catch(Exception ex){
+            System.out.println("BROKED");
+        }
+
+        ArrayList<ProjectArea> projectAreas = new ArrayList<>();
+
+        JSONArray projectAreasData = data.getJSONObject("jp06:project-areas").getJSONArray("jp06:project-area");
+        for(int i =0; i < projectAreasData.length(); i++){
+            String url = projectAreasData.getJSONObject(i).getString("jp06:url");
+            String name = projectAreasData.getJSONObject(i).getString("jp06:name");
+            String projectUri = url.split("/")[6];
+            projectAreas.add(new ProjectArea(url, name, projectUri));
+        }
+
+        return getArtifacts(projectAreas);
+    }
+
+    private static ArrayList<ProjectArea> getArtifacts(ArrayList<ProjectArea> projectAreas){
+        projectAreas.forEach(p -> {
+            String url = "https://mbse-rmdev.saic.com:9443/rm/publish/resources?projectURI=" + p.projectUri + "&size=500";
+            String result = executeGet(url);
+
+            try{
+                JSONObject jsonObject =  XML.toJSONObject(result);
+                String jsonPrettyPrintString = jsonObject.toString(4);
+                //System.out.println(jsonPrettyPrintString);
+
+
+                try{
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(p.name + ".txt"));
+                    writer.write(jsonPrettyPrintString);
+                    writer.close();
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+
+
+                JSONArray artifacts = jsonObject.getJSONObject("ds:dataSource").getJSONArray("ds:artifact");
+                String next = "";
+                try{
+                    next = jsonObject.getJSONObject("ds:dataSource").getString("href");
+                }catch(Exception ex){
+                    next = "";
+                }
+
+                for(int i = 0; i < artifacts.length(); i++){
+                    JSONObject obj = artifacts.getJSONObject(i);
+
+                    String name = obj.getJSONObject("rrm:title").getString("content");
+                    String id = Integer.toString(obj.getJSONObject("rrm:identifier").getInt("content"));
+                    String artifactType = obj.getJSONObject("rrm:collaboration").getJSONObject("rrm:attributes").getJSONObject("attribute:objectType").getString("attribute:name");
+                    String itemId = obj.getString("attribute:itemId");
+                    String parentFolder;
+                    String artifactUrl = obj.getString("rrm:about");
+                    Artifact artifact = new Artifact("","","","","", "");
+                    try{
+                        parentFolder = obj.getJSONObject("ds:location").getJSONObject("ds:parentFolder").getString("rrm:title");
+                        artifact = new Artifact(artifactType, id, itemId, name, parentFolder, artifactUrl);
+                    }catch(JSONException ex){ }
+
+                    try{
+                        JSONArray jsonLinks = obj.getJSONObject("ds:traceability").getJSONObject("ds:links").getJSONArray("ds:Link");
+                        //String id, String linkType, String linkCategory, String isChildLink, String isParentLink
+                        for(int j = 0; j < jsonLinks.length(); j++){
+                            JSONObject linkObj = jsonLinks.getJSONObject(j);
+                            String linkId = linkObj.getString("rrm:relation");
+                            linkId = linkId.substring(linkId.lastIndexOf('/') + 1);
+                            String linkType = linkObj.getString("rrm:title");
+                            String linkCategory = linkObj.getString("type");
+                            boolean isChildLink = false;
+                            boolean isParentLink = false;
+
+                            artifact.addLink(new Link(linkId, linkType, linkCategory, isChildLink, isParentLink));
+                        }
+
+                    }catch(Exception ex){
+                        try{
+                            JSONObject linkObj = obj.getJSONObject("ds:traceability").getJSONObject("ds:links").getJSONObject("ds:Link");
+                            String linkId = linkObj.getString("rrm:relation");
+                            linkId = linkId.substring(linkId.lastIndexOf('/') + 1);
+                            String linkType = linkObj.getString("rrm:title");
+                            String linkCategory = linkObj.getString("type");
+                            boolean isChildLink = false;
+                            boolean isParentLink = false;
+                            artifact.addLink(new Link(linkId, linkType, linkCategory, isChildLink, isParentLink));
+                        }catch(Exception ex2){ }
+                    }
+
+                    if(!artifact.parentFolder.equals("")){
+                        p.addArtifact(artifact);
+                    }
+
+                }
+
+                if(!next.equals("")){
+                    p.setArtifacts(artifactPagination(p.artifacts, next));
+                }
+            } catch (Exception e) {
+                //e.printStackTrace();
+            }
+
+        });
+
+        return projectAreas;
+    }
+
+    private static String executePost(String targetURL) throws Exception{
+        HttpURLConnection connection = null;
+
+        try {
+            //Create connection
+            CookieManager cookieManager = new CookieManager();
+            CookieHandler.setDefault(cookieManager);
+
+
+            URL url = new URL(targetURL);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+
+            connection.setUseCaches(false);
+            connection.setDoOutput(true);
+
+            //Send request
+            DataOutputStream wr = new DataOutputStream (connection.getOutputStream());
+            wr.writeBytes("j_username=michell&j_password=michell");
+            wr.flush();
+            wr.close();
+
+            //Get Response
+            InputStream is = connection.getInputStream();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+                response.append('\r');
+            }
+            rd.close();
+
+            List<HttpCookie> cookies = cookieManager.getCookieStore().getCookies();
+            int code =  connection.getResponseCode();
+
+            return response.toString();
+            //return Integer.toString(code);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    private static String executeGet(String targetURL) {
+        HttpURLConnection connection = null;
+
+        try {
+            URL url = new URL(targetURL);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            connection.setUseCaches(false);
+            connection.setDoOutput(true);
+
+            //Get Response
+            InputStream is = connection.getInputStream();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+                response.append('\r');
+            }
+            rd.close();
+            return response.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    private static class ProjectArea {
+        String url;
+        String name;
+        String projectUri;
+        ArrayList<Artifact> artifacts;
+
+        private ProjectArea(String url, String name, String projectUri){
+            this.url = url;
+            this.name = name;
+            this.projectUri = projectUri;
+            this.artifacts = new ArrayList<>();
+        }
+
+        private void addArtifact(Artifact artifact){
+            this.artifacts.add(artifact);
+        }
+
+        private void setArtifacts(ArrayList<Artifact> artifacts){
+            this.artifacts = new ArrayList<>();
+            this.artifacts = artifacts;
+        }
+    }
+
+    private static class Artifact {
+        String artifactType;
+        String id;
+        String itemId;
+        String name;
+        String parentFolder;
+        String url;
+        ArrayList<Link> links;
+
+        private Artifact(String artifactType, String id, String itemId, String name, String parentFolder, String url){
+            this.artifactType = artifactType;
+            this.id = id;
+            this.itemId = itemId;
+            this.name = name;
+            this.parentFolder = parentFolder;
+            this.url = url;
+            this.links = new ArrayList<>();
+        }
+
+        private void addLink(Link link){
+            this.links.add(link);
+        }
+    }
+
+    private static class Link{
+        String id;
+        String linkType;
+        String linkCategory;
+        boolean isChildLink;
+        boolean isParentLink;
+
+        private Link(String id, String linkType, String linkCategory, boolean isChildLink, boolean isParentLink){
+            this.id = id;
+            this.linkType = linkType;
+            this.linkCategory = linkCategory;
+            this.isChildLink = isChildLink;
+            this.isParentLink = isParentLink;
+        }
+    }
+
+    private static ArrayList<Artifact> artifactPagination(ArrayList<Artifact> artifacts, String next){
+
+        while(!next.equals("")){
+            String result = executeGet(next);
+            System.out.println(next);
+
+            try{
+                JSONObject jsonObject = XML.toJSONObject(result);
+
+                JSONArray jsonArtifacts = jsonObject.getJSONObject("ds:dataSource").getJSONArray("ds:artifact");
+
+                try{
+                    next = jsonObject.getJSONObject("ds:dataSource").getString("href");
+                }catch(Exception ex){
+                    next = "";
+                }
+                for(int i = 0; i < jsonArtifacts.length(); i++){
+                    JSONObject obj = jsonArtifacts.getJSONObject(i);
+
+                    String name = obj.getJSONObject("rrm:title").getString("content");
+                    String id = Integer.toString(obj.getJSONObject("rrm:identifier").getInt("content"));
+                    String artifactType = obj.getJSONObject("rrm:collaboration").getJSONObject("rrm:attributes").getJSONObject("attribute:objectType").getString("attribute:name");
+                    String itemId = obj.getString("attribute:itemId");
+                    String artifactUrl = obj.getString("rrm:about");
+                    String parentFolder;
+                    Artifact artifact = new Artifact("", "", "", "", "", "");
+                    try{
+                        parentFolder = obj.getJSONObject("ds:location").getJSONObject("ds:parentFolder").getString("rrm:title");
+                        artifact = new Artifact(artifactType, id, itemId, name, parentFolder, artifactUrl);
+                    }catch(JSONException ex){}
+
+                    try{
+                        JSONArray jsonLinks = obj.getJSONObject("ds:traceability").getJSONObject("ds:links").getJSONArray("ds:Link");
+                        //String id, String linkType, String linkCategory, String isChildLink, String isParentLink
+                        for(int j = 0; j < jsonLinks.length(); j++){
+                            JSONObject linkObj = jsonLinks.getJSONObject(j);
+                            String linkId = linkObj.getString("rrm:relation");
+                            linkId = linkId.substring(linkId.lastIndexOf('/') + 1);
+                            String linkType = linkObj.getString("rrm:title");
+                            String linkCategory = linkObj.getString("type");
+                            boolean isChildLink = false;
+                            boolean isParentLink = false;
+
+                            artifact.addLink(new Link(linkId, linkType, linkCategory, isChildLink, isParentLink));
+                        }
+
+                    }catch(Exception ex){
+                        try{
+                            JSONObject linkObj = obj.getJSONObject("ds:traceability").getJSONObject("ds:links").getJSONObject("ds:Link");
+                            String linkId = linkObj.getString("rrm:relation");
+                            linkId = linkId.substring(linkId.lastIndexOf('/') + 1);
+                            String linkType = linkObj.getString("rrm:title");
+                            String linkCategory = linkObj.getString("type");
+                            boolean isChildLink = false;
+                            boolean isParentLink = false;
+                            artifact.addLink(new Link(linkId, linkType, linkCategory, isChildLink, isParentLink));
+                        }catch(Exception ex2){ }
+                    }
+
+                    if(!artifact.parentFolder.equals("")){
+                        artifacts.add(artifact);
+                    }
+
+                }
+
+
+            } catch (Exception e) {
+                //e.printStackTrace();
+            }
+        }
+
+        return artifacts;
+    }
+
+    private static String readBytes(String filePath) {
+        String content = "";
+        try
+        {
+            content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return content;
+    }
+
+    public static String generateFilename(String extension) {
+        String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        int length = 17;
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            sb.append(candidateChars.charAt(random.nextInt(candidateChars
+                    .length())));
+        }
+
+        return sb.toString() + extension;
+    }
+}
+

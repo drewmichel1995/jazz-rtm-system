@@ -1,0 +1,86 @@
+.select2-selection--multiple .select2-search__field{
+    display: none;
+}
+
+.arrow::after {
+    content: "\2197";
+    text-align: center;
+    padding: 0px;
+}
+
+/*Stuff that works*/
+.sticky-table-cell {
+    display: table-cell;
+    border: 1px solid black;
+    border-collapse: collapse;
+    border-width: 1px;
+    
+    
+    text-align: left;
+    empty-cells: show;
+}
+
+.row-header {
+    max-width: 180px;
+    max-height: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    
+}
+
+.col-header {
+    height: 180px;
+    max-width: 30px;
+    white-space: nowrap;
+}
+
+.col-header>div {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: 
+    /* Magic Numbers */
+    translate(-80px, 70px)
+    /* 45 is really 360 - 45 */
+    rotate(270deg);
+    width: 170px;
+}
+
+.normalCell {
+   
+   overflow: hidden;
+}
+
+.normalCell:hover {
+    background-color: gainsboro;
+}
+
+div.rowCountCell {
+    background-color: gainsboro;
+    font-size: 15px;
+    border-left: ridge;
+    border-right: ridge;
+    text-align: center;
+}
+
+div.colCountCell {
+    background-color: gainsboro;
+    font-size: 15px;
+    border-top: ridge;
+    border-bottom: ridge;
+    text-align: center;
+}
+
+div.edgeCountCell {
+    background-color: gainsboro;
+    font-size: 15px;
+    border-top: ridge;
+    border-left: ridge;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+th.deadCell {
+    border-style: none;
+}

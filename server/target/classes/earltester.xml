@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+<ModulePrefs title="Earl Tester"
+title_url=""
+author="Landon Michel"
+author_location="Cookeville, TN"
+description="Earl Tester">
+<Require feature="dynamic-height"/>
+</ModulePrefs>
+<Content type="html"><![CDATA[
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Get Current URL in JavaScript</title>
+</head>
+<body>
+    <script>
+		function httpGet(theUrl)
+		{
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+			xmlHttp.send( null );
+			var json = xml2json(parseXml(xmlHttp.responseText));
+			
+			return json;
+		}
+	
+		function getHref() {
+				var theUrl = "http://mbse-appld10.corp.saic.com/server/getCookie";
+				
+				var data = JSON.parse('[{"uri": "_uAQboDPNEemiQN4B0zfQag", "name": "Launch_Enterprise (Requirements)"}, {"uri": "_uFuyAE_bEemsvePUybXwsw", "name": "Widget Testing (Requirements)"}, {"uri": "_YB7esGBlEemGQqcNQw0rhQ", "name": "Widget Testing 2"}]');
+		
+			    var xmlHttp = new XMLHttpRequest();
+				xmlHttp.withCredentials = true;
+				xmlHttp.open( "POST", theUrl, false );
+				xmlHttp.send( JSON.stringify({
+					"projectAreas": data
+				}) );
+				console.log(xmlHttp.cookie);
+				document.cookie = xmlHttp.cookie;
+		}
+		
+		function getHostname() {
+			alert("The URL of this page is: " + window.location.href);
+		}
+		
+		function getPathname() {
+			alert("The URL of this page is: " + window.location.href);
+		}
+		
+		function parseXml(xml) {
+			var dom = null;
+			if (window.DOMParser) {
+				try { 
+					dom = (new DOMParser()).parseFromString(xml, "text/xml"); 
+				} 
+				catch (e) { dom = null; }
+			}
+			else if (window.ActiveXObject) {
+				try {
+					dom = new ActiveXObject('Microsoft.XMLDOM');
+					dom.async = false;
+					if (!dom.loadXML(xml)) // parse error ..
+			
+						window.alert(dom.parseError.reason + dom.parseError.srcText);
+				} 
+				catch (e) { dom = null; }
+			}
+			else
+				alert("cannot parse xml string!");
+			return dom;
+		}
+		
+		function xml2json(xml) {
+			// Create the return object
+			var obj = {};
+			
+			if (xml.nodeType == 1) {
+				// element
+				// do attributes
+				if (xml.attributes.length > 0) {
+				obj["@attributes"] = {};
+				for (var j = 0; j < xml.attributes.length; j++) {
+					var attribute = xml.attributes.item(j);
+					obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+				}
+				}
+			} else if (xml.nodeType == 3) {
+				// text
+				obj = xml.nodeValue;
+			}
+			
+			// do children
+			// If all text nodes inside, get concatenated text from them.
+			var textNodes = [].slice.call(xml.childNodes).filter(function(node) {
+				return node.nodeType === 3;
+			});
+			if (xml.hasChildNodes() && xml.childNodes.length === textNodes.length) {
+				obj = [].slice.call(xml.childNodes).reduce(function(text, node) {
+				return text + node.nodeValue;
+				}, "");
+			} else if (xml.hasChildNodes()) {
+				for (var i = 0; i < xml.childNodes.length; i++) {
+				var item = xml.childNodes.item(i);
+				var nodeName = item.nodeName;
+				if (typeof obj[nodeName] == "undefined") {
+					obj[nodeName] = xml2json(item);
+				} else {
+					if (typeof obj[nodeName].push == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+					}
+					obj[nodeName].push(xml2json(item));
+				}
+				}
+			}
+			return obj;
+		}
+    </script>
+     
+    <button type="button" onclick="getHref();">Get Page HREF</button>
+	<button type="button" onclick="getHostname();">Get Page Hostname</button>
+	<button type="button" onclick="getPathname();">Get Page Pathname</button>
+</body>
+</html>
+]]></Content>
+</Module>

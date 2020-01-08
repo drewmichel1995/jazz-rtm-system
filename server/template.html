@@ -1,0 +1,160 @@
+<html>
+	<style>
+		.select2-selection--multiple .select2-search__field{
+			display: none;
+		}
+	</style>
+	<head>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+	</head>
+	<body>
+		
+		<div class="ui form">
+			<div class="fields">
+				<div class="field">
+					<label>Column Folder Scope</label>
+					<select id="columnFolders" type="button" multiple="multiple">
+					</select>
+				</div>
+				<div class="field">
+					<label>Row Folder Scope:</label>
+					<select id="rowFolders" type="button" multiple="multiple">
+					</select>
+				</div>
+			</div>
+			<div class="fields">
+				<div class="field">
+					<label>Column Artifact Type:</label>
+					<select id="columnTypes" type="button" multiple="multiple">
+					</select>
+				</div>
+				<div class="field">
+					<label>Row Artifact Types:</label>
+					<select id="rowTypes" type="button" multiple="multiple">
+					</select>
+				</div>
+			</div>
+			<div class="fields">
+				<div class="field">
+					<label>Dependencies</label>
+					<select id="dependencies" type="button" multiple="multiple">
+					</select>
+				</div>
+				<div class="field">
+					<label>Header Display</label>
+					<select id="headerDisplay" type="button">
+					</select>
+				</div>
+			</div>
+			<button>A button element</button>
+		</div>
+		<div id="tableDiv"></div>
+	</body>
+</html>
+<script type="text/javascript">
+	function getSelects(name) {
+		var selected = [];
+		$(name).children('option:selected').each( function() {
+			var $this = $(this);
+			selected.push( { "name": $this.val() } );
+		});
+		console.log(selected);
+		return selected;
+	}
+	$(function() {
+	var startX,
+		 startWidth,
+		 $handle,
+		 $table,
+		 pressed = false;
+	
+	$(document).on({
+		mousemove: function(event) {
+			if (pressed) {
+				$handle.width(startWidth + (event.pageX - startX));
+			}
+		},
+		mouseup: function() {
+			if (pressed) {
+				$table.removeClass('resizing');
+				pressed = false;
+			}
+		}
+	}).on('mousedown', '.table-resizable th', function(event) {
+		$handle = $(this);
+		pressed = true;
+		startX = event.pageX;
+		startWidth = $handle.width();
+		
+		$table = $handle.closest('.table-resizable').addClass('resizing');
+	}).on('dblclick', '.table-resizable thead', function() {
+		// Reset column sizes on double click
+		$(this).find('th[style]').css('width', '');
+	});
+});
+
+	$(document).ready(function() {
+	
+		const scopeUrl = 'http://localhost:4567/getScope/_uAQboDPNEemiQN4B0zfQag';
+		$.get(scopeUrl, function(data, status){
+			$.each(data,function(key, value) 
+			{
+				$("#rowFolders").append('<option value="' + value.name + '">' + value.name + '</option>');
+				$("#columnFolders").append('<option value="' + value.name + '">' + value.name + '</option>');
+			});
+		});
+			
+		const dependencyUrl = 'http://localhost:4567/getDependencies/_uAQboDPNEemiQN4B0zfQag';
+		$.get(dependencyUrl, function(data, status){
+			$.each(data,function(key, value) 
+			{
+				$("#dependencies").append('<option value="' + value.name + '">' + value.name + '</option>');
+			});
+		});
+		
+		const artifactTypeUrl = 'http://localhost:4567/getArtifactTypes/_uAQboDPNEemiQN4B0zfQag';
+		$.get(artifactTypeUrl, function(data, status){
+			$.each(data,function(key, value) 
+			{
+				$("#columnTypes").append('<option value="' + value.name + '">' + value.name + '</option>');
+				$("#rowTypes").append('<option value="' + value.name + '">' + value.name + '</option>');
+			});
+		});
+		
+		const headerDisplayUrl = 'http://localhost:4567/getHeaderDisplay';
+		$.get(headerDisplayUrl, function(data, status){
+			$.each(data,function(key, value) 
+			{
+				$("#headerDisplay").append('<option value="' + value.name + '">' + value.name + '</option>');
+			});
+		});
+		
+		$("#columnFolders").select2();
+		$("#rowFolders").select2();
+		$("#columnTypes").select2();
+		$("#rowTypes").select2();
+		$("#dependencies").select2();
+		
+		
+		const Url = 'http://localhost:4567/getTable/_uAQboDPNEemiQN4B0zfQag';
+		$('button').click(function(){
+			
+			var data = {
+				"columns": getSelects("#columnFolders"),
+				"rows": getSelects("#rowFolders"),
+				"columnTypes": getSelects("#columnTypes"),
+				"rowTypes": getSelects("#rowTypes"),
+				"dependencies": getSelects("#dependencies"),
+				"showHeader": $("#headerDisplay").val()
+			}
+			
+			$.post(Url, JSON.stringify(data), function(data, status){
+					$("#tableDiv").empty();
+					$("#tableDiv").append(data);
+			});
+		})
+	});	
+ </script>
