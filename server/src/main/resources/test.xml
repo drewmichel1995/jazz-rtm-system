@@ -198,7 +198,7 @@ function httpGetXML(theUrl) {
 }
 
 function getProjectInfo() {
-	var json = httpGet("https://" + window.location.host + "/rm/oslc_rm/catalog");
+	var json = httpGetXML("https://" + window.location.host + "/rm/oslc_rm/catalog");
 
 	var uris = json["oslc_disc:ServiceProviderCatalog"]["oslc_disc:entry"].map(item =>({"uri":item["oslc_disc:ServiceProvider"]["oslc_disc:details"]["@attributes"]["rdf:resource"].split("/")[6],
 		"name":item["oslc_disc:ServiceProvider"]["dcterms:title"]
