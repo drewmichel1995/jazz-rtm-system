@@ -179,7 +179,11 @@ public class JazzHTTP {
                 String encodedString = Base64.getEncoder().encodeToString(projectAreas.getBytes());
                 JSONPayload = new JSONObject();
                 JSONPayload.put("cookie", encodedString);
-                getRes(res, "application/json");
+
+                res.status(200);
+                res.type("application/json");
+                //res.header("Access-Control-Allow-Origin", "http://mbse-appld10.corp.saic.com");
+                res.header("Access-Control-Allow-Origin", "https://mbse-rmdev.saic.com:9443");
                 res.header("Access-Control-Allow-Credentials", "true");
                 res.cookie("/", "jazz_rtm_cookie", encodedString, 60*60*24, false, true);
                 return true;
@@ -227,7 +231,7 @@ public class JazzHTTP {
         res.status(200);
         res.type(type);
         //res.header("Access-Control-Allow-Origin", "http://mbse-appld10.corp.saic.com");
-        res.header("Access-Control-Allow-Origin", "https://mbse-colldev.saic.com");
+        res.header("Access-Control-Allow-Origin", "https://mbse-rmdev.saic.com:9443");
 
         return res;
     }
