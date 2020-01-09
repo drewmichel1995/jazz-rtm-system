@@ -168,8 +168,8 @@ function httpPostPayload(theUrl) {
 		"payload": payload
 	}) );
 
-	console.log(xmlHttp.responseText);
-    return xmlHttp.responseText;
+	var data = JSON.parse(xmlHttp.responseText);
+    return data;
 }
 
 function httpPostCookie(theUrl, data) {
@@ -268,9 +268,10 @@ function initFields(){
 function onSubmit(){
 	console.log("Button clicked");
 	var result = httpPostPayload(serverURL + "storePayload/")
+	console.log(result);
 	url = result.url;
 	var uniqueID = result.uniqueID;
-	var size = httpGet(serverUrl + "/getProjectAreaSize/" + uniqueID);
+	var size = httpGet(serverURL + "getProjectAreaSize/" + uniqueID);
 	var rowSize = size.rowSize;
 	var columnSize = size.columnSize;
 

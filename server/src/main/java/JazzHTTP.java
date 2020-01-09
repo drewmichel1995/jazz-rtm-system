@@ -137,15 +137,20 @@ public class JazzHTTP {
 
         get("/getProjectAreaSize/:uniqueID", (req, res) -> {
 
-            System.out.println("Received Request /getProjectAreaSize");
-            ProjectArea project = mongo.getUniqueIDProject(req.params(":uniqueID"), decodeCookie(req.cookie("jazz_rtm_cookie")));
-            getRes(res, "application/json");
+            try{
+                System.out.println("Received Request /getProjectAreaSize");
+                ProjectArea project = mongo.getUniqueIDProject(req.params(":uniqueID"), decodeCookie(req.cookie("jazz_rtm_cookie")));
+                getRes(res, "application/json");
 
-            JSONObject temp = new JSONObject();
-            temp.put("rowSize", project.rowArtifacts.size());
-            temp.put("columnSize", project.columnArtifacts.size());
+                JSONObject temp = new JSONObject();
+                temp.put("rowSize", project.rowArtifacts.size());
+                temp.put("columnSize", project.columnArtifacts.size());
 
-            return temp.toString();
+                return temp.toString();
+            }catch(Exception ex){
+                ex.printStackTrace();
+                return false;
+            }
         });
 
         get("/getWidget", (req, res) -> {
