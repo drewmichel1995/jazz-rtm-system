@@ -75,6 +75,19 @@ public class MongoHelper {
 
     }
 
+    ProjectArea getUniqueIDProject(String uniqueID){
+
+        MongoCollection<Document> pendingPayloads = database.getCollection("pendingPayloads");
+        BasicDBObject whereQuery = new BasicDBObject();
+        whereQuery.put("UniqueID", uniqueID);
+        Document documents = pendingPayloads.find(whereQuery).first();
+        JSONObject payload = new JSONObject(documents.toJson());
+        String projectAreaURI = payload.getString("projectAreaURI");
+        String payloadString = payload.getJSONObject("payload").toString();
+
+        return new ProjectArea(projectAreaURI, new Payload(payloadString));
+    }
+
     JSONObject getUniqueIDPayload(String uniqueID){
 
         MongoCollection<Document> pendingPayloads = database.getCollection("pendingPayloads");

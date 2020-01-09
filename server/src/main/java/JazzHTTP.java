@@ -139,7 +139,7 @@ public class JazzHTTP {
 
             try{
                 System.out.println("Received Request /getProjectAreaSize");
-                ProjectArea project = mongo.getUniqueIDProject(req.params(":uniqueID"), decodeCookie(req.cookie("jazz_rtm_cookie")));
+                ProjectArea project = mongo.getUniqueIDProject(req.params(":uniqueID"));
                 getRes(res, "application/json");
 
                 JSONObject temp = new JSONObject();
