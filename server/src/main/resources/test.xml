@@ -267,26 +267,39 @@ function initFields(){
 
 function onSubmit(){
 	console.log("Button clicked");
-	url = httpPostPayload(serverURL + "storePayload/")
+	var result = httpPostPayload(serverURL + "storePayload/")
+	url = result.url;
+	var uniqueID = result.uniqueID;
+	var size = httpGet(serverUrl + "/getProjectAreaSize/" + uniqueID);
+	var rowSize = size.rowSize;
+	var columnSize = size.columnSize;
 
-	window.open(url, '_blank');
+	if((rowSize * columnSize) > 10000){
+		alert("Size too large");
+	}else{
+		window.open(url, '_blank');
+	}
 }
 
 function setFieldOnChange(){
 		$("#rowElementList").on('change', function() {
 			payload.rows = $("#rowElementList").val().map(item => ({"name":item}));
+			gadgets.window.adjustHeight();
 		});
 
 		$("#columnElementList").on('change', function() {
 			payload.columns = $("#columnElementList").val().map(item => ({"name":item}));
+			gadgets.window.adjustHeight();
 		});
 
 		$("#rowScopeElementList").on('change', function() {
 			payload.rowTypes = $("#rowScopeElementList").val().map(item => ({"name":item}));
+			gadgets.window.adjustHeight();
 		});
 
 		$("#columnScopeElementList").on('change', function() {
 			payload.columnTypes = $("#columnScopeElementList").val().map(item => ({"name":item}));
+			gadgets.window.adjustHeight();
 		});
 
 		$("#dependencyCriteriaList").on('change', function() {

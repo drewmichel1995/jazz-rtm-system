@@ -135,6 +135,19 @@ public class JazzHTTP {
             }
         });
 
+        get("/getProjectAreaSize/:uniqueID", (req, res) -> {
+
+            System.out.println("Received Request /getProjectAreaSize");
+            ProjectArea project = mongo.getUniqueIDProject(req.params(":uniqueID"), decodeCookie(req.cookie("jazz_rtm_cookie")));
+            getRes(res, "application/json");
+
+            JSONObject temp = new JSONObject();
+            temp.put("rowSize", project.rowArtifacts.size());
+            temp.put("columnSize", project.columnArtifacts.size());
+
+            return temp.toString();
+        });
+
         get("/getWidget", (req, res) -> {
 
             System.out.println("Received Request /getWidget");
@@ -165,7 +178,7 @@ public class JazzHTTP {
         post("/storePayload/", (req, res) -> {
 
             System.out.println("Received Request /storePayload");
-            getRes(res, "text/html");
+            getRes(res, "application/json");
 
             return mongo.storePayload(new JSONObject(req.body()));
         });

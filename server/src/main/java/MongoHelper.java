@@ -50,7 +50,11 @@ public class MongoHelper {
 
         Config cfg = new Config();
 
-        return cfg.getProperty("clientURL") + "RequirementsView/" + uniqueID;
+        JSONObject temp = new JSONObject();
+        temp.put("url", cfg.getProperty("clientURL") + "RequirementsView/" + uniqueID);
+        temp.put("uniqueID", uniqueID);
+
+        return temp.toString();
     }
 
     ProjectArea getUniqueIDProject(String uniqueID, ArrayList<String> availableProjects){
