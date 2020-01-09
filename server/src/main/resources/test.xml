@@ -226,18 +226,16 @@ function loadFields(theUrl){
 			$columnScopeDropdown.append($("<option />").val(this.label).text(this.label));
 		});
 
+		$dependencyDropdown.append("<option disabled selected value> -- select an option -- </option>");
 		$.each(data.linkTypes, function() {
 			$dependencyDropdown.append($("<option />").val(this.label).text(this.label));
 		});
 }
 
 function loadProjectAreas(){
-	/*var projects = httpGetXML("https://" + window.location.host + "/rm/oslc_rm/catalog");*/
+	
 	var projects = getProjectInfo();
 	console.log(projects);
-	
-	/*var projects = JSON.parse('[{"uri": "_qG8bgCPZEemwhe94splNSA", "name": "Alpha_Sandbox (Requirements)"}, {"uri": "_5NcW8PGlEem4DpohqsrUbQ", "name": "Code WXP"}, {"uri": "_4J7twMngEemHqfRXaYeA3w", "name": "CSE"},{"uri": "_8GsbELX7EeiDO5ipMvp0pQ", "name": "DEF Implementation (Requirements)"}, {"uri": "_ZPVSELXkEeiDO5ipMvp0pQ", "name": "DEF Schema (Requirements)"}, {"uri": "_eb2MUC_MEemwhe94splNSA", "name": "Gateway Demo International Requirements"},{"uri": "_u1gZUJd9EempEJ1os0Ki0w", "name": "Gateway Ecosystem (Requirements)"}, {"uri": "_aR-UgHC8Eeitfa4fpeStQg", "name": "ImportTemplate DO NOT USE"}, {"uri": "_uAQboDPNEemiQN4B0zfQag", "name": "Launch_Enterprise (Requirements)"},{"uri": "_OqEQgPdMEem4DpohqsrUbQ", "name": "Linx (Requirements)"}, {"uri": "_iNEk8FScEemsvePUybXwsw", "name": "Money that Matters (Requirements Management)"}, {"uri": "_fefMQKpmEemFyc-pWvAwXQ", "name": "MPPF (Requirements)"},{"uri": "_l1k-QOKaEemCPrvt5Xn0Rg", "name": "Navy Aviation Distributed Training Center (NADTC) Distributed Mission Training (DMT) Environment (Requirements)"}, {"uri": "_gG-ksDw-EemiQN4B0zfQag", "name": "Nixie"}, {"uri": "_gMC04HjZEemYkdOBq2ZyYg", "name": "RQA PoC"},{"uri": "_AuhvIAIqEemKNv_3DkYR3w", "name": "SAIC Training Test (Requirements)"}, {"uri": "_2oznMHC8Eeitfa4fpeStQg", "name": "Sandbox (Requirements)"}, {"uri": "_RLVSQLISEemFyc-pWvAwXQ", "name": "SBE_POC"},{"uri": "_oeHSMJOHEempEJ1os0Ki0w", "name": "Shadow Sandbox (Requirements)"}, {"uri": "_OZC7YHSxEeitfa4fpeStQg", "name": "Space Systems Sandbox (Requirements)"}, {"uri": "__Y8koFxwEemGQqcNQw0rhQ", "name": "Traditional Project Management (Requirements)"},{"uri": "_uFuyAE_bEemsvePUybXwsw", "name": "Widget Testing (Requirements)"}, {"uri": "_YB7esGBlEemGQqcNQw0rhQ", "name": "Widget Testing 2"},{"uri": "_NrSkwKTyEemFyc-pWvAwXQ", "name": "WPF_Demo (Requirements)"}]')*/
-	var data = JSON.parse(httpPostCookie(serverURL + "getCookie/", projects));
 	
 	httpPostCookie(serverURL + "getCookie/", projects);
 	projects.map(item => (
