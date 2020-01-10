@@ -57,6 +57,11 @@ public class ProjectArea {
         this(projectUri);
         this.filterAll(payload.columns, payload.rows, payload.columnTypes, payload.rowTypes, payload.dependencies);
         this.linksOnly = payload.linksOnly;
+
+        if(this.linksOnly){
+            setColumnArtifacts(getOnlyLinks(this.columnArtifacts, this.rowArtifacts));
+            setRowArtifacts(getOnlyLinks(this.rowArtifacts, this.columnArtifacts));
+        }
     }
 
     void addArtifact(Artifact artifact){

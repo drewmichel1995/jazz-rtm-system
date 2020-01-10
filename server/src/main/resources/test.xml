@@ -20,16 +20,36 @@
 	.select2-selection--multiple .select2-search__field{
 		display: none;
 	}
+
+	.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
+    	display: none;
+	}
 </style>
 		<title>Jazz Widget</title>
 		<head>
 			<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"></link>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  			<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
 			<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet"></link>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 
 		</head>
 		<body>
+		<div id="dialog-confirm" title="Large Matrix Warning!" hidden="hidden">
+		  <p id="dialogText">
+		  	<h4>The requested matrix may cause the application to run sluggishly due to browser limitations.</h4>
+		  	<h5>To avoid this, narrow the scopes of your matrix.</h5>
+		  	<p><small><i>It is generally recommended to keep each axis below 500 requirements.</i></small></p>
+		  	<p><small><i id="linksOnlySuggestion"></i></small></p>
+		  	<p><small><b>The current number of requirements for each axis is:</b></small></p>
+		  	<ul>
+		  		<li>Row Axis: <strong id="rowSize"></strong></li>
+		  		<li>Column Axis: <strong id="columnSize"></strong></li>
+		  	</ul>
+		  	<p><small>To ignore this warning select Proceed to Matrix</small></p>
+		  </p>
+		</div>
 		<div class="hold">
 			<form class="ui form">
 				<div class="fields">
@@ -276,7 +296,14 @@ function onSubmit(){
 	var columnSize = size.columnSize;
 
 	if((rowSize * columnSize) > 10000){
-		alert("Size too large");
+		$("#rowSize").text(rowSize);
+		$("#columnSize").text(columnSize);
+		if(!payload.linksOnly){
+			$("#linksOnlySuggestion").text("Suggestion: Enable Display Links Only to only view requirements with links in the matrix.");
+		}else{
+			$("#linksOnlySuggestion").text("");
+		}
+		$( "#dialog-confirm" ).dialog("open");
 	}else{
 		window.open(url, '_blank');
 	}
@@ -321,7 +348,23 @@ function setFieldOnChange(){
 		});
 }
 
-
+$( function() {
+    $( "#dialog-confirm" ).dialog({
+      resizable: false,
+      height: "auto",
+      width: 400,
+      modal: true,
+      autoOpen: false,
+      buttons: {
+        "Proceed to Matrix": function() {
+          window.open(url, '_blank')
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+} );
 
 window.onload = function () {
 		initFields();
