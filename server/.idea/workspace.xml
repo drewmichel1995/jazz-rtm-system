@@ -89,8 +89,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="431" column="40" selection-start-line="431" selection-start-column="40" selection-end-line="431" selection-end-column="40" />
+            <state relative-caret-position="239">
+              <caret line="195" lean-forward="true" selection-start-line="195" selection-end-line="195" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ProjectArea#0;class#ProjectArea#0" />
@@ -105,13 +105,11 @@
                 <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
                 <element signature="method#getParentFolders#0;class#ProjectArea#0" />
                 <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
-                <element signature="method#getFields#0;class#ProjectArea#0" />
                 <element signature="method#getTableJSON_react_data_grid#0;class#ProjectArea#0" />
                 <element signature="method#getTableJSON#1;class#ProjectArea#0" />
                 <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
                 <element signature="method#getTableJSON#2;class#ProjectArea#0" />
                 <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
-                <element signature="method#getLinkColor#0;class#ProjectArea#0" />
                 <element signature="method#toJSON#0;class#ProjectArea#0" />
               </folding>
             </state>
@@ -176,6 +174,7 @@
       <find>executePost</find>
       <find>System</find>
       <find>loadData</find>
+      <find>getLinkTypes</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -231,8 +230,8 @@
     <option name="delegateBuildToMaven" value="true" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="3128" />
-    <option name="y" value="470" />
+    <option name="x" value="1388" />
+    <option name="y" value="466" />
     <option name="width" value="1094" />
     <option name="height" value="610" />
   </component>
@@ -283,7 +282,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578925029949" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578930736218" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -374,7 +373,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2992" y="472" width="1936" height="1056" extended-state="6" />
+    <frame x="1072" y="472" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13539445" />
@@ -557,8 +556,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="431" column="40" selection-start-line="431" selection-start-column="40" selection-end-line="431" selection-end-column="40" />
+        <state relative-caret-position="239">
+          <caret line="195" lean-forward="true" selection-start-line="195" selection-end-line="195" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ProjectArea#0;class#ProjectArea#0" />
@@ -573,13 +572,11 @@
             <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
             <element signature="method#getParentFolders#0;class#ProjectArea#0" />
             <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
-            <element signature="method#getFields#0;class#ProjectArea#0" />
             <element signature="method#getTableJSON_react_data_grid#0;class#ProjectArea#0" />
             <element signature="method#getTableJSON#1;class#ProjectArea#0" />
             <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
             <element signature="method#getTableJSON#2;class#ProjectArea#0" />
             <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
-            <element signature="method#getLinkColor#0;class#ProjectArea#0" />
             <element signature="method#toJSON#0;class#ProjectArea#0" />
           </folding>
         </state>

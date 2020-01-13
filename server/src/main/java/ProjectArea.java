@@ -169,9 +169,12 @@ public class ProjectArea {
         return artifactTypes;
     }
 
-    JSONArray getLinkTypes(){
+    JSONObject getLinkTypes(){
+        JSONObject ret = new JSONObject();
         JSONArray linkTypes = new JSONArray();
+        JSONArray legend = new JSONArray();
         ArrayList<String> uniqueLinks = new ArrayList<>();
+        ArrayList<String> uniqueFullLinks = new ArrayList<>();
         for(Artifact a: this.artifacts){
             for(Link l: a.links){
                 if(!uniqueLinks.contains(l.linkType)){
@@ -182,11 +185,19 @@ public class ProjectArea {
                     temp.put("color", getLinkColor(l.linkType));
                     linkTypes.put(temp);
                 }
+                if(!uniqueFullLinks.contains(getLinkFullName(l.linkType))){
+                    JSONObject temp = new JSONObject();
+                    uniqueFullLinks.add(getLinkFullName(l.linkType));
+                    temp.put("name", getLinkFullName(l.linkType));
+                    temp.put("color", getLinkColor(l.linkType));
+                    legend.put(temp);
+                }
             }
 
         }
-
-        return linkTypes;
+        ret.put("linkTypes", linkTypes);
+        ret.put("legend", legend);
+        return ret;
     }
 
     JSONArray getParentFolders(){
@@ -217,7 +228,8 @@ public class ProjectArea {
     JSONObject getFields(){
         JSONObject fields = new JSONObject();
         fields.put("parentFolders", getParentFolders());
-        fields.put("linkTypes", getLinkTypes());
+        fields.put("linkTypes", getLinkTypes().getJSONArray("linkTypes"));
+        fields.put("legend", getLinkTypes().getJSONArray("legend"));
         fields.put("artifactTypes", getArtifactTypes());
         fields.put("headers", getHeaderOptions());
 
@@ -654,6 +666,8 @@ public class ProjectArea {
             return "orangered";
         else if(linkType.toLowerCase().equals("satisfies") || linkType.toLowerCase().equals("satisfied by"))
             return "blue";
+        else if(linkType.toLowerCase().contains("satisfie") && linkType.toLowerCase().contains("architecture"))
+            return "orange";
         else if(linkType.toLowerCase().contains("synonym"))
             return "rosybrown";
         else if(linkType.toLowerCase().contains("trace"))
@@ -664,6 +678,49 @@ public class ProjectArea {
             return "teal";
         else
             return "brown";
+    }
+
+    private String getLinkFullName(String linkType){
+        if(linkType.toLowerCase().contains("affect"))
+            return "Affects/Affected By";
+        else if(linkType.toLowerCase().contains("term"))
+            return "References Term/Term Referenced From";
+        else if(linkType.toLowerCase().contains("constrain"))
+            return "Constrains/Constrained By";
+        else if(linkType.toLowerCase().contains("parent") || linkType.toLowerCase().contains("child"))
+            return "Parent Of/Child Of";
+        else if(linkType.toLowerCase().contains("derive"))
+            return "Derives Architecture Element/Derives From Architecture Element";
+        else if(linkType.toLowerCase().contains("embed"))
+            return "Embeds/Embedded In";
+        else if(linkType.toLowerCase().contains("extract"))
+            return "Extracted/Extracted From";
+        else if(linkType.toLowerCase().contains("illustrate"))
+            return "Illustrates/Illustrated By";
+        else if(linkType.toLowerCase().contains("implement"))
+            return "Implements/Implemented By";
+        else if(linkType.toLowerCase().contains("link"))
+            return "Link (To/From)";
+        else if(linkType.toLowerCase().contains("mitigate"))
+            return "Mitigates";
+        else if(linkType.toLowerCase().contains("reference"))
+            return "References/Referenced By";
+        else if(linkType.toLowerCase().contains("refine"))
+            return "Refines Architecture Element/Refined By Architecture Element";
+        else if(linkType.toLowerCase().equals("satisfies") || linkType.toLowerCase().equals("satisfied by"))
+            return "Satisfies/Satisfied By";
+        else if(linkType.toLowerCase().contains("satisfie") && linkType.toLowerCase().contains("architecture"))
+            return "Satisfies Architecture Element / Satisfied By Architecture Element";
+        else if(linkType.toLowerCase().contains("synonym"))
+            return "Synonym";
+        else if(linkType.toLowerCase().contains("trace"))
+            return "Trace Architecture Element/Traced By Architecture Element";
+        else if(linkType.toLowerCase().contains("track"))
+            return "Tracks/Tracked By";
+        else if(linkType.toLowerCase().contains("validate"))
+            return "Validates/Validated By";
+        else
+            return "Default";
     }
 
     JSONObject toJSON(){

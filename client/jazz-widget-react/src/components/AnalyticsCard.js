@@ -21,7 +21,7 @@ class AnalyticsCard extends Component {
         })
         .then(res => res.json())
         .then(result => this.setState({ 
-            dependencies: result.linkTypes
+            dependencies: result.legend
         }))  
     }
     
@@ -35,7 +35,7 @@ class AnalyticsCard extends Component {
                                {dependencies.map(item => (
                                    <Row>
                                    <Form.Label>
-                                      <font color={item.color}>&#8599; - {item.label}</font> 
+                                      <font color={item.color}>&#8599; - {item.name}</font> 
                                    </Form.Label>
                                    </Row>
                                ))}
