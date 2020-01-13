@@ -7,6 +7,23 @@ import {
 import RequirementsView from "./RequirementsView";
   
 class Main extends Component {
+
+  state: { language: '' }
+
+  constructor(props){
+    super(props);
+    this.state = {
+      title: "Jazz Requirements Matrix"
+
+    };
+
+    this.onTitleChange = this.onTitleChange.bind(this);
+  }
+
+  onTitleChange = (title) => {
+    this.setState({title: title});
+  }
+
   render() {
     return (
         
@@ -19,7 +36,7 @@ class Main extends Component {
           <div className="content">
             <Route exact path="/" component={RequirementsView}/>
             <Route exact path="/RequirementsView" component={RequirementsView}/>
-            <Route exact path="/RequirementsView/:uniqueID" component={RequirementsView}/>
+            <Route exact path="/RequirementsView/:uniqueID" render={(props) => <RequirementsView {...props} onTitleChange={this.onTitleChange}/>}/>
           </div>
         </div>
         </HashRouter>

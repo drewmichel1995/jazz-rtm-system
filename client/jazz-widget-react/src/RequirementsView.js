@@ -42,6 +42,7 @@ class RequirementsView extends React.Component{
         if(result.success){
           result = result.payload;
           this.setState({ columns: result.columns, rows: result.rows, projectURI: result.projectURI, projectName: result.projectName, uniqueID: uniqueID, loading: false});
+          this.props.onTitleChange(result.projectName);
         }else{
           this.setState({validCookie: result.success});
         }
