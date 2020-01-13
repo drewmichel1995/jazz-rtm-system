@@ -13,7 +13,7 @@ class Table extends Component {
     render(){
         const { rows, columns, showID, columnSearchTerm, rowSearchTerm, projectURI, serverURL } = this.props;
         return (
-            <div style={{width: '100%', height: '100%'}}>
+            <div style={{width: '100%', height: '800px'}}>
           <StickyTable stickyHeaderCount={1} stickyColumnCount={1}>
             <Row key="columnHeaders">
               <Cell key="holder">
