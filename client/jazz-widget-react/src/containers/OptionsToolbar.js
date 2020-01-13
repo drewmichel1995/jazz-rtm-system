@@ -62,7 +62,7 @@ class OptionsToolbar extends Component {
       uniqueID
     } = this.props;
     return (
-      <div style={{ margin: "20px" }}>
+      <div style={{ marginBottom: "20px", marginTop: "0px" }}>
         <ButtonGroup aria-label="Basic example">
           <Button
             variant={this.state.matrixVariant}
