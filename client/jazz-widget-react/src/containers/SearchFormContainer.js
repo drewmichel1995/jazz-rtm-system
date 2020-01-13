@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, Row, Col } from "react-bootstrap";
-import ToggleBox from "../components/ToggleBox";
 
 class SearchFormContainer extends Component {
   render() {
@@ -15,22 +14,22 @@ class SearchFormContainer extends Component {
       triggerShowID
     } = this.props;
     return (
-      <div>
+      <div style={{ margin: "20px" }}>
         <Form>
           <Form.Group>
             <Row>
               <Col xs={6} md={4}>
                 <Form.Control
-                  value={rowSearchTerm}
-                  onChange={onRowChange}
-                  placeholder={rowPlaceholder}
+                  value={columnSearchTerm}
+                  onChange={onColumnChange}
+                  placeholder={columnPlaceholder}
                 />
               </Col>
               <Col xs={6} md={4}>
                 <Form.Control
-                  value={columnSearchTerm}
-                  onChange={onColumnChange}
-                  placeholder={columnPlaceholder}
+                  value={rowSearchTerm}
+                  onChange={onRowChange}
+                  placeholder={rowPlaceholder}
                 />
               </Col>
             </Row>

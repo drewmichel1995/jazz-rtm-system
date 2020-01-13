@@ -20,15 +20,15 @@ class OptionsToolbar extends Component {
   onSearchChange = () => {
     this.setState({ showSearch: !this.state.showSearch });
     this.state.showSearch
-      ? this.setState({ searchText: "Hide Search Options" })
-      : this.setState({ searchText: "Show Search Options" });
+      ? this.setState({ searchText: "Show Search Options" })
+      : this.setState({ searchText: "Hide Search Options" });
   };
 
   onMatrixChange = () => {
     this.setState({ showMatrix: !this.state.showMatrix });
     this.state.showMatrix
-      ? this.setState({ matrixText: "Hide Filter Options" })
-      : this.setState({ matrixText: "Show Filter Options" });
+      ? this.setState({ matrixText: "Show Filter Options" })
+      : this.setState({ matrixText: "Hide Filter Options" });
   };
 
   render() {
@@ -48,7 +48,7 @@ class OptionsToolbar extends Component {
       uniqueID
     } = this.props;
     return (
-      <div>
+      <div style={{ margin: "20px" }}>
         <ButtonGroup aria-label="Basic example">
           <Button variant="secondary" onClick={this.onMatrixChange}>
             {this.state.matrixText}
