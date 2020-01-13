@@ -26,7 +26,7 @@ class Main extends Component {
         
         <HashRouter>
         <div>
-          <h1>Jazz Requirements Matrix</h1>
+          <h1>{this.state.title}</h1>
           <ul className="header">
             <li><NavLink exact to="/">Traceability Matrix</NavLink></li>
           </ul>
