@@ -30,12 +30,12 @@ public class JazzHTTP {
         */
         int MINUTES = 2;
         Timer timer = new Timer();
-        /*timer.schedule(new TimerTask() {
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 service.dataCheck();
             }
-        }, 0, 1000 * 60 * MINUTES);*/
+        }, 0, 1000 * 60 * MINUTES);
 
         get("/", (req, res) -> {
 

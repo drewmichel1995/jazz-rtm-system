@@ -60,8 +60,7 @@ class FormContainer extends Component {
             rowArtifactTypeSelected: result.formattedPayload.rowTypes,
             columnArtifactTypeSelected: result.formattedPayload.columnTypes,
             linksOnlySelected: result.formattedPayload.linksOnly,
-            projectURI: result.projectURI,
-            isLoading: false
+            projectURI: result.projectURI
           });
         } else {
           this.setState({ validCookie: result.success });
@@ -78,7 +77,8 @@ class FormContainer extends Component {
             this.setState({
               parentFolderOptions: result.parentFolders,
               dependencies: result.linkTypes,
-              artifactTypes: result.artifactTypes
+              artifactTypes: result.artifactTypes,
+              isLoading: false
             })
           );
       });

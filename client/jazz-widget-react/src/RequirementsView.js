@@ -115,7 +115,7 @@ class RequirementsView extends React.Component {
     return (
       <div>
         {!validCookie && <ModalContainer />}
-        {validCookie && (
+        {!loading && validCookie && (
           <OptionsToolbar
             rowSearchTerm={rowSearchTerm}
             columnSearchTerm={columnSearchTerm}
