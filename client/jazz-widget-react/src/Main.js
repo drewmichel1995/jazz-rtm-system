@@ -7,9 +7,6 @@ import {
 import RequirementsView from "./RequirementsView";
   
 class Main extends Component {
-
-  state: { language: '' }
-
   constructor(props){
     super(props);
     this.state = {
