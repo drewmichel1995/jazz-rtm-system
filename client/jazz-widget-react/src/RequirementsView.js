@@ -114,42 +114,42 @@ class RequirementsView extends React.Component {
 
     return (
       <div>
-        {!validCookie && <ModalContainer />}
-        {!loading && validCookie && (
-          <OptionsToolbar
-            rowSearchTerm={rowSearchTerm}
-            columnSearchTerm={columnSearchTerm}
-            onRowChange={this.onRowSearchChange}
-            onColumnChange={this.onColumnSearchChange}
-            rowPlaceholder="Search Row Requirements"
-            columnPlaceholder="Search Column Requirements"
-            showID={showID}
-            triggerShowID={this.triggerShowID}
-            tableRows={rows}
-            tableColumns={columns}
-            setTable={this.setTable}
-            toggleLoading={this.toggleLoading}
-            serverURL={serverURL}
-            projectURI={projectURI}
-            projectName={projectName}
-            uniqueID={uniqueID}
-          />
+        {!loading && (
+          <div>
+            <OptionsToolbar
+              rowSearchTerm={rowSearchTerm}
+              columnSearchTerm={columnSearchTerm}
+              onRowChange={this.onRowSearchChange}
+              onColumnChange={this.onColumnSearchChange}
+              rowPlaceholder="Search Row Requirements"
+              columnPlaceholder="Search Column Requirements"
+              showID={showID}
+              triggerShowID={this.triggerShowID}
+              tableRows={rows}
+              tableColumns={columns}
+              setTable={this.setTable}
+              toggleLoading={this.toggleLoading}
+              serverURL={serverURL}
+              projectURI={projectURI}
+              projectName={projectName}
+              uniqueID={uniqueID}
+            />
+            <Table
+              rows={rows}
+              columns={columns}
+              showID={showID}
+              columnSearchTerm={columnSearchTerm}
+              rowSearchTerm={rowSearchTerm}
+              projectURI={projectURI}
+              serverURL={serverURL}
+            />
+          </div>
         )}
+        {!validCookie && <ModalContainer />}
         {loading && validCookie && (
           <div>
             <Spinner animation="border" variant="primary" />
           </div>
-        )}
-        {!loading && (
-          <Table
-            rows={rows}
-            columns={columns}
-            showID={showID}
-            columnSearchTerm={columnSearchTerm}
-            rowSearchTerm={rowSearchTerm}
-            projectURI={projectURI}
-            serverURL={serverURL}
-          />
         )}
       </div>
     );
