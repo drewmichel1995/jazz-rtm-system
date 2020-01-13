@@ -32,7 +32,7 @@ class Table extends Component {
               <Row key={row.id}>
                 <Cell key={row.id + "name"} className="row-header"><HeaderContextArea artifact={row.name} artifactType={row.type} id={row.id} numLinks={row.numLinks} parentFolder={row.parentFolder} placement="top" cell={<a href={row.url}>{ row.name }</a>}/></Cell>
                 {row.cells.filter(isSearched(columnSearchTerm)).map(cell => (
-                  cell.isLink ? <Cell key={row.id+cell.id} className="normalCell"><LinkContextArea rowId={cell.linkId} columnId={cell.id} className={cell.className} rowArtifact={cell.linkName} columnArtifact={cell.name} linkType={cell.rowLinkType} content={cell.cell} /></Cell> : <Cell key={row.id+cell.id} className={cell.className}>{cell.cell}</Cell>
+                  cell.isLink ? <Cell key={row.id+cell.id} className="normalCell" color={cell.color}><LinkContextArea rowId={cell.linkId} columnId={cell.id} className={cell.className} rowArtifact={cell.linkName} columnArtifact={cell.name} linkType={cell.rowLinkType} content={cell.cell} /></Cell> : <Cell key={row.id+cell.id} className={cell.className} color={cell.color}>{cell.cell}</Cell>
                 ))}
               </Row>
               ))}
@@ -41,7 +41,7 @@ class Table extends Component {
               <Row key={row.id}>
                 <Cell key={row.id + "name"} className="row-header"><HeaderContextArea artifact={row.name} artifactType={row.type} id={row.id} numLinks={row.numLinks} parentFolder={row.parentFolder} placement="top" cell={<a href={row.url}>{ row.id }</a>}/></Cell>
                 {row.cells.filter(IdIsSearched(columnSearchTerm)).map(cell => (
-                  cell.isLink ? <Cell key={row.id+cell.id} className="normalCell"><LinkContextArea rowId={cell.linkId} columnId={cell.id} className={cell.className} rowArtifact={cell.linkName} columnArtifact={cell.name} linkType={cell.rowLinkType} content={cell.cell} /></Cell> : <Cell key={row.id+cell.id} className={cell.className}>{cell.cell}</Cell>
+                  cell.isLink ? <Cell key={row.id+cell.id} className="normalCell" color={cell.color}><LinkContextArea rowId={cell.linkId} columnId={cell.id} className={cell.className} rowArtifact={cell.linkName} columnArtifact={cell.name} linkType={cell.rowLinkType} content={cell.cell} /></Cell> : <Cell key={row.id+cell.id} className={cell.className} color={cell.color}>{cell.cell}</Cell>
                 ))}
               </Row>
               ))}

@@ -35,7 +35,7 @@ class AnalyticsCard extends Component {
                                {dependencies.map(item => (
                                    <Row>
                                    <Form.Label>
-                                       {item.label}
+                                      <font color={item.color}>&#8598; - </font> {item.label}
                                    </Form.Label>
                                    </Row>
                                ))}

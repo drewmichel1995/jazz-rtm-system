@@ -179,6 +179,7 @@ public class ProjectArea {
                     uniqueLinks.add(l.linkType);
                     temp.put("label", l.linkType);
                     temp.put("value", l.linkType);
+                    temp.put("color", getLinkColor(l.linkType));
                     linkTypes.put(temp);
                 }
             }
@@ -304,6 +305,7 @@ public class ProjectArea {
         tempCount.put("isLink", false);
         tempCount.put("rowLinkType", "");
         tempCount.put("colLinkType", "");
+        tempCount.put("color", "");
         tempCount.put("tableElemID", "rowCounter");
         tempCount.put("className", "edgeCountCell");
         columnHeaderCount.put(tempCount);
@@ -317,6 +319,7 @@ public class ProjectArea {
         tempCount.put("isLink", false);
         tempCount.put("rowLinkType", "");
         tempCount.put("colLinkType", "");
+        tempCount.put("color", "");
         tempCount.put("tableElemID", "rowCounter");
         columnHeaders.put(tempCount);
 
@@ -369,6 +372,7 @@ public class ProjectArea {
             rowCount.put("isLink", false);
             rowCount.put("rowLinkType", "");
             rowCount.put("colLinkType", "");
+            rowCount.put("color", "");
             rowCount.put("tableElemID", "rowCounter");
             rowCount.put("className", "rowCountCell");
 
@@ -412,6 +416,7 @@ public class ProjectArea {
                     cell.put("isLink", true);
                     cell.put("rowLinkType", rowLinkType);
                     cell.put("colLinkType", colLinkType);
+                    cell.put("color", getLinkColor(rowLinkType));
                     cell.put("tableElemID", "");
                     cell.put("className", "arrow normalCell");
                 }
@@ -424,6 +429,7 @@ public class ProjectArea {
                     cell.put("isLink", false);
                     cell.put("rowLinkType", rowLinkType);
                     cell.put("colLinkType", colLinkType);
+                    cell.put("color", "");
                     cell.put("tableElemID", "");
                     cell.put("className", "normalCell");
                 }
@@ -617,6 +623,47 @@ public class ProjectArea {
         }
 
         return artifacts;
+    }
+
+    private String getLinkColor(String linkType){
+        if(linkType.toLowerCase().contains("affect"))
+            return "cadetblue";
+        else if(linkType.toLowerCase().contains("term"))
+            return "crimson";
+        else if(linkType.toLowerCase().contains("constrain"))
+            return "darkgreen";
+        else if(linkType.toLowerCase().contains("parent") || linkType.toLowerCase().contains("child"))
+            return "deepskyblue";
+        else if(linkType.toLowerCase().contains("derive"))
+            return "indianred";
+        else if(linkType.toLowerCase().contains("embed"))
+            return "green";
+        else if(linkType.toLowerCase().contains("extract"))
+            return "navy";
+        else if(linkType.toLowerCase().contains("illustrate"))
+            return "maroon";
+        else if(linkType.toLowerCase().contains("implement"))
+            return "mediumseagreen";
+        else if(linkType.toLowerCase().contains("link"))
+            return "red";
+        else if(linkType.toLowerCase().contains("mitigate"))
+            return "midnightblue";
+        else if(linkType.toLowerCase().contains("reference"))
+            return "olive";
+        else if(linkType.toLowerCase().contains("refine"))
+            return "orangered";
+        else if(linkType.toLowerCase().equals("satisfies") || linkType.toLowerCase().equals("satisfied by"))
+            return "blue";
+        else if(linkType.toLowerCase().contains("synonym"))
+            return "rosybrown";
+        else if(linkType.toLowerCase().contains("trace"))
+            return "purple";
+        else if(linkType.toLowerCase().contains("track"))
+            return "tomato";
+        else if(linkType.toLowerCase().contains("validate"))
+            return "teal";
+        else
+            return "brown";
     }
 
     JSONObject toJSON(){
