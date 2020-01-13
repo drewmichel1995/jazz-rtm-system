@@ -45,7 +45,7 @@ class OptionsToolbar extends Component {
                                 projectURI={projectURI}
                                 uniqueID={uniqueID}
                             />}
-                            {this.state.showMatrix &&
+                            {this.state.showSearch &&
                             <SearchFormContainer
                                 rowSearchTerm={rowSearchTerm}
                                 columnSearchTerm={columnSearchTerm}
