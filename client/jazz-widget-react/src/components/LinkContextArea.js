@@ -4,7 +4,7 @@ import { Popover, OverlayTrigger } from 'react-bootstrap';
 class LinkContextArea extends Component {  
 
     render(){
-        const { className, rowArtifact, columnArtifact, linkType, rowId, columnId } = this.props;
+        const { className, rowArtifact, columnArtifact, linkType, rowId, columnId, color } = this.props;
 
         return(
             <OverlayTrigger
@@ -17,7 +17,7 @@ class LinkContextArea extends Component {
                     </Popover>
                 }
             >
-                <div className={className}></div>
+                <div className={className} style={"color:" + {color} + ";"}></div>
             </OverlayTrigger>
         )
     }
