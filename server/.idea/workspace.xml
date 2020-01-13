@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="" />
+    <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/ProjectArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProjectArea.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -87,11 +89,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="195" lean-forward="true" selection-start-line="195" selection-end-line="195" />
+            <state relative-caret-position="566">
+              <caret line="453" column="5" selection-start-line="453" selection-start-column="5" selection-end-line="453" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ProjectArea#0;class#ProjectArea#0" />
+                <element signature="method#ProjectArea#1;class#ProjectArea#0" />
+                <element signature="method#ProjectArea#2;class#ProjectArea#0" />
                 <element signature="method#getArtifacts#0;class#ProjectArea#0" />
                 <element signature="method#setArtifacts#0;class#ProjectArea#0" />
                 <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
@@ -100,14 +104,20 @@
                 <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
                 <element signature="method#filterRowDependencies#0;class#ProjectArea#0" />
                 <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
+                <element signature="method#filterAll#0;class#ProjectArea#0" />
                 <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
+                <element signature="method#getLinkTypes#0;class#ProjectArea#0" />
                 <element signature="method#getParentFolders#0;class#ProjectArea#0" />
                 <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
-                <element signature="method#getTableJSON_react_data_grid#0;class#ProjectArea#0" />
+                <element signature="method#getFields#0;class#ProjectArea#0" />
+                <element signature="method#getTableJSON#0;class#ProjectArea#0" />
+                <element signature="method#getCellObject#0;class#ProjectArea#0" />
+                <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
                 <element signature="method#getTableJSON#1;class#ProjectArea#0" />
                 <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
-                <element signature="method#getTableJSON#2;class#ProjectArea#0" />
                 <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
+                <element signature="method#getLinkColor#0;class#ProjectArea#0" />
+                <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
                 <element signature="method#toJSON#0;class#ProjectArea#0" />
               </folding>
             </state>
@@ -280,7 +290,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578930741663" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578934225209" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -391,7 +401,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.35861322" />
+      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.032502707" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -554,11 +564,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="195" lean-forward="true" selection-start-line="195" selection-end-line="195" />
+        <state relative-caret-position="566">
+          <caret line="453" column="5" selection-start-line="453" selection-start-column="5" selection-end-line="453" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ProjectArea#0;class#ProjectArea#0" />
+            <element signature="method#ProjectArea#1;class#ProjectArea#0" />
+            <element signature="method#ProjectArea#2;class#ProjectArea#0" />
             <element signature="method#getArtifacts#0;class#ProjectArea#0" />
             <element signature="method#setArtifacts#0;class#ProjectArea#0" />
             <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
@@ -567,14 +579,20 @@
             <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
             <element signature="method#filterRowDependencies#0;class#ProjectArea#0" />
             <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
+            <element signature="method#filterAll#0;class#ProjectArea#0" />
             <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
+            <element signature="method#getLinkTypes#0;class#ProjectArea#0" />
             <element signature="method#getParentFolders#0;class#ProjectArea#0" />
             <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
-            <element signature="method#getTableJSON_react_data_grid#0;class#ProjectArea#0" />
+            <element signature="method#getFields#0;class#ProjectArea#0" />
+            <element signature="method#getTableJSON#0;class#ProjectArea#0" />
+            <element signature="method#getCellObject#0;class#ProjectArea#0" />
+            <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
             <element signature="method#getTableJSON#1;class#ProjectArea#0" />
             <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
-            <element signature="method#getTableJSON#2;class#ProjectArea#0" />
             <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
+            <element signature="method#getLinkColor#0;class#ProjectArea#0" />
+            <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
             <element signature="method#toJSON#0;class#ProjectArea#0" />
           </folding>
         </state>

@@ -236,58 +236,6 @@ public class ProjectArea {
         return fields;
     }
 
-    JSONObject getTableJSON_react_data_grid(){
-        JSONObject tableData = new JSONObject();
-        JSONArray columnHeaders = new JSONArray();
-        JSONArray rows = new JSONArray();
-        JSONObject first = new JSONObject();
-        int i = 0;
-        first.put("name", "");
-        first.put("key", "name");
-        first.put("id", "");
-        columnHeaders.put(first);
-        for(Artifact a: artifacts){
-            i++;
-            JSONObject temp = new JSONObject();
-            temp.put("name", a.name);
-            temp.put("url", a.url);
-            temp.put("id", a.id);
-            temp.put("key", Integer.toString(i));
-            temp.put("className", "rotate");
-            temp.put("width", "20");
-            temp.put("ellipsis", true);
-            columnHeaders.put(temp);
-        }
-
-        for(Artifact a: artifacts){
-            JSONObject temp = new JSONObject();
-            temp.put("name", a.name);
-            temp.put("url", a.url);
-            temp.put("id", a.id);
-            i = 0;
-            for(Artifact j: artifacts){
-                i++;
-                boolean add = false;
-                for(Link l: j.links){
-                    if(a.itemId.equals(l.id)){
-                        add = true;
-                    }
-                }
-
-                if(add)
-                    temp.put(Integer.toString(i), "1");
-                else
-                    temp.put(Integer.toString(i), "");
-            }
-
-            rows.put(temp);
-        }
-
-        tableData.put("columns", columnHeaders);
-        tableData.put("rows", rows);
-        return tableData;
-    }
-
     JSONObject getTableJSON(){
 
         if(this.linksOnly){
@@ -308,99 +256,40 @@ public class ProjectArea {
         JSONArray rows = new JSONArray();
 
         //For Empty edge cell
-        JSONObject tempCount = new JSONObject();
-        tempCount.put("cell", "");
-        tempCount.put("name", "");
-        tempCount.put("id", "");
-        tempCount.put("linkName", "");
-        tempCount.put("linkId", "");
-        tempCount.put("isLink", false);
-        tempCount.put("rowLinkType", "");
-        tempCount.put("colLinkType", "");
-        tempCount.put("color", "");
-        tempCount.put("tableElemID", "rowCounter");
-        tempCount.put("className", "edgeCountCell");
-        columnHeaderCount.put(tempCount);
+        JSONObject edgeCountCell = getCellObject("","","","","",false,"","","","rowCounter","edgeCountCell");
+        columnHeaderCount.put(edgeCountCell);
 
-        tempCount = new JSONObject();
-        tempCount.put("name", "");
-        tempCount.put("url", "");
-        tempCount.put("id", "");
-        tempCount.put("linkName", "");
-        tempCount.put("linkId", "");
-        tempCount.put("isLink", false);
-        tempCount.put("rowLinkType", "");
-        tempCount.put("colLinkType", "");
-        tempCount.put("color", "");
-        tempCount.put("tableElemID", "rowCounter");
-        columnHeaders.put(tempCount);
+        //Empty Column Header(first column header - blank)
+        JSONObject emptyColumnHeader = getHeaderObject("","","","","","","rowCounter");
+        columnHeaders.put(emptyColumnHeader);
 
+        //Get all column headers and corresponding count cells
         columnArtifacts.forEach(a -> {
-            JSONObject countCell = new JSONObject();
-            countCell.put("cell", Integer.toString(a.links.size()));
-            countCell.put("name", a.name);
-            countCell.put("id", a.id);
-            countCell.put("linkName", "");
-            countCell.put("linkId", "");
-            countCell.put("isLink", false);
-            countCell.put("rowLinkType", "");
-            countCell.put("colLinkType", "");
-            countCell.put("tableElemID", "");
-            countCell.put("className", "colCountCell");
+            JSONObject countCell = getCellObject(Integer.toString(a.links.size()), a.name, a.id, "", "", false, "", "", "", "","colCountCell");
             columnHeaderCount.put(countCell);
 
-            JSONObject temp = new JSONObject();
-            temp.put("name", a.name);
-            temp.put("url", a.url);
-            temp.put("id", a.id);
-            temp.put("type", a.artifactType);
-            temp.put("parentFolder", a.parentFolder);
-            temp.put("numLinks", a.links.size());
-            temp.put("tableElemID", "");
+            JSONObject temp = getHeaderObject(a.name, a.url, a.id, a.artifactType, a.parentFolder,Integer.toString(a.links.size()), "");
             columnHeaders.put(temp);
         });
 
-        tempCount = new JSONObject();
-        tempCount.put("name", "");
-        tempCount.put("url", "");
-        tempCount.put("id", "");
-        tempCount.put("linkName", "");
-        tempCount.put("linkId", "");
-        tempCount.put("isLink", false);
-        tempCount.put("rowLinkType", "");
-        tempCount.put("colLinkType", "");
-        tempCount.put("tableElemID", "rowCounter");
-        tempCount.put("cells", columnHeaderCount);
-        rows.put(tempCount);
+        //Empty Row Header(first row header - blank)
+        JSONObject emptyRowHeader = getHeaderObject("","","","","","","rowCounter");
+        emptyRowHeader.put("cells", columnHeaderCount);
+
+        rows.put(emptyRowHeader);
 
         rowArtifacts.forEach(a -> {
-            JSONObject temp = new JSONObject();
-            JSONObject rowCount = new JSONObject();
-            rowCount.put("cell", Integer.toString(a.links.size()));
-            rowCount.put("name", "");
-            rowCount.put("id", "");
-            rowCount.put("linkName", "");
-            rowCount.put("linkId", "");
-            rowCount.put("isLink", false);
-            rowCount.put("rowLinkType", "");
-            rowCount.put("colLinkType", "");
-            rowCount.put("color", "");
-            rowCount.put("tableElemID", "rowCounter");
-            rowCount.put("className", "rowCountCell");
+            //Get Row Header
+            JSONObject rowHeader = getHeaderObject(a.name, a.url, a.id, a.artifactType, a.parentFolder, Integer.toString(a.links.size()), "");
 
-
-            temp.put("name", a.name);
-            temp.put("url", a.url);
-            temp.put("id", a.id);
-            temp.put("type", a.artifactType);
-            temp.put("parentFolder", a.parentFolder);
-            temp.put("numLinks", a.links.size());
-            temp.put("tableElemID", "");
+            //Count cell to start row
+            JSONObject rowCount = getCellObject(Integer.toString(a.links.size()), "", "", "", "", false, "", "", "", "rowCounter", "rowCountCell");
             JSONArray cells = new JSONArray();
             cells.put(rowCount);
 
+            //Get cells for that row
             columnArtifacts.forEach(j -> {
-                JSONObject cell = new JSONObject();
+                JSONObject cell;
                 boolean add = false;
                 String rowLinkType = "";
                 String colLinkType = "";
@@ -419,36 +308,15 @@ public class ProjectArea {
                     }
                 }
 
-                if(add){
-                    cell.put("cell", "");
-                    cell.put("name", j.name);
-                    cell.put("id", j.id);
-                    cell.put("linkName", a.name);
-                    cell.put("linkId", a.id);
-                    cell.put("isLink", true);
-                    cell.put("rowLinkType", rowLinkType);
-                    cell.put("colLinkType", colLinkType);
-                    cell.put("color", getLinkColor(rowLinkType));
-                    cell.put("tableElemID", "");
-                    cell.put("className", "arrow normalCell");
-                }
-                else{
-                    cell.put("cell", "");
-                    cell.put("name", j.name);
-                    cell.put("id", j.id);
-                    cell.put("linkName", "");
-                    cell.put("linkId", "");
-                    cell.put("isLink", false);
-                    cell.put("rowLinkType", rowLinkType);
-                    cell.put("colLinkType", colLinkType);
-                    cell.put("color", "");
-                    cell.put("tableElemID", "");
-                    cell.put("className", "normalCell");
-                }
+                if(add)
+                    cell = getCellObject("", j.name, j.id, a.name, a.id, true, rowLinkType, colLinkType, getLinkColor(rowLinkType), "", "arrow normalCell");
+                else
+                    cell = getCellObject("", j.name, j.id, "", "", false, rowLinkType, colLinkType, "", "", "normalCell");
+
                 cells.put(cell);
             });
-            temp.put("cells",cells);
-            rows.put(temp);
+            rowHeader.put("cells",cells);
+            rows.put(rowHeader);
         });
 
         tableData.put("columns", columnHeaders);
@@ -456,6 +324,38 @@ public class ProjectArea {
         tableData.put("projectURI", this.projectUri);
         tableData.put("projectName", this.name);
         return tableData;
+    }
+
+    JSONObject getCellObject(String cellContent, String name, String id, String linkName, String linkId, boolean isLink, String rowLinkType, String colLinkType, String color, String tableElemID, String className){
+        JSONObject cell = new JSONObject();
+
+        cell.put("cell", cellContent);
+        cell.put("name", name);
+        cell.put("id", id);
+        cell.put("linkName", linkName);
+        cell.put("linkId", linkId);
+        cell.put("isLink", isLink);
+        cell.put("rowLinkType", rowLinkType);
+        cell.put("colLinkType", colLinkType);
+        cell.put("color", color);
+        cell.put("tableElemID", tableElemID);
+        cell.put("className", className);
+
+        return cell;
+    }
+
+    JSONObject getHeaderObject(String name, String url, String id, String type, String parentFolder, String numLinks, String tableElemID){
+        JSONObject header = new JSONObject();
+
+        header.put("name", name);
+        header.put("url", url);
+        header.put("id", id);
+        header.put("type", type);
+        header.put("parentFolder", parentFolder);
+        header.put("numLinks", numLinks);
+        header.put("tableElemID", tableElemID);
+
+        return header;
     }
 
     JSONObject getTableJSON(JSONObject payload){
@@ -551,69 +451,6 @@ public class ProjectArea {
             }
         }
         return 0;
-    }
-
-    JSONObject getTableJSON(ArrayList<Artifact> filterRows){
-        ArrayList<Artifact> columns = new ArrayList<>();
-        JSONObject tableData = new JSONObject();
-        JSONArray columnHeaders = new JSONArray();
-        JSONArray rows = new JSONArray();
-
-        for(Artifact a: artifacts) {
-
-            boolean add = false;
-            for(Link l: a.links){
-                for(Artifact r: filterRows){
-                    if(r.itemId.equals(l.id)){
-                        add = true;
-                    }
-                }
-            }
-
-            if(add){
-                JSONObject temp = new JSONObject();
-                temp.put("name", a.name);
-                temp.put("url", a.url);
-                temp.put("id", a.id);
-                columns.add(a);
-                columnHeaders.put(temp);
-            }
-        }
-
-        filterRows.forEach(a -> {
-            JSONObject temp = new JSONObject();
-            temp.put("name", a.name);
-            temp.put("url", a.url);
-            temp.put("id", a.id);
-            JSONArray cells = new JSONArray();
-            columns.forEach(j -> {
-                JSONObject cell = new JSONObject();
-                boolean add = false;
-                for(Link l: j.links){
-                    if(a.itemId.equals(l.id)){
-                        add = true;
-                    }
-                }
-
-                cell.put("cell", "");
-                if(add){
-                    cell.put("name", j.name);
-                    cell.put("id", j.id);
-                    cell.put("className", "arrow normalCell");
-                }else{
-                    cell.put("name", j.name);
-                    cell.put("id", j.id);
-                    cell.put("className", "normalCell");
-                }
-                cells.put(cell);
-            });
-            temp.put("cells",cells);
-            rows.put(temp);
-        });
-
-        tableData.put("columns", columnHeaders);
-        tableData.put("rows", rows);
-        return tableData;
     }
 
     private ArrayList<Artifact> getOnlyLinks(ArrayList<Artifact> baseList, ArrayList<Artifact> compareList){
