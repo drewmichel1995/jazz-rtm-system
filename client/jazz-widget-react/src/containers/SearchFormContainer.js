@@ -6,7 +6,7 @@ class SearchFormContainer extends Component {
     render(){
         const { rowSearchTerm, columnSearchTerm, onRowChange, onColumnChange, rowPlaceholder, columnPlaceholder, showID, triggerShowID } = this.props;
         return (
-            <ToggleBox title="Show Search" hideTitle="Hide Search Options" showTitle="Show Search Options">
+            <div>
             <Form>
                 <Form.Group>
                     <Row>
@@ -30,7 +30,7 @@ class SearchFormContainer extends Component {
                     </Row>
                 </Form.Group>
             </Form>
-            </ToggleBox>
+            </div>
         );
     }
 }

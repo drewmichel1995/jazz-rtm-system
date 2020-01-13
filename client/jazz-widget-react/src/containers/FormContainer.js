@@ -204,7 +204,7 @@ class FormContainer extends Component {
     render(){
         const { parentFolderOptions, dependencies, artifactTypes, columnSelected, rowSelected, dependencySelected, columnArtifactTypeSelected, rowArtifactTypeSelected, linksOnlySelected, validCookie } = this.state;
         return(
-            <ToggleBox hideTitle="Hide Matrix Options" showTitle="Show Matrix Options">
+            <div>
             {!validCookie && <Spinner animation="grow"/>}
             {validCookie && <Form>
                 <Row>
@@ -243,7 +243,7 @@ class FormContainer extends Component {
                     </Col>
                 </Row>
             </Form>}
-            </ToggleBox>
+            </div>
         )
         
     }
