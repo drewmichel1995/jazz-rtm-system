@@ -29,7 +29,8 @@ class FormContainer extends Component {
       columnArtifactTypeSelected: "",
       linksOnlySelected: false,
       projectURI: "",
-      validCookie: true
+      validCookie: true,
+      isLoading: true
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
@@ -59,7 +60,8 @@ class FormContainer extends Component {
             rowArtifactTypeSelected: result.formattedPayload.rowTypes,
             columnArtifactTypeSelected: result.formattedPayload.columnTypes,
             linksOnlySelected: result.formattedPayload.linksOnly,
-            projectURI: result.projectURI
+            projectURI: result.projectURI,
+            isLoading: false
           });
         } else {
           this.setState({ validCookie: result.success });
@@ -203,12 +205,13 @@ class FormContainer extends Component {
       columnArtifactTypeSelected,
       rowArtifactTypeSelected,
       linksOnlySelected,
-      validCookie
+      validCookie,
+      isLoading
     } = this.state;
     return (
       <div style={{ margin: "20px" }}>
-        {!validCookie && <Spinner animation="grow" />}
-        {validCookie && (
+        {!validCookie || (isLoading && <Spinner animation="grow" />)}
+        {!isLoading && validCookie && (
           <Form>
             <Row>
               <Col>

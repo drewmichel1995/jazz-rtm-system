@@ -10,7 +10,9 @@ class OptionsToolbar extends Component {
       showSearch: false,
       showMatrix: false,
       searchText: "Show Search Options",
-      matrixText: "Show Filter Options"
+      matrixText: "Show Filter Options",
+      searchVariant: "secondary",
+      matrixVariant: "primary"
     };
 
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -20,15 +22,27 @@ class OptionsToolbar extends Component {
   onSearchChange = () => {
     this.setState({ showSearch: !this.state.showSearch });
     this.state.showSearch
-      ? this.setState({ searchText: "Show Search Options" })
-      : this.setState({ searchText: "Hide Search Options" });
+      ? this.setState({
+          searchText: "Show Search Options",
+          searchVariant: "secondary"
+        })
+      : this.setState({
+          searchText: "Hide Search Options",
+          searchVariant: "link"
+        });
   };
 
   onMatrixChange = () => {
     this.setState({ showMatrix: !this.state.showMatrix });
     this.state.showMatrix
-      ? this.setState({ matrixText: "Show Filter Options" })
-      : this.setState({ matrixText: "Hide Filter Options" });
+      ? this.setState({
+          matrixText: "Show Filter Options",
+          matrixVariant: "primary"
+        })
+      : this.setState({
+          matrixText: "Hide Filter Options",
+          matrixVariant: "link"
+        });
   };
 
   render() {
@@ -50,10 +64,16 @@ class OptionsToolbar extends Component {
     return (
       <div style={{ margin: "20px" }}>
         <ButtonGroup aria-label="Basic example">
-          <Button variant="secondary" onClick={this.onMatrixChange}>
+          <Button
+            variant={this.state.matrixVariant}
+            onClick={this.onMatrixChange}
+          >
             {this.state.matrixText}
           </Button>
-          <Button variant="secondary" onClick={this.onSearchChange}>
+          <Button
+            variant={this.state.searchVariant}
+            onClick={this.onSearchChange}
+          >
             {this.state.searchText}
           </Button>
         </ButtonGroup>
