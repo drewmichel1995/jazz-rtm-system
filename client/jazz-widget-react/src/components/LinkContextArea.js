@@ -17,7 +17,7 @@ class LinkContextArea extends Component {
                     </Popover>
                 }
             >
-                <div className={className} style={{"color": {color}}}></div>
+                <div className={className} style={{color: {color}}}></div>
             </OverlayTrigger>
         )
     }
