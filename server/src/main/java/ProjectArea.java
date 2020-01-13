@@ -59,8 +59,14 @@ public class ProjectArea {
         this.linksOnly = payload.linksOnly;
 
         if(this.linksOnly){
+            System.out.println("Column Artifact Size: " + this.columnArtifacts.size());
+            System.out.println("Row Artifact Size: " + this.rowArtifacts.size());
+
             setColumnArtifacts(getOnlyLinks(this.columnArtifacts, this.rowArtifacts));
             setRowArtifacts(getOnlyLinks(this.rowArtifacts, this.columnArtifacts));
+
+            System.out.println("Column Artifact Size: " + this.columnArtifacts.size());
+            System.out.println("Row Artifact Size: " + this.rowArtifacts.size());
         }
     }
 
@@ -237,18 +243,6 @@ public class ProjectArea {
     }
 
     JSONObject getTableJSON(){
-
-        if(this.linksOnly){
-
-            System.out.println("Column Artifact Size: " + this.columnArtifacts.size());
-            System.out.println("Row Artifact Size: " + this.rowArtifacts.size());
-
-            setColumnArtifacts(getOnlyLinks(this.columnArtifacts, this.rowArtifacts));
-            setRowArtifacts(getOnlyLinks(this.rowArtifacts, this.columnArtifacts));
-
-            System.out.println("Column Artifact Size: " + this.columnArtifacts.size());
-            System.out.println("Row Artifact Size: " + this.rowArtifacts.size());
-        }
 
         JSONObject tableData = new JSONObject();
         JSONArray columnHeaderCount = new JSONArray();
