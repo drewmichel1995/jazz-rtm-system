@@ -174,6 +174,8 @@ public class JazzHTTP {
         post("/tableJSON/:projectURI", (req, res) -> {
 
             System.out.println("Received Request /tableJSON");
+            System.out.println("ProjectURI " + req.params(":projectURI"));
+            System.out.println("Payload " + req.body());
             ProjectArea project = new ProjectArea(req.params(":projectURI"), new Payload(req.body()));
             getRes(res, "application/json");
 
