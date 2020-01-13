@@ -31,8 +31,8 @@ class OptionsToolbar extends Component {
 
             <div>
             <ButtonGroup aria-label="Basic example">
-                <Button variant="secondary" onChange={this.onMatrixChange}>Matrix Options</Button>
-                <Button variant="secondary" onChange={this.onSearchChange}>Search Options</Button>
+                <Button variant="secondary" onClick={this.onMatrixChange}>Matrix Options</Button>
+                <Button variant="secondary" onClick={this.onSearchChange}>Search Options</Button>
           </ButtonGroup>
 
                         {this.state.showMatrix &&
