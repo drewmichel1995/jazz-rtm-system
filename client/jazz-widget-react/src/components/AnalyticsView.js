@@ -1,5 +1,5 @@
 import React from "react";
-import { Spinner, Table } from "react-bootstrap";
+import { Spinner, Table, Jumbotron, Container } from "react-bootstrap";
 
 const serverURL = "https://mbse-colldev.saic.com/server";
 
@@ -42,6 +42,13 @@ class AnalyticsView extends React.Component {
       <div>
         {!loading && (
           <div>
+            <Jumbotron fluid>
+              <Container>
+                <h1>{data.projectName}</h1>
+                <h2>Number of Artifacts: {data.numArtifacts}</h2>
+                <h2>Number of Folders: {data.numFolders}</h2>
+              </Container>
+            </Jumbotron>
             <Table striped bordered hover>
               <thead>
                 <tr>
