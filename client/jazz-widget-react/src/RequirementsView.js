@@ -47,7 +47,7 @@ class RequirementsView extends React.Component {
             uniqueID: uniqueID,
             loading: false
           });
-          this.props.onTitleChange(result.projectName);
+          this.props.onTitleChange(result.projectName, result.projectURI);
         } else {
           this.setState({ validCookie: result.success });
         }
