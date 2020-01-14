@@ -28,7 +28,7 @@ class UserTableRow extends React.Component {
     return [
       <tr key="main" onClick={this.toggleExpander}>
         <td className="uk-text-nowrap">{folder.folderName}.</td>
-        <td>{folder.numArtifactd}</td>
+        <td>{folder.numArtifacts}</td>
       </tr>,
       this.state.expanded && (
         <tr className="expandable" key="tr-expander">
