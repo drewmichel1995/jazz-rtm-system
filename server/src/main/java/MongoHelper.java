@@ -108,10 +108,6 @@ public class MongoHelper {
         return collection;
     }
 
-    MongoDatabase database(){
-        return database;
-    }
-
     private static String generateUniqueID() {
         String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         int length = 17;

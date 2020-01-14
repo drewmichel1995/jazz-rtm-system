@@ -1,4 +1,5 @@
 DataSync.class
+AnalyticsHelper.class
 MongoHelper.class
 Artifact.class
 ProjectArea.class

@@ -171,6 +171,15 @@ public class JazzHTTP {
             return readBytes(file);
         });
 
+        get("/getAnalytics/:projectURI", (req, res) -> {
+
+            System.out.println("Received Request /getAnalytics");
+            AnalyticsHelper analytics = new AnalyticsHelper(req.params(":projectURI"));
+            getRes(res, "application/json");
+
+            return analytics.toJSON();
+        });
+
         post("/tableJSON/:projectURI", (req, res) -> {
 
             System.out.println("Received Request /tableJSON");
