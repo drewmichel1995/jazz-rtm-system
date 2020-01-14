@@ -55,7 +55,8 @@ public class DataSync {
             }
         }catch(Exception ex){
             System.out.println("No new data for " + p.name + " at " + dateFormatGmt.format(new Date()) + " URL Tested: " + jazzURL + cfg.getProperty("jazzResourcesEndpoint") + p.projectUri + "&modifiedSince=" + dateFormatGmt.format(new Date()));
-            System.out.println(jazzURL + cfg.getProperty("jazzResourcesEndpoint") + p.projectUri + "&modifiedSince=" + dateFormatGmt.format(new Date()));
+            //System.out.println(jazzURL + cfg.getProperty("jazzResourcesEndpoint") + p.projectUri + "&modifiedSince=" + dateFormatGmt.format(new Date()));
+            System.out.println(" ");
         }
     }
 

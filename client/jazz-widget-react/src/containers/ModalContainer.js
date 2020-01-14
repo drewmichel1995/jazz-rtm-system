@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 
 class ModalContainer extends Component {
+  copyToClipboard = e => {
+    var copyText = document.getElementById("copypasta");
+    copyText.select();
+    document.execCommand("copy");
+  };
+
   render() {
     return (
       <Modal.Dialog>
@@ -26,8 +32,15 @@ class ModalContainer extends Component {
           >
             Go to Jazz Dashboard
           </Button>
-          <Button variant="secondary">Copy Link to Jazz Widget</Button>
+          <Button variant="secondary" onClick={this.copyToClipboard}>
+            Copy Link to Jazz Widget
+          </Button>
         </Modal.Footer>
+        <span
+          id="copypasta"
+          style={{ display: "hidden" }}
+          value="https://mbse-colldev.saic.com/server/getWidget"
+        />
       </Modal.Dialog>
     );
   }
