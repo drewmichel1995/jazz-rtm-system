@@ -21,13 +21,11 @@ class AnalyticsView extends React.Component {
     })
       .then(res => res.json())
       .then(result => {
-        if (result.success) {
-          this.setState({
-            data: result,
-            loading: false
-          });
-          this.props.onTitleChange(result.projectName);
-        }
+        this.setState({
+          data: result,
+          loading: false
+        });
+        this.props.onTitleChange(result.projectName);
       });
   }
 
