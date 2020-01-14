@@ -3,8 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 
 class ModalContainer extends Component {
   copyToClipboard = e => {
-    var copyText = document.getElementById("copypasta");
-    copyText.select();
+    document.querySelector("#span").select();
     document.execCommand("copy");
   };
 
