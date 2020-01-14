@@ -1,5 +1,6 @@
 import React from "react";
 import { Spinner, Table, Jumbotron, Container } from "react-bootstrap";
+import UserTableRow from "./UserTableRow";
 
 const serverURL = "https://mbse-colldev.saic.com/server";
 
@@ -58,10 +59,7 @@ class AnalyticsView extends React.Component {
               </thead>
               <tbody>
                 {data.folders.map(item => (
-                  <tr>
-                    <td>{item.folderName}</td>
-                    <td>{item.numArtifacts}</td>
-                  </tr>
+                  <UserTableRow folder={item} />
                 ))}
               </tbody>
             </Table>
