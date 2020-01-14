@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import { Route, NavLink, HashRouter } from "react-router-dom";
 import RequirementsView from "./RequirementsView";
+import AnalyticsView from "./components/AnalyticsView";
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "Jazz Requirements Matrix"
+      title: "Jazz Requirements Matrix",
+      uri: "xxxxxx"
     };
 
     this.onTitleChange = this.onTitleChange.bind(this);
   }
 
-  onTitleChange = title => {
-    this.setState({ title: title });
+  onTitleChange = (title, uri) => {
+    this.setState({ title: title, uri: uri });
   };
 
   render() {
@@ -25,6 +27,9 @@ class Main extends Component {
             <li>
               <NavLink exact to="/">
                 Traceability Matrix
+              </NavLink>
+              <NavLink exact to="/AnalyticsView">
+                Project Analytics
               </NavLink>
             </li>
           </ul>
@@ -57,6 +62,13 @@ class Main extends Component {
                   {...props}
                   onTitleChange={this.onTitleChange}
                 />
+              )}
+            />
+            <Route
+              exact
+              path="/AnalyticsView"
+              render={props => (
+                <AnalyticsView {...props} projectURI={this.state.uri} />
               )}
             />
           </div>
