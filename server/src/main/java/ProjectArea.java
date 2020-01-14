@@ -146,7 +146,7 @@ public class ProjectArea {
         this.setColumnArtifacts(filteredArtifacts);
     }
 
-    void filterAll(ArrayList<String> columns, ArrayList<String> rows, ArrayList<String> columnArtifactTypes, ArrayList<String> rowArtifactTypes, ArrayList<String> dependencies){
+    private void filterAll(ArrayList<String> columns, ArrayList<String> rows, ArrayList<String> columnArtifactTypes, ArrayList<String> rowArtifactTypes, ArrayList<String> dependencies){
 
         this.setColumnArtifacts(filterParentFolders(columns));
         this.setRowArtifacts(filterParentFolders(rows));
@@ -158,7 +158,7 @@ public class ProjectArea {
 
     }
 
-    JSONArray getArtifactTypes(){
+    private JSONArray getArtifactTypes(){
         JSONArray artifactTypes = new JSONArray();
         ArrayList<String> uniqueTypes = new ArrayList<>();
         for(Artifact a: this.artifacts){
@@ -175,7 +175,7 @@ public class ProjectArea {
         return artifactTypes;
     }
 
-    JSONObject getLinkTypes(){
+    private JSONObject getLinkTypes(){
         JSONObject ret = new JSONObject();
         JSONArray linkTypes = new JSONArray();
         JSONArray legend = new JSONArray();
@@ -206,7 +206,7 @@ public class ProjectArea {
         return ret;
     }
 
-    JSONArray getParentFolders(){
+    private JSONArray getParentFolders(){
         JSONArray parentFolders = new JSONArray();
         ArrayList<String> uniqueParents = new ArrayList<>();
         int i = 0;
@@ -320,7 +320,7 @@ public class ProjectArea {
         return tableData;
     }
 
-    JSONObject getCellObject(String cellContent, String name, String id, String linkName, String linkId, boolean isLink, String rowLinkType, String colLinkType, String color, String tableElemID, String className){
+    private JSONObject getCellObject(String cellContent, String name, String id, String linkName, String linkId, boolean isLink, String rowLinkType, String colLinkType, String color, String tableElemID, String className){
         JSONObject cell = new JSONObject();
 
         cell.put("cell", cellContent);
@@ -338,7 +338,7 @@ public class ProjectArea {
         return cell;
     }
 
-    JSONObject getHeaderObject(String name, String url, String id, String type, String parentFolder, String numLinks, String tableElemID){
+    private JSONObject getHeaderObject(String name, String url, String id, String type, String parentFolder, String numLinks, String tableElemID){
         JSONObject header = new JSONObject();
 
         header.put("name", name);
@@ -449,10 +449,7 @@ public class ProjectArea {
 
     private ArrayList<Artifact> getOnlyLinks(ArrayList<Artifact> baseList, ArrayList<Artifact> compareList){
         ArrayList<Artifact> artifacts = new ArrayList<>();
-        int count = 0;
         for(Artifact r: baseList){
-            if(r.name.equals("Shock"))
-                count++;
             boolean add = false;
             for(Link l: r.links){
                 for(Artifact c: compareList){

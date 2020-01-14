@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -299,7 +298,7 @@ public class ServiceAccountManager {
     }
 
     private static String getMemberPayload(String uri){
-        String payload = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<jp06:members xmlns:jp06=\"http://jazz.net/xmlns/prod/jazz/process/0.6/\">\n" +
                 "    <jp06:member>\n" +
                 "        <jp06:user-url>https://mbse-jtsdev.saic.com:9443/jts/users/srvc-csee-jazz</jp06:user-url>\n" +
@@ -310,7 +309,5 @@ public class ServiceAccountManager {
                 "        </jp06:role-assignments>\n" +
                 "    </jp06:member>\n" +
                 "</jp06:members>";
-
-        return payload;
     }
 }
