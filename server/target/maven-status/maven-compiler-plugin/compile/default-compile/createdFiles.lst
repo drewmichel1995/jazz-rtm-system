@@ -4,6 +4,7 @@ Artifact.class
 ProjectArea.class
 Config.class
 JazzHTTP.class
+JazzHTTP$1.class
 Link.class
 ServiceAccountManager.class
 Payload.class

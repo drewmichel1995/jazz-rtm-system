@@ -74,18 +74,6 @@ public class ProjectArea {
         this.artifacts.add(artifact);
     }
 
-    ArrayList<Artifact> getArtifacts(JSONArray jsonArtifacts){
-        ArrayList<Artifact> artifacts = new ArrayList<>();
-        for(int i = 0; i < jsonArtifacts.length(); i++){
-            String temp = jsonArtifacts.getString(i);
-            for(Artifact a: this.artifacts)
-                if(a.itemId.equals(temp))
-                    artifacts.add(a);
-        }
-
-        return artifacts;
-    }
-
     void setArtifacts(ArrayList<Artifact> artifacts){
         this.artifacts = new ArrayList<>();
         this.artifacts = artifacts;

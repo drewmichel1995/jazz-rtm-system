@@ -26,7 +26,8 @@ public class ServiceAccountManager {
             cookieManager = new CookieManager(null, CookiePolicy.ACCEPT_ALL);
 
             CookieHandler.setDefault(cookieManager);
-            authenticate(authURL);
+            //authenticate with Jazz Server
+            executePost(authURL, cfg.getProperty("jazzAuth"));
             ArrayList<ProjectArea> uris = getProjectAreas();
 
             syncProjects();
@@ -44,9 +45,14 @@ public class ServiceAccountManager {
             newProjects.forEach(p -> {
                 try{
                     System.out.println("Adding data for: " + p.name);
-                    addAccountToProjectArea(p.projectUri, getJsessionId());
+                    //Add service account to project area
+                    String memberURL = cfg.getProperty("jazzURL") + cfg.getProperty("jazzAddMembersEndpoint1") + p.projectUri + cfg.getProperty("jazzAddMembersEndpoint2");
+                    executePost(memberURL, getMemberPayload(p.projectUri));
                     sync.getNewProjects(p);
-                    deleteAccountFromProjectArea(p.projectUri, getJsessionId());
+
+                    //Delete service account from project area
+                    String deleteURL = cfg.getProperty("jazzURL") + cfg.getProperty("jazzAddMembersEndpoint1") + p.projectUri + cfg.getProperty("jazzAddMembersEndpoint2") + "/srvc-csee-jazz";
+                    executeDelete(deleteURL);
                 }catch(Exception ex){
                     ex.printStackTrace();
                 }
@@ -55,9 +61,15 @@ public class ServiceAccountManager {
 
         existingProjects.forEach(p -> {
             try{
-                addAccountToProjectArea(p.projectUri, getJsessionId());
+                //Add service account to project area
+                String memberURL = cfg.getProperty("jazzURL") + cfg.getProperty("jazzAddMembersEndpoint1") + p.projectUri + cfg.getProperty("jazzAddMembersEndpoint2");
+                executePost(memberURL, getMemberPayload(p.projectUri));
+
                 sync.getNewData(p);
-                deleteAccountFromProjectArea(p.projectUri, getJsessionId());
+
+                //Delete service account from project area
+                String deleteURL = cfg.getProperty("jazzURL") + cfg.getProperty("jazzAddMembersEndpoint1") + p.projectUri + cfg.getProperty("jazzAddMembersEndpoint2") + "/srvc-csee-jazz";
+                executeDelete(deleteURL);
             }catch(Exception ex){
                 ex.printStackTrace();
             }
@@ -68,15 +80,24 @@ public class ServiceAccountManager {
     }
 
     private static String getJsessionId(){
-        List<HttpCookie> cookies = cookieManager.getCookieStore().getCookies();
-        ArrayList<String> JSESSIONID = new ArrayList<>();
-        for(HttpCookie c : cookies){
-            if(c.toString().contains("JSESSIONID")){
-                JSESSIONID.add(c.toString().split("JSESSIONID=")[1]);
+        try{
+            List<HttpCookie> cookies = cookieManager.getCookieStore().getCookies();
+            ArrayList<String> JSESSIONID = new ArrayList<>();
+            for(HttpCookie c : cookies){
+                if(c.toString().contains("JSESSIONID")){
+                    JSESSIONID.add(c.toString().split("JSESSIONID=")[1]);
+                }
             }
+
+            if(JSESSIONID.isEmpty()){
+                return "";
+            }
+
+            return JSESSIONID.get(1);
+        }catch(Exception ex){
+            return "";
         }
 
-        return JSESSIONID.get(1);
     }
 
     private static ArrayList<ProjectArea> checkForNewProjects(){
@@ -99,56 +120,6 @@ public class ServiceAccountManager {
         }
 
         return newProjects;
-    }
-
-    private static ArrayList<String> authenticate(String targetURL) throws Exception{
-        HttpURLConnection connection = null;
-
-        try {
-            //Create connection
-
-            URL url = new URL(targetURL);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
-
-            connection.setUseCaches(false);
-            connection.setDoOutput(true);
-
-
-            String jazzAuth = cfg.getProperty("jazzAuth");
-
-            //Send request
-            DataOutputStream wr = new DataOutputStream (connection.getOutputStream());
-            wr.writeBytes(jazzAuth);
-            wr.flush();
-            wr.close();
-
-            //Get Response
-            InputStream is = connection.getInputStream();
-
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-            StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
-            String line;
-            while ((line = rd.readLine()) != null) {
-                response.append(line);
-                response.append('\r');
-            }
-            rd.close();
-
-            ArrayList<String> JSESSIONID = new ArrayList<>();
-
-            return JSESSIONID;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
     }
 
     private static ArrayList<ProjectArea> getProjectAreas(){
@@ -177,94 +148,21 @@ public class ServiceAccountManager {
         return projectAreas;
     }
 
-    private static String addAccountToProjectArea(String projectAreaURI, String JSESSIONID) throws Exception{
-        HttpURLConnection connection = null;
-
-        try {
-
-            String targetURL = cfg.getProperty("jazzURL") + cfg.getProperty("jazzAddMembersEndpoint1") + projectAreaURI + cfg.getProperty("jazzAddMembersEndpoint2");
-
-            URL url = new URL(targetURL);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("X-Jazz-CSRF-Prevent", JSESSIONID);
-
-            connection.setUseCaches(false);
-            connection.setDoOutput(true);
-
-
-            String memberPayload = getMemberPayload(projectAreaURI);
-
-            //Send request
-            DataOutputStream wr = new DataOutputStream (connection.getOutputStream());
-            wr.writeBytes(memberPayload);
-            wr.flush();
-            wr.close();
-
-            //Get Response
-            InputStream is = connection.getInputStream();
-
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-            StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
-            String line;
-            while ((line = rd.readLine()) != null) {
-                response.append(line);
-                response.append('\r');
-            }
-            rd.close();
-
-            int code =  connection.getResponseCode();
-
-            return response.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
+    private static String getMemberPayload(String uri){
+        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<jp06:members xmlns:jp06=\"http://jazz.net/xmlns/prod/jazz/process/0.6/\">\n" +
+                "    <jp06:member>\n" +
+                "        <jp06:user-url>https://mbse-jtsdev.saic.com:9443/jts/users/srvc-csee-jazz</jp06:user-url>\n" +
+                "        <jp06:role-assignments>\n" +
+                "            <jp06:role-assignment>\n" +
+                "                <jp06:role-url>https://mbse-rmdev.saic.com:9443/rm/process/project-areas/" + uri + "/roles/Administrator</jp06:role-url>\n" +
+                "            </jp06:role-assignment>\n" +
+                "        </jp06:role-assignments>\n" +
+                "    </jp06:member>\n" +
+                "</jp06:members>";
     }
 
-    private static String deleteAccountFromProjectArea(String projectAreaURI, String JSESSIONID) throws Exception{
-        HttpURLConnection connection = null;
-
-        try {
-            String targetURL = cfg.getProperty("jazzURL") + cfg.getProperty("jazzAddMembersEndpoint1") + projectAreaURI + cfg.getProperty("jazzAddMembersEndpoint2") + "/srvc-csee-jazz";
-
-            URL url = new URL(targetURL);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("DELETE");
-            connection.setRequestProperty("X-Jazz-CSRF-Prevent", JSESSIONID);
-
-            connection.setUseCaches(false);
-            connection.setDoOutput(true);
-
-            //Get Response
-            InputStream is = connection.getInputStream();
-
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-            StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
-            String line;
-            while ((line = rd.readLine()) != null) {
-                response.append(line);
-                response.append('\r');
-            }
-            rd.close();
-
-            int code =  connection.getResponseCode();
-            return response.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
-    }
-
-    private static String executeGet(String targetURL) {
+    static String executeGet(String targetURL) {
         HttpURLConnection connection = null;
 
         try {
@@ -297,17 +195,82 @@ public class ServiceAccountManager {
         }
     }
 
-    private static String getMemberPayload(String uri){
-        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<jp06:members xmlns:jp06=\"http://jazz.net/xmlns/prod/jazz/process/0.6/\">\n" +
-                "    <jp06:member>\n" +
-                "        <jp06:user-url>https://mbse-jtsdev.saic.com:9443/jts/users/srvc-csee-jazz</jp06:user-url>\n" +
-                "        <jp06:role-assignments>\n" +
-                "            <jp06:role-assignment>\n" +
-                "                <jp06:role-url>https://mbse-rmdev.saic.com:9443/rm/process/project-areas/" + uri + "/roles/Administrator</jp06:role-url>\n" +
-                "            </jp06:role-assignment>\n" +
-                "        </jp06:role-assignments>\n" +
-                "    </jp06:member>\n" +
-                "</jp06:members>";
+    static int executePost(String targetURL, String payload) throws Exception{
+        HttpURLConnection connection = null;
+
+        try {
+            URL url = new URL(targetURL);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            if(!getJsessionId().equals(""))
+                connection.setRequestProperty("X-Jazz-CSRF-Prevent", getJsessionId());
+
+            connection.setUseCaches(false);
+            connection.setDoOutput(true);
+
+            //Send request
+            DataOutputStream wr = new DataOutputStream (connection.getOutputStream());
+            wr.writeBytes(payload);
+            wr.flush();
+            wr.close();
+
+            //Get Response
+            InputStream is = connection.getInputStream();
+
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+                response.append('\r');
+            }
+            rd.close();
+
+            return connection.getResponseCode();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    static int executeDelete(String targetURL) throws Exception{
+        HttpURLConnection connection = null;
+
+        try {
+            URL url = new URL(targetURL);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("X-Jazz-CSRF-Prevent", getJsessionId());
+
+            connection.setUseCaches(false);
+            connection.setDoOutput(true);
+
+            //Get Response
+            InputStream is = connection.getInputStream();
+
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+                response.append('\r');
+            }
+            rd.close();
+
+            return connection.getResponseCode();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
     }
 }

@@ -202,7 +202,7 @@ public class JazzHTTP {
 
                 res.status(200);
                 res.type("application/json");
-                //res.header("Access-Control-Allow-Origin", "http://mbse-appld10.corp.saic.com");
+
                 res.header("Access-Control-Allow-Origin", "https://mbse-rmdev.saic.com:9443");
                 res.header("Access-Control-Allow-Credentials", "true");
                 res.cookie("/", "jazz_rtm_cookie", encodedString, 60*60*24, false, true);
