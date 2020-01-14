@@ -62,9 +62,11 @@ public class AnalyticsHelper {
                 });
 
                 artifact.put("links", links);
+                artifacts.put(artifact);
             });
 
             folder.put("artifacts", artifacts);
+            folders.put(folder);
         });
 
         analytics.put("folders", folders);

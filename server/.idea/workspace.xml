@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JazzHTTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JazzHTTP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MongoHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MongoHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,7 +16,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="409">
@@ -140,11 +137,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/AnalyticsHelper.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="407">
-                  <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+                <state relative-caret-position="390">
+                  <caret line="64" column="40" lean-forward="true" selection-start-line="63" selection-start-column="45" selection-end-line="64" selection-end-column="40" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#195#196#0" expanded="true" />
@@ -362,7 +359,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579028769445" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579029403882" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -678,18 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AnalyticsHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#195#196#0" expanded="true" />
-            <element signature="e#237#238#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="409">
@@ -714,6 +699,18 @@
             <element signature="method#getRes#0;class#JazzHTTP#0" />
             <element signature="method#decodeCookie#0;class#JazzHTTP#0" />
             <element signature="method#loadData#0;class#JazzHTTP#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AnalyticsHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="64" column="40" lean-forward="true" selection-start-line="63" selection-start-column="45" selection-end-line="64" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#195#196#0" expanded="true" />
+            <element signature="e#237#238#0" expanded="true" />
           </folding>
         </state>
       </provider>
