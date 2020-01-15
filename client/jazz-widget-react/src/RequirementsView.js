@@ -20,7 +20,8 @@ class RequirementsView extends React.Component {
       projectURI: "",
       projectName: "",
       uniqueID: this.props.match.params.uniqueID,
-      validCookie: true
+      validCookie: true,
+      done: false
     };
 
     this.onRowSearchChange = this.onRowSearchChange.bind(this);
@@ -49,6 +50,9 @@ class RequirementsView extends React.Component {
             loading: false
           });
           this.props.onTitleChange(result.projectName, result.projectURI);
+          setTimeout(() => {
+            this.setState({ done: true });
+          }, 1000);
         } else {
           this.setState({ validCookie: result.success });
         }
@@ -110,12 +114,13 @@ class RequirementsView extends React.Component {
       projectURI,
       uniqueID,
       loading,
-      validCookie
+      validCookie,
+      done
     } = this.state;
 
     return (
       <div>
-        {!loading && (
+        {done && (
           <div>
             <OptionsToolbar
               rowSearchTerm={rowSearchTerm}
@@ -147,7 +152,7 @@ class RequirementsView extends React.Component {
           </div>
         )}
         {!validCookie && <ModalContainer />}
-        {loading && validCookie && <Loading />}
+        {!done && validCookie && <Loading loading={loading} />}
       </div>
     );
   }
