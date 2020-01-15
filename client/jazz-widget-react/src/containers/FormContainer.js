@@ -44,7 +44,7 @@ class FormContainer extends Component {
 
   componentDidMount() {
     var result = this.props.payload;
-    var fields = this.state.fields;
+    var fields = this.props.fields;
     this.setState({
       payload: result.payload,
       columnSelected: result.formattedPayload.columns,

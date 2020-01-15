@@ -122,8 +122,8 @@ class OptionsToolbar extends Component {
                 projectURI={projectURI}
                 uniqueID={uniqueID}
                 onTitleChange={onTitleChange}
-                fields={this.state.fields}
-                payload={this.state.payload}
+                fields={this.props.fields}
+                payload={this.props.payload}
               />
             </FadeIn>
           )}
