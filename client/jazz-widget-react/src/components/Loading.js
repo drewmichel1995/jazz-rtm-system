@@ -2,6 +2,7 @@ import React from "react";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import ReactLoading from "react-loading";
+import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import * as legoData from "./legoloading.json";
 import * as doneData from "./doneloading.json";
@@ -35,14 +36,18 @@ export default class Loading extends React.Component {
     return (
       <div>
         <FadeIn>
-          <div class="d-flex justify-content-center align-items-center">
-            <h1>fetching pizza</h1>
-            {this.props.loading ? (
-              <Lottie options={defaultOptions} height={120} width={120} />
-            ) : (
-              <Lottie options={defaultOptions2} height={120} width={120} />
-            )}
-          </div>
+          <Modal.Dialog>
+            <Modal.Body>
+              <div class="d-flex justify-content-center align-items-center">
+                <h1>Fetching Artifacts</h1>
+                {this.props.loading ? (
+                  <Lottie options={defaultOptions} height={120} width={120} />
+                ) : (
+                  <Lottie options={defaultOptions2} height={120} width={120} />
+                )}
+              </div>
+            </Modal.Body>
+          </Modal.Dialog>
         </FadeIn>
       </div>
     );
