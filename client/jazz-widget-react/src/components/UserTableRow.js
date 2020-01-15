@@ -35,7 +35,7 @@ class UserTableRow extends React.Component {
           <td className="uk-background-muted" colSpan={6}>
             <div ref="expanderBody" className="inner uk-grid">
               <div className="uk-width-1-4 uk-text-center">
-                <table>
+                <table style={{ width: "auto" }}>
                   <thead>
                     <th>ID</th>
                     <th>Name</th>
