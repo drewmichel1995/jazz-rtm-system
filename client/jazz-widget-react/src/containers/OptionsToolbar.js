@@ -30,11 +30,9 @@ class OptionsToolbar extends Component {
     })
       .then(res => res.json())
       .then(result => {
-        if (result.success) {
-          this.setState({
-            payload: result
-          });
-        }
+        this.setState({
+          payload: result
+        });
 
         console.log(this.props.projectURI);
 
