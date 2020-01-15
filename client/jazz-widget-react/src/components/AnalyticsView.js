@@ -2,6 +2,7 @@ import React from "react";
 import { Spinner, Table, Jumbotron, Container } from "react-bootstrap";
 import UserTableRow from "./UserTableRow";
 import Loading from "./Loading";
+import FadeIn from "react-fade-in";
 
 const serverURL = "https://mbse-colldev.saic.com/server";
 
@@ -31,7 +32,7 @@ class AnalyticsView extends React.Component {
 
         setTimeout(() => {
           this.setState({ done: true });
-        }, 2000);
+        }, 1500);
       });
   }
 
@@ -47,7 +48,7 @@ class AnalyticsView extends React.Component {
     return (
       <div>
         {done && (
-          <div>
+          <FadeIn>
             <Jumbotron fluid>
               <Container>
                 <h1>{data.projectName}</h1>
@@ -68,7 +69,7 @@ class AnalyticsView extends React.Component {
                 ))}
               </tbody>
             </Table>
-          </div>
+          </FadeIn>
         )}
         {!done && (
           <div>

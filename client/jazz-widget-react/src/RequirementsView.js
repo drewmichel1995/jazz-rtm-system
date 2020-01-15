@@ -56,7 +56,7 @@ class RequirementsView extends React.Component {
           );
           setTimeout(() => {
             this.setState({ done: true });
-          }, 2000);
+          }, 1500);
         } else {
           this.setState({ validCookie: result.success });
         }
