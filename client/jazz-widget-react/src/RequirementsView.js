@@ -21,7 +21,8 @@ class RequirementsView extends React.Component {
       projectName: "",
       uniqueID: this.props.match.params.uniqueID,
       validCookie: true,
-      done: false
+      done: false,
+      isEmpty: false
     };
 
     this.onRowSearchChange = this.onRowSearchChange.bind(this);
@@ -47,7 +48,8 @@ class RequirementsView extends React.Component {
             projectURI: result.projectURI,
             projectName: result.projectName,
             uniqueID: uniqueID,
-            loading: false
+            loading: false,
+            isEmpty: result.rows.isEmpty && result.columns.isEmpty
           });
           this.props.onTitleChange(
             result.projectName,
@@ -119,11 +121,19 @@ class RequirementsView extends React.Component {
       uniqueID,
       loading,
       validCookie,
-      done
+      done,
+      isEmpty
     } = this.state;
 
     return (
       <div>
+        {done && isEmpty && (
+          <div
+            style={{ justifyContent: "center", backgroundColor: "gainsboro" }}
+          >
+            These Filter Criteria Produced an Empty Matrix
+          </div>
+        )}
         {done && (
           <FadeIn>
             <OptionsToolbar
