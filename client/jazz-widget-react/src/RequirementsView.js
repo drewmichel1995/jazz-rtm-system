@@ -128,14 +128,7 @@ class RequirementsView extends React.Component {
 
     return (
       <div>
-        {done && isEmpty && (
-          <div
-            style={{ justifyContent: "center", backgroundColor: "gainsboro" }}
-          >
-            These Filter Criteria Produced an Empty Matrix
-          </div>
-        )}
-        {done && (
+        {done && validCookie && (
           <FadeIn>
             <OptionsToolbar
               rowSearchTerm={rowSearchTerm}
@@ -155,15 +148,26 @@ class RequirementsView extends React.Component {
               projectName={projectName}
               uniqueID={uniqueID}
             />
-            <Table
-              rows={rows}
-              columns={columns}
-              showID={showID}
-              columnSearchTerm={columnSearchTerm}
-              rowSearchTerm={rowSearchTerm}
-              projectURI={projectURI}
-              serverURL={serverURL}
-            />
+            {!isEmpty ? (
+              <Table
+                rows={rows}
+                columns={columns}
+                showID={showID}
+                columnSearchTerm={columnSearchTerm}
+                rowSearchTerm={rowSearchTerm}
+                projectURI={projectURI}
+                serverURL={serverURL}
+              />
+            ) : (
+              <div
+                style={{
+                  justifyContent: "center",
+                  backgroundColor: "gainsboro"
+                }}
+              >
+                These Filter Criteria Produced an Empty Matrix
+              </div>
+            )}
           </FadeIn>
         )}
         {!validCookie && (
