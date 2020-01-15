@@ -100,17 +100,30 @@ class RequirementsView extends React.Component {
     console.log(this.state.showID);
   };
 
-  setTable(data) {
+  setTable(data, uniqueID) {
     this.setState({
       rows: data.rows,
-      columns: data.columns
+      columns: data.columns,
+      uniqueID: uniqueID
     });
+
+    this.onTitleChange(
+      this.state.projectName,
+      this.state.projectURI,
+      this.state.uniqueID
+    );
   }
 
   toggleLoading() {
     this.setState({
       loading: !this.state.loading
     });
+
+    this.state.loading
+      ? this.setState({ done: false })
+      : setTimeout(() => {
+          this.setState({ done: true });
+        }, 1500);
   }
 
   render() {

@@ -88,14 +88,26 @@ class FormContainer extends Component {
     e.preventDefault();
     this.props.toggleLoading();
     let userData = this.state.payload;
-    var url = this.props.serverURL + "/tableJSON/" + this.props.projectURI;
+    let data = {
+      projectAreaURI: this.props.projectURI,
+      payload: this.state.payload
+    };
+    var url = this.props.serverURL + "/storePayload";
     fetch(url, {
       method: "POST",
-      body: JSON.stringify(userData)
+      body: JSON.stringify(data)
     }).then(response => {
-      response.json().then(data => {
-        this.props.setTable(data);
-        this.props.toggleLoading();
+      response.json().then(result => {
+        let tableUrl =
+          this.props.serverURL + "/getLoadedTable/" + result.uniqueID;
+        fetch(tableUrl, {
+          method: "get"
+        })
+          .then(res => res.json())
+          .then(result2 => {
+            this.props.setTable(result2, result.uniqueID);
+            this.props.toggleLoading();
+          });
       });
     });
   }
