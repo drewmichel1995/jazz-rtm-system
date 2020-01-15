@@ -19,7 +19,7 @@ class AnalyticsView extends React.Component {
   }
 
   componentDidMount() {
-    var url = serverURL + "/getAnalytics/" + this.props.projectURI;
+    var url = serverURL + "/getAnalytics/" + this.props.match.params.projectURI;
     fetch(url, {
       method: "get"
     })

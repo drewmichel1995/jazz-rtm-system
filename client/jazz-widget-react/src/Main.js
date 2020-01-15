@@ -29,7 +29,7 @@ class Main extends Component {
               <NavLink exact to={`/RequirementsView/${this.state.uniqueID}`}>
                 Traceability Matrix
               </NavLink>
-              <NavLink exact to="/AnalyticsView">
+              <NavLink exact to={`/AnalyticsView/${this.state.uri}`}>
                 Project Overview
               </NavLink>
             </li>
@@ -67,10 +67,8 @@ class Main extends Component {
             />
             <Route
               exact
-              path="/AnalyticsView"
-              render={props => (
-                <AnalyticsView {...props} projectURI={this.state.uri} />
-              )}
+              path="/AnalyticsView/:projectURI"
+              render={props => <AnalyticsView {...props} />}
             />
           </div>
         </div>
