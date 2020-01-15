@@ -28,7 +28,7 @@ class AnalyticsView extends React.Component {
           data: result,
           loading: false
         });
-        this.props.onTitleChange(result.projectName);
+
         setTimeout(() => {
           this.setState({ done: true });
         }, 2000);
