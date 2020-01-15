@@ -3,7 +3,7 @@ import Table from "./components/Table";
 import OptionsToolbar from "./containers/OptionsToolbar";
 import ModalContainer from "./containers/ModalContainer";
 import Loading from "./components/Loading";
-import { Spinner } from "react-bootstrap";
+import FadeIn from "react-fade-in";
 
 const serverURL = "https://mbse-colldev.saic.com/server";
 
@@ -121,7 +121,7 @@ class RequirementsView extends React.Component {
     return (
       <div>
         {done && (
-          <div>
+          <FadeIn>
             <OptionsToolbar
               rowSearchTerm={rowSearchTerm}
               columnSearchTerm={columnSearchTerm}
@@ -149,9 +149,13 @@ class RequirementsView extends React.Component {
               projectURI={projectURI}
               serverURL={serverURL}
             />
-          </div>
+          </FadeIn>
         )}
-        {!validCookie && <ModalContainer />}
+        {!validCookie && (
+          <FadeIn>
+            <ModalContainer />
+          </FadeIn>
+        )}
         {!done && validCookie && <Loading loading={loading} />}
       </div>
     );
