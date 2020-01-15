@@ -96,8 +96,9 @@ class FormContainer extends Component {
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data)
-    }).then(response => {
-      response.json().then(result => {
+    })
+      .then(res => res.json())
+      .then(result => {
         let tableUrl =
           this.props.serverURL + "/getLoadedTable/" + result.uniqueID;
         fetch(tableUrl, {
@@ -109,7 +110,6 @@ class FormContainer extends Component {
             this.props.toggleLoading();
           });
       });
-    });
   }
 
   handleClearForm(e) {
