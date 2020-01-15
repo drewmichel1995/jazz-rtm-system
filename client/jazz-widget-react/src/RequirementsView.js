@@ -2,6 +2,7 @@ import React from "react";
 import Table from "./components/Table";
 import OptionsToolbar from "./containers/OptionsToolbar";
 import ModalContainer from "./containers/ModalContainer";
+import Loading from "./components/Loading";
 import { Spinner } from "react-bootstrap";
 
 const serverURL = "https://mbse-colldev.saic.com/server";
@@ -146,11 +147,7 @@ class RequirementsView extends React.Component {
           </div>
         )}
         {!validCookie && <ModalContainer />}
-        {loading && validCookie && (
-          <div>
-            <Spinner animation="border" variant="primary" />
-          </div>
-        )}
+        {loading && validCookie && <Loading />}
       </div>
     );
   }
