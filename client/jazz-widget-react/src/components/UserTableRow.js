@@ -35,14 +35,16 @@ class UserTableRow extends React.Component {
           <td className="uk-background-muted" colSpan={6}>
             <div ref="expanderBody" className="inner uk-grid">
               <div className="uk-width-1-4 uk-text-center">
-                {folder.artifacts.map(artifact => (
-                  <tr>
-                    <td>{artifact.artifactName}</td>
-                    <td>{artifact.artifactID}</td>
-                    <td>{artifact.artifactType}</td>
-                    <td>{artifact.numLinks}</td>
-                  </tr>
-                ))}
+                <tbody>
+                  {folder.artifacts.map(artifact => (
+                    <tr>
+                      <td>{artifact.artifactName}</td>
+                      <td>{artifact.artifactID}</td>
+                      <td>{artifact.artifactType}</td>
+                      <td>{artifact.numLinks}</td>
+                    </tr>
+                  ))}
+                </tbody>
               </div>
             </div>
           </td>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" afterDir="false" />
-    </list>
+    <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -202,7 +200,7 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/ServiceAccountManager.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="68">
+                <state relative-caret-position="170">
                   <caret line="10" column="27" lean-forward="true" selection-start-line="10" selection-end-line="10" selection-end-column="27" />
                   <folding>
                     <element signature="method#dataCheck#0;class#ServiceAccountManager#0" />
@@ -307,8 +305,8 @@
     <option name="delegateBuildToMaven" value="true" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1072" />
-    <option name="y" value="472" />
+    <option name="x" value="3149" />
+    <option name="y" value="471" />
     <option name="width" value="1094" />
     <option name="height" value="610" />
   </component>
@@ -359,7 +357,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579029403882" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579095619310" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -450,7 +448,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1072" y="472" width="1936" height="1056" extended-state="6" />
+    <frame x="2992" y="472" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11353944" />
