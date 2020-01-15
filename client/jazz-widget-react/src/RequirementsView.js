@@ -4,6 +4,7 @@ import OptionsToolbar from "./containers/OptionsToolbar";
 import ModalContainer from "./containers/ModalContainer";
 import Loading from "./components/Loading";
 import FadeIn from "react-fade-in";
+import { Alert } from "react-bootstrap";
 
 const serverURL = "https://mbse-colldev.saic.com/server";
 
@@ -159,14 +160,10 @@ class RequirementsView extends React.Component {
                 serverURL={serverURL}
               />
             ) : (
-              <div
-                style={{
-                  justifyContent: "center",
-                  backgroundColor: "gainsboro"
-                }}
-              >
-                These Filter Criteria Produced an Empty Matrix
-              </div>
+              <Alert variant="danger">
+                <Alert.Heading>Empty Matrix Warning</Alert.Heading>
+                <p>The selected matrix criteria produced an empty matrix.</p>
+              </Alert>
             )}
           </FadeIn>
         )}
