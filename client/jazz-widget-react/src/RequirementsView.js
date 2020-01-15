@@ -164,7 +164,7 @@ class RequirementsView extends React.Component {
               uniqueID={uniqueID}
               onTitleChange={this.props.onTitleChange}
             />
-            {!isEmpty ? (
+            {!isEmpty && done ? (
               <Table
                 rows={rows}
                 columns={columns}

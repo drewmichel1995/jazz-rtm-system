@@ -220,6 +220,7 @@ class FormContainer extends Component {
                 />
               </Col>
               <Col>
+                <Form.Label> </Form.Label>
                 <Form.Group>
                   <Select
                     onChange={this.handleDependencies}
@@ -253,16 +254,18 @@ class FormContainer extends Component {
                     checked={linksOnlySelected}
                   />
                 </Form.Group>
-                <Form.Group>
-                  <Button variant="success" onClick={this.handleFormSubmit}>
-                    Submit
-                  </Button>
-
-                  <Button variant="danger" onClick={this.handleClearForm}>
-                    Clear Selected
-                  </Button>
-                </Form.Group>
               </Col>
+            </Row>
+            <Row>
+              <Form.Group>
+                <Button variant="success" onClick={this.handleFormSubmit}>
+                  Submit
+                </Button>
+
+                <Button variant="danger" onClick={this.handleClearForm}>
+                  Clear Selected
+                </Button>
+              </Form.Group>
             </Row>
           </Form>
         )}
