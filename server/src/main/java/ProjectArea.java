@@ -129,7 +129,7 @@ public class ProjectArea {
         if(dependencies.size() < 1) return;
         for(Artifact a: columnArtifacts)
             for(Link l: a.links)
-                if (dependencies.contains(l.linkType) && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
+                if (dependencies.contains(getLinkFullName(l.linkType)) && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
 
         this.setColumnArtifacts(filteredArtifacts);
     }

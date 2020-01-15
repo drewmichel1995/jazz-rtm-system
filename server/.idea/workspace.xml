@@ -88,8 +88,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="120" column="69" selection-start-line="120" selection-start-column="69" selection-end-line="120" selection-end-column="69" />
+            <state relative-caret-position="280">
+              <caret line="131" column="69" selection-start-line="131" selection-start-column="69" selection-end-line="131" selection-end-column="69" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ProjectArea#0;class#ProjectArea#0" />
@@ -99,7 +99,6 @@
                 <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
                 <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
                 <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
-                <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
                 <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
                 <element signature="method#getParentFolders#0;class#ProjectArea#0" />
                 <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
@@ -617,8 +616,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="120" column="69" selection-start-line="120" selection-start-column="69" selection-end-line="120" selection-end-column="69" />
+        <state relative-caret-position="280">
+          <caret line="131" column="69" selection-start-line="131" selection-start-column="69" selection-end-line="131" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ProjectArea#0;class#ProjectArea#0" />
@@ -628,7 +627,6 @@
             <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
             <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
             <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
-            <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
             <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
             <element signature="method#getParentFolders#0;class#ProjectArea#0" />
             <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
