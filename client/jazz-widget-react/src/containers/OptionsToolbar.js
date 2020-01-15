@@ -13,11 +13,42 @@ class OptionsToolbar extends Component {
       searchText: "Show Search Options",
       matrixText: "Show Filter Options",
       searchVariant: "secondary",
-      matrixVariant: "primary"
+      matrixVariant: "primary",
+      fields: {},
+      payload: {}
     };
 
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onMatrixChange = this.onMatrixChange.bind(this);
+  }
+
+  componentDidMount() {
+    var url =
+      this.props.serverURL + "/getFormattedPayload/" + this.props.uniqueID;
+    fetch(url, {
+      method: "get"
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          this.setState({
+            payload: result
+          });
+        }
+
+        console.log(this.state.projectURI);
+
+        url = this.props.serverURL + "/getFields/" + this.state.projectURI;
+        fetch(url, {
+          method: "get"
+        })
+          .then(res => res.json())
+          .then(result =>
+            this.setState({
+              fields: result
+            })
+          );
+      });
   }
 
   onSearchChange = () => {
@@ -91,6 +122,8 @@ class OptionsToolbar extends Component {
                 projectURI={projectURI}
                 uniqueID={uniqueID}
                 onTitleChange={onTitleChange}
+                fields={this.state.fields}
+                payload={this.state.payload}
               />
             </FadeIn>
           )}

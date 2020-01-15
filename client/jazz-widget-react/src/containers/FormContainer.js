@@ -43,45 +43,22 @@ class FormContainer extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.uniqueID);
-    var url =
-      this.props.serverURL + "/getFormattedPayload/" + this.props.uniqueID;
-    fetch(url, {
-      method: "get"
-    })
-      .then(res => res.json())
-      .then(result => {
-        if (result.success) {
-          this.setState({
-            payload: result.payload,
-            columnSelected: result.formattedPayload.columns,
-            rowSelected: result.formattedPayload.rows,
-            dependencySelected: result.formattedPayload.dependencies,
-            rowArtifactTypeSelected: result.formattedPayload.rowTypes,
-            columnArtifactTypeSelected: result.formattedPayload.columnTypes,
-            linksOnlySelected: result.formattedPayload.linksOnly,
-            projectURI: result.projectURI
-          });
-        } else {
-          this.setState({ validCookie: result.success });
-        }
-
-        console.log(this.state.projectURI);
-
-        url = this.props.serverURL + "/getFields/" + this.state.projectURI;
-        fetch(url, {
-          method: "get"
-        })
-          .then(res => res.json())
-          .then(result =>
-            this.setState({
-              parentFolderOptions: result.parentFolders,
-              dependencies: result.linkTypes,
-              artifactTypes: result.artifactTypes,
-              isLoading: false
-            })
-          );
-      });
+    var result = this.props.payload;
+    var fields = this.state.fields;
+    this.setState({
+      payload: result.payload,
+      columnSelected: result.formattedPayload.columns,
+      rowSelected: result.formattedPayload.rows,
+      dependencySelected: result.formattedPayload.dependencies,
+      rowArtifactTypeSelected: result.formattedPayload.rowTypes,
+      columnArtifactTypeSelected: result.formattedPayload.columnTypes,
+      linksOnlySelected: result.formattedPayload.linksOnly,
+      projectURI: result.projectURI,
+      parentFolderOptions: fields.parentFolders,
+      dependencies: fields.linkTypes,
+      artifactTypes: fields.artifactTypes,
+      isLoading: false
+    });
   }
 
   handleFormSubmit(e) {
