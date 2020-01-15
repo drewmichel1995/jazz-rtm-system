@@ -49,7 +49,11 @@ class RequirementsView extends React.Component {
             uniqueID: uniqueID,
             loading: false
           });
-          this.props.onTitleChange(result.projectName, result.projectURI);
+          this.props.onTitleChange(
+            result.projectName,
+            result.projectURI,
+            uniqueID
+          );
           setTimeout(() => {
             this.setState({ done: true });
           }, 2000);

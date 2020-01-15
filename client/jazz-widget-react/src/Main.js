@@ -8,14 +8,15 @@ class Main extends Component {
     super(props);
     this.state = {
       title: "Jazz Requirements Matrix",
-      uri: "xxxxxx"
+      uri: "xxxxxx",
+      uniqueID: "xxxxxx"
     };
 
     this.onTitleChange = this.onTitleChange.bind(this);
   }
 
-  onTitleChange = (title, uri) => {
-    this.setState({ title: title, uri: uri });
+  onTitleChange = (title, uri, uniqueID) => {
+    this.setState({ title: title, uri: uri, uniqueID: uniqueID });
   };
 
   render() {
@@ -25,11 +26,11 @@ class Main extends Component {
           <h1>{this.state.title}</h1>
           <ul className="header">
             <li>
-              <NavLink exact to="/">
+              <NavLink exact to={`/RequirementsView/${this.state.uniqueID}`}>
                 Traceability Matrix
               </NavLink>
               <NavLink exact to="/AnalyticsView">
-                Project Analytics
+                Project Overview
               </NavLink>
             </li>
           </ul>
