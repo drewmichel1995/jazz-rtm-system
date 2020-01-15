@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ProjectArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProjectArea.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -14,194 +13,163 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.70408165">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2771">
-                  <caret line="173" column="39" selection-start-line="173" selection-start-column="39" selection-end-line="173" selection-end-column="39" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#468#503#1" />
-                    <element signature="method#readBytes#0;class#JazzHTTP#0" />
-                    <element signature="method#getRes#0;class#JazzHTTP#0" />
-                    <element signature="method#decodeCookie#0;class#JazzHTTP#0" />
-                    <element signature="method#loadData#0;class#JazzHTTP#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="365">
-                  <caret line="95" column="104" selection-start-line="95" selection-start-column="104" selection-end-line="95" selection-end-column="104" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/MongoHelper.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="782">
-                  <caret line="108" column="5" selection-start-line="108" selection-start-column="5" selection-end-line="108" selection-end-column="5" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="method#MongoHelper#0;class#MongoHelper#0" />
-                    <element signature="method#get#0;class#MongoHelper#0" />
-                    <element signature="method#query#0;class#MongoHelper#0" />
-                    <element signature="method#getUniqueIDProject#0;class#MongoHelper#0" />
-                    <element signature="method#getUniqueIDProject#1;class#MongoHelper#0" />
-                    <element signature="method#getUniqueIDPayload#0;class#MongoHelper#0" />
-                    <element signature="method#collectionExists#0;class#MongoHelper#0" />
-                    <element signature="method#generateUniqueID#0;class#MongoHelper#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Config.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret column="20" selection-start-column="20" selection-end-column="20" />
-                  <folding>
-                    <element signature="method#Config#0;class#Config#0" />
-                    <element signature="method#getProperty#0;class#Config#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Artifact.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="221">
-                  <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
-                  <folding>
-                    <element signature="method#Artifact#0;class#Artifact#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="833">
-                  <caret line="74" column="5" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="method#ProjectArea#0;class#ProjectArea#0" />
-                    <element signature="method#ProjectArea#2;class#ProjectArea#0" />
-                    <element signature="method#setArtifacts#0;class#ProjectArea#0" />
-                    <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
-                    <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
-                    <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
-                    <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
-                    <element signature="method#filterRowDependencies#0;class#ProjectArea#0" />
-                    <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
-                    <element signature="method#filterAll#0;class#ProjectArea#0" />
-                    <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
-                    <element signature="method#getLinkTypes#0;class#ProjectArea#0" />
-                    <element signature="method#getParentFolders#0;class#ProjectArea#0" />
-                    <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
-                    <element signature="method#getFields#0;class#ProjectArea#0" />
-                    <element signature="method#getTableJSON#0;class#ProjectArea#0" />
-                    <element signature="method#getCellObject#0;class#ProjectArea#0" />
-                    <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
-                    <element signature="method#getTableJSON#1;class#ProjectArea#0" />
-                    <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
-                    <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
-                    <element signature="method#getLinkColor#0;class#ProjectArea#0" />
-                    <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
-                    <element signature="method#toJSON#0;class#ProjectArea#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/pom.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1428">
-                  <caret line="84" column="21" selection-start-line="84" selection-start-column="21" selection-end-line="84" selection-end-column="21" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/AnalyticsHelper.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1020">
-                  <caret line="64" column="40" selection-start-line="63" selection-start-column="45" selection-end-line="64" selection-end-column="40" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Link.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/ServiceAccountManager.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret selection-end-line="12" selection-end-column="22" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="method#dataCheck#0;class#ServiceAccountManager#0" />
-                    <element signature="method#syncProjects#0;class#ServiceAccountManager#0" />
-                    <element signature="method#getJsessionId#0;class#ServiceAccountManager#0" />
-                    <element signature="method#checkForNewProjects#0;class#ServiceAccountManager#0" />
-                    <element signature="method#getProjectAreas#0;class#ServiceAccountManager#0" />
-                    <element signature="method#getMemberPayload#0;class#ServiceAccountManager#0" />
-                    <element signature="method#executeGet#0;class#ServiceAccountManager#0" />
-                    <element signature="method#executePost#0;class#ServiceAccountManager#0" />
-                    <element signature="method#executeDelete#0;class#ServiceAccountManager#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/ServiceAccountManager.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="10" column="27" selection-start-line="10" selection-end-line="10" selection-end-column="27" />
-                  <folding>
-                    <element signature="method#dataCheck#0;class#ServiceAccountManager#0" />
-                    <element signature="method#syncProjects#0;class#ServiceAccountManager#0" />
-                    <element signature="method#getJsessionId#0;class#ServiceAccountManager#0" />
-                    <element signature="method#checkForNewProjects#0;class#ServiceAccountManager#0" />
-                    <element signature="method#getProjectAreas#0;class#ServiceAccountManager#0" />
-                    <element signature="method#getMemberPayload#0;class#ServiceAccountManager#0" />
-                    <element signature="method#executeGet#0;class#ServiceAccountManager#0" />
-                    <element signature="method#executePost#0;class#ServiceAccountManager#0" />
-                    <element signature="method#executeDelete#0;class#ServiceAccountManager#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2771">
+              <caret line="173" column="39" selection-start-line="173" selection-start-column="39" selection-end-line="173" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#468#503#1" />
+                <element signature="method#readBytes#0;class#JazzHTTP#0" />
+                <element signature="method#getRes#0;class#JazzHTTP#0" />
+                <element signature="method#decodeCookie#0;class#JazzHTTP#0" />
+                <element signature="method#loadData#0;class#JazzHTTP#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="365">
+              <caret line="95" column="104" selection-start-line="95" selection-start-column="104" selection-end-line="95" selection-end-column="104" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/MongoHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="782">
+              <caret line="108" column="5" selection-start-line="108" selection-start-column="5" selection-end-line="108" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#MongoHelper#0;class#MongoHelper#0" />
+                <element signature="method#get#0;class#MongoHelper#0" />
+                <element signature="method#query#0;class#MongoHelper#0" />
+                <element signature="method#getUniqueIDProject#0;class#MongoHelper#0" />
+                <element signature="method#getUniqueIDProject#1;class#MongoHelper#0" />
+                <element signature="method#getUniqueIDPayload#0;class#MongoHelper#0" />
+                <element signature="method#collectionExists#0;class#MongoHelper#0" />
+                <element signature="method#generateUniqueID#0;class#MongoHelper#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Config.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="20" selection-start-column="20" selection-end-column="20" />
+              <folding>
+                <element signature="method#Config#0;class#Config#0" />
+                <element signature="method#getProperty#0;class#Config#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Artifact.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+              <folding>
+                <element signature="method#Artifact#0;class#Artifact#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="120" column="69" selection-start-line="120" selection-start-column="69" selection-end-line="120" selection-end-column="69" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#ProjectArea#0;class#ProjectArea#0" />
+                <element signature="method#ProjectArea#2;class#ProjectArea#0" />
+                <element signature="method#setArtifacts#0;class#ProjectArea#0" />
+                <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
+                <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
+                <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
+                <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
+                <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
+                <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
+                <element signature="method#getParentFolders#0;class#ProjectArea#0" />
+                <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
+                <element signature="method#getFields#0;class#ProjectArea#0" />
+                <element signature="method#getTableJSON#0;class#ProjectArea#0" />
+                <element signature="method#getCellObject#0;class#ProjectArea#0" />
+                <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
+                <element signature="method#getTableJSON#1;class#ProjectArea#0" />
+                <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
+                <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
+                <element signature="method#getLinkColor#0;class#ProjectArea#0" />
+                <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
+                <element signature="method#toJSON#0;class#ProjectArea#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1428">
+              <caret line="84" column="21" selection-start-line="84" selection-start-column="21" selection-end-line="84" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AnalyticsHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1020">
+              <caret line="64" column="40" selection-start-line="63" selection-start-column="45" selection-end-line="64" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Link.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ServiceAccountManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret selection-end-line="12" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#dataCheck#0;class#ServiceAccountManager#0" />
+                <element signature="method#syncProjects#0;class#ServiceAccountManager#0" />
+                <element signature="method#getJsessionId#0;class#ServiceAccountManager#0" />
+                <element signature="method#checkForNewProjects#0;class#ServiceAccountManager#0" />
+                <element signature="method#getProjectAreas#0;class#ServiceAccountManager#0" />
+                <element signature="method#getMemberPayload#0;class#ServiceAccountManager#0" />
+                <element signature="method#executeGet#0;class#ServiceAccountManager#0" />
+                <element signature="method#executePost#0;class#ServiceAccountManager#0" />
+                <element signature="method#executeDelete#0;class#ServiceAccountManager#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -253,12 +221,12 @@
         <option value="$PROJECT_DIR$/src/main/java/Config.java" />
         <option value="$PROJECT_DIR$/src/main/java/ServiceAccountManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataSync.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ProjectArea.java" />
         <option value="$PROJECT_DIR$/src/main/java/MongoHelper.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/JazzHTTP.java" />
         <option value="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/test.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/ProjectArea.java" />
       </list>
     </option>
   </component>
@@ -597,40 +565,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="74" column="5" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#ProjectArea#0;class#ProjectArea#0" />
-            <element signature="method#ProjectArea#2;class#ProjectArea#0" />
-            <element signature="method#setArtifacts#0;class#ProjectArea#0" />
-            <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
-            <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
-            <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
-            <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
-            <element signature="method#filterRowDependencies#0;class#ProjectArea#0" />
-            <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
-            <element signature="method#filterAll#0;class#ProjectArea#0" />
-            <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
-            <element signature="method#getLinkTypes#0;class#ProjectArea#0" />
-            <element signature="method#getParentFolders#0;class#ProjectArea#0" />
-            <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
-            <element signature="method#getFields#0;class#ProjectArea#0" />
-            <element signature="method#getTableJSON#0;class#ProjectArea#0" />
-            <element signature="method#getCellObject#0;class#ProjectArea#0" />
-            <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
-            <element signature="method#getTableJSON#1;class#ProjectArea#0" />
-            <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
-            <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
-            <element signature="method#getLinkColor#0;class#ProjectArea#0" />
-            <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
-            <element signature="method#toJSON#0;class#ProjectArea#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1428">
@@ -678,6 +612,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="365">
           <caret line="95" column="104" selection-start-line="95" selection-start-column="104" selection-end-line="95" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="120" column="69" selection-start-line="120" selection-start-column="69" selection-end-line="120" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#ProjectArea#0;class#ProjectArea#0" />
+            <element signature="method#ProjectArea#2;class#ProjectArea#0" />
+            <element signature="method#setArtifacts#0;class#ProjectArea#0" />
+            <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
+            <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
+            <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
+            <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
+            <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
+            <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
+            <element signature="method#getParentFolders#0;class#ProjectArea#0" />
+            <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
+            <element signature="method#getFields#0;class#ProjectArea#0" />
+            <element signature="method#getTableJSON#0;class#ProjectArea#0" />
+            <element signature="method#getCellObject#0;class#ProjectArea#0" />
+            <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
+            <element signature="method#getTableJSON#1;class#ProjectArea#0" />
+            <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
+            <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
+            <element signature="method#getLinkColor#0;class#ProjectArea#0" />
+            <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
+            <element signature="method#toJSON#0;class#ProjectArea#0" />
+          </folding>
         </state>
       </provider>
     </entry>

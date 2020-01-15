@@ -118,7 +118,7 @@ public class ProjectArea {
         if(dependencies.size() < 1) return;
         for(Artifact a: rowArtifacts)
             for(Link l: a.links)
-                if (dependencies.contains(l.linkType) && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
+                if (dependencies.contains(getLinkFullName(l.linkType)) && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
 
         this.setRowArtifacts(filteredArtifacts);
     }
@@ -171,11 +171,11 @@ public class ProjectArea {
         ArrayList<String> uniqueFullLinks = new ArrayList<>();
         for(Artifact a: this.artifacts){
             for(Link l: a.links){
-                if(!uniqueLinks.contains(l.linkType)){
+                if(!uniqueLinks.contains(getLinkFullName(l.linkType))){
                     JSONObject temp = new JSONObject();
-                    uniqueLinks.add(l.linkType);
-                    temp.put("label", l.linkType);
-                    temp.put("value", l.linkType);
+                    uniqueLinks.add(getLinkFullName(l.linkType));
+                    temp.put("label", getLinkFullName(l.linkType));
+                    temp.put("value", getLinkFullName(l.linkType));
                     temp.put("color", getLinkColor(l.linkType));
                     linkTypes.put(temp);
                 }
