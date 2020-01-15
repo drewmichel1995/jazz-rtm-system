@@ -15,7 +15,8 @@ class OptionsToolbar extends Component {
       searchVariant: "secondary",
       matrixVariant: "primary",
       fields: {},
-      payload: {}
+      payload: {},
+      isLoading: true
     };
 
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -43,7 +44,8 @@ class OptionsToolbar extends Component {
           .then(res => res.json())
           .then(result =>
             this.setState({
-              fields: result
+              fields: result,
+              isLoading: false
             })
           );
       });
@@ -109,7 +111,7 @@ class OptionsToolbar extends Component {
           </Button>
         </ButtonGroup>
         <div>
-          {this.state.showMatrix && (
+          {this.state.showMatrix && !this.state.isLoading && (
             <FadeIn>
               <FormContainer
                 tableRows={tableRows}
@@ -120,8 +122,8 @@ class OptionsToolbar extends Component {
                 projectURI={projectURI}
                 uniqueID={uniqueID}
                 onTitleChange={onTitleChange}
-                fields={this.props.fields}
-                payload={this.props.payload}
+                fields={this.state.fields}
+                payload={this.state.payload}
               />
             </FadeIn>
           )}
