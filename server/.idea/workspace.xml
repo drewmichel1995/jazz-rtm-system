@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="" />
+    <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,7 +16,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.70408165">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="408">
@@ -43,11 +45,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2142">
-                  <caret line="303" column="45" selection-start-line="303" selection-start-column="45" selection-end-line="303" selection-end-column="45" />
+                <state relative-caret-position="277">
+                  <caret line="236" column="45" selection-start-line="236" selection-start-column="45" selection-end-line="236" selection-end-column="45" />
                 </state>
               </provider>
             </entry>
@@ -242,6 +244,7 @@
       <find>loadData</find>
       <find>getLinkTypes</find>
       <find>service</find>
+      <find>httpPostPayload</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -259,7 +262,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/test.html" />
         <option value="$PROJECT_DIR$/src/main/resources/widget.html" />
         <option value="$PROJECT_DIR$/src/main/resources/config.cfg" />
-        <option value="$PROJECT_DIR$/src/main/resources/test.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Config.java" />
         <option value="$PROJECT_DIR$/src/main/java/ServiceAccountManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataSync.java" />
@@ -268,6 +270,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/JazzHTTP.java" />
         <option value="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/test.xml" />
       </list>
     </option>
   </component>
@@ -350,7 +353,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579113714491" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579119287688" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -670,13 +673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2142">
-          <caret line="303" column="45" selection-start-line="303" selection-start-column="45" selection-end-line="303" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -701,6 +697,13 @@
             <element signature="method#decodeCookie#0;class#JazzHTTP#0" />
             <element signature="method#loadData#0;class#JazzHTTP#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="236" column="45" selection-start-line="236" selection-start-column="45" selection-end-line="236" selection-end-column="45" />
         </state>
       </provider>
     </entry>

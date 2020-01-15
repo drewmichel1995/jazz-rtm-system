@@ -36,9 +36,9 @@ class OptionsToolbar extends Component {
           });
         }
 
-        console.log(this.state.projectURI);
+        console.log(this.props.projectURI);
 
-        url = this.props.serverURL + "/getFields/" + this.state.projectURI;
+        url = this.props.serverURL + "/getFields/" + this.props.projectURI;
         fetch(url, {
           method: "get"
         })

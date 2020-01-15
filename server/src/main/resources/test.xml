@@ -234,6 +234,7 @@ function loadFields(theUrl){
 		var $rowScopeDropdown = $("#rowScopeElementList").empty();
 		var $columnScopeDropdown = $("#columnScopeElementList").empty();
 		var $dependencyDropdown = $("#dependencyCriteriaList").empty();
+		$("#linksOnly").prop("checked", false);
 		$.each(data.parentFolders, function() {
 			$rowDropdown.append($("<option />").val(this.label).text(this.label));
 			$columnDropdown.append($("<option />").val(this.label).text(this.label));
