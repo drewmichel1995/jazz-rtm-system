@@ -52,7 +52,7 @@ class RequirementsView extends React.Component {
           this.props.onTitleChange(result.projectName, result.projectURI);
           setTimeout(() => {
             this.setState({ done: true });
-          }, 3000);
+          }, 2000);
         } else {
           this.setState({ validCookie: result.success });
         }

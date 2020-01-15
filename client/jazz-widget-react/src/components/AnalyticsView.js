@@ -1,6 +1,7 @@
 import React from "react";
 import { Spinner, Table, Jumbotron, Container } from "react-bootstrap";
 import UserTableRow from "./UserTableRow";
+import Loading from "./Loading";
 
 const serverURL = "https://mbse-colldev.saic.com/server";
 
@@ -9,7 +10,8 @@ class AnalyticsView extends React.Component {
     super(props);
     this.state = {
       data: {},
-      loading: true
+      loading: true,
+      done: false
     };
 
     this.toggleLoading = this.toggleLoading.bind(this);
@@ -27,6 +29,9 @@ class AnalyticsView extends React.Component {
           loading: false
         });
         this.props.onTitleChange(result.projectName);
+        setTimeout(() => {
+          this.setState({ done: true });
+        }, 2000);
       });
   }
 
@@ -37,11 +42,11 @@ class AnalyticsView extends React.Component {
   }
 
   render() {
-    const { data, loading } = this.state;
+    const { data, loading, done } = this.state;
 
     return (
       <div>
-        {!loading && (
+        {done && (
           <div>
             <Jumbotron fluid>
               <Container>
@@ -65,9 +70,9 @@ class AnalyticsView extends React.Component {
             </Table>
           </div>
         )}
-        {loading && (
+        {!done && (
           <div>
-            <Spinner animation="border" variant="primary" />
+            <Loading loading={loading} />
           </div>
         )}
       </div>
