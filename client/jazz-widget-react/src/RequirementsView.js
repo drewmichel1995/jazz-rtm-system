@@ -108,7 +108,7 @@ class RequirementsView extends React.Component {
       isEmpty: data.rows.length < 2 && data.columns.length < 3
     });
 
-    this.onTitleChange(
+    this.props.onTitleChange(
       this.state.projectName,
       this.state.projectURI,
       this.state.uniqueID
