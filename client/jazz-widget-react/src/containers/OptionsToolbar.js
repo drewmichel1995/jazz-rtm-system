@@ -60,7 +60,8 @@ class OptionsToolbar extends Component {
       toggleLoading,
       serverURL,
       projectURI,
-      uniqueID
+      uniqueID,
+      onTitleChange
     } = this.props;
     return (
       <div style={{ marginBottom: "20px", marginTop: "0px" }}>
@@ -89,6 +90,7 @@ class OptionsToolbar extends Component {
                 serverURL={serverURL}
                 projectURI={projectURI}
                 uniqueID={uniqueID}
+                onTitleChange={onTitleChange}
               />
             </FadeIn>
           )}

@@ -162,6 +162,7 @@ class RequirementsView extends React.Component {
               projectURI={projectURI}
               projectName={projectName}
               uniqueID={uniqueID}
+              onTitleChange={this.props.onTitleChange}
             />
             {!isEmpty ? (
               <Table
