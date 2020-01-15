@@ -104,7 +104,8 @@ class RequirementsView extends React.Component {
     this.setState({
       rows: data.rows,
       columns: data.columns,
-      uniqueID: uniqueID
+      uniqueID: uniqueID,
+      isEmpty: data.rows.length < 2 && data.columns.length < 3
     });
 
     this.onTitleChange(

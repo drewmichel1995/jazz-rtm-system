@@ -106,7 +106,7 @@ class FormContainer extends Component {
         })
           .then(res => res.json())
           .then(result2 => {
-            this.props.setTable(result2, result.uniqueID);
+            this.props.setTable(result2.payload, result.uniqueID);
             this.props.toggleLoading();
           });
       });
