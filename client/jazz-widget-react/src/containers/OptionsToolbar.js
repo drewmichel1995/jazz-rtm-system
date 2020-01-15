@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import FormContainer from "./FormContainer";
 import SearchFormContainer from "./SearchFormContainer";
 import { Button, ButtonGroup } from "react-bootstrap";
+import FadeIn from "react-fade-in";
 
 class OptionsToolbar extends Component {
   constructor(props) {
@@ -79,27 +80,31 @@ class OptionsToolbar extends Component {
         </ButtonGroup>
         <div>
           {this.state.showMatrix && (
-            <FormContainer
-              tableRows={tableRows}
-              tableColumns={tableColumns}
-              setTable={setTable}
-              toggleLoading={toggleLoading}
-              serverURL={serverURL}
-              projectURI={projectURI}
-              uniqueID={uniqueID}
-            />
+            <FadeIn>
+              <FormContainer
+                tableRows={tableRows}
+                tableColumns={tableColumns}
+                setTable={setTable}
+                toggleLoading={toggleLoading}
+                serverURL={serverURL}
+                projectURI={projectURI}
+                uniqueID={uniqueID}
+              />
+            </FadeIn>
           )}
           {this.state.showSearch && (
-            <SearchFormContainer
-              rowSearchTerm={rowSearchTerm}
-              columnSearchTerm={columnSearchTerm}
-              onRowChange={onRowChange}
-              onColumnChange={onColumnChange}
-              rowPlaceholder="Search Row Requirements"
-              columnPlaceholder="Search Column Requirements"
-              showID={showID}
-              triggerShowID={triggerShowID}
-            />
+            <FadeIn>
+              <SearchFormContainer
+                rowSearchTerm={rowSearchTerm}
+                columnSearchTerm={columnSearchTerm}
+                onRowChange={onRowChange}
+                onColumnChange={onColumnChange}
+                rowPlaceholder="Search Row Requirements"
+                columnPlaceholder="Search Column Requirements"
+                showID={showID}
+                triggerShowID={triggerShowID}
+              />
+            </FadeIn>
           )}
         </div>
       </div>

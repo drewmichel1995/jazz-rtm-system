@@ -42,6 +42,7 @@ class RequirementsView extends React.Component {
       .then(result => {
         if (result.success) {
           result = result.payload;
+          console.log();
           this.setState({
             columns: result.columns,
             rows: result.rows,
@@ -49,7 +50,7 @@ class RequirementsView extends React.Component {
             projectName: result.projectName,
             uniqueID: uniqueID,
             loading: false,
-            isEmpty: result.rows.isEmpty && result.columns.isEmpty
+            isEmpty: result.rows.length < 2 && result.columns.length < 3
           });
           this.props.onTitleChange(
             result.projectName,
