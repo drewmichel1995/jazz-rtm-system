@@ -92,7 +92,7 @@ class FormContainer extends Component {
       projectAreaURI: this.props.projectURI,
       payload: this.state.payload
     };
-    var url = this.props.serverURL + "/storePayload";
+    var url = this.props.serverURL + "/storePayload/";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data)
