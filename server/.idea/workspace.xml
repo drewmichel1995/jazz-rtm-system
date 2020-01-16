@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProjectArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProjectArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="95" column="104" selection-start-line="95" selection-start-column="104" selection-end-line="95" selection-end-column="104" />
+            <state relative-caret-position="432">
+              <caret line="95" column="82" selection-start-line="95" selection-start-column="82" selection-end-line="95" selection-end-column="82" />
             </state>
           </provider>
         </entry>
@@ -85,10 +85,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
+            <state relative-caret-position="75">
               <caret line="131" column="69" selection-start-line="131" selection-start-column="69" selection-end-line="131" selection-end-column="69" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -224,8 +224,8 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/JazzHTTP.java" />
         <option value="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/test.xml" />
         <option value="$PROJECT_DIR$/src/main/java/ProjectArea.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/test.xml" />
       </list>
     </option>
   </component>
@@ -256,10 +256,10 @@
     <option name="delegateBuildToMaven" value="true" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="y" value="-11" />
-    <option name="width" value="1943" />
-    <option name="height" value="1103" />
+    <option name="x" value="3761" />
+    <option name="y" value="472" />
+    <option name="width" value="728" />
+    <option name="height" value="406" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -399,10 +399,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="1072" y="472" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.06639676" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.043710023" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -607,16 +607,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="95" column="104" selection-start-line="95" selection-start-column="104" selection-end-line="95" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
+        <state relative-caret-position="75">
           <caret line="131" column="69" selection-start-line="131" selection-start-column="69" selection-end-line="131" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -641,6 +634,13 @@
             <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
             <element signature="method#toJSON#0;class#ProjectArea#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="95" column="82" selection-start-line="95" selection-start-column="82" selection-end-line="95" selection-end-column="82" />
         </state>
       </provider>
     </entry>

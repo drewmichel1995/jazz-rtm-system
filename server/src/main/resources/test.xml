@@ -93,7 +93,7 @@
 						</div>
 					</div>
 				</div>
-				<button type="button" id="submitButton" class="ui primary button" style={padding: "3rem"}onClick="onSubmit()">Go to Matrix</button>
+				<button type="button" id="submitButton" class="ui primary button" onClick="onSubmit()">Go to Matrix</button>
 			</form>
 		</div>
 		<script type="text/javascript">

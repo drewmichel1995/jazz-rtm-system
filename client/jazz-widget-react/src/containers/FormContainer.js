@@ -257,15 +257,17 @@ class FormContainer extends Component {
               </Col>
             </Row>
             <Row>
-              <Form.Group>
-                <Button variant="success" onClick={this.handleFormSubmit}>
-                  Submit
-                </Button>
+              <Col>
+                <ButtonGroup className="mt-3">
+                  <Button variant="success" onClick={this.handleFormSubmit}>
+                    Submit
+                  </Button>
 
-                <Button variant="danger" onClick={this.handleClearForm}>
-                  Clear Selected
-                </Button>
-              </Form.Group>
+                  <Button variant="danger" onClick={this.handleClearForm}>
+                    Clear Selected
+                  </Button>
+                </ButtonGroup>
+              </Col>
             </Row>
           </Form>
         )}
