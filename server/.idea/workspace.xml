@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/components/AnalyticsView.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/components/AnalyticsView.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />

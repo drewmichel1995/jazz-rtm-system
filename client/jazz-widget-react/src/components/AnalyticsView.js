@@ -1,5 +1,5 @@
 import React from "react";
-import { Spinner, Table, Jumbotron, Container } from "react-bootstrap";
+import { Table, Card } from "react-bootstrap";
 import ArtifactRow from "./ArtifactRow";
 import Loading from "./Loading";
 import FadeIn from "react-fade-in";
@@ -49,13 +49,15 @@ class AnalyticsView extends React.Component {
       <div>
         {done && (
           <FadeIn>
-            <Jumbotron fluid>
-              <Container>
-                <h1>{data.projectName}</h1>
-                <h2>Number of Artifacts: {data.numArtifacts}</h2>
-                <h2>Number of Folders: {data.numFolders}</h2>
-              </Container>
-            </Jumbotron>
+            <Card>
+              <Card.Header as="h5">{data.projectName}</Card.Header>
+              <Card.Body>
+                <Card.Title>
+                  Number of Artifacts: {data.numArtifacts}
+                </Card.Title>
+                <Card.Title>Number of Folders: {data.numFolders}</Card.Title>
+              </Card.Body>
+            </Card>
             <Table striped bordered hover>
               <thead>
                 <tr>
