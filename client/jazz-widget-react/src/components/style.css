@@ -1,5 +1,6 @@
 main {
   margin: auto;
+  max-width: 960px;
 }
 
 .table-container {
@@ -15,5 +16,7 @@ tr.expandable > td {
 }
 
 tr.expandable > td > .inner {
+  margin: 15px;
+  width: auto;
   overflow: hidden;
 }
