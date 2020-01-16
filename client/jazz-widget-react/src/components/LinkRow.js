@@ -2,7 +2,7 @@ import React from "react";
 import { slideDown, slideUp } from "./anim";
 import "./style.css";
 
-class UserTableRow extends React.Component {
+class LinkRow extends React.Component {
   state = { expanded: false };
 
   toggleExpander = e => {
@@ -24,11 +24,13 @@ class UserTableRow extends React.Component {
   };
 
   render() {
-    const { folder } = this.props;
+    const { artifact } = this.props;
     return [
       <tr key="main" onClick={this.toggleExpander}>
-        <td className="uk-text-nowrap">{folder.folderName}.</td>
-        <td>{folder.numArtifacts}</td>
+        <td>{artifact.artifactID}</td>
+        <td>{artifact.artifactName}</td>
+        <td>{artifact.artifactType}</td>
+        <td>{artifact.numLinks}</td>
       </tr>,
       this.state.expanded && (
         <tr className="expandable" key="tr-expander">
@@ -38,17 +40,15 @@ class UserTableRow extends React.Component {
                 <table style={{ width: "auto" }}>
                   <thead>
                     <th>ID</th>
-                    <th>Name</th>
                     <th>Type</th>
-                    <th>Number of Links</th>
+                    <th>Category</th>
                   </thead>
                   <tbody>
-                    {folder.artifacts.map(artifact => (
+                    {artifact.links.map(link => (
                       <tr>
-                        <td>{artifact.artifactID}</td>
-                        <td>{artifact.artifactName}</td>
-                        <td>{artifact.artifactType}</td>
-                        <td>{artifact.numLinks}</td>
+                        <td>{link.linkID}</td>
+                        <td>{link.linkType}</td>
+                        <td>{link.category}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -62,4 +62,4 @@ class UserTableRow extends React.Component {
   }
 }
 
-export default UserTableRow;
+export default LinkRow;

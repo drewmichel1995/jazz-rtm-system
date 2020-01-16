@@ -257,15 +257,17 @@ class FormContainer extends Component {
               </Col>
             </Row>
             <Row>
-              <div className="d-flex flex-column">
+              <Col md={{ span: 6, offset: 3 }}>
                 <Button variant="success" onClick={this.handleFormSubmit} block>
                   Submit
                 </Button>
+              </Col>
 
+              <Col>
                 <Button variant="danger" onClick={this.handleClearForm} block>
                   Clear Selected
                 </Button>
-              </div>
+              </Col>
             </Row>
           </Form>
         )}

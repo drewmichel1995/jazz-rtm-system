@@ -1,6 +1,6 @@
 import React from "react";
 import { Spinner, Table, Jumbotron, Container } from "react-bootstrap";
-import UserTableRow from "./UserTableRow";
+import ArtifactRow from "./ArtifactRow";
 import Loading from "./Loading";
 import FadeIn from "react-fade-in";
 
@@ -65,7 +65,7 @@ class AnalyticsView extends React.Component {
               </thead>
               <tbody>
                 {data.folders.map(item => (
-                  <UserTableRow folder={item} />
+                  <ArtifactRow folder={item} />
                 ))}
               </tbody>
             </Table>
