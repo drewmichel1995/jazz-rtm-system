@@ -305,6 +305,7 @@ function onSubmit(){
 			$("#linksOnlySuggestion").text("");
 		}
 		$( "#dialog-confirm" ).dialog("open");
+		gadgets.window.adjustHeight();
 	}else{
 		window.open(url, '_blank');
 	}
