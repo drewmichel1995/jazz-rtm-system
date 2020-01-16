@@ -257,21 +257,15 @@ class FormContainer extends Component {
               </Col>
             </Row>
             <Row>
-              <Col>
-                <ButtonGroup className="mt-3">
-                  <Button
-                    variant="success"
-                    onClick={this.handleFormSubmit}
-                    block
-                  >
-                    Submit
-                  </Button>
+              <div className="d-flex flex-column">
+                <Button variant="success" onClick={this.handleFormSubmit} block>
+                  Submit
+                </Button>
 
-                  <Button variant="danger" onClick={this.handleClearForm} block>
-                    Clear Selected
-                  </Button>
-                </ButtonGroup>
-              </Col>
+                <Button variant="danger" onClick={this.handleClearForm} block>
+                  Clear Selected
+                </Button>
+              </div>
             </Row>
           </Form>
         )}
