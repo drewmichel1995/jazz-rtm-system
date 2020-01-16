@@ -28,7 +28,7 @@ class ArtifactRow extends React.Component {
     const { folder } = this.props;
     return [
       <tr key="main" onClick={this.toggleExpander}>
-        <td className="uk-text-nowrap">{folder.folderName}.</td>
+        <td className="uk-text-nowrap">{folder.folderName}</td>
         <td>{folder.numArtifacts}</td>
       </tr>,
       this.state.expanded && !folder.numArtifacts < 1 && (
@@ -36,7 +36,7 @@ class ArtifactRow extends React.Component {
           <td className="uk-background-muted">
             <div ref="expanderBody" className="inner uk-grid">
               <div className="uk-width-1-4 uk-text-center">
-                <table style={{ width: "auto" }}>
+                <table>
                   <thead>
                     <th>ID</th>
                     <th>Name</th>
