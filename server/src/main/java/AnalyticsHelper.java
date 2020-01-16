@@ -58,6 +58,18 @@ public class AnalyticsHelper {
                     link.put("linkID", l.id);
                     link.put("linkType", l.linkType);
                     link.put("category", l.linkCategory);
+                    String linkName = "";
+                    String id = "";
+
+                    for(Artifact art: project.artifacts){
+                        if(art.itemId.equals(l.id)){
+                            linkName = art.name;
+                            id = art.id;
+                        }
+                    }
+
+                    link.put("linkName", linkName);
+                    link.put("linkID", id);
                     links.put(link);
                 });
 

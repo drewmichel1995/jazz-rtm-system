@@ -40,13 +40,15 @@ class LinkRow extends React.Component {
                 <table style={{ width: "auto" }}>
                   <thead>
                     <th>ID</th>
-                    <th>Type</th>
-                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Link Type</th>
+                    <th>Link Category</th>
                   </thead>
                   <tbody>
                     {artifact.links.map(link => (
                       <tr>
-                        <td>{link.linkID}</td>
+                        <td>{link.id}</td>
+                        <td>{link.linkName}</td>
                         <td>{link.linkType}</td>
                         <td>{link.category}</td>
                       </tr>
