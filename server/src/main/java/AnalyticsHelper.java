@@ -69,7 +69,7 @@ public class AnalyticsHelper {
                     }
 
                     link.put("linkName", linkName);
-                    link.put("linkID", id);
+                    link.put("id", id);
                     links.put(link);
                 });
 
