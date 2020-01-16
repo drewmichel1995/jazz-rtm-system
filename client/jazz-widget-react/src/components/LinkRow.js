@@ -32,7 +32,7 @@ class LinkRow extends React.Component {
         <td>{artifact.artifactType}</td>
         <td>{artifact.numLinks}</td>
       </tr>,
-      this.state.expanded && (
+      this.state.expanded && !artifact.numLinks < 1 && (
         <tr className="expandable" key="tr-expander">
           <td className="uk-background-muted" colSpan={6}>
             <div ref="expanderBody" className="inner uk-grid">

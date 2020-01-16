@@ -31,7 +31,7 @@ class ArtifactRow extends React.Component {
         <td className="uk-text-nowrap">{folder.folderName}.</td>
         <td>{folder.numArtifacts}</td>
       </tr>,
-      this.state.expanded && (
+      this.state.expanded && !folder.numArtifacts < 1 && (
         <tr className="expandable" key="tr-expander">
           <td className="uk-background-muted">
             <div ref="expanderBody" className="inner uk-grid">
