@@ -36,10 +36,7 @@ class LinkRow extends React.Component {
         <tr className="expandable" key="tr-expander">
           <td className="uk-background-muted" colSpan={6}>
             <div ref="expanderBody" className="inner uk-grid">
-              <div
-                className="uk-width-1-4 uk-text-center"
-                style={{ justifyContent: "center" }}
-              >
+              <div className="uk-width-1-4 uk-text-center">
                 <table style={{ width: "auto" }}>
                   <thead>
                     <th>ID</th>

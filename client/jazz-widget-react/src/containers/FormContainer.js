@@ -257,13 +257,13 @@ class FormContainer extends Component {
               </Col>
             </Row>
             <Row>
-              <Col md={{ span: 6, offset: 3 }}>
+              <Col md={{ span: 6 }}>
                 <Button variant="success" onClick={this.handleFormSubmit} block>
                   Submit
                 </Button>
               </Col>
 
-              <Col>
+              <Col md={{ span: 6 }}>
                 <Button variant="danger" onClick={this.handleClearForm} block>
                   Clear Selected
                 </Button>
