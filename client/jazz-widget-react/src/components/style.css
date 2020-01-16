@@ -17,6 +17,5 @@ tr.expandable > td {
 
 tr.expandable > td > .inner {
   margin: 15px;
-  width: auto;
   overflow: hidden;
 }
