@@ -105,7 +105,8 @@ public class ProjectArea {
         ArrayList<Artifact> filteredArtifacts = new ArrayList<>();
 
         if(artifactTypes.size() < 1) return tempArtifacts;
-
+        System.out.println("Artifact Types Sent From Client ---------------");
+        System.out.println(artifactTypes.toString());
         for(Artifact a: tempArtifacts)
             if (artifactTypes.contains(a.artifactType)) filteredArtifacts.add(a);
 
