@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Select from "react-select";
-import Multiselect from "multiselect-dropdown-react";
 import MultiSelect from "@kenshooui/react-multi-select";
 import "@kenshooui/react-multi-select/dist/style.css";
 import { Form, Row, Col, Button, ButtonGroup, Spinner } from "react-bootstrap";
@@ -230,28 +229,34 @@ class FormContainer extends Component {
                 <Form.Label> </Form.Label>
                 <Form.Group>
                   <Row>
-                    <Multiselect
+                    <Select
                       options={dependencies}
-                      onSelectOptions={this.handleDependencies}
+                      value={dependencySelected}
+                      onChange={this.handleDependencies}
                       placeholder="Link Types"
+                      isMulti
                     />
                   </Row>
                 </Form.Group>
                 <Form.Group>
                   <Row>
-                    <Multiselect
+                    <Select
                       options={artifactTypes}
-                      onSelectOptions={this.handleColumnTypes}
+                      value={columnArtifactTypeSelected}
+                      onChange={this.handleColumnTypes}
                       placeholder="Column Requirement Type"
+                      isMulti
                     />
                   </Row>
                 </Form.Group>
                 <Form.Group>
                   <Row>
-                    <Multiselect
+                    <Select
                       options={artifactTypes}
-                      onSelectOptions={this.handleRowTypes}
+                      value={rowArtifactTypeSelected}
+                      onChange={this.handleRowTypes}
                       placeholder="Row Requirement Type"
+                      isMulti
                     />
                   </Row>
                 </Form.Group>
