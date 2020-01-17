@@ -109,13 +109,14 @@ public class ProjectArea {
         for(String t: artifactTypes){
             System.out.println(t);
         }
-        System.out.println(artifactTypes.toString());
+        System.out.println("---------------Before Size: " + tempArtifacts.size() );
         for(Artifact a: tempArtifacts) {
-            System.out.println(a.artifactType);
+           // System.out.println(a.artifactType);
             for(String t: artifactTypes) {
                 if(t.equals(a.artifactType)) filteredArtifacts.add(a);
             }
         }
+        System.out.println("=---------------After Size: " + filteredArtifacts.size() );
         return filteredArtifacts;
     }
 
