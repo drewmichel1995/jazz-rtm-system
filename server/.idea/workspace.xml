@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ProjectArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProjectArea.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -89,16 +88,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="135" column="70" selection-start-line="135" selection-start-column="70" selection-end-line="135" selection-end-column="70" />
+            <state relative-caret-position="221">
+              <caret line="57" column="30" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ProjectArea#0;class#ProjectArea#0" />
-                <element signature="method#ProjectArea#2;class#ProjectArea#0" />
+                <element signature="method#ProjectArea#1;class#ProjectArea#0" />
                 <element signature="method#setArtifacts#0;class#ProjectArea#0" />
                 <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
                 <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
                 <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
+                <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
+                <element signature="method#filterRowDependencies#0;class#ProjectArea#0" />
+                <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
+                <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
+                <element signature="method#getLinkTypes#0;class#ProjectArea#0" />
                 <element signature="method#getParentFolders#0;class#ProjectArea#0" />
                 <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
                 <element signature="method#getFields#0;class#ProjectArea#0" />
@@ -107,7 +111,6 @@
                 <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
                 <element signature="method#getTableJSON#1;class#ProjectArea#0" />
                 <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
-                <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
                 <element signature="method#getLinkColor#0;class#ProjectArea#0" />
                 <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
                 <element signature="method#toJSON#0;class#ProjectArea#0" />
@@ -307,7 +310,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579283809085" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579284830473" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -644,16 +647,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="135" column="70" selection-start-line="135" selection-start-column="70" selection-end-line="135" selection-end-column="70" />
+        <state relative-caret-position="221">
+          <caret line="57" column="30" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ProjectArea#0;class#ProjectArea#0" />
-            <element signature="method#ProjectArea#2;class#ProjectArea#0" />
+            <element signature="method#ProjectArea#1;class#ProjectArea#0" />
             <element signature="method#setArtifacts#0;class#ProjectArea#0" />
             <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
             <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
             <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
+            <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
+            <element signature="method#filterRowDependencies#0;class#ProjectArea#0" />
+            <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
+            <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
+            <element signature="method#getLinkTypes#0;class#ProjectArea#0" />
             <element signature="method#getParentFolders#0;class#ProjectArea#0" />
             <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
             <element signature="method#getFields#0;class#ProjectArea#0" />
@@ -662,7 +670,6 @@
             <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
             <element signature="method#getTableJSON#1;class#ProjectArea#0" />
             <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
-            <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
             <element signature="method#getLinkColor#0;class#ProjectArea#0" />
             <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
             <element signature="method#toJSON#0;class#ProjectArea#0" />

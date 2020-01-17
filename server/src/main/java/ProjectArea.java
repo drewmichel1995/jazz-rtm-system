@@ -55,19 +55,7 @@ public class ProjectArea {
 
     public ProjectArea(String projectUri, Payload payload){
         this(projectUri);
-        this.filterAll(payload.columns, payload.rows, payload.columnTypes, payload.rowTypes, payload.dependencies);
-        this.linksOnly = payload.linksOnly;
-
-        if(this.linksOnly){
-            System.out.println("Column Artifact Size: " + this.columnArtifacts.size());
-            System.out.println("Row Artifact Size: " + this.rowArtifacts.size());
-
-            setColumnArtifacts(getOnlyLinks(this.columnArtifacts, this.rowArtifacts));
-            setRowArtifacts(getOnlyLinks(this.rowArtifacts, this.columnArtifacts));
-
-            System.out.println("Column Artifact Size: " + this.columnArtifacts.size());
-            System.out.println("Row Artifact Size: " + this.rowArtifacts.size());
-        }
+        this.filterAll(payload);
     }
 
     void addArtifact(Artifact artifact){
@@ -138,21 +126,20 @@ public class ProjectArea {
         this.setColumnArtifacts(filteredArtifacts);
     }
 
-    private void filterAll(ArrayList<String> columns, ArrayList<String> rows, ArrayList<String> columnArtifactTypes, ArrayList<String> rowArtifactTypes, ArrayList<String> dependencies){
+    private void filterAll(Payload payload){
+        this.linksOnly = payload.linksOnly;
+        this.setColumnArtifacts(filterParentFolders(payload.columns));
+        this.setRowArtifacts(filterParentFolders(payload.rows));
+        this.setColumnArtifacts(filterArtifactTypes(payload.columnTypes, this.columnArtifacts));
+        this.setRowArtifacts(filterArtifactTypes(payload.rowTypes, this.rowArtifacts));
 
-        this.setColumnArtifacts(filterParentFolders(columns));
-        this.setRowArtifacts(filterParentFolders(rows));
-        this.setColumnArtifacts(filterArtifactTypes(columnArtifactTypes, this.columnArtifacts));
-        this.setRowArtifacts(filterArtifactTypes(rowArtifactTypes, this.rowArtifacts));
+        filterRowDependencies(payload.dependencies);
+        filterColumnDependencies(payload.dependencies);
 
-        System.out.println("Row Artifact Size Before Dependency Filter" + this.rowArtifacts.size());
-        System.out.println("Column Artifact Size Before Dependency Filter" + this.columnArtifacts.size());
-        filterRowDependencies(dependencies);
-        filterColumnDependencies(dependencies);
-
-        System.out.println("Row Artifact Size Before Dependency Filter" + this.rowArtifacts.size());
-        System.out.println("Column Artifact Size Before Dependency Filter" + this.columnArtifacts.size());
-
+        if(this.linksOnly){
+            setColumnArtifacts(getOnlyLinks(this.columnArtifacts, this.rowArtifacts));
+            setRowArtifacts(getOnlyLinks(this.rowArtifacts, this.columnArtifacts));
+        }
     }
 
     private JSONArray getArtifactTypes(){
