@@ -229,25 +229,31 @@ class FormContainer extends Component {
               <Col>
                 <Form.Label> </Form.Label>
                 <Form.Group>
-                  <Multiselect
-                    options={dependencies}
-                    onSelectOptions={this.handleDependencies}
-                    placeholder="Link Types"
-                  />
+                  <Row>
+                    <Multiselect
+                      options={dependencies}
+                      onSelectOptions={this.handleDependencies}
+                      placeholder="Link Types"
+                    />
+                  </Row>
                 </Form.Group>
                 <Form.Group>
-                  <Multiselect
-                    options={artifactTypes}
-                    onSelectOptions={this.handleColumnTypes}
-                    placeholder="Column Requirement Type"
-                  />
+                  <Row>
+                    <Multiselect
+                      options={artifactTypes}
+                      onSelectOptions={this.handleColumnTypes}
+                      placeholder="Column Requirement Type"
+                    />
+                  </Row>
                 </Form.Group>
                 <Form.Group>
-                  <Multiselect
-                    options={artifactTypes}
-                    onSelectOptions={this.handleRowTypes}
-                    placeholder="Row Requirement Type"
-                  />
+                  <Row>
+                    <Multiselect
+                      options={artifactTypes}
+                      onSelectOptions={this.handleRowTypes}
+                      placeholder="Row Requirement Type"
+                    />
+                  </Row>
                 </Form.Group>
                 <Form.Group>
                   <Form.Check
