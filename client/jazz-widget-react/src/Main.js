@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, NavLink, HashRouter } from "react-router-dom";
 import RequirementsView from "./RequirementsView";
 import AnalyticsView from "./components/AnalyticsView";
+import FormContainerz from "./containers/FormContainerz";
 
 class Main extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class Main extends Component {
                 />
               )}
             />
+            <Route exact path="/fields" render={<FormContainerz />} />
             <Route
               exact
               path="/RequirementsView"
