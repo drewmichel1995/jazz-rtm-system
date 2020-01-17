@@ -112,7 +112,9 @@ public class ProjectArea {
         System.out.println(artifactTypes.toString());
         for(Artifact a: tempArtifacts) {
             System.out.println(a.artifactType);
-            if (artifactTypes.contains(a.artifactType)) filteredArtifacts.add(a);
+            for(String t: artifactTypes) {
+                if(t.equals(a.artifactType)) filteredArtifacts.add(a);
+            }
         }
         return filteredArtifacts;
     }
