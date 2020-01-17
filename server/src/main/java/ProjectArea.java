@@ -154,7 +154,7 @@ public class ProjectArea {
                 JSONObject temp = new JSONObject();
                 uniqueTypes.add(a.artifactType);
 
-                temp.put("label", a.artifactType);
+                temp.put("name", a.artifactType);
                 temp.put("value", a.artifactType);
                 artifactTypes.put(temp);
             }
@@ -174,7 +174,7 @@ public class ProjectArea {
                 if(!uniqueLinks.contains(getLinkFullName(l.linkType))){
                     JSONObject temp = new JSONObject();
                     uniqueLinks.add(getLinkFullName(l.linkType));
-                    temp.put("label", getLinkFullName(l.linkType));
+                    temp.put("name", getLinkFullName(l.linkType));
                     temp.put("value", getLinkFullName(l.linkType));
                     temp.put("color", getLinkColor(l.linkType));
                     linkTypes.put(temp);

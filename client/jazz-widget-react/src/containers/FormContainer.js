@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Select from "react-select";
+import Multiselect from "multiselect-dropdown-react";
 import MultiSelect from "@kenshooui/react-multi-select";
 import "@kenshooui/react-multi-select/dist/style.css";
 import { Form, Row, Col, Button, ButtonGroup, Spinner } from "react-bootstrap";
@@ -141,22 +142,24 @@ class FormContainer extends Component {
 
   handleDependencies(data) {
     const name = "dependencies";
+    var temp = data.map(item => ({ name: item.name }));
     this.setState(prevState => ({
       dependencySelected: data,
       payload: {
         ...prevState.payload,
-        [name]: [{ name: data.value }]
+        [name]: temp
       }
     }));
   }
 
   handleColumnTypes(data) {
     const name = "columnTypes";
+    var temp = data.map(item => ({ name: item.label }));
     this.setState(prevState => ({
       columnArtifactTypeSelected: data,
       payload: {
         ...prevState.payload,
-        [name]: [{ name: data.value }]
+        [name]: temp
       }
     }));
   }
@@ -222,26 +225,23 @@ class FormContainer extends Component {
               <Col>
                 <Form.Label> </Form.Label>
                 <Form.Group>
-                  <Select
-                    onChange={this.handleDependencies}
+                  <Multiselect
                     options={dependencies}
-                    value={dependencySelected}
-                    placeholder="Link Type"
+                    onSelectOptions={this.handleDependencies}
+                    placeholder="Link Types"
                   />
                 </Form.Group>
                 <Form.Group>
-                  <Select
-                    onChange={this.handleColumnTypes}
+                  <Multiselect
                     options={artifactTypes}
-                    value={columnArtifactTypeSelected}
+                    onSelectOptions={this.handleColumnTypes}
                     placeholder="Column Requirement Type"
                   />
                 </Form.Group>
                 <Form.Group>
-                  <Select
-                    onChange={this.handleRowTypes}
+                  <Multiselect
                     options={artifactTypes}
-                    value={rowArtifactTypeSelected}
+                    onSelectOptions={this.handleRowTypes}
                     placeholder="Row Requirement Type"
                   />
                 </Form.Group>
