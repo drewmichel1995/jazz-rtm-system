@@ -106,10 +106,14 @@ public class ProjectArea {
 
         if(artifactTypes.size() < 1) return tempArtifacts;
         System.out.println("Artifact Types Sent From Client ---------------");
+        artifactTypes.forEach(t -> {
+            System.out.println(l);
+        });
         System.out.println(artifactTypes.toString());
-        for(Artifact a: tempArtifacts)
+        for(Artifact a: tempArtifacts) {
+            System.out.println(a.artifactType);
             if (artifactTypes.contains(a.artifactType)) filteredArtifacts.add(a);
-
+        }
         return filteredArtifacts;
     }
 
