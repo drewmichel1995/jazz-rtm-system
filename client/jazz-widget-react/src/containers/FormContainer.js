@@ -228,37 +228,31 @@ class FormContainer extends Component {
               <Col>
                 <Form.Label> </Form.Label>
                 <Form.Group>
-                  <Row>
-                    <Select
-                      options={dependencies}
-                      value={dependencySelected}
-                      onChange={this.handleDependencies}
-                      placeholder="Link Types"
-                      isMulti
-                    />
-                  </Row>
+                  <Select
+                    options={dependencies}
+                    value={dependencySelected}
+                    onChange={this.handleDependencies}
+                    placeholder="Link Types"
+                    isMulti
+                  />
                 </Form.Group>
                 <Form.Group>
-                  <Row>
-                    <Select
-                      options={artifactTypes}
-                      value={columnArtifactTypeSelected}
-                      onChange={this.handleColumnTypes}
-                      placeholder="Column Requirement Type"
-                      isMulti
-                    />
-                  </Row>
+                  <Select
+                    options={artifactTypes}
+                    value={columnArtifactTypeSelected}
+                    onChange={this.handleColumnTypes}
+                    placeholder="Column Requirement Type"
+                    isMulti
+                  />
                 </Form.Group>
                 <Form.Group>
-                  <Row>
-                    <Select
-                      options={artifactTypes}
-                      value={rowArtifactTypeSelected}
-                      onChange={this.handleRowTypes}
-                      placeholder="Row Requirement Type"
-                      isMulti
-                    />
-                  </Row>
+                  <Select
+                    options={artifactTypes}
+                    value={rowArtifactTypeSelected}
+                    onChange={this.handleRowTypes}
+                    placeholder="Row Requirement Type"
+                    isMulti
+                  />
                 </Form.Group>
                 <Form.Group>
                   <Form.Check
