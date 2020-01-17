@@ -105,18 +105,14 @@ public class ProjectArea {
         ArrayList<Artifact> filteredArtifacts = new ArrayList<>();
 
         if(artifactTypes.size() < 1) return tempArtifacts;
-        System.out.println("Artifact Types Sent From Client ---------------");
-        for(String t: artifactTypes){
-            System.out.println(t);
-        }
-        System.out.println("---------------Before Size: " + tempArtifacts.size() );
+
         for(Artifact a: tempArtifacts) {
            // System.out.println(a.artifactType);
             for(String t: artifactTypes) {
                 if(t.equals(a.artifactType)) filteredArtifacts.add(a);
             }
         }
-        System.out.println("=---------------After Size: " + filteredArtifacts.size() );
+
         return filteredArtifacts;
     }
 
@@ -126,7 +122,7 @@ public class ProjectArea {
         if(dependencies.size() < 1) return;
         for(Artifact a: rowArtifacts)
             for(Link l: a.links)
-                if (dependencies.contains(getLinkFullName(l.linkType)) && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
+                if (dependencies.contains(getLinkFullName(l.linkType))) filteredArtifacts.add(a);
 
         this.setRowArtifacts(filteredArtifacts);
     }
@@ -137,7 +133,7 @@ public class ProjectArea {
         if(dependencies.size() < 1) return;
         for(Artifact a: columnArtifacts)
             for(Link l: a.links)
-                if (dependencies.contains(getLinkFullName(l.linkType)) && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
+                if (dependencies.contains(getLinkFullName(l.linkType))) filteredArtifacts.add(a);
 
         this.setColumnArtifacts(filteredArtifacts);
     }
@@ -149,8 +145,13 @@ public class ProjectArea {
         this.setColumnArtifacts(filterArtifactTypes(columnArtifactTypes, this.columnArtifacts));
         this.setRowArtifacts(filterArtifactTypes(rowArtifactTypes, this.rowArtifacts));
 
+        System.out.println("Row Artifact Size Before Dependency Filter" + this.rowArtifacts.size());
+        System.out.println("Column Artifact Size Before Dependency Filter" + this.columnArtifacts.size());
         filterRowDependencies(dependencies);
         filterColumnDependencies(dependencies);
+
+        System.out.println("Row Artifact Size Before Dependency Filter" + this.rowArtifacts.size());
+        System.out.println("Column Artifact Size Before Dependency Filter" + this.columnArtifacts.size());
 
     }
 
