@@ -51,53 +51,51 @@
 		  	<p><small>To ignore this warning select Proceed to Matrix</small></p>
 		  </p>
 		</div>
-		<div class="hold container">
-
-				<div class="row">
-					<div class="col">
+		<div class="hold">
+			<form class="ui form">
+				<div class="fields">
+					<div class="field">
 						<label>Project Area</label>
 						<select id="projectAreaList" type="button" class="ui dropdown"></select>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col">
+				<div class="fields">
+					<div class="field">
 						<label>Row Folder Scope:</label>
 						<select id="rowElementList" type="button" multiple="multiple" class="ui dropdown"></select>
 					</div>
-					<div class="col">
+					<div class="field">
 						<label>Column Folder Scope:</label>
 						<select id="columnElementList" type="button" multiple="multiple" class="ui dropdown"></select>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col">
+				<div class="fields">
+					<div class="field">
 						<label>Column Requirement Type:</label>
 						<select id="columnScopeElementList" type="button" multiple="multiple" class="ui dropdown"></select>
 					</div>
-					<div class="col">
+					<div class="field">
 						<label>Row Requirement Type:</label>
 						<select id="rowScopeElementList" type="button" multiple="multiple" class="ui dropdown"></select>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col">
+				<div class="fields">
+					<div class="field">
 						<label>Dependency Criteria:</label>
 						<select id="dependencyCriteriaList" type="button"></select>
 					</div>
-					<div class="ui segment col">
-
+					<div class="ui segment">
+						<div class="field">
 							<div class="ui toggle checkbox">
 
 								<input id="linksOnly" type="checkbox"  name="public"></input>
 								<label>Display Links Only</label>
 							</div>
-
+						</div>
 					</div>
 				</div>
-				<div class="row">
-					<button type="button" id="submitButton" class="ui primary button" onClick="onSubmit()">Go to Matrix</button>
-				</div>
-
+				<button type="button" id="submitButton" class="ui primary button" onClick="onSubmit()">Go to Matrix</button>
+			</form>
 		</div>
 		<script type="text/javascript">
 
