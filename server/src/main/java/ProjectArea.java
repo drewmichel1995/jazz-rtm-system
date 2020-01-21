@@ -84,7 +84,7 @@ public class ProjectArea {
         if(parentFolders.size() < 1) return this.artifacts;
 
         for(Artifact a: artifacts)
-            if (parentFolders.contains(a.parentFolder)) filteredArtifacts.add(a);
+            if (parentFolders.contains(a.parentFolder)  && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
 
         return filteredArtifacts;
     }
@@ -97,7 +97,7 @@ public class ProjectArea {
         for(Artifact a: tempArtifacts) {
            // System.out.println(a.artifactType);
             for(String t: artifactTypes) {
-                if(t.equals(a.artifactType)) filteredArtifacts.add(a);
+                if(t.equals(a.artifactType)  && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
             }
         }
 
@@ -110,7 +110,7 @@ public class ProjectArea {
         if(dependencies.size() < 1) return;
         for(Artifact a: rowArtifacts)
             for(Link l: a.links)
-                if (dependencies.contains(getLinkFullName(l.linkType))) filteredArtifacts.add(a);
+                if (dependencies.contains(getLinkFullName(l.linkType)) && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
 
         this.setRowArtifacts(filteredArtifacts);
     }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ProjectArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProjectArea.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,7 +31,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
@@ -85,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="172" column="35" selection-start-line="172" selection-start-column="35" selection-end-line="172" selection-end-column="35" />
+            <state relative-caret-position="308">
+              <caret line="79" column="85" lean-forward="true" selection-start-line="79" selection-start-column="85" selection-end-line="79" selection-end-column="85" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ProjectArea#0;class#ProjectArea#0" />
@@ -98,9 +98,6 @@
                 <element signature="method#setArtifacts#0;class#ProjectArea#0" />
                 <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
                 <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
-                <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
-                <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
-                <element signature="method#filterRowDependencies#0;class#ProjectArea#0" />
                 <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
                 <element signature="method#filterAll#0;class#ProjectArea#0" />
                 <element signature="method#getParentFolders#0;class#ProjectArea#0" />
@@ -227,8 +224,8 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/JazzHTTP.java" />
         <option value="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ProjectArea.java" />
         <option value="$PROJECT_DIR$/src/main/resources/test.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/ProjectArea.java" />
       </list>
     </option>
   </component>
@@ -311,7 +308,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579617595472" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579618772566" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -639,10 +636,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="34" column="106" selection-start-line="34" selection-start-column="106" selection-end-line="34" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="172" column="35" selection-start-line="172" selection-start-column="35" selection-end-line="172" selection-end-column="35" />
+        <state relative-caret-position="308">
+          <caret line="79" column="85" lean-forward="true" selection-start-line="79" selection-start-column="85" selection-end-line="79" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ProjectArea#0;class#ProjectArea#0" />
@@ -651,9 +655,6 @@
             <element signature="method#setArtifacts#0;class#ProjectArea#0" />
             <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
             <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
-            <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
-            <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
-            <element signature="method#filterRowDependencies#0;class#ProjectArea#0" />
             <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
             <element signature="method#filterAll#0;class#ProjectArea#0" />
             <element signature="method#getParentFolders#0;class#ProjectArea#0" />
@@ -669,13 +670,6 @@
             <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
             <element signature="method#toJSON#0;class#ProjectArea#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="34" column="106" selection-start-line="34" selection-start-column="106" selection-end-line="34" selection-end-column="106" />
         </state>
       </provider>
     </entry>
