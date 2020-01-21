@@ -53,45 +53,45 @@
 		</div>
 		<div class="hold container">
 
-				<div class="fields row">
-					<div class="field col">
+				<div class="row">
+					<div class="col">
 						<label>Project Area</label>
 						<select id="projectAreaList" type="button" class="ui dropdown"></select>
 					</div>
 				</div>
-				<div class="fields row">
-					<div class="field col">
+				<div class="row">
+					<div class="col">
 						<label>Row Folder Scope:</label>
 						<select id="rowElementList" type="button" multiple="multiple" class="ui dropdown"></select>
 					</div>
-					<div class="field col">
+					<div class="col">
 						<label>Column Folder Scope:</label>
 						<select id="columnElementList" type="button" multiple="multiple" class="ui dropdown"></select>
 					</div>
 				</div>
-				<div class="fields row">
-					<div class="field col">
+				<div class="row">
+					<div class="col">
 						<label>Column Requirement Type:</label>
 						<select id="columnScopeElementList" type="button" multiple="multiple" class="ui dropdown"></select>
 					</div>
-					<div class="field col">
+					<div class="col">
 						<label>Row Requirement Type:</label>
 						<select id="rowScopeElementList" type="button" multiple="multiple" class="ui dropdown"></select>
 					</div>
 				</div>
-				<div class="fields row">
-					<div class="field col">
+				<div class="row">
+					<div class="col">
 						<label>Dependency Criteria:</label>
 						<select id="dependencyCriteriaList" type="button"></select>
 					</div>
 					<div class="ui segment col">
-						<div class="field">
+
 							<div class="ui toggle checkbox">
 
 								<input id="linksOnly" type="checkbox"  name="public"></input>
 								<label>Display Links Only</label>
 							</div>
-						</div>
+
 					</div>
 				</div>
 				<div class="row">
