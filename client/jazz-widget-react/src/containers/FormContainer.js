@@ -142,7 +142,7 @@ class FormContainer extends Component {
   handleDependencies(data) {
     const name = "dependencies";
     console.log(data);
-    var temp = data.map(item => ({ name: item }));
+    var temp = data.map(item => ({ name: item.label }));
     this.setState(prevState => ({
       dependencySelected: data,
       payload: {
@@ -155,7 +155,7 @@ class FormContainer extends Component {
   handleColumnTypes(data) {
     const name = "columnTypes";
     console.log(data);
-    var temp = data.map(item => ({ name: item }));
+    var temp = data.map(item => ({ name: item.label }));
     this.setState(prevState => ({
       columnArtifactTypeSelected: data,
       payload: {
@@ -168,7 +168,7 @@ class FormContainer extends Component {
   handleRowTypes(data) {
     const name = "rowTypes";
     console.log(data);
-    var temp = data.map(item => ({ name: item }));
+    var temp = data.map(item => ({ name: item.label }));
     this.setState(prevState => ({
       rowArtifactTypeSelected: data,
       payload: {
