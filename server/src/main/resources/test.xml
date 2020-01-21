@@ -52,7 +52,7 @@
 		  </p>
 		</div>
 		<div class="hold container">
-			<form class="ui form">
+
 				<div class="fields row">
 					<div class="field col">
 						<label>Project Area</label>
@@ -95,9 +95,9 @@
 					</div>
 				</div>
 				<div class="row">
-				<button type="button" id="submitButton" class="ui primary button" onClick="onSubmit()">Go to Matrix</button>
+					<button type="button" id="submitButton" class="ui primary button" onClick="onSubmit()">Go to Matrix</button>
 				</div>
-			</form>
+
 		</div>
 		<script type="text/javascript">
 
