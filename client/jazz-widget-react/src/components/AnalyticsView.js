@@ -9,10 +9,10 @@ const serverURL = "https://mbse-colldev.saic.com/server";
 const isSearched = searchTerm => item =>
   item.folderName.toLowerCase().includes(searchTerm.toLowerCase()) ||
   item.artifacts.map(art =>
-    art.artifactName.toLowerCase.includes(searchTerm)
+    art.artifactName.toLowerCase().includes(searchTerm)
   ) ||
   item.artifacts.map(art =>
-    art.links.map(link => link.linkName.toLowerCase.includes(searchTerm))
+    art.links.map(link => link.linkName.toLowerCase().includes(searchTerm))
   );
 class AnalyticsView extends React.Component {
   constructor(props) {
