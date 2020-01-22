@@ -7,13 +7,7 @@ import FadeIn from "react-fade-in";
 const serverURL = "https://mbse-colldev.saic.com/server";
 
 const isSearched = searchTerm => item =>
-  item.folderName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  item.artifacts.map(art =>
-    art.artifactName.toLowerCase().includes(searchTerm)
-  ) ||
-  item.artifacts.map(art =>
-    art.links.map(link => link.linkName.toLowerCase().includes(searchTerm))
-  );
+  item.folderName.toLowerCase().includes(searchTerm.toLowerCase());
 class AnalyticsView extends React.Component {
   constructor(props) {
     super(props);
@@ -47,15 +41,9 @@ class AnalyticsView extends React.Component {
   }
 
   onSearchChange(event) {
-    if (event.target.value !== "") {
-      this.setState({
-        searchTerm: event.target.value
-      });
-    } else {
-      this.setState({
-        searchTerm: event.target.value
-      });
-    }
+    this.setState({
+      searchTerm: event.target.value
+    });
   }
 
   toggleLoading() {
