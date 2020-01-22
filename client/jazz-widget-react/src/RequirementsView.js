@@ -173,6 +173,7 @@ class RequirementsView extends React.Component {
                 rowSearchTerm={rowSearchTerm}
                 projectURI={projectURI}
                 serverURL={serverURL}
+                loading={loading}
               />
             ) : (
               <Alert variant="danger">

@@ -4,11 +4,10 @@ import AnalyticsCard from "./AnalyticsCard";
 import HeaderContextArea from "./HeaderContextArea";
 import "../table.css";
 import LinkContextArea from "./LinkContextArea";
+import Loading from "./Loading";
 
 const isSearched = searchTerm => item =>
   item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  item.tableElemID.toLowerCase().includes("rowCounter".toLowerCase());
-const IdIsSearched = searchTerm => item =>
   item.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
   item.tableElemID.toLowerCase().includes("rowCounter".toLowerCase());
 
@@ -21,9 +20,13 @@ class Table extends Component {
       columnSearchTerm,
       rowSearchTerm,
       projectURI,
-      serverURL
+      serverURL,
+      loading
     } = this.props;
-    return (
+
+    return loading ? (
+      <Loading loading={loading} />
+    ) : (
       <div style={{ width: "100%", height: "800px" }}>
         <StickyTable stickyHeaderCount={1} stickyColumnCount={1}>
           <Row key="columnHeaders">
@@ -55,7 +58,7 @@ class Table extends Component {
               ))}
 
             {showID &&
-              columns.filter(IdIsSearched(columnSearchTerm)).map(col => (
+              columns.filter(isSearched(columnSearchTerm)).map(col => (
                 <Cell key={col.id} className="col-header">
                   <HeaderContextArea
                     artifact={col.name}
@@ -116,7 +119,7 @@ class Table extends Component {
             ))}
 
           {showID &&
-            rows.filter(IdIsSearched(rowSearchTerm)).map(row => (
+            rows.filter(isSearched(rowSearchTerm)).map(row => (
               <Row key={row.id}>
                 <Cell key={row.id + "name"} className="row-header">
                   <HeaderContextArea
@@ -129,7 +132,7 @@ class Table extends Component {
                     cell={<a href={row.url}>{row.id}</a>}
                   />
                 </Cell>
-                {row.cells.filter(IdIsSearched(columnSearchTerm)).map(cell =>
+                {row.cells.filter(isSearched(columnSearchTerm)).map(cell =>
                   cell.isLink ? (
                     <Cell key={row.id + cell.id} className="normalCell">
                       <LinkContextArea
