@@ -234,7 +234,7 @@ class FormContainer extends Component {
                     onChange={this.handleDependencies}
                     placeholder="Link Types"
                     isMulti
-                    isClearable={true}
+                    isClearable={false}
                   />
                 </Form.Group>
                 <Form.Group>
@@ -244,7 +244,7 @@ class FormContainer extends Component {
                     onChange={this.handleColumnTypes}
                     placeholder="Column Requirement Type"
                     isMulti
-                    isClearable={true}
+                    isClearable={false}
                   />
                 </Form.Group>
                 <Form.Group>
@@ -254,7 +254,7 @@ class FormContainer extends Component {
                     onChange={this.handleRowTypes}
                     placeholder="Row Requirement Type"
                     isMulti
-                    isClearable={true}
+                    isClearable={false}
                   />
                 </Form.Group>
                 <Form.Group>
