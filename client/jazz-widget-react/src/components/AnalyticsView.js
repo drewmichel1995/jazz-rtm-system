@@ -78,11 +78,13 @@ class AnalyticsView extends React.Component {
                   Number of Artifacts: {data.numArtifacts}
                 </Card.Title>
                 <Card.Title>Number of Folders: {data.numFolders}</Card.Title>
-                <Form.Control
-                  value={searchTerm}
-                  onChange={this.onSearchChange}
-                  placeholder="Search"
-                />
+                <Form>
+                  <Form.Control
+                    value={searchTerm}
+                    onChange={this.onSearchChange}
+                    placeholder="Search"
+                  />
+                </Form>
               </Card.Body>
             </Card>
             <Table striped bordered hover>
