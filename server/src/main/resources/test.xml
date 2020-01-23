@@ -240,8 +240,8 @@ function loadFields(theUrl){
 		});
 
 		$.each(data.artifactTypes, function() {
-			$rowScopeDropdown.append($("<option />").val(this.name).text(this.name));
-			$columnScopeDropdown.append($("<option />").val(this.name).text(this.name));
+			$rowScopeDropdown.append($("<option />").val(this.value).text(this.label));
+			$columnScopeDropdown.append($("<option />").val(this.value).text(this.label));
 		});
 
 		$dependencyDropdown.append("<option disabled selected value> -- select an option -- </option>");
