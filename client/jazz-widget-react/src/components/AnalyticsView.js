@@ -4,7 +4,7 @@ import ArtifactRow from "./ArtifactRow";
 import Loading from "./Loading";
 import FadeIn from "react-fade-in";
 
-const serverURL = "https://mbse-colldev.saic.com/server";
+const serverURL = process.env.REACT_APP_SERVER_URL;
 
 const isSearched = searchTerm => item =>
   item.folderName.toLowerCase().includes(searchTerm.toLowerCase());

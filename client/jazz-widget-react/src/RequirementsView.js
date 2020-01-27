@@ -5,8 +5,10 @@ import ModalContainer from "./containers/ModalContainer";
 import Loading from "./components/Loading";
 import FadeIn from "react-fade-in";
 import { Alert } from "react-bootstrap";
+import dotenv from "dotenv";
 
-const serverURL = "https://mbse-colldev.saic.com/server";
+dotenv.config();
+const serverURL = process.env.REACT_APP_SERVER_URL;
 
 class RequirementsView extends React.Component {
   constructor(props) {
