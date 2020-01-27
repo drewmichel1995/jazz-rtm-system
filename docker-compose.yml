@@ -9,6 +9,7 @@ services:
       - "5000"
     dns:
       - 192.0.2.53
+    restart: always
       
   server:
     container_name: jazz-widget-server
@@ -16,6 +17,8 @@ services:
     image: jazz-widget-server-image
     expose:
       - "4567"
+    env_file:
+     - .env
     restart: always
     
   db:
@@ -32,6 +35,7 @@ services:
       - '80:80'
       - '443:443'
       - '27017:27017'
+    restart: always
 
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/nginx.conf
