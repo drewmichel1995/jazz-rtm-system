@@ -38,6 +38,7 @@ class RequirementsView extends React.Component {
   componentDidMount() {
     const { uniqueID } = this.props.match.params;
     var url = serverURL + "/getLoadedTable/" + uniqueID;
+    console.log(serverURL);
     fetch(url, {
       method: "get"
     })
