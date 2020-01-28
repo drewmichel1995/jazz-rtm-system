@@ -27,8 +27,8 @@ class Matrix extends React.Component {
       validCookie: true,
       done: false,
       isEmpty: false,
-      formattedPayload: {},
-      fields: {}
+      fields: {},
+      payload: {}
     };
 
     this.onRowSearchChange = this.onRowSearchChange.bind(this);
@@ -56,8 +56,8 @@ class Matrix extends React.Component {
             uniqueID: uniqueID,
             loading: false,
             isEmpty: payload.rows.length < 2 && payload.columns.length < 3,
-            formattedPayload: payload.formattedPayload,
-            fields: result.fields
+            fields: result.fields,
+            payload: payload
           });
           this.props.onTitleChange(
             payload.projectName,
@@ -128,8 +128,8 @@ class Matrix extends React.Component {
       validCookie,
       done,
       isEmpty,
-      formattedPayload,
-      fields
+      fields,
+      payload
     } = this.state;
 
     return (
@@ -154,8 +154,8 @@ class Matrix extends React.Component {
               projectName={projectName}
               uniqueID={uniqueID}
               onTitleChange={this.props.onTitleChange}
-              formattedPayload={formattedPayload}
               fields={fields}
+              payload={payload}
             />
             {!isEmpty && done ? (
               <Table

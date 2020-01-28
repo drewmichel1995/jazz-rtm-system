@@ -13,9 +13,7 @@ class OptionsToolbar extends Component {
       searchText: "Show Search Options",
       matrixText: "Show Filter Options",
       searchVariant: "secondary",
-      matrixVariant: "primary",
-      fields: {},
-      payload: {}
+      matrixVariant: "primary"
     };
 
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -94,7 +92,7 @@ class OptionsToolbar extends Component {
                 uniqueID={uniqueID}
                 onTitleChange={onTitleChange}
                 fields={this.props.fields}
-                payload={this.props.formattedPayload}
+                payload={this.props.payload}
               />
             </FadeIn>
           )}

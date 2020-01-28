@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Select from "react-select";
 import MultiSelect from "@kenshooui/react-multi-select";
 import "@kenshooui/react-multi-select/dist/style.css";
-import { Form, Row, Col, Button, Spinner } from "react-bootstrap";
+import { Form, Row, Col, Button } from "react-bootstrap";
 
 class MatrixFilterOptions extends Component {
   constructor(props) {
@@ -29,8 +29,7 @@ class MatrixFilterOptions extends Component {
       columnArtifactTypeSelected: "",
       linksOnlySelected: false,
       projectURI: "",
-      validCookie: true,
-      isLoading: true
+      validCookie: true
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
@@ -56,8 +55,7 @@ class MatrixFilterOptions extends Component {
       projectURI: result.projectURI,
       parentFolderOptions: fields.parentFolders,
       dependencies: fields.linkTypes,
-      artifactTypes: fields.artifactTypes,
-      isLoading: false
+      artifactTypes: fields.artifactTypes
     });
   }
 
@@ -196,13 +194,11 @@ class MatrixFilterOptions extends Component {
       columnArtifactTypeSelected,
       rowArtifactTypeSelected,
       linksOnlySelected,
-      validCookie,
-      isLoading
+      validCookie
     } = this.state;
     return (
       <div style={{ margin: "20px" }}>
-        {!validCookie || (isLoading && <Spinner animation="grow" />)}
-        {!isLoading && validCookie && (
+        {validCookie && (
           <Form>
             <Row>
               <Col>
