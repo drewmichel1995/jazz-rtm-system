@@ -8,8 +8,8 @@ import { Alert } from "react-bootstrap";
 import dotenv from "dotenv";
 
 dotenv.config();
-/*const serverURL = process.env.REACT_APP_SERVER_URL;*/
-const serverURL = "https://mbse-colldev.saic.com/server";
+const serverURL = process.env.REACT_APP_SERVER_URL;
+/*const serverURL = "https://mbse-colldev.saic.com/server";*/
 
 class Matrix extends React.Component {
   constructor(props) {
