@@ -106,6 +106,7 @@ public class JazzHTTP {
                     JSONObject temp = new JSONObject();
                     temp.put("success", true);
                     temp.put("payload", project.getTableJSON(mongo.getUniqueIDPayload(req.params(":uniqueID"))));
+                    temp.put("fields", project.getFields());
                     return temp;
                 }else{
                     JSONObject temp = new JSONObject();

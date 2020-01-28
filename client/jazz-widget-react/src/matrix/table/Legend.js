@@ -11,8 +11,6 @@ class Legend extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.uniqueID);
-
     var url = this.props.serverURL + "/getFields/" + this.props.projectURI;
     fetch(url, {
       method: "get"

@@ -23,34 +23,6 @@ class OptionsToolbar extends Component {
     this.onMatrixChange = this.onMatrixChange.bind(this);
   }
 
-  componentDidMount() {
-    var url =
-      this.props.serverURL + "/getFormattedPayload/" + this.props.uniqueID;
-    fetch(url, {
-      method: "get"
-    })
-      .then(res => res.json())
-      .then(result => {
-        this.setState({
-          payload: result
-        });
-
-        console.log(this.props.projectURI);
-
-        url = this.props.serverURL + "/getFields/" + this.props.projectURI;
-        fetch(url, {
-          method: "get"
-        })
-          .then(res => res.json())
-          .then(result =>
-            this.setState({
-              fields: result,
-              isLoading: false
-            })
-          );
-      });
-  }
-
   onSearchChange = () => {
     this.setState({ showSearch: !this.state.showSearch });
     this.state.showSearch
@@ -122,8 +94,8 @@ class OptionsToolbar extends Component {
                 projectURI={projectURI}
                 uniqueID={uniqueID}
                 onTitleChange={onTitleChange}
-                fields={this.state.fields}
-                payload={this.state.payload}
+                fields={this.props.fields}
+                payload={this.props.formattedPayload}
               />
             </FadeIn>
           )}

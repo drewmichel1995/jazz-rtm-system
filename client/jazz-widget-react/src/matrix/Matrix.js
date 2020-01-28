@@ -26,7 +26,9 @@ class Matrix extends React.Component {
       uniqueID: this.props.match.params.uniqueID,
       validCookie: true,
       done: false,
-      isEmpty: false
+      isEmpty: false,
+      formattedPayload: {},
+      fields: {}
     };
 
     this.onRowSearchChange = this.onRowSearchChange.bind(this);
@@ -38,28 +40,28 @@ class Matrix extends React.Component {
 
   componentDidMount() {
     const { uniqueID } = this.props.match.params;
-    var url = serverURL + "/getLoadedTable/" + uniqueID;
-    console.log(serverURL);
+    var url = "/server/getLoadedTable/" + uniqueID;
     fetch(url, {
       method: "get"
     })
       .then(res => res.json())
       .then(result => {
         if (result.success) {
-          result = result.payload;
-          console.log();
+          let payload = result.payload;
           this.setState({
-            columns: result.columns,
-            rows: result.rows,
-            projectURI: result.projectURI,
-            projectName: result.projectName,
+            columns: payload.columns,
+            rows: payload.rows,
+            projectURI: payload.projectURI,
+            projectName: payload.projectName,
             uniqueID: uniqueID,
             loading: false,
-            isEmpty: result.rows.length < 2 && result.columns.length < 3
+            isEmpty: payload.rows.length < 2 && payload.columns.length < 3,
+            formattedPayload: payload.formattedPayload,
+            fields: result.fields
           });
           this.props.onTitleChange(
-            result.projectName,
-            result.projectURI,
+            payload.projectName,
+            payload.projectURI,
             uniqueID
           );
           setTimeout(() => {
@@ -125,7 +127,9 @@ class Matrix extends React.Component {
       loading,
       validCookie,
       done,
-      isEmpty
+      isEmpty,
+      formattedPayload,
+      fields
     } = this.state;
 
     return (
@@ -150,6 +154,8 @@ class Matrix extends React.Component {
               projectName={projectName}
               uniqueID={uniqueID}
               onTitleChange={this.props.onTitleChange}
+              formattedPayload={formattedPayload}
+              fields={fields}
             />
             {!isEmpty && done ? (
               <Table

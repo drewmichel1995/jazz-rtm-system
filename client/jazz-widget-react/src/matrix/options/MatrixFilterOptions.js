@@ -140,7 +140,6 @@ class MatrixFilterOptions extends Component {
 
   handleDependencies(data) {
     const name = "dependencies";
-    console.log(data);
     var temp = data.map(item => ({ name: item.label }));
     this.setState(prevState => ({
       dependencySelected: data,
@@ -153,7 +152,6 @@ class MatrixFilterOptions extends Component {
 
   handleColumnTypes(data) {
     const name = "columnTypes";
-    console.log(data);
     var temp = data.map(item => ({ name: item.label }));
     this.setState(prevState => ({
       columnArtifactTypeSelected: data,
@@ -166,7 +164,6 @@ class MatrixFilterOptions extends Component {
 
   handleRowTypes(data) {
     const name = "rowTypes";
-    console.log(data);
     var temp = data.map(item => ({ name: item.label }));
     this.setState(prevState => ({
       rowArtifactTypeSelected: data,
@@ -186,17 +183,6 @@ class MatrixFilterOptions extends Component {
         [name]: !this.state.payload.linksOnly
       }
     }));
-  }
-
-  generateRandom() {
-    return (
-      Math.random()
-        .toString(36)
-        .substring(2, 15) +
-      Math.random()
-        .toString(36)
-        .substring(2, 15)
-    );
   }
 
   render() {

@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.env" beforeDir="false" afterPath="$PROJECT_DIR$/../.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProjectArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProjectArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/Matrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/Matrix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/MatrixFilterOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/MatrixFilterOptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/OptionsToolbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/OptionsToolbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/table/Legend.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/table/Legend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JazzHTTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JazzHTTP.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -15,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1539">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="297">
+              <caret line="108" column="51" selection-start-line="108" selection-start-column="51" selection-end-line="108" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#468#503#1" />
@@ -78,7 +82,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="279">
@@ -213,9 +217,9 @@
         <option value="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/test.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Config.java" />
-        <option value="$PROJECT_DIR$/src/main/java/JazzHTTP.java" />
         <option value="$PROJECT_DIR$/src/main/java/MongoHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/ProjectArea.java" />
+        <option value="$PROJECT_DIR$/src/main/java/JazzHTTP.java" />
       </list>
     </option>
   </component>
@@ -298,7 +302,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580239123221" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580243183398" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -613,21 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1539">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#468#503#1" />
-            <element signature="method#readBytes#0;class#JazzHTTP#0" />
-            <element signature="method#getRes#0;class#JazzHTTP#0" />
-            <element signature="method#decodeCookie#0;class#JazzHTTP#0" />
-            <element signature="method#loadData#0;class#JazzHTTP#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
@@ -651,6 +640,21 @@
             <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
             <element signature="method#toJSON#0;class#ProjectArea#0" />
             <element signature="method#generateUniqueID#0;class#ProjectArea#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="108" column="51" selection-start-line="108" selection-start-column="51" selection-end-line="108" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#468#503#1" />
+            <element signature="method#readBytes#0;class#JazzHTTP#0" />
+            <element signature="method#getRes#0;class#JazzHTTP#0" />
+            <element signature="method#decodeCookie#0;class#JazzHTTP#0" />
+            <element signature="method#loadData#0;class#JazzHTTP#0" />
           </folding>
         </state>
       </provider>
