@@ -18,7 +18,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2967">
+            <state relative-caret-position="-1539">
               <caret line="14" selection-start-line="14" selection-end-line="14" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -81,8 +81,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="197" column="18" lean-forward="true" selection-start-line="197" selection-start-column="18" selection-end-line="197" selection-end-column="18" />
+            <state relative-caret-position="279">
+              <caret line="367" lean-forward="true" selection-start-line="367" selection-end-line="367" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ProjectArea#0;class#ProjectArea#0" />
@@ -96,7 +96,6 @@
                 <element signature="method#getTableJSON#0;class#ProjectArea#0" />
                 <element signature="method#getCellObject#0;class#ProjectArea#0" />
                 <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
-                <element signature="method#getTableJSON#1;class#ProjectArea#0" />
                 <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
                 <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
                 <element signature="method#getLinkColor#0;class#ProjectArea#0" />
@@ -299,7 +298,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1579622079442" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580239123221" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -393,7 +392,7 @@
     <frame x="2992" y="472" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18550107" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18550107" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -401,7 +400,7 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.38678223" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.38678223" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32286024" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -578,21 +577,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2967">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#468#503#1" />
-            <element signature="method#readBytes#0;class#JazzHTTP#0" />
-            <element signature="method#getRes#0;class#JazzHTTP#0" />
-            <element signature="method#decodeCookie#0;class#JazzHTTP#0" />
-            <element signature="method#loadData#0;class#JazzHTTP#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ServiceAccountManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -629,10 +613,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1539">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#468#503#1" />
+            <element signature="method#readBytes#0;class#JazzHTTP#0" />
+            <element signature="method#getRes#0;class#JazzHTTP#0" />
+            <element signature="method#decodeCookie#0;class#JazzHTTP#0" />
+            <element signature="method#loadData#0;class#JazzHTTP#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="197" column="18" lean-forward="true" selection-start-line="197" selection-start-column="18" selection-end-line="197" selection-end-column="18" />
+        <state relative-caret-position="279">
+          <caret line="367" lean-forward="true" selection-start-line="367" selection-end-line="367" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ProjectArea#0;class#ProjectArea#0" />
@@ -646,7 +645,6 @@
             <element signature="method#getTableJSON#0;class#ProjectArea#0" />
             <element signature="method#getCellObject#0;class#ProjectArea#0" />
             <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
-            <element signature="method#getTableJSON#1;class#ProjectArea#0" />
             <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
             <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
             <element signature="method#getLinkColor#0;class#ProjectArea#0" />

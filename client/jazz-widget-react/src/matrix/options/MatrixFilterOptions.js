@@ -54,10 +54,7 @@ class MatrixFilterOptions extends Component {
       columnArtifactTypeSelected: result.formattedPayload.columnTypes,
       linksOnlySelected: result.formattedPayload.linksOnly,
       projectURI: result.projectURI,
-      parentFolderOptions: fields.parentFolders.map(item => ({
-        label: item.label,
-        id: this.generateRandom()
-      })),
+      parentFolderOptions: fields.parentFolders,
       dependencies: fields.linkTypes,
       artifactTypes: fields.artifactTypes,
       isLoading: false

@@ -201,7 +201,7 @@ public class ProjectArea {
                 i++;
                 JSONObject temp = new JSONObject();
                 uniqueParents.add(a.parentFolder);
-                temp.put("id", "{this.props.generateRandom()}");
+                temp.put("id", i);
                 temp.put("label", a.parentFolder);
                 parentFolders.put(temp);
             }
@@ -349,7 +349,7 @@ public class ProjectArea {
             JSONObject tempColumn = new JSONObject();
             String tempName = payload.getJSONArray("columns").getJSONObject(i).getString("name");
             tempColumn.put("label", tempName);
-            tempColumn.put("id", this.getParentFolderIndex(tempName));
+            tempColumn.put("id", "col" + this.getParentFolderIndex(tempName));
 
             columns.put(tempColumn);
         }
@@ -361,7 +361,7 @@ public class ProjectArea {
             JSONObject tempRow = new JSONObject();
             String tempName = payload.getJSONArray("rows").getJSONObject(i).getString("name");
             tempRow.put("label", tempName);
-            tempRow.put("id", this.getParentFolderIndex(tempName));
+            tempRow.put("id", "row" + this.getParentFolderIndex(tempName));
 
             rows.put(tempRow);
         }
