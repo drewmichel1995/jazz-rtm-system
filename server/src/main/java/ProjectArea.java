@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Random;
+
 import org.json.*;
 
 public class ProjectArea {
@@ -199,7 +201,7 @@ public class ProjectArea {
                 i++;
                 JSONObject temp = new JSONObject();
                 uniqueParents.add(a.parentFolder);
-                temp.put("id", i);
+                temp.put("id", generateUniqueID());
                 temp.put("label", a.parentFolder);
                 parentFolders.put(temp);
             }
@@ -570,5 +572,18 @@ public class ProjectArea {
         project.put("artifacts", artifactArray);
 
         return project;
+    }
+
+    private static String generateUniqueID() {
+        String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        int length = 17;
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            sb.append(candidateChars.charAt(random.nextInt(candidateChars
+                    .length())));
+        }
+
+        return sb.toString();
     }
 }
