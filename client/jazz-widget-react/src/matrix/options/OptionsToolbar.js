@@ -15,8 +15,7 @@ class OptionsToolbar extends Component {
       searchVariant: "secondary",
       matrixVariant: "primary",
       fields: {},
-      payload: {},
-      isLoading: true
+      payload: {}
     };
 
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -83,7 +82,7 @@ class OptionsToolbar extends Component {
           </Button>
         </ButtonGroup>
         <div>
-          {this.state.showMatrix && !this.state.isLoading && (
+          {this.state.showMatrix && (
             <FadeIn>
               <MatrixFilterOptions
                 tableRows={tableRows}
