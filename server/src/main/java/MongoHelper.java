@@ -18,12 +18,9 @@ public class MongoHelper {
     private MongoHelper(){
         cfg = new Config();
 
-        System.out.println(cfg.getProperty("mongo"));
         String mongo = cfg.getProperty("mongo");
 
-        //MongoClient mongoClient = MongoClients.create();
         MongoClient mongoClient = MongoClients.create(mongo);
-        //MongoClient mongoClient = MongoClients.create("mongodb://mbse-appld10.corp.saic.com");
         database = mongoClient.getDatabase("admin");
         collection = database.getCollection("projectAreas");
     }
@@ -51,7 +48,7 @@ public class MongoHelper {
         Config cfg = new Config();
 
         JSONObject temp = new JSONObject();
-        temp.put("url", cfg.getProperty("clientURL") + "RequirementsView/" + uniqueID);
+        temp.put("url", cfg.getProperty("clientURL") + "matrix/" + uniqueID);
         temp.put("uniqueID", uniqueID);
 
         return temp.toString();

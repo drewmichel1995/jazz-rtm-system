@@ -12,7 +12,7 @@ import static spark.Spark.post;
 public class JazzHTTP {
 
     public static void main(String[] args) {
-        
+
         MongoHelper mongo = MongoHelper.get();
         ServiceAccountManager service = new ServiceAccountManager();
 
