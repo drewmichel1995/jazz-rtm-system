@@ -201,7 +201,7 @@ public class ProjectArea {
                 i++;
                 JSONObject temp = new JSONObject();
                 uniqueParents.add(a.parentFolder);
-                temp.put("id", "{new Date().getMilliseconds().toString + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}");
+                temp.put("id", "{Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}");
                 temp.put("label", a.parentFolder);
                 parentFolders.put(temp);
             }
