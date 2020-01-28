@@ -54,7 +54,10 @@ class MatrixFilterOptions extends Component {
       columnArtifactTypeSelected: result.formattedPayload.columnTypes,
       linksOnlySelected: result.formattedPayload.linksOnly,
       projectURI: result.projectURI,
-      parentFolderOptions: fields.parentFolders,
+      parentFolderOptions: fields.parentFolders.map(item => ({
+        label: item.label,
+        id: this.generateRandom()
+      })),
       dependencies: fields.linkTypes,
       artifactTypes: fields.artifactTypes,
       isLoading: false
@@ -224,7 +227,7 @@ class MatrixFilterOptions extends Component {
                 <MultiSelect
                   items={parentFolderOptions.map(item => ({
                     label: item.label,
-                    id: this.generateRandom()
+                    id: "col" + item.id
                   }))}
                   onChange={this.handleColumnFolders}
                   selectedItems={columnSelected}
@@ -236,7 +239,7 @@ class MatrixFilterOptions extends Component {
                 <MultiSelect
                   items={parentFolderOptions.map(item => ({
                     label: item.label,
-                    id: this.generateRandom()
+                    id: "row" + item.id
                   }))}
                   onChange={this.handleRowFolders}
                   selectedItems={rowSelected}
