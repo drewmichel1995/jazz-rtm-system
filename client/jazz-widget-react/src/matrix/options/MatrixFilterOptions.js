@@ -222,9 +222,10 @@ class MatrixFilterOptions extends Component {
               <Col>
                 <Form.Label>Column Folders</Form.Label>
                 <MultiSelect
-                  items={parentFolderOptions.map(
-                    item => (item.id = this.generateRandom)
-                  )}
+                  items={parentFolderOptions.map(item => ({
+                    label: item.label,
+                    id: this.generateRandom
+                  }))}
                   onChange={this.handleColumnFolders}
                   selectedItems={columnSelected}
                   generateRandom={this.generateRandom}
@@ -233,9 +234,10 @@ class MatrixFilterOptions extends Component {
               <Col>
                 <Form.Label>Row Folders</Form.Label>
                 <MultiSelect
-                  items={parentFolderOptions.map(
-                    item => (item.id = this.generateRandom)
-                  )}
+                  items={parentFolderOptions.map(item => ({
+                    label: item.label,
+                    id: this.generateRandom
+                  }))}
                   onChange={this.handleRowFolders}
                   selectedItems={rowSelected}
                   generateRandom={this.generateRandom}
