@@ -201,7 +201,7 @@ public class ProjectArea {
                 i++;
                 JSONObject temp = new JSONObject();
                 uniqueParents.add(a.parentFolder);
-                temp.put("id", "{this.props.generateRandom}");
+                temp.put("id", "{this.props.generateRandom()}");
                 temp.put("label", a.parentFolder);
                 parentFolders.put(temp);
             }
