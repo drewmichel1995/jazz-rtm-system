@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import FormContainer from "./FormContainer";
-import SearchFormContainer from "./SearchFormContainer";
+import MatrixFilterOptions from "./MatrixFilterOptions";
+import SearchFormContainer from "./SearchFilterOptions";
 import { Button, ButtonGroup } from "react-bootstrap";
 import FadeIn from "react-fade-in";
 
@@ -113,7 +113,7 @@ class OptionsToolbar extends Component {
         <div>
           {this.state.showMatrix && !this.state.isLoading && (
             <FadeIn>
-              <FormContainer
+              <MatrixFilterOptions
                 tableRows={tableRows}
                 tableColumns={tableColumns}
                 setTable={setTable}

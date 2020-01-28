@@ -4,7 +4,7 @@ import MultiSelect from "@kenshooui/react-multi-select";
 import "@kenshooui/react-multi-select/dist/style.css";
 import { Form, Row, Col, Button, ButtonGroup, Spinner } from "react-bootstrap";
 
-class FormContainer extends Component {
+class MatrixFilterOptions extends Component {
   constructor(props) {
     super(props);
 
@@ -288,4 +288,4 @@ class FormContainer extends Component {
   }
 }
 
-export default FormContainer;
+export default MatrixFilterOptions;

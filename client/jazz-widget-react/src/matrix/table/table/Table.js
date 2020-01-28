@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { StickyTable, Row, Cell } from "react-sticky-table";
-import AnalyticsCard from "./AnalyticsCard";
-import HeaderContextArea from "./HeaderContextArea";
-import "../table.css";
-import LinkContextArea from "./LinkContextArea";
-import Loading from "./Loading";
+import Legend from "../Legend";
+import HeaderContextArea from "../HeaderContextArea";
+import LinkContextArea from "../LinkContextArea";
+import Loading from "../../../common/loading/Loading";
+import "./table.css";
 
 const isSearched = searchTerm => item =>
   item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -31,7 +31,7 @@ class Table extends Component {
         <StickyTable stickyHeaderCount={1} stickyColumnCount={1}>
           <Row key="columnHeaders">
             <Cell key="holder">
-              <AnalyticsCard
+              <Legend
                 rows={rows}
                 columns={columns}
                 projectURI={projectURI}

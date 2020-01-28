@@ -1,16 +1,17 @@
 import React from "react";
-import Table from "./components/Table";
-import OptionsToolbar from "./containers/OptionsToolbar";
-import ModalContainer from "./containers/ModalContainer";
-import Loading from "./components/Loading";
+import Table from "./table/table/Table";
+import OptionsToolbar from "./options/OptionsToolbar";
+import ModalContainer from "../common/ModalContainer";
+import Loading from "../common/loading/Loading";
 import FadeIn from "react-fade-in";
 import { Alert } from "react-bootstrap";
 import dotenv from "dotenv";
 
 dotenv.config();
-const serverURL = process.env.REACT_APP_SERVER_URL;
+/*const serverURL = process.env.REACT_APP_SERVER_URL;*/
+const serverURL = "https://mbse-colldev.saic.com/server";
 
-class RequirementsView extends React.Component {
+class Matrix extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,36 +72,19 @@ class RequirementsView extends React.Component {
   }
 
   onRowSearchChange(event) {
-    if (event.target.value !== "") {
-      this.setState({
-        rowSearchTerm: event.target.value,
-        currentlySearching: true
-      });
-    } else {
-      this.setState({
-        rowSearchTerm: event.target.value,
-        currentlySearching: false
-      });
-    }
+    this.setState({
+      rowSearchTerm: event.target.value
+    });
   }
 
   onColumnSearchChange(event) {
-    if (event.target.value !== "") {
-      this.setState({
-        columnSearchTerm: event.target.value,
-        currentlySearching: true
-      });
-    } else {
-      this.setState({
-        columnSearchTerm: event.target.value,
-        currentlySearching: false
-      });
-    }
+    this.setState({
+      columnSearchTerm: event.target.value
+    });
   }
 
   triggerShowID = () => {
     this.setState({ showID: !this.state.showID });
-    console.log(this.state.showID);
   };
 
   setTable(data, uniqueID) {
@@ -197,4 +181,4 @@ class RequirementsView extends React.Component {
   }
 }
 
-export default RequirementsView;
+export default Matrix;

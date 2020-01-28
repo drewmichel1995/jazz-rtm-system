@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, NavLink, HashRouter } from "react-router-dom";
-import RequirementsView from "./RequirementsView";
-import AnalyticsView from "./components/AnalyticsView";
+import Matrix from "./matrix/Matrix";
+import Overview from "./overview/Overview";
 
 class Main extends Component {
   constructor(props) {
@@ -26,10 +26,10 @@ class Main extends Component {
           <h1>{this.state.title}</h1>
           <ul className="header">
             <li>
-              <NavLink exact to={`/RequirementsView/${this.state.uniqueID}`}>
+              <NavLink exact to={`/matrix/${this.state.uniqueID}`}>
                 Traceability Matrix
               </NavLink>
-              <NavLink exact to={`/AnalyticsView/${this.state.uri}`}>
+              <NavLink exact to={`/overview/${this.state.uri}`}>
                 Project Overview
               </NavLink>
             </li>
@@ -39,37 +39,28 @@ class Main extends Component {
               exact
               path="/"
               render={props => (
-                <RequirementsView
-                  {...props}
-                  onTitleChange={this.onTitleChange}
-                />
+                <Matrix {...props} onTitleChange={this.onTitleChange} />
               )}
             />
 
             <Route
               exact
-              path="/RequirementsView"
+              path="/matrix"
               render={props => (
-                <RequirementsView
-                  {...props}
-                  onTitleChange={this.onTitleChange}
-                />
+                <Matrix {...props} onTitleChange={this.onTitleChange} />
               )}
             />
             <Route
               exact
-              path="/RequirementsView/:uniqueID"
+              path="/matrix/:uniqueID"
               render={props => (
-                <RequirementsView
-                  {...props}
-                  onTitleChange={this.onTitleChange}
-                />
+                <Matrix {...props} onTitleChange={this.onTitleChange} />
               )}
             />
             <Route
               exact
-              path="/AnalyticsView/:projectURI"
-              render={props => <AnalyticsView {...props} />}
+              path="/overview/:projectURI"
+              render={props => <Overview {...props} />}
             />
           </div>
         </div>

@@ -1,14 +1,15 @@
 import React from "react";
 import { Table, Card, Form } from "react-bootstrap";
-import ArtifactRow from "./ArtifactRow";
-import Loading from "./Loading";
+import ArtifactRow from "./table/ArtifactRow";
+import Loading from "../common/loading/Loading";
 import FadeIn from "react-fade-in";
 
 const serverURL = process.env.REACT_APP_SERVER_URL;
 
 const isSearched = searchTerm => item =>
   item.folderName.toLowerCase().includes(searchTerm.toLowerCase());
-class AnalyticsView extends React.Component {
+
+class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -100,4 +101,4 @@ class AnalyticsView extends React.Component {
   }
 }
 
-export default AnalyticsView;
+export default Overview;

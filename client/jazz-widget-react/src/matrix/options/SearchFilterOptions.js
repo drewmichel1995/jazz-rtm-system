@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Row, Col } from "react-bootstrap";
 
-class SearchFormContainer extends Component {
+class SearchFilterOptions extends Component {
   render() {
     const {
       rowSearchTerm,
@@ -51,4 +51,4 @@ class SearchFormContainer extends Component {
   }
 }
 
-export default SearchFormContainer;
+export default SearchFilterOptions;
