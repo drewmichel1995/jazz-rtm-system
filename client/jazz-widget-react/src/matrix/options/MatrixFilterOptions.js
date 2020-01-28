@@ -73,15 +73,7 @@ class MatrixFilterOptions extends Component {
     })
       .then(res => res.json())
       .then(result => {
-        let tableUrl = "/server/getLoadedTable/" + result.uniqueID;
-        fetch(tableUrl, {
-          method: "get"
-        })
-          .then(res => res.json())
-          .then(result2 => {
-            this.props.setTable(result2.payload, result.uniqueID);
-            this.props.toggleLoading();
-          });
+        this.props.reload(result.uniqueID);
       });
   }
 

@@ -92,6 +92,7 @@ class OptionsToolbar extends Component {
                 onTitleChange={onTitleChange}
                 fields={this.props.fields}
                 payload={this.props.payload}
+                reload={this.props.reload}
               />
             </FadeIn>
           )}

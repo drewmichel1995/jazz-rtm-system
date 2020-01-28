@@ -34,6 +34,7 @@ class Matrix extends React.Component {
     this.triggerShowID = this.triggerShowID.bind(this);
     this.setTable = this.setTable.bind(this);
     this.toggleLoading = this.toggleLoading.bind(this);
+    this.reload = this.reload.bind(this);
   }
 
   componentDidMount() {
@@ -114,6 +115,40 @@ class Matrix extends React.Component {
         }, 1500);
   }
 
+  reload(uniqueID) {
+    var url = "/server/getLoadedTable/" + uniqueID;
+    fetch(url, {
+      method: "get"
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          let payload = result.payload;
+          this.setState({
+            columns: payload.columns,
+            rows: payload.rows,
+            projectURI: payload.projectURI,
+            projectName: payload.projectName,
+            uniqueID: uniqueID,
+            loading: false,
+            isEmpty: payload.rows.length < 2 && payload.columns.length < 3,
+            fields: result.fields,
+            payload: payload
+          });
+          this.props.onTitleChange(
+            payload.projectName,
+            payload.projectURI,
+            uniqueID
+          );
+          setTimeout(() => {
+            this.setState({ done: true });
+          }, 1500);
+        } else {
+          this.setState({ validCookie: result.success });
+        }
+      });
+  }
+
   render() {
     const { rowSearchTerm, columnSearchTerm, showID } = this.state;
     const {
@@ -153,6 +188,7 @@ class Matrix extends React.Component {
               onTitleChange={this.props.onTitleChange}
               fields={fields}
               payload={payload}
+              reload={this.reload}
             />
             {!isEmpty && done ? (
               <Table
