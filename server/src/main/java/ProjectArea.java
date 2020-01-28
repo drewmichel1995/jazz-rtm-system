@@ -177,7 +177,8 @@ public class ProjectArea {
                     temp.put("color", getLinkColor(l.linkType));
                     linkTypes.put(temp);
                 }
-                if(!uniqueFullLinks.contains(getLinkFullName(l.linkType))){
+                if(!uniqueFullLinks.contains(getLinkFullName(l.linkType)) && (this.columnArtifacts.contains(a) || this.rowArtifacts.contains(a))){
+
                     JSONObject temp = new JSONObject();
                     uniqueFullLinks.add(getLinkFullName(l.linkType));
                     temp.put("name", getLinkFullName(l.linkType));
