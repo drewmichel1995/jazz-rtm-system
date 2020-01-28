@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Select from "react-select";
 import MultiSelect from "@kenshooui/react-multi-select";
 import "@kenshooui/react-multi-select/dist/style.css";
-import { Form, Row, Col, Button, ButtonGroup, Spinner } from "react-bootstrap";
+import { Form, Row, Col, Button, Spinner } from "react-bootstrap";
 
 class MatrixFilterOptions extends Component {
   constructor(props) {
@@ -64,7 +64,6 @@ class MatrixFilterOptions extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
     this.props.toggleLoading();
-    let userData = this.state.payload;
     let data = {
       projectAreaURI: this.props.projectURI,
       payload: this.state.payload
@@ -189,6 +188,17 @@ class MatrixFilterOptions extends Component {
     }));
   }
 
+  generateRandom() {
+    return (
+      Math.random()
+        .toString(36)
+        .substring(2, 15) +
+      Math.random()
+        .toString(36)
+        .substring(2, 15)
+    );
+  }
+
   render() {
     const {
       parentFolderOptions,
@@ -215,6 +225,7 @@ class MatrixFilterOptions extends Component {
                   items={parentFolderOptions}
                   onChange={this.handleColumnFolders}
                   selectedItems={columnSelected}
+                  generateRandom={this.generateRandom}
                 />
               </Col>
               <Col>
@@ -223,6 +234,7 @@ class MatrixFilterOptions extends Component {
                   items={parentFolderOptions}
                   onChange={this.handleRowFolders}
                   selectedItems={rowSelected}
+                  generateRandom={this.generateRandom}
                 />
               </Col>
               <Col>

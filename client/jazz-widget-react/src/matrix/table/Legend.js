@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Row, Col, Badge } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 
 class Legend extends Component {
   constructor(props) {
