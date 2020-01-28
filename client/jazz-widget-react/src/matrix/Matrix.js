@@ -8,8 +8,6 @@ import { Alert } from "react-bootstrap";
 import dotenv from "dotenv";
 
 dotenv.config();
-const serverURL = process.env.REACT_APP_SERVER_URL;
-/*const serverURL = "https://mbse-colldev.saic.com/server";*/
 
 class Matrix extends React.Component {
   constructor(props) {
@@ -149,7 +147,6 @@ class Matrix extends React.Component {
               tableColumns={columns}
               setTable={this.setTable}
               toggleLoading={this.toggleLoading}
-              serverURL={serverURL}
               projectURI={projectURI}
               projectName={projectName}
               uniqueID={uniqueID}
@@ -165,8 +162,8 @@ class Matrix extends React.Component {
                 columnSearchTerm={columnSearchTerm}
                 rowSearchTerm={rowSearchTerm}
                 projectURI={projectURI}
-                serverURL={serverURL}
                 loading={loading}
+                legend={fields.legend}
               />
             ) : (
               <Alert variant="danger">

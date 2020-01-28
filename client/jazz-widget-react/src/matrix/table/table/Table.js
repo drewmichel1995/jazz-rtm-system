@@ -19,9 +19,8 @@ class Table extends Component {
       showID,
       columnSearchTerm,
       rowSearchTerm,
-      projectURI,
-      serverURL,
-      loading
+      loading,
+      legend
     } = this.props;
 
     return loading ? (
@@ -31,12 +30,7 @@ class Table extends Component {
         <StickyTable stickyHeaderCount={1} stickyColumnCount={1}>
           <Row key="columnHeaders">
             <Cell key="holder">
-              <Legend
-                rows={rows}
-                columns={columns}
-                projectURI={projectURI}
-                serverURL={serverURL}
-              />
+              <Legend legend={legend} />
             </Cell>
             {!showID &&
               columns.filter(isSearched(columnSearchTerm)).map(col => (

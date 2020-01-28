@@ -4,8 +4,6 @@ import ArtifactRow from "./table/ArtifactRow";
 import Loading from "../common/loading/Loading";
 import FadeIn from "react-fade-in";
 
-const serverURL = process.env.REACT_APP_SERVER_URL;
-
 const isSearched = searchTerm => item =>
   item.folderName.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -24,7 +22,7 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    var url = serverURL + "/getAnalytics/" + this.props.match.params.projectURI;
+    var url = "/server/getAnalytics/" + this.props.match.params.projectURI;
     fetch(url, {
       method: "get"
     })

@@ -58,7 +58,7 @@ class OptionsToolbar extends Component {
       tableColumns,
       setTable,
       toggleLoading,
-      serverURL,
+
       projectURI,
       uniqueID,
       onTitleChange
@@ -87,7 +87,6 @@ class OptionsToolbar extends Component {
                 tableColumns={tableColumns}
                 setTable={setTable}
                 toggleLoading={toggleLoading}
-                serverURL={serverURL}
                 projectURI={projectURI}
                 uniqueID={uniqueID}
                 onTitleChange={onTitleChange}

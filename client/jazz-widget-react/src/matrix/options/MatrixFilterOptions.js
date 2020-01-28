@@ -66,15 +66,14 @@ class MatrixFilterOptions extends Component {
       projectAreaURI: this.props.projectURI,
       payload: this.state.payload
     };
-    var url = this.props.serverURL + "/storePayload/";
+    var url = "/server/storePayload/";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data)
     })
       .then(res => res.json())
       .then(result => {
-        let tableUrl =
-          this.props.serverURL + "/getLoadedTable/" + result.uniqueID;
+        let tableUrl = "/server/getLoadedTable/" + result.uniqueID;
         fetch(tableUrl, {
           method: "get"
         })
