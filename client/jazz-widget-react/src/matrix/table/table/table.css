@@ -9,8 +9,8 @@
   font-size: large;
 }
 
-.multi-arrow::before {
-  content: "\2197";
+.multi-arrow::after {
+  content: "\2197 +";
   text-align: center;
   padding: 0px;
   font-size: large;

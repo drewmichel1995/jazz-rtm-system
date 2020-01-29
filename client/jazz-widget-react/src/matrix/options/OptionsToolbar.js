@@ -48,16 +48,14 @@ class OptionsToolbar extends Component {
 
   render() {
     const {
-      rowSearchTerm,
-      columnSearchTerm,
       onRowChange,
       onColumnChange,
       showID,
       triggerShowID,
-      tableRows,
-      tableColumns,
-      projectURI,
-      onTitleChange
+      onTitleChange,
+      payload,
+      fields,
+      reload
     } = this.props;
     return (
       <div style={{ marginBottom: "20px", marginTop: "0px" }}>
@@ -79,25 +77,21 @@ class OptionsToolbar extends Component {
           {this.state.showMatrix && (
             <FadeIn>
               <MatrixFilterOptions
-                tableRows={tableRows}
-                tableColumns={tableColumns}
-                projectURI={projectURI}
+                tableRows={payload.rows}
+                tableColumns={payload.columns}
+                projectURI={payload.projectURI}
                 onTitleChange={onTitleChange}
-                fields={this.props.fields}
-                payload={this.props.payload}
-                reload={this.props.reload}
+                fields={fields}
+                payload={payload}
+                reload={reload}
               />
             </FadeIn>
           )}
           {this.state.showSearch && (
             <FadeIn>
               <SearchFormContainer
-                rowSearchTerm={rowSearchTerm}
-                columnSearchTerm={columnSearchTerm}
                 onRowChange={onRowChange}
                 onColumnChange={onColumnChange}
-                rowPlaceholder="Search Row Requirements"
-                columnPlaceholder="Search Column Requirements"
                 showID={showID}
                 triggerShowID={triggerShowID}
               />

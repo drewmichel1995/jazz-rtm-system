@@ -3,16 +3,7 @@ import { Form, Row, Col } from "react-bootstrap";
 
 class SearchFilterOptions extends Component {
   render() {
-    const {
-      rowSearchTerm,
-      columnSearchTerm,
-      onRowChange,
-      onColumnChange,
-      rowPlaceholder,
-      columnPlaceholder,
-      showID,
-      triggerShowID
-    } = this.props;
+    const { onRowChange, onColumnChange, showID, triggerShowID } = this.props;
     return (
       <div style={{ margin: "20px" }}>
         <Form>
@@ -20,16 +11,14 @@ class SearchFilterOptions extends Component {
             <Row>
               <Col xs={6} md={4}>
                 <Form.Control
-                  value={columnSearchTerm}
                   onChange={onColumnChange}
-                  placeholder={columnPlaceholder}
+                  placeholder="Search Column Requirements"
                 />
               </Col>
               <Col xs={6} md={4}>
                 <Form.Control
-                  value={rowSearchTerm}
                   onChange={onRowChange}
-                  placeholder={rowPlaceholder}
+                  placeholder="Search Row Requirements"
                 />
               </Col>
             </Row>
