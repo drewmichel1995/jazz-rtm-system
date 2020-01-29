@@ -32,7 +32,6 @@ class Matrix extends React.Component {
     this.onRowSearchChange = this.onRowSearchChange.bind(this);
     this.onColumnSearchChange = this.onColumnSearchChange.bind(this);
     this.triggerShowID = this.triggerShowID.bind(this);
-    this.setTable = this.setTable.bind(this);
     this.toggleLoading = this.toggleLoading.bind(this);
     this.reload = this.reload.bind(this);
   }
@@ -88,21 +87,6 @@ class Matrix extends React.Component {
     this.setState({ showID: !this.state.showID });
   };
 
-  setTable(data, uniqueID) {
-    this.setState({
-      rows: data.rows,
-      columns: data.columns,
-      uniqueID: uniqueID,
-      isEmpty: data.rows.length < 2 && data.columns.length < 3
-    });
-
-    this.props.onTitleChange(
-      this.state.projectName,
-      this.state.projectURI,
-      this.state.uniqueID
-    );
-  }
-
   toggleLoading() {
     this.setState({
       loading: !this.state.loading
@@ -156,7 +140,6 @@ class Matrix extends React.Component {
       columns,
       projectName,
       projectURI,
-      uniqueID,
       loading,
       validCookie,
       done,
@@ -180,11 +163,9 @@ class Matrix extends React.Component {
               triggerShowID={this.triggerShowID}
               tableRows={rows}
               tableColumns={columns}
-              setTable={this.setTable}
               toggleLoading={this.toggleLoading}
               projectURI={projectURI}
               projectName={projectName}
-              uniqueID={uniqueID}
               onTitleChange={this.props.onTitleChange}
               fields={fields}
               payload={payload}

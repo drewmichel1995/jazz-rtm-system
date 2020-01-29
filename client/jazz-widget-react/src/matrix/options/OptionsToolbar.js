@@ -56,11 +56,8 @@ class OptionsToolbar extends Component {
       triggerShowID,
       tableRows,
       tableColumns,
-      setTable,
       toggleLoading,
-
       projectURI,
-      uniqueID,
       onTitleChange
     } = this.props;
     return (
@@ -85,10 +82,8 @@ class OptionsToolbar extends Component {
               <MatrixFilterOptions
                 tableRows={tableRows}
                 tableColumns={tableColumns}
-                setTable={setTable}
                 toggleLoading={toggleLoading}
                 projectURI={projectURI}
-                uniqueID={uniqueID}
                 onTitleChange={onTitleChange}
                 fields={this.props.fields}
                 payload={this.props.payload}

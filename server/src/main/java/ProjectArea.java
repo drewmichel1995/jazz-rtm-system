@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.json.*;
 
@@ -283,25 +282,35 @@ public class ProjectArea {
             //Get cells for that row
             columnArtifacts.forEach(j -> {
                 JSONObject cell;
-                boolean add = false;
+
                 String rowLinkType = "";
                 String colLinkType = "";
 
+                boolean colAdd = false;
                 for(Link l: j.links){
                     if(a.itemId.equals(l.id)){
-                        add = true;
-                       colLinkType = l.linkType;
+                        if(colAdd){
+                            colLinkType = colLinkType + " and " + l.linkType;
+                        }else{
+                            colAdd = true;
+                            colLinkType = l.linkType;
+                        }
                     }
                 }
 
+                boolean rowAdd = false;
                 for(Link l: a.links){
                     if(j.itemId.equals(l.id)){
-                        add = true;
-                        rowLinkType = l.linkType;
+                        if(rowAdd){
+                            rowLinkType = rowLinkType + " and " + l.linkType;
+                        }else{
+                            rowAdd = true;
+                            rowLinkType = l.linkType;
+                        }
                     }
                 }
 
-                if(add)
+                if(rowAdd || colAdd)
                     cell = getCellObject("", j.name, j.id, a.name, a.id, true, rowLinkType, colLinkType, getLinkColor(rowLinkType), "", "arrow normalCell");
                 else
                     cell = getCellObject("", j.name, j.id, "", "", false, rowLinkType, colLinkType, "", "", "normalCell");
