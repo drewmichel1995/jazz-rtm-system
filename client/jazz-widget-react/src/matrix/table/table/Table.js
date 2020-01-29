@@ -14,8 +14,7 @@ const isSearched = searchTerm => item =>
 class Table extends Component {
   render() {
     const {
-      rows,
-      columns,
+      payload,
       showID,
       columnSearchTerm,
       rowSearchTerm,
@@ -23,6 +22,8 @@ class Table extends Component {
       legend
     } = this.props;
 
+    const rows = payload.rows;
+    const columns = payload.columns;
     return loading ? (
       <Loading loading={loading} />
     ) : (
@@ -35,38 +36,14 @@ class Table extends Component {
             {!showID &&
               columns.filter(isSearched(columnSearchTerm)).map(col => (
                 <Cell key={col.id} className="col-header">
-                  <HeaderContextArea
-                    artifact={col.name}
-                    artifactType={col.type}
-                    id={col.id}
-                    numLinks={col.numLinks}
-                    parentFolder={col.parentFolder}
-                    placement="right"
-                    cell={
-                      <div>
-                        <a href={col.url}>{col.name}</a>
-                      </div>
-                    }
-                  />
+                  <HeaderContextArea artifact={col} placement="right" />
                 </Cell>
               ))}
 
             {showID &&
               columns.filter(isSearched(columnSearchTerm)).map(col => (
                 <Cell key={col.id} className="col-header">
-                  <HeaderContextArea
-                    artifact={col.name}
-                    artifactType={col.type}
-                    id={col.id}
-                    numLinks={col.numLinks}
-                    parentFolder={col.parentFolder}
-                    placement="right"
-                    cell={
-                      <div>
-                        <a href={col.url}>{col.id}</a>
-                      </div>
-                    }
-                  />
+                  <HeaderContextArea artifact={col} placement="right" />
                 </Cell>
               ))}
           </Row>
@@ -75,29 +52,12 @@ class Table extends Component {
             rows.filter(isSearched(rowSearchTerm)).map(row => (
               <Row key={row.id}>
                 <Cell key={row.id + "name"} className="row-header">
-                  <HeaderContextArea
-                    artifact={row.name}
-                    artifactType={row.type}
-                    id={row.id}
-                    numLinks={row.numLinks}
-                    parentFolder={row.parentFolder}
-                    placement="top"
-                    cell={<a href={row.url}>{row.name}</a>}
-                  />
+                  <HeaderContextArea artifact={row} placement="top" />
                 </Cell>
                 {row.cells.filter(isSearched(columnSearchTerm)).map(cell =>
                   cell.isLink ? (
                     <Cell key={row.id + cell.id} className="normalCell">
-                      <LinkContextArea
-                        rowId={cell.linkId}
-                        columnId={cell.id}
-                        className={cell.className}
-                        rowArtifact={cell.linkName}
-                        columnArtifact={cell.name}
-                        linkType={cell.rowLinkType}
-                        content={cell.cell}
-                        color={cell.color}
-                      />
+                      <LinkContextArea cell={cell} />
                     </Cell>
                   ) : (
                     <Cell
@@ -116,29 +76,12 @@ class Table extends Component {
             rows.filter(isSearched(rowSearchTerm)).map(row => (
               <Row key={row.id}>
                 <Cell key={row.id + "name"} className="row-header">
-                  <HeaderContextArea
-                    artifact={row.name}
-                    artifactType={row.type}
-                    id={row.id}
-                    numLinks={row.numLinks}
-                    parentFolder={row.parentFolder}
-                    placement="top"
-                    cell={<a href={row.url}>{row.id}</a>}
-                  />
+                  <HeaderContextArea artifact={row} placement="top" />
                 </Cell>
                 {row.cells.filter(isSearched(columnSearchTerm)).map(cell =>
                   cell.isLink ? (
                     <Cell key={row.id + cell.id} className="normalCell">
-                      <LinkContextArea
-                        rowId={cell.linkId}
-                        columnId={cell.id}
-                        className={cell.className}
-                        rowArtifact={cell.linkName}
-                        columnArtifact={cell.name}
-                        linkType={cell.rowLinkType}
-                        content={cell.cell}
-                        color={cell.color}
-                      />
+                      <LinkContextArea cell={cell} />
                     </Cell>
                   ) : (
                     <Cell

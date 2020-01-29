@@ -13,8 +13,6 @@ class Matrix extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      columns: [],
-      rows: [],
       rowSearchTerm: "",
       columnSearchTerm: "",
       showID: false,
@@ -46,10 +44,6 @@ class Matrix extends React.Component {
         if (result.success) {
           let payload = result.payload;
           this.setState({
-            columns: payload.columns,
-            rows: payload.rows,
-            projectURI: payload.projectURI,
-            projectName: payload.projectName,
             uniqueID: uniqueID,
             loading: false,
             isEmpty: payload.rows.length < 2 && payload.columns.length < 3,
@@ -100,10 +94,6 @@ class Matrix extends React.Component {
         if (result.success) {
           let payload = result.payload;
           this.setState({
-            columns: payload.columns,
-            rows: payload.rows,
-            projectURI: payload.projectURI,
-            projectName: payload.projectName,
             uniqueID: uniqueID,
             loading: false,
             isEmpty: payload.rows.length < 2 && payload.columns.length < 3,
@@ -125,15 +115,13 @@ class Matrix extends React.Component {
   }
 
   render() {
-    const { rowSearchTerm, columnSearchTerm, showID } = this.state;
     const {
-      rows,
-      columns,
-      projectName,
-      projectURI,
       loading,
       validCookie,
       done,
+      showID,
+      columnSearchTerm,
+      rowSearchTerm,
       isEmpty,
       fields,
       payload
@@ -144,18 +132,9 @@ class Matrix extends React.Component {
         {done && validCookie && (
           <FadeIn>
             <OptionsToolbar
-              rowSearchTerm={rowSearchTerm}
-              columnSearchTerm={columnSearchTerm}
               onRowChange={this.onRowSearchChange}
               onColumnChange={this.onColumnSearchChange}
-              rowPlaceholder="Search Row Requirements"
-              columnPlaceholder="Search Column Requirements"
-              showID={showID}
               triggerShowID={this.triggerShowID}
-              tableRows={rows}
-              tableColumns={columns}
-              projectURI={projectURI}
-              projectName={projectName}
               onTitleChange={this.props.onTitleChange}
               fields={fields}
               payload={payload}
@@ -163,12 +142,10 @@ class Matrix extends React.Component {
             />
             {!isEmpty && done ? (
               <Table
-                rows={rows}
-                columns={columns}
+                payload={payload}
                 showID={showID}
                 columnSearchTerm={columnSearchTerm}
                 rowSearchTerm={rowSearchTerm}
-                projectURI={projectURI}
                 loading={loading}
                 legend={fields.legend}
               />

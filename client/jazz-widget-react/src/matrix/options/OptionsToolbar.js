@@ -50,9 +50,7 @@ class OptionsToolbar extends Component {
     const {
       onRowChange,
       onColumnChange,
-      showID,
       triggerShowID,
-      onTitleChange,
       payload,
       fields,
       reload
@@ -77,10 +75,6 @@ class OptionsToolbar extends Component {
           {this.state.showMatrix && (
             <FadeIn>
               <MatrixFilterOptions
-                tableRows={payload.rows}
-                tableColumns={payload.columns}
-                projectURI={payload.projectURI}
-                onTitleChange={onTitleChange}
                 fields={fields}
                 payload={payload}
                 reload={reload}
@@ -92,7 +86,6 @@ class OptionsToolbar extends Component {
               <SearchFormContainer
                 onRowChange={onRowChange}
                 onColumnChange={onColumnChange}
-                showID={showID}
                 triggerShowID={triggerShowID}
               />
             </FadeIn>

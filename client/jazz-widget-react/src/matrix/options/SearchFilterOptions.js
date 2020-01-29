@@ -3,7 +3,7 @@ import { Form, Row, Col } from "react-bootstrap";
 
 class SearchFilterOptions extends Component {
   render() {
-    const { onRowChange, onColumnChange, showID, triggerShowID } = this.props;
+    const { onRowChange, onColumnChange, triggerShowID } = this.props;
     return (
       <div style={{ margin: "20px" }}>
         <Form>
@@ -29,7 +29,7 @@ class SearchFilterOptions extends Component {
                   id="show-id-switch"
                   label="Show Id"
                   onChange={triggerShowID}
-                  checked={showID}
+                  checked="false"
                 />
               </Col>
             </Row>

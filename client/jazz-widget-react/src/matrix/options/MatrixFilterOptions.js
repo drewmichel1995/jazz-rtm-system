@@ -28,7 +28,6 @@ class MatrixFilterOptions extends Component {
       rowArtifactTypeSelected: "",
       columnArtifactTypeSelected: "",
       linksOnlySelected: false,
-      projectURI: "",
       validCookie: true
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -52,7 +51,6 @@ class MatrixFilterOptions extends Component {
       rowArtifactTypeSelected: result.formattedPayload.rowTypes,
       columnArtifactTypeSelected: result.formattedPayload.columnTypes,
       linksOnlySelected: result.formattedPayload.linksOnly,
-      projectURI: result.projectURI,
       parentFolderOptions: fields.parentFolders,
       dependencies: fields.linkTypes,
       artifactTypes: fields.artifactTypes
@@ -62,7 +60,7 @@ class MatrixFilterOptions extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
     let data = {
-      projectAreaURI: this.props.projectURI,
+      projectAreaURI: this.props.payload.projectURI,
       payload: this.state.payload
     };
     var url = "/server/storePayload/";

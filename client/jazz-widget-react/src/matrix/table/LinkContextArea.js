@@ -3,15 +3,14 @@ import { Popover, OverlayTrigger } from "react-bootstrap";
 
 class LinkContextArea extends Component {
   render() {
-    const {
-      className,
-      rowArtifact,
-      columnArtifact,
-      linkType,
-      rowId,
-      columnId,
-      color
-    } = this.props;
+    const { cell } = this.props;
+    const rowId = cell.linkId;
+    const columnId = cell.id;
+    const className = cell.className;
+    const rowArtifact = cell.linkName;
+    const columnArtifact = cell.name;
+    const linkType = cell.rowLinkType;
+    const color = cell.color;
 
     return (
       <OverlayTrigger
