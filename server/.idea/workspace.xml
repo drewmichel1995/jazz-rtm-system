@@ -4,6 +4,7 @@
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.env" beforeDir="false" afterPath="$PROJECT_DIR$/../.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/Matrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/Matrix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/MatrixFilterOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/MatrixFilterOptions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/OptionsToolbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/OptionsToolbar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ProjectArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProjectArea.java" afterDir="false" />
     </list>
@@ -93,9 +94,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="27" selection-start-column="27" selection-end-column="27" />
+            <state relative-caret-position="459">
+              <caret line="314" column="47" selection-start-line="314" selection-start-column="47" selection-end-line="314" selection-end-column="47" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#ProjectArea#0;class#ProjectArea#0" />
                 <element signature="method#ProjectArea#1;class#ProjectArea#0" />
                 <element signature="method#ProjectArea#2;class#ProjectArea#0" />
@@ -112,15 +114,12 @@
                 <element signature="method#getParentFolders#0;class#ProjectArea#0" />
                 <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
                 <element signature="method#getFields#0;class#ProjectArea#0" />
-                <element signature="method#getTableJSON#0;class#ProjectArea#0" />
                 <element signature="method#getCellObject#0;class#ProjectArea#0" />
                 <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
-                <element signature="method#getTableJSON#1;class#ProjectArea#0" />
                 <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
                 <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
                 <element signature="method#getLegend#0;class#ProjectArea#0" />
                 <element signature="method#getLinkColor#0;class#ProjectArea#0" />
-                <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
                 <element signature="method#toJSON#0;class#ProjectArea#0" />
               </folding>
             </state>
@@ -309,7 +308,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580313575511" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580314327363" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -639,9 +638,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="27" selection-start-column="27" selection-end-column="27" />
+        <state relative-caret-position="459">
+          <caret line="314" column="47" selection-start-line="314" selection-start-column="47" selection-end-line="314" selection-end-column="47" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#ProjectArea#0;class#ProjectArea#0" />
             <element signature="method#ProjectArea#1;class#ProjectArea#0" />
             <element signature="method#ProjectArea#2;class#ProjectArea#0" />
@@ -658,15 +658,12 @@
             <element signature="method#getParentFolders#0;class#ProjectArea#0" />
             <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
             <element signature="method#getFields#0;class#ProjectArea#0" />
-            <element signature="method#getTableJSON#0;class#ProjectArea#0" />
             <element signature="method#getCellObject#0;class#ProjectArea#0" />
             <element signature="method#getHeaderObject#0;class#ProjectArea#0" />
-            <element signature="method#getTableJSON#1;class#ProjectArea#0" />
             <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
             <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
             <element signature="method#getLegend#0;class#ProjectArea#0" />
             <element signature="method#getLinkColor#0;class#ProjectArea#0" />
-            <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
             <element signature="method#toJSON#0;class#ProjectArea#0" />
           </folding>
         </state>

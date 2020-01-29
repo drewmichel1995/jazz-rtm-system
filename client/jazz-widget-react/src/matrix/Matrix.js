@@ -32,7 +32,6 @@ class Matrix extends React.Component {
     this.onRowSearchChange = this.onRowSearchChange.bind(this);
     this.onColumnSearchChange = this.onColumnSearchChange.bind(this);
     this.triggerShowID = this.triggerShowID.bind(this);
-    this.toggleLoading = this.toggleLoading.bind(this);
     this.reload = this.reload.bind(this);
   }
 
@@ -87,19 +86,11 @@ class Matrix extends React.Component {
     this.setState({ showID: !this.state.showID });
   };
 
-  toggleLoading() {
+  reload(uniqueID) {
     this.setState({
-      loading: !this.state.loading
+      loading: true
     });
 
-    this.state.loading
-      ? this.setState({ done: false })
-      : setTimeout(() => {
-          this.setState({ done: true });
-        }, 1500);
-  }
-
-  reload(uniqueID) {
     var url = "/server/getLoadedTable/" + uniqueID;
     fetch(url, {
       method: "get"
@@ -163,7 +154,6 @@ class Matrix extends React.Component {
               triggerShowID={this.triggerShowID}
               tableRows={rows}
               tableColumns={columns}
-              toggleLoading={this.toggleLoading}
               projectURI={projectURI}
               projectName={projectName}
               onTitleChange={this.props.onTitleChange}

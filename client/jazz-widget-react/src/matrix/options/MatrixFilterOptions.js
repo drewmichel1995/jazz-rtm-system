@@ -61,7 +61,6 @@ class MatrixFilterOptions extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    this.props.toggleLoading();
     let data = {
       projectAreaURI: this.props.projectURI,
       payload: this.state.payload
