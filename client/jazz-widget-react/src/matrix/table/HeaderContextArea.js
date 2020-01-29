@@ -3,7 +3,7 @@ import { Popover, OverlayTrigger } from "react-bootstrap";
 
 class HeaderContextArea extends Component {
   render() {
-    const { artifact, placement } = this.props;
+    const { artifact, placement, showID } = this.props;
 
     const name = artifact.name;
     const type = artifact.type;
@@ -40,7 +40,7 @@ class HeaderContextArea extends Component {
         }
       >
         <div>
-          <a href={url}>{id}</a>
+          <a href={url}>{showID ? { id } : { name }}</a>
         </div>
       </OverlayTrigger>
     );

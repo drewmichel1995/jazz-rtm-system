@@ -33,68 +33,42 @@ class Table extends Component {
             <Cell key="holder">
               <Legend legend={legend} />
             </Cell>
-            {!showID &&
-              columns.filter(isSearched(columnSearchTerm)).map(col => (
-                <Cell key={col.id} className="col-header">
-                  <HeaderContextArea artifact={col} placement="right" />
-                </Cell>
-              ))}
-
-            {showID &&
-              columns.filter(isSearched(columnSearchTerm)).map(col => (
-                <Cell key={col.id} className="col-header">
-                  <HeaderContextArea artifact={col} placement="right" />
-                </Cell>
-              ))}
+            {columns.filter(isSearched(columnSearchTerm)).map(col => (
+              <Cell key={col.id} className="col-header">
+                <HeaderContextArea
+                  artifact={col}
+                  placement="right"
+                  showID={showID}
+                />
+              </Cell>
+            ))}
           </Row>
-
-          {!showID &&
-            rows.filter(isSearched(rowSearchTerm)).map(row => (
-              <Row key={row.id}>
-                <Cell key={row.id + "name"} className="row-header">
-                  <HeaderContextArea artifact={row} placement="top" />
-                </Cell>
-                {row.cells.filter(isSearched(columnSearchTerm)).map(cell =>
-                  cell.isLink ? (
-                    <Cell key={row.id + cell.id} className="normalCell">
-                      <LinkContextArea cell={cell} />
-                    </Cell>
-                  ) : (
-                    <Cell
-                      key={row.id + cell.id}
-                      className={cell.className}
-                      color={cell.color}
-                    >
-                      {cell.cell}
-                    </Cell>
-                  )
-                )}
-              </Row>
-            ))}
-
-          {showID &&
-            rows.filter(isSearched(rowSearchTerm)).map(row => (
-              <Row key={row.id}>
-                <Cell key={row.id + "name"} className="row-header">
-                  <HeaderContextArea artifact={row} placement="top" />
-                </Cell>
-                {row.cells.filter(isSearched(columnSearchTerm)).map(cell =>
-                  cell.isLink ? (
-                    <Cell key={row.id + cell.id} className="normalCell">
-                      <LinkContextArea cell={cell} />
-                    </Cell>
-                  ) : (
-                    <Cell
-                      key={row.id + cell.id}
-                      className={cell.className}
-                      color={cell.color}
-                    >
-                      {cell.cell}
-                    </Cell>
-                  )
-                )}
-              </Row>
-            ))}
+          {rows.filter(isSearched(rowSearchTerm)).map(row => (
+            <Row key={row.id}>
+              <Cell key={row.id + "name"} className="row-header">
+                <HeaderContextArea
+                  artifact={row}
+                  placement="top"
+                  showID={showID}
+                />
+              </Cell>
+              {row.cells.filter(isSearched(columnSearchTerm)).map(cell =>
+                cell.isLink ? (
+                  <Cell key={row.id + cell.id} className="normalCell">
+                    <LinkContextArea cell={cell} />
+                  </Cell>
+                ) : (
+                  <Cell
+                    key={row.id + cell.id}
+                    className={cell.className}
+                    color={cell.color}
+                  >
+                    {cell.cell}
+                  </Cell>
+                )
+              )}
+            </Row>
+          ))}
         </StickyTable>
       </div>
     );
