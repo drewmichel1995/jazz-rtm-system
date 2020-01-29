@@ -109,10 +109,20 @@ public class ProjectArea {
     private void filterRowDependencies(ArrayList<String> dependencies){
         ArrayList<Artifact> filteredArtifacts = new ArrayList<>();
 
+        ArrayList<String> rowItemIDs =  new ArrayList<>();
+        for (Artifact row : this.rowArtifacts) {
+            rowItemIDs.add(row.itemId);
+        }
+
+        ArrayList<String> colItemIDs =  new ArrayList<>();
+        for (Artifact col : this.columnArtifacts) {
+            colItemIDs.add(col.itemId);
+        }
+
         if(dependencies.size() < 1) return;
         for(Artifact a: rowArtifacts)
             for(Link l: a.links)
-                if (dependencies.contains(getLinkFullName(l.linkType)) && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
+                if (dependencies.contains(getLinkFullName(l.linkType)) && !filteredArtifacts.contains(a)  && (colItemIDs.contains(l.id))) filteredArtifacts.add(a);
 
         this.setRowArtifacts(filteredArtifacts);
     }
@@ -120,10 +130,20 @@ public class ProjectArea {
     private void filterColumnDependencies(ArrayList<String> dependencies){
         ArrayList<Artifact> filteredArtifacts = new ArrayList<>();
 
+        ArrayList<String> rowItemIDs =  new ArrayList<>();
+        for (Artifact row : this.rowArtifacts) {
+            rowItemIDs.add(row.itemId);
+        }
+
+        ArrayList<String> colItemIDs =  new ArrayList<>();
+        for (Artifact col : this.columnArtifacts) {
+            colItemIDs.add(col.itemId);
+        }
+
         if(dependencies.size() < 1) return;
         for(Artifact a: columnArtifacts)
             for(Link l: a.links)
-                if (dependencies.contains(getLinkFullName(l.linkType))  && !filteredArtifacts.contains(a)) filteredArtifacts.add(a);
+                if (dependencies.contains(getLinkFullName(l.linkType))  && !filteredArtifacts.contains(a) && (rowItemIDs.contains(l.id))) filteredArtifacts.add(a);
 
         this.setColumnArtifacts(filteredArtifacts);
     }
@@ -165,6 +185,8 @@ public class ProjectArea {
         JSONObject ret = new JSONObject();
         JSONArray linkTypes = new JSONArray();
         ArrayList<String> uniqueLinks = new ArrayList<>();
+
+
 
         for(Artifact a: this.artifacts){
             for(Link l: a.links){
@@ -445,13 +467,23 @@ public class ProjectArea {
     private JSONArray getLegend(ArrayList<Artifact> baseList, ArrayList<Artifact> compareList){
         ArrayList<String> uniqueFullLinks = new ArrayList<>();
 
+        ArrayList<String> rowItemIDs =  new ArrayList<>();
+        for (Artifact row : this.rowArtifacts) {
+            rowItemIDs.add(row.itemId);
+        }
+
+        ArrayList<String> colItemIDs =  new ArrayList<>();
+        for (Artifact col : this.columnArtifacts) {
+            colItemIDs.add(col.itemId);
+        }
+
         JSONArray legend = new JSONArray();
         for(Artifact r: baseList){
 
             for(Link l: r.links){
                 for(Artifact c: compareList){
                     if(c.itemId.equals(l.id)){
-                        if(!uniqueFullLinks.contains(getLinkFullName(l.linkType))) {
+                        if(!uniqueFullLinks.contains(getLinkFullName(l.linkType)) && (rowItemIDs.contains(l.id) || colItemIDs.contains(l.id))) {
                             JSONObject temp = new JSONObject();
                             uniqueFullLinks.add(getLinkFullName(l.linkType));
                             temp.put("name", getLinkFullName(l.linkType));

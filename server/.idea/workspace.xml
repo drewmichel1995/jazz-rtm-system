@@ -44,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/MongoHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="943">
-              <caret line="118" column="5" lean-forward="true" selection-start-line="107" selection-start-column="4" selection-end-line="118" selection-end-column="5" />
+            <state relative-caret-position="17">
+              <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#get#0;class#MongoHelper#0" />
@@ -53,7 +53,6 @@
                 <element signature="method#getUniqueIDProject#1;class#MongoHelper#0" />
                 <element signature="method#getUniqueIDPayload#0;class#MongoHelper#0" />
                 <element signature="method#collectionExists#0;class#MongoHelper#0" />
-                <element signature="method#generateUniqueID#0;class#MongoHelper#0" />
               </folding>
             </state>
           </provider>
@@ -92,15 +91,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="175" column="64" lean-forward="true" selection-start-line="175" selection-start-column="64" selection-end-line="175" selection-end-column="64" />
+            <state relative-caret-position="593">
+              <caret line="466" column="94" selection-start-line="466" selection-start-column="94" selection-end-line="466" selection-end-column="94" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ProjectArea#0;class#ProjectArea#0" />
                 <element signature="method#ProjectArea#1;class#ProjectArea#0" />
+                <element signature="method#ProjectArea#2;class#ProjectArea#0" />
                 <element signature="method#setArtifacts#0;class#ProjectArea#0" />
                 <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
                 <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
+                <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
+                <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
+                <element signature="method#filterRowDependencies#0;class#ProjectArea#0" />
+                <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
+                <element signature="method#filterAll#0;class#ProjectArea#0" />
+                <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
+                <element signature="method#getLinkTypes#0;class#ProjectArea#0" />
                 <element signature="method#getParentFolders#0;class#ProjectArea#0" />
                 <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
                 <element signature="method#getFields#0;class#ProjectArea#0" />
@@ -110,6 +117,7 @@
                 <element signature="method#getTableJSON#1;class#ProjectArea#0" />
                 <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
                 <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
+                <element signature="method#getLegend#0;class#ProjectArea#0" />
                 <element signature="method#getLinkColor#0;class#ProjectArea#0" />
                 <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
                 <element signature="method#toJSON#0;class#ProjectArea#0" />
@@ -214,9 +222,9 @@
         <option value="$PROJECT_DIR$/src/main/java/AnalyticsHelper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/test.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Config.java" />
-        <option value="$PROJECT_DIR$/src/main/java/MongoHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/JazzHTTP.java" />
         <option value="$PROJECT_DIR$/src/main/java/Artifact.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MongoHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/ProjectArea.java" />
       </list>
     </option>
@@ -300,7 +308,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580307925671" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580309969051" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -615,8 +623,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MongoHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="943">
-          <caret line="118" column="5" lean-forward="true" selection-start-line="107" selection-start-column="4" selection-end-line="118" selection-end-column="5" />
+        <state relative-caret-position="17">
+          <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#get#0;class#MongoHelper#0" />
@@ -624,22 +632,29 @@
             <element signature="method#getUniqueIDProject#1;class#MongoHelper#0" />
             <element signature="method#getUniqueIDPayload#0;class#MongoHelper#0" />
             <element signature="method#collectionExists#0;class#MongoHelper#0" />
-            <element signature="method#generateUniqueID#0;class#MongoHelper#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="175" column="64" lean-forward="true" selection-start-line="175" selection-start-column="64" selection-end-line="175" selection-end-column="64" />
+        <state relative-caret-position="593">
+          <caret line="466" column="94" selection-start-line="466" selection-start-column="94" selection-end-line="466" selection-end-column="94" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ProjectArea#0;class#ProjectArea#0" />
             <element signature="method#ProjectArea#1;class#ProjectArea#0" />
+            <element signature="method#ProjectArea#2;class#ProjectArea#0" />
             <element signature="method#setArtifacts#0;class#ProjectArea#0" />
             <element signature="method#setRowArtifacts#0;class#ProjectArea#0" />
             <element signature="method#setColumnArtifacts#0;class#ProjectArea#0" />
+            <element signature="method#filterParentFolders#0;class#ProjectArea#0" />
+            <element signature="method#filterArtifactTypes#0;class#ProjectArea#0" />
+            <element signature="method#filterRowDependencies#0;class#ProjectArea#0" />
+            <element signature="method#filterColumnDependencies#0;class#ProjectArea#0" />
+            <element signature="method#filterAll#0;class#ProjectArea#0" />
+            <element signature="method#getArtifactTypes#0;class#ProjectArea#0" />
+            <element signature="method#getLinkTypes#0;class#ProjectArea#0" />
             <element signature="method#getParentFolders#0;class#ProjectArea#0" />
             <element signature="method#getHeaderOptions#0;class#ProjectArea#0" />
             <element signature="method#getFields#0;class#ProjectArea#0" />
@@ -649,6 +664,7 @@
             <element signature="method#getTableJSON#1;class#ProjectArea#0" />
             <element signature="method#getParentFolderIndex#0;class#ProjectArea#0" />
             <element signature="method#getOnlyLinks#0;class#ProjectArea#0" />
+            <element signature="method#getLegend#0;class#ProjectArea#0" />
             <element signature="method#getLinkColor#0;class#ProjectArea#0" />
             <element signature="method#getLinkFullName#0;class#ProjectArea#0" />
             <element signature="method#toJSON#0;class#ProjectArea#0" />
