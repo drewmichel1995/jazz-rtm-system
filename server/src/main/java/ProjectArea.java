@@ -164,9 +164,8 @@ public class ProjectArea {
     private JSONObject getLinkTypes(){
         JSONObject ret = new JSONObject();
         JSONArray linkTypes = new JSONArray();
-        JSONArray legend = new JSONArray();
         ArrayList<String> uniqueLinks = new ArrayList<>();
-        ArrayList<String> uniqueFullLinks = new ArrayList<>();
+
         for(Artifact a: this.artifacts){
             for(Link l: a.links){
                 if(!uniqueLinks.contains(getLinkFullName(l.linkType))){
@@ -177,19 +176,10 @@ public class ProjectArea {
                     temp.put("color", getLinkColor(l.linkType));
                     linkTypes.put(temp);
                 }
-                if(!uniqueFullLinks.contains(getLinkFullName(l.linkType)) && (this.columnArtifacts.contains(a) || this.rowArtifacts.contains(a))){
-
-                    JSONObject temp = new JSONObject();
-                    uniqueFullLinks.add(getLinkFullName(l.linkType));
-                    temp.put("name", getLinkFullName(l.linkType));
-                    temp.put("color", getLinkColor(l.linkType));
-                    legend.put(temp);
-                }
             }
-
         }
         ret.put("linkTypes", linkTypes);
-        ret.put("legend", legend);
+        ret.put("legend", getLegend(this.columnArtifacts, this.rowArtifacts));
         return ret;
     }
 
@@ -452,6 +442,31 @@ public class ProjectArea {
         return artifacts;
     }
 
+    private JSONArray getLegend(ArrayList<Artifact> baseList, ArrayList<Artifact> compareList){
+        ArrayList<String> uniqueFullLinks = new ArrayList<>();
+
+        JSONArray legend = new JSONArray();
+        for(Artifact r: baseList){
+
+            for(Link l: r.links){
+                for(Artifact c: compareList){
+                    if(c.itemId.equals(l.id)){
+                        if(!uniqueFullLinks.contains(getLinkFullName(l.linkType))) {
+                            JSONObject temp = new JSONObject();
+                            uniqueFullLinks.add(getLinkFullName(l.linkType));
+                            temp.put("name", getLinkFullName(l.linkType));
+                            temp.put("color", getLinkColor(l.linkType));
+                            legend.put(temp);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        return legend;
+    }
+
     private String getLinkColor(String linkType){
         if(linkType.toLowerCase().contains("affect"))
             return "cadetblue";
@@ -535,7 +550,7 @@ public class ProjectArea {
         else if(linkType.toLowerCase().contains("validate"))
             return "Validates/Validated By";
         else
-            return "Default";
+            return "Unknown Link Type";
     }
 
     JSONObject toJSON(){
@@ -573,18 +588,5 @@ public class ProjectArea {
         project.put("artifacts", artifactArray);
 
         return project;
-    }
-
-    private static String generateUniqueID() {
-        String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        int length = 17;
-        StringBuilder sb = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            sb.append(candidateChars.charAt(random.nextInt(candidateChars
-                    .length())));
-        }
-
-        return sb.toString();
     }
 }
