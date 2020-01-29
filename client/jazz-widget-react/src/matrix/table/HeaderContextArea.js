@@ -40,7 +40,7 @@ class HeaderContextArea extends Component {
         }
       >
         <div>
-          <a href={url}>{showID ? { id } : { name }}</a>
+          <a href={url}>{showID ? id : name}</a>
         </div>
       </OverlayTrigger>
     );
