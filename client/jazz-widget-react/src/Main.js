@@ -17,6 +17,7 @@ class Main extends Component {
 
   onTitleChange = (title, uri, uniqueID) => {
     this.setState({ title: title, uri: uri, uniqueID: uniqueID });
+    window.history.pushState({}, null, "/#/matrix/" + uniqueID);
   };
 
   render() {

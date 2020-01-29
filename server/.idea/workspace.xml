@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.env" beforeDir="false" afterPath="$PROJECT_DIR$/../.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/Matrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/Matrix.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/MatrixFilterOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/MatrixFilterOptions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/OptionsToolbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/OptionsToolbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProjectArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProjectArea.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -255,7 +251,7 @@
   <component name="MavenRunner">
     <option name="delegateBuildToMaven" value="true" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1379" />
     <option name="y" value="470" />
     <option name="width" value="1080" />
@@ -308,7 +304,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580314327363" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580324413870" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
