@@ -51,6 +51,7 @@ class OptionsToolbar extends Component {
       onRowChange,
       onColumnChange,
       triggerShowID,
+      showID,
       payload,
       fields,
       reload
@@ -87,6 +88,7 @@ class OptionsToolbar extends Component {
                 onRowChange={onRowChange}
                 onColumnChange={onColumnChange}
                 triggerShowID={triggerShowID}
+                showID={showID}
               />
             </FadeIn>
           )}

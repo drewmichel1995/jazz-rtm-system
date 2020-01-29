@@ -135,6 +135,7 @@ class Matrix extends React.Component {
               onRowChange={this.onRowSearchChange}
               onColumnChange={this.onColumnSearchChange}
               triggerShowID={this.triggerShowID}
+              showID={showID}
               onTitleChange={this.props.onTitleChange}
               fields={fields}
               payload={payload}
