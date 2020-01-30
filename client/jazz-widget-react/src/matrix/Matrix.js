@@ -105,6 +105,7 @@ class Matrix extends React.Component {
             payload.projectURI,
             uniqueID
           );
+
           setTimeout(() => {
             this.setState({ done: true });
           }, 1500);

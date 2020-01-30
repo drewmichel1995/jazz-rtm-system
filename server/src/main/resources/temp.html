@@ -1,0 +1,131 @@
+<html>
+    <style>
+        /*Holds the entire widget*/
+        div.hold {
+            padding: 50px 10px 50px 50px;
+            overflow: visible;
+        }
+
+        .select2-selection--multiple .select2-search__field {
+            display: none;
+        }
+
+        .ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
+            display: none;
+        }
+
+    </style>
+    <title>Jazz Widget</title>
+
+    <head>
+        <link rel="stylesheet" type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        </link>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet">
+        </link>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </head>
+
+
+    <body>
+        <div id="dialog-confirm" title="Large Matrix Warning!" hidden="hidden">
+            <p id="dialogText">
+                <h4>The requested matrix may cause the application to run sluggishly due to browser limitations.</h4>
+                <h5>To avoid this, narrow the scopes of your matrix.</h5>
+                <p><small><i>It is generally recommended to keep each axis below 500 requirements.</i></small></p>
+                <p><small><i id="linksOnlySuggestion"></i></small></p>
+                <p><small><b>The current number of requirements for each axis is:</b></small></p>
+                <ul>
+                    <li>Row Axis: <strong id="rowSize"></strong></li>
+                    <li>Column Axis: <strong id="columnSize"></strong></li>
+                </ul>
+                <p><small>To ignore this warning select Proceed to Matrix</small></p>
+            </p>
+        </div>
+        <div class="hold">
+            <div class="container-fluid" style="justify-content: center; outline: 2px black solid;">
+
+                <div class="row" style="justify-content: center;">
+                    <div class="col-8">
+                        <label for="projectAreaList">Project Area</label>
+                        <div class="input-group mb-3">
+                            <select id="projectAreaList" type="button" class="ui dropdown"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <label for="rowElementList">Row Folder Scope:</label>
+                        <div class="input-group mb-3">
+                            <select id="rowElementList" type="button" multiple="multiple" class="ui dropdown"></select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <label for="columnElementList">Column Folder Scope:</label>
+                        <div class="input-group mb-3">
+                            <select id="columnElementList" type="button" multiple="multiple"
+                                class="ui dropdown"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <label for="columnScopeElementList">Column Requirement Type:</label>
+                        <div class="input-group mb-3">
+                            <select id="columnScopeElementList" type="button" multiple="multiple"
+                                class="ui dropdown"></select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <label for="rowScopeElementList">Row Requirement Type:</label>
+                        <div class="input-group mb-3">
+                            <select id="rowScopeElementList" type="button" multiple="multiple"
+                                class="ui dropdown"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label for="dependencyCriteriaList">Dependency Criteria:</label>
+                        <div class="input-group mb-3">
+                            <select id="dependencyCriteriaList" type="button"></select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="ui segment">
+
+                            <div class="ui toggle checkbox">
+
+                                <input id="linksOnly" type="checkbox" name="public"></input>
+                                <label>Display Links Only</label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="justify-content: center;">
+                    <div class="col-8">
+                        <button type="button" id="submitButton" class="ui primary button" onClick="onSubmit()">Go to
+                            Matrix</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</html>
