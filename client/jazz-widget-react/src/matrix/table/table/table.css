@@ -51,9 +51,12 @@
   width: 170px;
 }
 
+.sticky-table-cell.normalCell {
+  width: 25%;
+}
+
 .normalCell {
   overflow: hidden;
-  width: 25%;
 }
 
 .normalCell:hover {
@@ -67,7 +70,6 @@ div.rowCountCell {
   border-right: ridge;
   text-align: center;
   position: sticky;
-  width: 25%;
 }
 
 div.colCountCell {
@@ -77,7 +79,6 @@ div.colCountCell {
   border-bottom: ridge;
   text-align: center;
   position: sticky;
-  width: 25%;
 }
 
 div.edgeCountCell {
@@ -88,7 +89,6 @@ div.edgeCountCell {
   padding: 10px 10px;
   text-align: center;
   position: sticky;
-  width: 25%;
 }
 
 th.deadCell {
