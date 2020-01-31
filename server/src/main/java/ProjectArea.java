@@ -312,9 +312,9 @@ public class ProjectArea {
 
                 if(rowAdd || colAdd) {
                     if(rowLinkType.contains("and") || colLinkType.contains("and"))
-                        cell = getCellObject("+", j.name, j.id, a.name, a.id, true, rowLinkType, colLinkType, getLinkColor(rowLinkType), "", "multi-arrow normalCell");
+                        cell = getCellObject("+", j.name, j.id, a.name, a.id, true, rowLinkType, colLinkType, getLinkColor(rowLinkType), "", "multi-arrow");
                     else
-                        cell = getCellObject("", j.name, j.id, a.name, a.id, true, rowLinkType, colLinkType, getLinkColor(rowLinkType), "", "arrow normalCell");
+                        cell = getCellObject("", j.name, j.id, a.name, a.id, true, rowLinkType, colLinkType, getLinkColor(rowLinkType), "", "arrow");
                 }
                 else
                     cell = getCellObject("", j.name, j.id, "", "", false, rowLinkType, colLinkType, "", "", "normalCell");
