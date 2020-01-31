@@ -72,6 +72,10 @@ div.rowCountCell {
   border-right: ridge;
   text-align: center;
   position: sticky;
+  height: 40px;
+  width: 40px;
+  max-height: 40px;
+  max-width: 40px;
 }
 
 div.colCountCell {
@@ -81,6 +85,10 @@ div.colCountCell {
   border-bottom: ridge;
   text-align: center;
   position: sticky;
+  height: 40px;
+  width: 40px;
+  max-height: 40px;
+  max-width: 40px;
 }
 
 div.edgeCountCell {
@@ -91,6 +99,10 @@ div.edgeCountCell {
   padding: 10px 10px;
   text-align: center;
   position: sticky;
+  height: 40px;
+  width: 40px;
+  max-height: 40px;
+  max-width: 40px;
 }
 
 th.deadCell {
