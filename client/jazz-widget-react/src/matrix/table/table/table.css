@@ -31,7 +31,6 @@
 
 .row-header {
   max-width: 180px;
-  height: 40px;
   max-height: 40px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -58,7 +57,7 @@
   white-space: nowrap;
   overflow: hidden;
   transform: 
-    /* Magic Numbers */ translate(-60px, 79px)
+    /* Magic Numbers */ translate(-70px, 70px)
     /* 45 is really 360 - 45 */ rotate(270deg);
   width: 170px;
 }
@@ -99,7 +98,7 @@ div.colCountCell {
   text-align: center;
   position: sticky;
   width: 40px;
-  height: 40px;
+  height: 32px;
   max-height: 40px;
   max-width: 40px;
   padding: 6px 0px 0px 0px !important;
@@ -114,7 +113,7 @@ div.edgeCountCell {
   padding: 10px 10px;
   text-align: center;
   position: sticky;
-  height: 40px;
+  height: 32px;
   max-height: 40px;
   max-width: 40px;
   overflow: hidden;
