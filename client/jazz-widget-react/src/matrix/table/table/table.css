@@ -35,10 +35,13 @@
   overflow: hidden;
   white-space: nowrap;
   padding: 0px !important;
+  border-bottom: 0px !important;
 }
 
 .row-header > div {
   overflow: hidden;
+  height: 40px;
+  padding: 0px !important;
 }
 
 .col-header {
@@ -64,6 +67,7 @@
   max-width: 40px;
   text-align: center;
   padding: 0px !important;
+  border-bottom: 0px !important;
 }
 
 .normalCell:hover {
@@ -81,6 +85,7 @@ div.rowCountCell {
   max-height: 40px;
   max-width: 40px;
   padding: 0px !important;
+  border-bottom: 0px !important;
 }
 
 div.colCountCell {
@@ -94,6 +99,7 @@ div.colCountCell {
   max-height: 40px;
   max-width: 40px;
   padding: 0px !important;
+  border-bottom: 0px !important;
 }
 
 div.edgeCountCell {
@@ -108,6 +114,7 @@ div.edgeCountCell {
   max-width: 40px;
   overflow: hidden;
   padding: 0px !important;
+  border-bottom: 0px !important;
 }
 
 th.deadCell {
