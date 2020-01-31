@@ -1,372 +1,412 @@
 <!DOCTYPE html>
 <html>
 	<style>
-
-
 		/*Holds the entire widget*/
-		  div.hold{
-			  padding: 50px 10px 50px 50px;
-			  overflow:visible;
-		  }
-	  
-		  .select2-selection--multiple .select2-search__field{
-			  display: none;
-		  }
-	  
-		  .ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
-			  display: none;
-		  }
-	  </style>
-			  <title>Jazz Widget</title>
-			  <head>
-				  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"></link>
-					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-					<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-					<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
-				  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet"></link>
-				  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-			  </head>
-			  <body>
-			  <div id="dialog-confirm" title="Large Matrix Warning!" hidden="hidden">
-				<p id="dialogText">
-					<h4>The requested matrix may cause the application to run sluggishly due to browser limitations.</h4>
-					<h5>To avoid this, narrow the scopes of your matrix.</h5>
-					<p><small><i>It is generally recommended to keep each axis below 500 requirements.</i></small></p>
-					<p><small><i id="linksOnlySuggestion"></i></small></p>
-					<p><small><b>The current number of requirements for each axis is:</b></small></p>
-					<ul>
-						<li>Row Axis: <strong id="rowSize"></strong></li>
-						<li>Column Axis: <strong id="columnSize"></strong></li>
-					</ul>
-					<p><small>To ignore this warning select Proceed to Matrix</small></p>
-				</p>
-			  </div>
-			  <div class="hold">
-				  <form class="ui form">
-					  <div class="fields">
-						  <div class="field">
-							  <label>Project Area</label>
-							  <select id="projectAreaList" type="button" class="ui dropdown"></select>
-						  </div>
-					  </div>
-					  <div class="fields">
-						  <div class="field">
-							  <label>Row Folder Scope:</label>
-							  <select id="rowElementList" type="button" multiple="multiple" class="ui dropdown"></select>
-						  </div>
-						  <div class="field">
-							  <label>Column Folder Scope:</label>
-							  <select id="columnElementList" type="button" multiple="multiple" class="ui dropdown"></select>
-						  </div>
-					  </div>
-					  <div class="fields">
-						  <div class="field">
-							  <label>Column Requirement Type:</label>
-							  <select id="columnScopeElementList" type="button" multiple="multiple" class="ui dropdown"></select>
-						  </div>
-						  <div class="field">
-							  <label>Row Requirement Type:</label>
-							  <select id="rowScopeElementList" type="button" multiple="multiple" class="ui dropdown"></select>
-						  </div>
-					  </div>
-					  <div class="fields">
-						  <div class="field">
-							  <label>Dependency Criteria:</label>
-							  <select id="dependencyCriteriaList" type="button"></select>
-						  </div>
-						  <div class="ui segment">
-							  <div class="field">
-								  <div class="ui toggle checkbox">
-	  
-									  <input id="linksOnly" type="checkbox"  name="public"></input>
-									  <label>Display Links Only</label>
-								  </div>
-							  </div>
-						  </div>
-					  </div>
-					  <button type="button" id="submitButton" class="ui primary button" onClick="onSubmit()">Go to Matrix</button>
-				  </form>
-			  </div>
-			  <script type="text/javascript">
-	  
-	  var payload = getPayload();
-	  var projectURI = "";
-	  var serverURL = "https://mbse-colldev.saic.com/server/";
-	  var url = "";
-	  
-	  function parseXml(xml) {
-				  var dom = null;
-				  if (window.DOMParser) {
-					  try {
-						  dom = (new DOMParser()).parseFromString(xml, "text/xml");
-					  }
-					  catch (e) { dom = null; }
-				  }
-				  else if (window.ActiveXObject) {
-					  try {
-						  dom = new ActiveXObject('Microsoft.XMLDOM');
-						  dom.async = false;
-						  if (!dom.loadXML(xml))
-	  
-							  window.alert(dom.parseError.reason + dom.parseError.srcText);
-					  }
-					  catch (e) { dom = null; }
-				  }
-				  else
-					  alert("cannot parse xml string!");
-				  return dom;
-			  }
-	  
-	  function xml2json(xml) {
-	  
-		  var obj = {};
-	  
-		  if (xml.nodeType == 1) {
-	  
-			  if (xml.attributes.length > 0) {
-			  obj["@attributes"] = {};
-			  for (var j = 0; j < xml.attributes.length; j++) {
-				  var attribute = xml.attributes.item(j);
-				  obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
-			  }
-			  }
-		  } else if (xml.nodeType == 3) {
-	  
-			  obj = xml.nodeValue;
-		  }
-	  
-		  var textNodes = [].slice.call(xml.childNodes).filter(function(node) {
-			  return node.nodeType === 3;
-		  });
-		  if (xml.hasChildNodes() && xml.childNodes.length === textNodes.length) {
-			  obj = [].slice.call(xml.childNodes).reduce(function(text, node) {
-			  return text + node.nodeValue;
-			  }, "");
-		  } else if (xml.hasChildNodes()) {
-			  for (var i = 0; i < xml.childNodes.length; i++) {
-			  var item = xml.childNodes.item(i);
-			  var nodeName = item.nodeName;
-			  if (typeof obj[nodeName] == "undefined") {
-				  obj[nodeName] = xml2json(item);
-			  } else {
-				  if (typeof obj[nodeName].push == "undefined") {
-				  var old = obj[nodeName];
-				  obj[nodeName] = [];
-				  obj[nodeName].push(old);
-				  }
-				  obj[nodeName].push(xml2json(item));
-			  }
-			  }
-		  }
-		  return obj;
-	  }
-	  
-	  function httpGet(theUrl) {
-		  var xmlHttp = new XMLHttpRequest();
-		  xmlHttp.open( "GET", theUrl, false );
-		  xmlHttp.send( null );
-		  var data = JSON.parse(xmlHttp.responseText);
-		  return data;
-	  }
-	  
-	  function httpPostPayload(theUrl) {
-		  console.log(payload);
-	  
-		  var xmlHttp = new XMLHttpRequest();
-		  xmlHttp.open( "POST", theUrl, false );
-		  xmlHttp.send( JSON.stringify({
-			  "projectAreaURI": projectArea,
-			  "payload": payload
-		  }) );
-	  
-		  var data = JSON.parse(xmlHttp.responseText);
-		  return data;
-	  }
-	  
-	  function httpPostCookie(theUrl, data) {
-		  console.log(payload);
-	  
-		  var xmlHttp = new XMLHttpRequest();
-		  xmlHttp.withCredentials = true;
-		  xmlHttp.open( "POST", theUrl, false );
-		  xmlHttp.send( JSON.stringify({
-			  "projectAreas": data
-		  }) );
-		  console.log(xmlHttp.cookie);
-		  document.cookie = xmlHttp.cookie;
-		  //return xmlHttp.responseText;
-	  }
-	  
-	  function httpGetXML(theUrl) {
-		  var xmlHttp = new XMLHttpRequest();
-		  xmlHttp.open( "GET", theUrl, false );
-		  xmlHttp.send( null );
-		  var json = xml2json(parseXml(xmlHttp.responseText));
-	  
-		  return json;
-	  }
-	  
-	  function getProjectInfo() {
-		  var json = httpGetXML("https://" + window.location.host + "/rm/oslc_rm/catalog");
-	  
-		  var uris = json["oslc_disc:ServiceProviderCatalog"]["oslc_disc:entry"].map(item =>({"uri":item["oslc_disc:ServiceProvider"]["oslc_disc:details"]["@attributes"]["rdf:resource"].split("/")[6],
-			  "name":item["oslc_disc:ServiceProvider"]["dcterms:title"]
-		  }));
-	  
-		  return uris;
-	  }
-	  
-	  function loadFields(theUrl){
-			  payload = getPayload();
-			  var data = httpGet(theUrl);
-	  
-			  var $rowDropdown = $("#rowElementList").empty();
-			  var $columnDropdown = $("#columnElementList").empty();
-			  var $rowScopeDropdown = $("#rowScopeElementList").empty();
-			  var $columnScopeDropdown = $("#columnScopeElementList").empty();
-			  var $dependencyDropdown = $("#dependencyCriteriaList").empty();
-			  $("#linksOnly").attr("checked", false);
-			  $.each(data.parentFolders, function() {
-				  $rowDropdown.append($("<option />").val(this.label).text(this.label));
-				  $columnDropdown.append($("<option />").val(this.label).text(this.label));
-			  });
-	  
-			  $.each(data.artifactTypes, function() {
-				  $rowScopeDropdown.append($("<option />").val(this.value).text(this.label));
-				  $columnScopeDropdown.append($("<option />").val(this.value).text(this.label));
-			  });
-	  
-			  $dependencyDropdown.append("<option disabled selected value> -- select an option -- </option>");
-			  $.each(data.linkTypes, function() {
-				  $dependencyDropdown.append($("<option />").val(this.label).text(this.label));
-			  });
-	  }
-	  
-	  function loadProjectAreas(){
-		  
-		  var projects = getProjectInfo();
-		  console.log(projects);
-		  
-		  httpPostCookie(serverURL + "getCookie/", projects);
-		  projects.map(item => (
-			  $("#projectAreaList").append($("<option />").val(item.uri).text(item.name))
-		  ))
-	  
-		  projectArea = projects[0].uri;
-		  loadFields(serverURL + "getFields/" + projects[0].uri);
-	  }
-	  
-	  function getPayload(){
-		  var payload = new Object();
-		  payload.columns = [];
-		  payload.rows = [];
-		  payload.columnTypes = [];
-		  payload.rowTypes =[];
-		  payload.dependencies = [];
-		  payload.showHeader = "";
-		  payload.linksOnly = false;
-	  
-		  return payload;
-	  
-	  }
-	  
-	  function initFields(){
-		  $("#rowScopeElementList").select2();
-		  $("#columnScopeElementList").select2();
-		  $("#rowElementList").select2();
-		  $("#columnElementList").select2();
-	  }
-	  
-	  function onSubmit(){
-		  console.log("Button clicked");
-		  var result = httpPostPayload(serverURL + "storePayload/")
-		  console.log(result);
-		  url = result.url;
-		  var uniqueID = result.uniqueID;
-		  var size = httpGet(serverURL + "getProjectAreaSize/" + uniqueID);
-		  var rowSize = size.rowSize;
-		  var columnSize = size.columnSize;
-	  
-		  if((rowSize * columnSize) > 10000){
-			  $("#rowSize").text(rowSize);
-			  $("#columnSize").text(columnSize);
-			  if(!payload.linksOnly){
-				  $("#linksOnlySuggestion").text("Suggestion: Enable Display Links Only to only view requirements with links in the matrix.");
-			  }else{
-				  $("#linksOnlySuggestion").text("");
-			  }
-			  $( "#dialog-confirm" ).dialog("open");
-			  gadgets.window.adjustHeight();
-		  }else{
-			  window.open(url, '_blank');
-		  }
-	  }
-	  
-	  function setFieldOnChange(){
-			  $("#rowElementList").on('change', function() {
-				  payload.rows = $("#rowElementList").val().map(item => ({"name":item}));
-				  gadgets.window.adjustHeight();
-			  });
-	  
-			  $("#columnElementList").on('change', function() {
-				  payload.columns = $("#columnElementList").val().map(item => ({"name":item}));
-				  gadgets.window.adjustHeight();
-			  });
-	  
-			  $("#rowScopeElementList").on('change', function() {
-				  payload.rowTypes = $("#rowScopeElementList").val().map(item => ({"name":item}));
-				  gadgets.window.adjustHeight();
-			  });
-	  
-			  $("#columnScopeElementList").on('change', function() {
-				  payload.columnTypes = $("#columnScopeElementList").val().map(item => ({"name":item}));
-				  gadgets.window.adjustHeight();
-			  });
-	  
-			  $("#dependencyCriteriaList").on('change', function() {
-				  payload.dependencies = [{"name": this.value}];
-			  });
-	  
-			  $("#linksOnly").change(function() {
-				  payload.linksOnly = false;
-				  if(this.checked) {
-					  payload.linksOnly = true;
-				  }
-			  });
-	  
-			  $("#projectAreaList").on('change', function() {
-				  projectArea = this.value;
-				  console.log(this.value);
-				  loadFields(serverURL + "getFields/" + projectArea);
-			  });
-	  }
-	  
-	  $( function() {
-		  $( "#dialog-confirm" ).dialog({
-			resizable: false,
-			height: "auto",
-			width: 400,
-			modal: true,
-			autoOpen: false,
-			buttons: {
-			  "Proceed to Matrix": function() {
-				window.open(url, '_blank')
-			  },
-			  Cancel: function() {
-				$( this ).dialog( "close" );
-			  }
+		div.hold {
+			padding: 50px 10px 50px 50px;
+			overflow: visible;
+		}
+
+		.select2-selection--multiple .select2-search__field {
+			display: none;
+		}
+
+		.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
+			display: none;
+		}
+
+	</style>
+	<title>Jazz Widget</title>
+
+	<head>
+		<link rel="stylesheet" type="text/css"
+			href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+		</link>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet">
+		</link>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		<!-- Popper JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	</head>
+
+
+	<body>
+		<div id="dialog-confirm" title="Large Matrix Warning!" hidden="hidden">
+			<p id="dialogText">
+				<h4>The requested matrix may cause the application to run sluggishly due to browser limitations.</h4>
+				<h5>To avoid this, narrow the scopes of your matrix.</h5>
+				<p><small><i>It is generally recommended to keep each axis below 500 requirements.</i></small></p>
+				<p><small><i id="linksOnlySuggestion"></i></small></p>
+				<p><small><b>The current number of requirements for each axis is:</b></small></p>
+				<ul>
+					<li>Row Axis: <strong id="rowSize"></strong></li>
+					<li>Column Axis: <strong id="columnSize"></strong></li>
+				</ul>
+				<p><small>To ignore this warning select Proceed to Matrix</small></p>
+			</p>
+		</div>
+
+		<div class="container" style="justify-content: center; outline: 2px black solid;">
+
+			<div class="row">
+				<div class="col-8">
+					<label for="projectAreaList">Project Area</label>
+					<div class="input-group mb-3">
+						<select id="projectAreaList" type="button" class="ui dropdown"></select>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-4">
+					<label for="rowElementList">Row Folder Scope:</label>
+					<div class="input-group mb-3">
+						<select id="rowElementList" type="button" multiple="multiple" class="ui dropdown"></select>
+					</div>
+				</div>
+				<div class="col-4">
+					<label for="columnElementList">Column Folder Scope:</label>
+					<div class="input-group mb-3">
+						<select id="columnElementList" type="button" multiple="multiple" class="ui dropdown"></select>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-4">
+					<label for="columnScopeElementList">Column Requirement Type:</label>
+					<div class="input-group mb-3">
+						<select id="columnScopeElementList" type="button" multiple="multiple"
+							class="ui dropdown"></select>
+					</div>
+				</div>
+				<div class="col-4">
+					<label for="rowScopeElementList">Row Requirement Type:</label>
+					<div class="input-group mb-3">
+						<select id="rowScopeElementList" type="button" multiple="multiple" class="ui dropdown"></select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4">
+					<label for="dependencyCriteriaList">Dependency Criteria:</label>
+					<div class="input-group mb-3">
+						<select id="dependencyCriteriaList" type="button"></select>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="ui segment">
+
+						<div class="ui toggle checkbox">
+
+							<input id="linksOnly" type="checkbox" name="public"></input>
+							<label>Display Links Only</label>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="row" style="justify-content: center;">
+				<div class="col-8">
+					<button type="button" id="submitButton" class="ui primary button" onClick="onSubmit()">Go to
+						Matrix</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+
+			var payload = getPayload();
+			var projectURI = "";
+			var serverURL = "https://mbse-colldev.saic.com/server/";
+			var url = "";
+
+			function parseXml(xml) {
+				var dom = null;
+				if (window.DOMParser) {
+					try {
+						dom = (new DOMParser()).parseFromString(xml, "text/xml");
+					}
+					catch (e) { dom = null; }
+				}
+				else if (window.ActiveXObject) {
+					try {
+						dom = new ActiveXObject('Microsoft.XMLDOM');
+						dom.async = false;
+						if (!dom.loadXML(xml))
+
+							window.alert(dom.parseError.reason + dom.parseError.srcText);
+					}
+					catch (e) { dom = null; }
+				}
+				else
+					alert("cannot parse xml string!");
+				return dom;
 			}
-		  });
-	  } );
-	  
-	  window.onload = function () {
-			  initFields();
-			  setFieldOnChange();
-			  loadProjectAreas();
-	  
-	  
-			  gadgets.window.adjustHeight();
-	  
-	  }
-	   </script>
+
+			function xml2json(xml) {
+
+				var obj = {};
+
+				if (xml.nodeType == 1) {
+
+					if (xml.attributes.length > 0) {
+						obj["@attributes"] = {};
+						for (var j = 0; j < xml.attributes.length; j++) {
+							var attribute = xml.attributes.item(j);
+							obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+						}
+					}
+				} else if (xml.nodeType == 3) {
+
+					obj = xml.nodeValue;
+				}
+
+				var textNodes = [].slice.call(xml.childNodes).filter(function (node) {
+					return node.nodeType === 3;
+				});
+				if (xml.hasChildNodes() && xml.childNodes.length === textNodes.length) {
+					obj = [].slice.call(xml.childNodes).reduce(function (text, node) {
+						return text + node.nodeValue;
+					}, "");
+				} else if (xml.hasChildNodes()) {
+					for (var i = 0; i < xml.childNodes.length; i++) {
+						var item = xml.childNodes.item(i);
+						var nodeName = item.nodeName;
+						if (typeof obj[nodeName] == "undefined") {
+							obj[nodeName] = xml2json(item);
+						} else {
+							if (typeof obj[nodeName].push == "undefined") {
+								var old = obj[nodeName];
+								obj[nodeName] = [];
+								obj[nodeName].push(old);
+							}
+							obj[nodeName].push(xml2json(item));
+						}
+					}
+				}
+				return obj;
+			}
+
+			function httpGet(theUrl) {
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("GET", theUrl, false);
+				xmlHttp.send(null);
+				var data = JSON.parse(xmlHttp.responseText);
+				return data;
+			}
+
+			function httpPostPayload(theUrl) {
+				console.log(payload);
+
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("POST", theUrl, false);
+				xmlHttp.send(JSON.stringify({
+					"projectAreaURI": projectArea,
+					"payload": payload
+				}));
+
+				var data = JSON.parse(xmlHttp.responseText);
+				return data;
+			}
+
+			function httpPostCookie(theUrl, data) {
+				console.log(payload);
+
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.withCredentials = true;
+				xmlHttp.open("POST", theUrl, false);
+				xmlHttp.send(JSON.stringify({
+					"projectAreas": data
+				}));
+				console.log(xmlHttp.cookie);
+				document.cookie = xmlHttp.cookie;
+				//return xmlHttp.responseText;
+			}
+
+			function httpGetXML(theUrl) {
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("GET", theUrl, false);
+				xmlHttp.send(null);
+				var json = xml2json(parseXml(xmlHttp.responseText));
+
+				return json;
+			}
+
+			function getProjectInfo() {
+				var json = httpGetXML("https://" + window.location.host + "/rm/oslc_rm/catalog");
+
+				var uris = json["oslc_disc:ServiceProviderCatalog"]["oslc_disc:entry"].map(item => ({
+					"uri": item["oslc_disc:ServiceProvider"]["oslc_disc:details"]["@attributes"]["rdf:resource"].split("/")[6],
+					"name": item["oslc_disc:ServiceProvider"]["dcterms:title"]
+				}));
+
+				return uris;
+			}
+
+			function loadFields(theUrl) {
+				payload = getPayload();
+				var data = httpGet(theUrl);
+
+				var $rowDropdown = $("#rowElementList").empty();
+				var $columnDropdown = $("#columnElementList").empty();
+				var $rowScopeDropdown = $("#rowScopeElementList").empty();
+				var $columnScopeDropdown = $("#columnScopeElementList").empty();
+				var $dependencyDropdown = $("#dependencyCriteriaList").empty();
+				$("#linksOnly").attr("checked", false);
+				$.each(data.parentFolders, function () {
+					$rowDropdown.append($("<option />").val(this.label).text(this.label));
+					$columnDropdown.append($("<option />").val(this.label).text(this.label));
+				});
+
+				$.each(data.artifactTypes, function () {
+					$rowScopeDropdown.append($("<option />").val(this.value).text(this.label));
+					$columnScopeDropdown.append($("<option />").val(this.value).text(this.label));
+				});
+
+				$dependencyDropdown.append("<option disabled selected value> -- select an option -- </option>");
+				$.each(data.linkTypes, function () {
+					$dependencyDropdown.append($("<option />").val(this.label).text(this.label));
+				});
+			}
+
+			function loadProjectAreas() {
+
+				var projects = getProjectInfo();
+				console.log(projects);
+
+				httpPostCookie(serverURL + "getCookie/", projects);
+				projects.map(item => (
+					$("#projectAreaList").append($("<option />").val(item.uri).text(item.name))
+				))
+
+				projectArea = projects[0].uri;
+				loadFields(serverURL + "getFields/" + projects[0].uri);
+			}
+
+			function getPayload() {
+				var payload = new Object();
+				payload.columns = [];
+				payload.rows = [];
+				payload.columnTypes = [];
+				payload.rowTypes = [];
+				payload.dependencies = [];
+				payload.showHeader = "";
+				payload.linksOnly = false;
+
+				return payload;
+
+			}
+
+			function initFields() {
+				$("#rowScopeElementList").select2();
+				$("#columnScopeElementList").select2();
+				$("#rowElementList").select2();
+				$("#columnElementList").select2();
+			}
+
+			function onSubmit() {
+				console.log("Button clicked");
+				var result = httpPostPayload(serverURL + "storePayload/")
+				console.log(result);
+				url = result.url;
+				var uniqueID = result.uniqueID;
+				var size = httpGet(serverURL + "getProjectAreaSize/" + uniqueID);
+				var rowSize = size.rowSize;
+				var columnSize = size.columnSize;
+
+				if ((rowSize * columnSize) > 10000) {
+					$("#rowSize").text(rowSize);
+					$("#columnSize").text(columnSize);
+					if (!payload.linksOnly) {
+						$("#linksOnlySuggestion").text("Suggestion: Enable Display Links Only to only view requirements with links in the matrix.");
+					} else {
+						$("#linksOnlySuggestion").text("");
+					}
+					$("#dialog-confirm").dialog("open");
+					gadgets.window.adjustHeight();
+				} else {
+					window.open(url, '_blank');
+				}
+			}
+
+			function setFieldOnChange() {
+				$("#rowElementList").on('change', function () {
+					payload.rows = $("#rowElementList").val().map(item => ({ "name": item }));
+					gadgets.window.adjustHeight();
+				});
+
+				$("#columnElementList").on('change', function () {
+					payload.columns = $("#columnElementList").val().map(item => ({ "name": item }));
+					gadgets.window.adjustHeight();
+				});
+
+				$("#rowScopeElementList").on('change', function () {
+					payload.rowTypes = $("#rowScopeElementList").val().map(item => ({ "name": item }));
+					gadgets.window.adjustHeight();
+				});
+
+				$("#columnScopeElementList").on('change', function () {
+					payload.columnTypes = $("#columnScopeElementList").val().map(item => ({ "name": item }));
+					gadgets.window.adjustHeight();
+				});
+
+				$("#dependencyCriteriaList").on('change', function () {
+					payload.dependencies = [{ "name": this.value }];
+				});
+
+				$("#linksOnly").change(function () {
+					payload.linksOnly = false;
+					if (this.checked) {
+						payload.linksOnly = true;
+					}
+				});
+
+				$("#projectAreaList").on('change', function () {
+					projectArea = this.value;
+					console.log(this.value);
+					loadFields(serverURL + "getFields/" + projectArea);
+				});
+			}
+
+			$(function () {
+				$("#dialog-confirm").dialog({
+					resizable: false,
+					height: "auto",
+					width: 400,
+					modal: true,
+					autoOpen: false,
+					buttons: {
+						"Proceed to Matrix": function () {
+							window.open(url, '_blank')
+						},
+						Cancel: function () {
+							$(this).dialog("close");
+						}
+					}
+				});
+			});
+
+			window.onload = function () {
+				initFields();
+				setFieldOnChange();
+				loadProjectAreas();
+
+
+				gadgets.window.adjustHeight();
+
+			}
+		</script>
+
 </html>

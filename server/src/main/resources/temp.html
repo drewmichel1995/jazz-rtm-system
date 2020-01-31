@@ -6,12 +6,12 @@
             overflow: visible;
         }
 
-        .select2-selection--multiple .select2-search__field {
+        .ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
             display: none;
         }
 
-        .ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
-            display: none;
+        select {
+            width: 100%;
         }
 
     </style>
@@ -29,9 +29,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -56,73 +53,85 @@
                 <p><small>To ignore this warning select Proceed to Matrix</small></p>
             </p>
         </div>
-        <div class="hold">
-            <div class="container-fluid" style="justify-content: center; outline: 2px black solid;">
+        <div class="container">
+            <div class="form">
 
-                <div class="row" style="justify-content: center;">
-                    <div class="col-8">
+                <div class="form-row">
+                    <div class="col">
                         <label for="projectAreaList">Project Area</label>
                         <div class="input-group mb-3">
-                            <select id="projectAreaList" type="button" class="ui dropdown"></select>
+                            <select id="projectAreaList" type="button" class="form-control"></select>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-4">
+                <div class="form-row">
+                    <div class="col">
                         <label for="rowElementList">Row Folder Scope:</label>
-                        <div class="input-group mb-3">
-                            <select id="rowElementList" type="button" multiple="multiple" class="ui dropdown"></select>
+                        <div class="input-group">
+                            <select id="rowElementList" type="button" multiple="multiple" class="form-control"
+                                placeholder="None"></select>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <label for="columnElementList">Column Folder Scope:</label>
-                        <div class="input-group mb-3">
+                        <div class="input-group">
                             <select id="columnElementList" type="button" multiple="multiple"
-                                class="ui dropdown"></select>
+                                class="form-control"></select>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-4">
+                <div class="form-row">
+                    <div class="col">
                         <label for="columnScopeElementList">Column Requirement Type:</label>
-                        <div class="input-group mb-3">
+                        <div class="input-group">
                             <select id="columnScopeElementList" type="button" multiple="multiple"
-                                class="ui dropdown"></select>
+                                class="form-control"></select>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <label for="rowScopeElementList">Row Requirement Type:</label>
-                        <div class="input-group mb-3">
+                        <div class="input-group">
                             <select id="rowScopeElementList" type="button" multiple="multiple"
-                                class="ui dropdown"></select>
+                                class="form-control"></select>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-4">
+                <div class="form-row">
+                    <div class="col">
                         <label for="dependencyCriteriaList">Dependency Criteria:</label>
-                        <div class="input-group mb-3">
-                            <select id="dependencyCriteriaList" type="button"></select>
+                        <div class="input-group">
+                            <select id="dependencyCriteriaList" type="button" multiple="multiple"
+                                class="form-control"></select>
                         </div>
                     </div>
-                    <div class="col-4">
-                        <div class="ui segment">
-
-                            <div class="ui toggle checkbox">
-
-                                <input id="linksOnly" type="checkbox" name="public"></input>
-                                <label>Display Links Only</label>
-                            </div>
-
+                    <div class="col">
+                        <label for="linksToggle">Display Links Only:</label>
+                        <div class="ui toggle checkbox input-group" id="linksToggle">
+                            <label></label>
+                            <input id="linksOnly" type="checkbox" name="public"></input>
                         </div>
+
                     </div>
                 </div>
-                <div class="row" style="justify-content: center;">
-                    <div class="col-8">
-                        <button type="button" id="submitButton" class="ui primary button" onClick="onSubmit()">Go to
-                            Matrix</button>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="submitButton"></label>
+                        <div class="input-group">
+                            <button type="button" id="submitButton" style="width: 100%;" class="btn btn-primary"
+                                onClick="onSubmit()">Go to
+                                Matrix</button>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="clearButton"></label>
+                        <div class="input-group">
+                            <button type="button" id="clearButton" style="width: 100%;" class="btn btn-danger"
+                                onClick="onClear()">Clear
+                                Filters</button>
+                        </div>
                     </div>
                 </div>
             </div>

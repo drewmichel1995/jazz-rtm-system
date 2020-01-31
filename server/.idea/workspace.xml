@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.env" beforeDir="false" afterPath="$PROJECT_DIR$/../.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/Matrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/Matrix.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/temp.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/temp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/widget.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/widget.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -35,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3730">
-              <caret line="243" column="87" selection-start-line="243" selection-start-column="87" selection-end-line="243" selection-end-column="87" />
+            <state relative-caret-position="17">
+              <caret line="369" column="87" selection-start-line="369" selection-start-column="87" selection-end-line="369" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -244,10 +246,10 @@
     <option name="delegateBuildToMaven" value="true" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2056" />
-    <option name="y" value="467" />
-    <option name="width" value="810" />
-    <option name="height" value="780" />
+    <option name="x" value="1072" />
+    <option name="y" value="472" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -255,6 +257,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -291,8 +295,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -390,7 +392,7 @@
     <frame x="1072" y="472" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32622603" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32995737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -467,24 +469,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.old">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-544">
-          <caret line="865" column="25" lean-forward="true" selection-start-line="865" selection-start-column="25" selection-end-line="865" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/old-template.old">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.old" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/old-template.old" />
     <entry file="file://$PROJECT_DIR$/src/main/java/config.cfg" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/template.html" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/widget.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3400">
@@ -527,6 +515,7 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.cfg" />
     <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1700">
@@ -553,13 +542,6 @@
             <element signature="method#getUniqueIDPayload#0;class#MongoHelper#0" />
             <element signature="method#collectionExists#0;class#MongoHelper#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="11" selection-end-column="62" />
         </state>
       </provider>
     </entry>
@@ -651,8 +633,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/test.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3730">
-          <caret line="243" column="87" selection-start-line="243" selection-start-column="87" selection-end-line="243" selection-end-column="87" />
+        <state relative-caret-position="17">
+          <caret line="369" column="87" selection-start-line="369" selection-start-column="87" selection-end-line="369" selection-end-column="87" />
         </state>
       </provider>
     </entry>
