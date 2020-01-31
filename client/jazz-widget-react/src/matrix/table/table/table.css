@@ -23,9 +23,8 @@
   border-collapse: collapse;
   border-width: 1px;
 
-  text-align: center;
+  text-align: left;
   empty-cells: show;
-  width: 25%;
 }
 
 .row-header {
@@ -54,6 +53,7 @@
 
 .normalCell {
   overflow: hidden;
+  width: 25%;
 }
 
 .normalCell:hover {
@@ -67,6 +67,7 @@ div.rowCountCell {
   border-right: ridge;
   text-align: center;
   position: sticky;
+  width: 25%;
 }
 
 div.colCountCell {
@@ -76,6 +77,7 @@ div.colCountCell {
   border-bottom: ridge;
   text-align: center;
   position: sticky;
+  width: 25%;
 }
 
 div.edgeCountCell {
@@ -86,6 +88,7 @@ div.edgeCountCell {
   padding: 10px 10px;
   text-align: center;
   position: sticky;
+  width: 25%;
 }
 
 th.deadCell {
