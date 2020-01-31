@@ -29,7 +29,7 @@
 
 .row-header {
   max-width: 180px;
-  max-height: 30px;
+  height: 40px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -37,7 +37,7 @@
 
 .col-header {
   height: 180px;
-  max-width: 30px;
+  width: 40px;
   white-space: nowrap;
 }
 
@@ -51,12 +51,10 @@
   width: 170px;
 }
 
-.sticky-table-cell.normalCell {
-  width: 25%;
-}
-
 .normalCell {
   overflow: hidden;
+  height: 40px;
+  width: 40px;
 }
 
 .normalCell:hover {
