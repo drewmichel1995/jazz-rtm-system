@@ -36,6 +36,10 @@
   white-space: nowrap;
 }
 
+.row-header > div {
+  overflow: hidden;
+}
+
 .col-header {
   height: 180px;
   width: 40px;
