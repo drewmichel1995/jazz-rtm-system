@@ -36,8 +36,8 @@
 }
 
 .col-header {
-  height: 180px;
-  width: 30px;
+  height: 30px;
+  max-width: 180px;
   white-space: nowrap;
 }
 
