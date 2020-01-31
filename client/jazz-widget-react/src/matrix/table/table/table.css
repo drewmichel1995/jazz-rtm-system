@@ -34,6 +34,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  padding: 0px !important;
 }
 
 .row-header > div {
@@ -58,11 +59,11 @@
 }
 
 .normalCell {
-  overflow: hidden;
-  height: 40px;
-  width: 40px;
+  overflow: visible;
   max-height: 40px;
   max-width: 40px;
+  text-align: center;
+  padding: 0px !important;
 }
 
 .normalCell:hover {
@@ -76,10 +77,10 @@ div.rowCountCell {
   border-right: ridge;
   text-align: center;
   position: sticky;
-  height: 40px;
   width: 40px;
   max-height: 40px;
   max-width: 40px;
+  padding: 0px !important;
 }
 
 div.colCountCell {
@@ -89,10 +90,10 @@ div.colCountCell {
   border-bottom: ridge;
   text-align: center;
   position: sticky;
-  height: 40px;
   width: 40px;
   max-height: 40px;
   max-width: 40px;
+  padding: 0px !important;
 }
 
 div.edgeCountCell {
@@ -103,10 +104,10 @@ div.edgeCountCell {
   padding: 10px 10px;
   text-align: center;
   position: sticky;
-  height: 40px;
-  width: 40px;
   max-height: 40px;
   max-width: 40px;
+  overflow: hidden;
+  padding: 0px !important;
 }
 
 th.deadCell {
