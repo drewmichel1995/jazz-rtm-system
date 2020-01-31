@@ -90,3 +90,12 @@ div.edgeCountCell {
 th.deadCell {
   border-style: none;
 }
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+td {
+  width: 25%;
+}
