@@ -23,8 +23,9 @@
   border-collapse: collapse;
   border-width: 1px;
 
-  text-align: left;
+  text-align: center;
   empty-cells: show;
+  width: 25%;
 }
 
 .row-header {
@@ -89,13 +90,4 @@ div.edgeCountCell {
 
 th.deadCell {
   border-style: none;
-}
-
-table {
-  table-layout: fixed;
-  width: 100%;
-}
-
-td {
-  width: 25%;
 }
