@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.env" beforeDir="false" afterPath="$PROJECT_DIR$/../.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProjectArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProjectArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/table/table/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/table/table/table.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -81,8 +81,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="302" column="46" lean-forward="true" selection-start-line="302" selection-start-column="46" selection-end-line="302" selection-end-column="46" />
+            <state relative-caret-position="552">
+              <caret line="267" column="53" selection-start-line="267" selection-start-column="53" selection-end-line="267" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ProjectArea#0;class#ProjectArea#0" />
@@ -604,8 +604,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="302" column="46" lean-forward="true" selection-start-line="302" selection-start-column="46" selection-end-line="302" selection-end-column="46" />
+        <state relative-caret-position="552">
+          <caret line="267" column="53" selection-start-line="267" selection-start-column="53" selection-end-line="267" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ProjectArea#0;class#ProjectArea#0" />

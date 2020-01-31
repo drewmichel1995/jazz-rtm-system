@@ -7,6 +7,7 @@
   text-align: center;
   padding: 0px;
   font-size: large;
+  vertical-align: middle;
 }
 
 .multi-arrow::after {
@@ -14,6 +15,7 @@
   text-align: center;
   padding: 0px;
   font-size: large;
+  vertical-align: middle;
 }
 
 /*Stuff that works*/
@@ -40,7 +42,7 @@
 
 .row-header > div {
   overflow: hidden;
-  height: 40px;
+  height: 33px;
   padding: 0px !important;
 }
 
@@ -56,7 +58,7 @@
   white-space: nowrap;
   overflow: hidden;
   transform: 
-    /* Magic Numbers */ translate(-80px, 70px)
+    /* Magic Numbers */ translate(-60px, 79px)
     /* 45 is really 360 - 45 */ rotate(270deg);
   width: 170px;
 }
@@ -68,6 +70,7 @@
   text-align: center;
   padding: 0px !important;
   border-bottom: 0px !important;
+  line-height: 29px;
 }
 
 .normalCell:hover {
@@ -84,7 +87,7 @@ div.rowCountCell {
   width: 40px;
   max-height: 40px;
   max-width: 40px;
-  padding: 0px !important;
+  padding: 6px 0px 0px 0px !important;
   border-bottom: 0px !important;
 }
 
@@ -96,9 +99,10 @@ div.colCountCell {
   text-align: center;
   position: sticky;
   width: 40px;
+  height: 40px;
   max-height: 40px;
   max-width: 40px;
-  padding: 0px !important;
+  padding: 6px 0px 0px 0px !important;
   border-bottom: 0px !important;
 }
 
@@ -110,6 +114,7 @@ div.edgeCountCell {
   padding: 10px 10px;
   text-align: center;
   position: sticky;
+  height: 40px;
   max-height: 40px;
   max-width: 40px;
   overflow: hidden;
