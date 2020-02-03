@@ -3,6 +3,9 @@ import { slideDown, slideUp } from "./anim";
 import "./style.css";
 import LinkRow from "./LinkRow";
 
+const isSearched = searchTerm => item =>
+  item.artifactName.toLowerCase().includes(searchTerm.toLowerCase());
+
 class ArtifactRow extends React.Component {
   state = { expanded: false };
 
@@ -25,7 +28,7 @@ class ArtifactRow extends React.Component {
   };
 
   render() {
-    const { folder } = this.props;
+    const { folder, searchTerm } = this.props;
     return [
       <tr key="main" onClick={this.toggleExpander}>
         <td className="uk-text-nowrap">{folder.folderName}</td>
@@ -44,9 +47,11 @@ class ArtifactRow extends React.Component {
                     <th>Number of Links</th>
                   </thead>
                   <tbody>
-                    {folder.artifacts.map(artifact => (
-                      <LinkRow artifact={artifact} />
-                    ))}
+                    {folder.artifacts
+                      .filter(isSearched(searchTerm))
+                      .map(artifact => (
+                        <LinkRow artifact={artifact} />
+                      ))}
                   </tbody>
                 </table>
               </div>

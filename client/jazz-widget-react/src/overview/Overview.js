@@ -6,7 +6,10 @@ import FadeIn from "react-fade-in";
 import ModalContainer from "../common/ModalContainer";
 
 const isSearched = searchTerm => item =>
-  item.folderName.toLowerCase().includes(searchTerm.toLowerCase());
+  item.folderName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  item.artifacts.some(a =>
+    a.artifactName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
 class Overview extends React.Component {
   constructor(props) {
@@ -87,7 +90,7 @@ class Overview extends React.Component {
               </thead>
               <tbody>
                 {data.folders.filter(isSearched(searchTerm)).map(item => (
-                  <ArtifactRow folder={item} />
+                  <ArtifactRow folder={item} searchTerm={searchTerm} />
                 ))}
               </tbody>
             </Table>
