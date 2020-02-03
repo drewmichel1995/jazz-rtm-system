@@ -2,7 +2,7 @@ import React from "react";
 import { slideDown, slideUp } from "./anim";
 import "./style.css";
 import LinkRow from "./LinkRow";
-import { Accordion, Table } from "react-bootstrap";
+import { Accordion, Table, Button } from "react-bootstrap";
 
 const isSearched = searchTerm => item =>
   item.artifactName.toLowerCase().includes(searchTerm.toLowerCase());
