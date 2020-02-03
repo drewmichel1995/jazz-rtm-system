@@ -2,7 +2,7 @@ import React from "react";
 import { slideDown, slideUp } from "./anim";
 import "./style.css";
 import LinkRow from "./LinkRow";
-import { Accordion, Table, Button } from "react-bootstrap";
+import { Accordion, Table } from "react-bootstrap";
 
 const isSearched = searchTerm => item =>
   item.artifactName.toLowerCase().includes(searchTerm.toLowerCase());
@@ -31,11 +31,11 @@ class ArtifactRow extends React.Component {
   render() {
     const { folder, searchTerm } = this.props;
     return (
-      <Accordion>
-        <Accordion.Toggle as="tr" eventKey="0">
-          <td>{folder.folderName}</td>
-          <td>{folder.numArtifacts}</td>
+      <Accordion as="tr">
+        <Accordion.Toggle as="td" eventKey="0">
+          {folder.folderName}
         </Accordion.Toggle>
+        <td>{folder.numArtifacts}</td>
         {!folder.numArtifacts < 1 && (
           <Accordion.Collapse eventKey="0">
             <Table striped bordered hover>
