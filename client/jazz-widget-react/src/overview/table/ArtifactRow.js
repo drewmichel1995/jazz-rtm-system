@@ -1,5 +1,4 @@
 import React from "react";
-import { slideDown, slideUp } from "./anim";
 import "./style.css";
 import LinkRow from "./LinkRow";
 import { Accordion, Table } from "react-bootstrap";
@@ -14,7 +13,7 @@ class ArtifactRow extends React.Component {
       <tr>
         <td>
           <Accordion>
-            <Accordion.Toggle eventKey="0">
+            <Accordion.Toggle as="div" eventKey="0">
               {folder.folderName}
             </Accordion.Toggle>
 
