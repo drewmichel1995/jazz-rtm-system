@@ -31,7 +31,7 @@ class ArtifactRow extends React.Component {
   render() {
     const { folder, searchTerm } = this.props;
     return (
-      <div>
+      <Accordion>
         <Accordion.Toggle as={Button} eventKey="0">
           <tr key="main">
             <td className="uk-text-nowrap">{folder.folderName}</td>
@@ -57,7 +57,7 @@ class ArtifactRow extends React.Component {
             </Table>
           </Accordion.Collapse>
         )}
-      </div>
+      </Accordion>
     );
   }
 }
