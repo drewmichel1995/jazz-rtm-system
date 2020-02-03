@@ -458,11 +458,12 @@ function onSubmit(){
 
 function onClear(){
 		payload = getPayload();
-		var $rowDropdown = $("#rowElementList").empty();
-		var $columnDropdown = $("#columnElementList").empty();
-		var $rowScopeDropdown = $("#rowScopeElementList").empty();
-		var $columnScopeDropdown = $("#columnScopeElementList").empty();
-		var $dependencyDropdown = $("#dependencyCriteriaList").empty();
+		var $rowDropdown = $("#rowElementList").val([]);
+		var $columnDropdown = $("#columnElementList").val([]);
+		var $rowScopeDropdown = $("#rowScopeElementList").val([]);
+		var $columnScopeDropdown = $("#columnScopeElementList").val([]);
+		var $dependencyDropdown = $("#dependencyCriteriaList").val([]);
+		$("#linksOnly").attr("checked", false);
 }
 
 function setFieldOnChange(){

@@ -187,7 +187,7 @@ public class JazzHTTP {
             }catch(Exception ex){
 
             }
-            
+
             temp.put("success", false);
             temp.put("analytics", new JSONObject());
             return temp.toString();
