@@ -34,30 +34,28 @@ class LinkRow extends React.Component {
       </tr>,
       this.state.expanded && !artifact.numLinks < 1 && (
         <tr className="expandable" key="tr-expander">
-          <td className="uk-background-muted" colSpan={6}>
-            <div ref="expanderBody" className="inner uk-grid">
-              <div className="uk-width-1-4 uk-text-center">
-                <table>
-                  <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Link Type</th>
-                    <th>Link Category</th>
-                  </thead>
-                  <tbody>
-                    {artifact.links.map(link => (
-                      <tr>
-                        <td>{link.id}</td>
-                        <td>{link.linkName}</td>
-                        <td>{link.linkType}</td>
-                        <td>{link.category}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+          <div ref="expanderBody" className="inner uk-grid">
+            <div className="uk-text-center">
+              <table>
+                <thead>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Link Type</th>
+                  <th>Link Category</th>
+                </thead>
+                <tbody>
+                  {artifact.links.map(link => (
+                    <tr>
+                      <td>{link.id}</td>
+                      <td>{link.linkName}</td>
+                      <td>{link.linkType}</td>
+                      <td>{link.category}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </td>
+          </div>
         </tr>
       )
     ];

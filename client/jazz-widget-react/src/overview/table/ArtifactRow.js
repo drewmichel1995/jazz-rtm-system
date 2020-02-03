@@ -36,27 +36,25 @@ class ArtifactRow extends React.Component {
       </tr>,
       this.state.expanded && !folder.numArtifacts < 1 && (
         <tr className="expandable" key="tr-expander">
-          <td className="uk-background-muted">
-            <div ref="expanderBody" className="inner uk-grid">
-              <div className="uk-width-1-4 uk-text-center">
-                <table>
-                  <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Number of Links</th>
-                  </thead>
-                  <tbody>
-                    {folder.artifacts
-                      .filter(isSearched(searchTerm))
-                      .map(artifact => (
-                        <LinkRow artifact={artifact} />
-                      ))}
-                  </tbody>
-                </table>
-              </div>
+          <div ref="expanderBody" className="inner uk-grid">
+            <div className="uk-text-center">
+              <table>
+                <thead>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Number of Links</th>
+                </thead>
+                <tbody>
+                  {folder.artifacts
+                    .filter(isSearched(searchTerm))
+                    .map(artifact => (
+                      <LinkRow artifact={artifact} />
+                    ))}
+                </tbody>
+              </table>
             </div>
-          </td>
+          </div>
         </tr>
       )
     ];
