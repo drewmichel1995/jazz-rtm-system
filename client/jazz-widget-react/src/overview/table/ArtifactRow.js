@@ -8,54 +8,39 @@ const isSearched = searchTerm => item =>
   item.artifactName.toLowerCase().includes(searchTerm.toLowerCase());
 
 class ArtifactRow extends React.Component {
-  state = { expanded: false };
-
-  toggleExpander = e => {
-    if (e.target.type === "checkbox") return;
-
-    if (!this.state.expanded) {
-      this.setState({ expanded: true }, () => {
-        if (this.refs.expanderBody) {
-          slideDown(this.refs.expanderBody);
-        }
-      });
-    } else {
-      slideUp(this.refs.expanderBody, {
-        onComplete: () => {
-          this.setState({ expanded: false });
-        }
-      });
-    }
-  };
-
   render() {
     const { folder, searchTerm } = this.props;
     return (
-      <Accordion as="tr">
-        <Accordion.Toggle as="td" eventKey="0">
-          {folder.folderName}
-        </Accordion.Toggle>
+      <tr>
+        <td>
+          <Accordion>
+            <Accordion.Toggle eventKey="0">
+              {folder.folderName}
+            </Accordion.Toggle>
+
+            {!folder.numArtifacts < 1 && (
+              <Accordion.Collapse eventKey="0">
+                <Table striped bordered hover>
+                  <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Number of Links</th>
+                  </thead>
+                  <tbody>
+                    {folder.artifacts
+                      .filter(isSearched(searchTerm))
+                      .map(artifact => (
+                        <LinkRow artifact={artifact} />
+                      ))}
+                  </tbody>
+                </Table>
+              </Accordion.Collapse>
+            )}
+          </Accordion>
+        </td>
         <td>{folder.numArtifacts}</td>
-        {!folder.numArtifacts < 1 && (
-          <Accordion.Collapse eventKey="0">
-            <Table striped bordered hover>
-              <thead>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Number of Links</th>
-              </thead>
-              <tbody>
-                {folder.artifacts
-                  .filter(isSearched(searchTerm))
-                  .map(artifact => (
-                    <LinkRow artifact={artifact} />
-                  ))}
-              </tbody>
-            </Table>
-          </Accordion.Collapse>
-        )}
-      </Accordion>
+      </tr>
     );
   }
 }
