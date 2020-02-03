@@ -32,7 +32,7 @@ class ArtifactRow extends React.Component {
     const { folder, searchTerm } = this.props;
     return (
       <Accordion>
-        <Accordion.Toggle as={tr} eventKey="0">
+        <Accordion.Toggle as="tr" eventKey="0">
           <td>{folder.folderName}</td>
           <td>{folder.numArtifacts}</td>
         </Accordion.Toggle>
