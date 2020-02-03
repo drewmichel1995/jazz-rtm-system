@@ -31,36 +31,31 @@ class ArtifactRow extends React.Component {
   render() {
     const { folder, searchTerm } = this.props;
     return (
-      <tr>
-        <td>
-          {folder.folderName}
-          <Accordion>
-            <Accordion.Toggle as={Button} eventKey="0">
-              {folder.folderName}
-            </Accordion.Toggle>
-            {!folder.numArtifacts < 1 && (
-              <Accordion.Collapse eventKey="0">
-                <Table striped bordered hover>
-                  <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Number of Links</th>
-                  </thead>
-                  <tbody>
-                    {folder.artifacts
-                      .filter(isSearched(searchTerm))
-                      .map(artifact => (
-                        <LinkRow artifact={artifact} />
-                      ))}
-                  </tbody>
-                </Table>
-              </Accordion.Collapse>
-            )}
-          </Accordion>
-        </td>
-        <td>{folder.numArtifacts}</td>
-      </tr>
+      <Accordion>
+        <Accordion.Toggle as={tr} eventKey="0">
+          <td>{folder.folderName}</td>
+          <td>{folder.numArtifacts}</td>
+        </Accordion.Toggle>
+        {!folder.numArtifacts < 1 && (
+          <Accordion.Collapse eventKey="0">
+            <Table striped bordered hover>
+              <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Number of Links</th>
+              </thead>
+              <tbody>
+                {folder.artifacts
+                  .filter(isSearched(searchTerm))
+                  .map(artifact => (
+                    <LinkRow artifact={artifact} />
+                  ))}
+              </tbody>
+            </Table>
+          </Accordion.Collapse>
+        )}
+      </Accordion>
     );
   }
 }
