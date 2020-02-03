@@ -173,11 +173,22 @@ public class JazzHTTP {
 
         get("/getAnalytics/:projectURI", (req, res) -> {
 
-            System.out.println("Received Request /getAnalytics");
-            AnalyticsHelper analytics = new AnalyticsHelper(req.params(":projectURI"));
-            getRes(res, "application/json");
+            if(decodeCookie(req.cookie("jazz_rtm_cookie")).contains(req.params(":projectURI"))){
+                System.out.println("Received Request /getAnalytics");
+                AnalyticsHelper analytics = new AnalyticsHelper(req.params(":projectURI"));
+                getRes(res, "application/json");
+                JSONObject temp = new JSONObject();
+                temp.put("success", true);
+                temp.put("analytics", analytics.toJSON());
 
-            return analytics.toJSON();
+                return temp.toString();
+            }else{
+                JSONObject temp = new JSONObject();
+                temp.put("success", false);
+                temp.put("analytics", new JSONObject());
+                return temp.toString();
+            }
+
         });
 
         post("/tableJSON/:projectURI", (req, res) -> {

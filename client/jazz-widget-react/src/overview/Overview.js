@@ -3,6 +3,7 @@ import { Table, Card, Form } from "react-bootstrap";
 import ArtifactRow from "./table/ArtifactRow";
 import Loading from "../common/loading/Loading";
 import FadeIn from "react-fade-in";
+import ModalContainer from "../common/ModalContainer";
 
 const isSearched = searchTerm => item =>
   item.folderName.toLowerCase().includes(searchTerm.toLowerCase());
@@ -14,7 +15,8 @@ class Overview extends React.Component {
       data: {},
       loading: true,
       done: false,
-      searchTerm: ""
+      searchTerm: "",
+      validCookie: false
     };
 
     this.toggleLoading = this.toggleLoading.bind(this);
@@ -29,7 +31,8 @@ class Overview extends React.Component {
       .then(res => res.json())
       .then(result => {
         this.setState({
-          data: result,
+          data: result.analytics,
+          validCookie: result.success,
           loading: false
         });
 
@@ -52,11 +55,12 @@ class Overview extends React.Component {
   }
 
   render() {
-    const { data, loading, done, searchTerm } = this.state;
+    const { data, loading, done, searchTerm, validCookie } = this.state;
 
     return (
       <div>
-        {done && (
+        {done && !validCookie && <ModalContainer />}
+        {done && validCookie && (
           <FadeIn>
             <Card>
               <Card.Header as="h5">{data.projectName}</Card.Header>
