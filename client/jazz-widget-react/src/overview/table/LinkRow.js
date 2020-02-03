@@ -8,35 +8,37 @@ class LinkRow extends React.Component {
     return (
       <tr key="main">
         <td>
-          <Accordion.Toggle as="div" eventKey="1">
-            {artifact.artifactID}
-          </Accordion.Toggle>
+          <Accordion>
+            <Accordion.Toggle as="div" eventKey="1">
+              {artifact.artifactID}
+            </Accordion.Toggle>
+            {!artifact.numLinks < 1 && (
+              <Accordion.Collapse eventKey="1">
+                <Table striped bordered hover>
+                  <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Link Type</th>
+                    <th>Link Category</th>
+                  </thead>
+                  <tbody>
+                    {artifact.links.map(link => (
+                      <tr>
+                        <td>{link.id}</td>
+                        <td>{link.linkName}</td>
+                        <td>{link.linkType}</td>
+                        <td>{link.category}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Accordion.Collapse>
+            )}
+          </Accordion>
         </td>
         <td>{artifact.artifactName}</td>
         <td>{artifact.artifactType}</td>
         <td>{artifact.numLinks}</td>
-        {!artifact.numLinks < 1 && (
-          <Accordion.Collapse eventKey="1">
-            <Table striped bordered hover>
-              <thead>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Link Type</th>
-                <th>Link Category</th>
-              </thead>
-              <tbody>
-                {artifact.links.map(link => (
-                  <tr>
-                    <td>{link.id}</td>
-                    <td>{link.linkName}</td>
-                    <td>{link.linkType}</td>
-                    <td>{link.category}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Accordion.Collapse>
-        )}
       </tr>
     );
   }
