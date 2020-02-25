@@ -120,7 +120,7 @@ input:checked + .slider:before {
 
 
     <body>
-        <div id="dialog-confirm" title="Large Matrix Warning!" hidden="hidden">
+        <div id="dialog-confirm" title="Large Matrix Warning!">
             <p id="dialogText">
                 <h4>The requested matrix may cause the application to run sluggishly due to browser limitations.</h4>
                 <h5>To avoid this, narrow the scopes of your matrix.</h5>
@@ -147,6 +147,13 @@ input:checked + .slider:before {
                 </div>
 
                 <div class="form-row">
+                	<div class="col">
+                        <label for="columnElementList"><strong>Column Folder Scope:</strong></label>
+                        <div class="input-group">
+                            <select id="columnElementList" type="button" multiple="multiple"
+                                class="form-control"></select>
+                        </div>
+                    </div>
                     <div class="col">
                         <label for="rowElementList"><strong>Row Folder Scope:</strong></label>
                         <div class="input-group">
@@ -154,13 +161,7 @@ input:checked + .slider:before {
                                 placeholder="None"></select>
                         </div>
                     </div>
-                    <div class="col">
-                        <label for="columnElementList"><strong>Column Folder Scope:</strong></label>
-                        <div class="input-group">
-                            <select id="columnElementList" type="button" multiple="multiple"
-                                class="form-control"></select>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="form-row">
@@ -304,7 +305,6 @@ function httpGet(theUrl) {
 }
 
 function httpPostPayload(theUrl) {
-	console.log(payload);
 
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "POST", theUrl, false );
@@ -318,7 +318,7 @@ function httpPostPayload(theUrl) {
 }
 
 function httpPostCookie(theUrl, data) {
-	console.log(payload);
+
 
     var xmlHttp = new XMLHttpRequest();
 	xmlHttp.withCredentials = true;
@@ -326,7 +326,7 @@ function httpPostCookie(theUrl, data) {
     xmlHttp.send( JSON.stringify({
 		"projectAreas": data
 	}) );
-	console.log(xmlHttp.cookie);
+
 	document.cookie = xmlHttp.cookie;
     //return xmlHttp.responseText;
 }
@@ -378,7 +378,7 @@ function loadFields(theUrl){
 function loadProjectAreas(){
 	
 	var projects = getProjectInfo();
-	console.log(projects);
+
 	
 	httpPostCookie(serverURL + "getCookie/", projects);
 	projects.map(item => (
@@ -432,9 +432,9 @@ function initFields(){
 }
 
 function onSubmit(){
-	console.log("Button clicked");
+
 	var result = httpPostPayload(serverURL + "storePayload/")
-	console.log(result);
+
 	url = result.url;
 	var uniqueID = result.uniqueID;
 	var size = httpGet(serverURL + "getProjectAreaSize/" + uniqueID);
@@ -458,37 +458,57 @@ function onSubmit(){
 
 function onClear(){
 		payload = getPayload();
-		var $rowDropdown = $("#rowElementList").val([]);
-		var $columnDropdown = $("#columnElementList").val([]);
-		var $rowScopeDropdown = $("#rowScopeElementList").val([]);
-		var $columnScopeDropdown = $("#columnScopeElementList").val([]);
-		var $dependencyDropdown = $("#dependencyCriteriaList").val([]);
+		$("#rowElementList").val([]).trigger('change');
+		$("#columnElementList").val([]).trigger('change');
+		$("#rowScopeElementList").val([]).trigger('change');
+		$("#columnScopeElementList").val([]).trigger('change');
+		$("#dependencyCriteriaList").val([]).trigger('change');
 		$("#linksOnly").attr("checked", false);
 }
 
 function setFieldOnChange(){
 		$("#rowElementList").on('change', function() {
-			payload.rows = $("#rowElementList").val().map(item => ({"name":item}));
+			if($("#rowElementList").val()){
+				payload.rows = $("#rowElementList").val().map(item => ({"name":item}));
+			}else{
+				payload.rows = [];
+			}
 			gadgets.window.adjustHeight();
 		});
 
 		$("#columnElementList").on('change', function() {
-			payload.columns = $("#columnElementList").val().map(item => ({"name":item}));
+			if($("#columnElementList").val()){
+				payload.columns = $("#columnElementList").val().map(item => ({"name":item}));
+			}else{
+				payload.columns = [];
+			}
 			gadgets.window.adjustHeight();
 		});
 
 		$("#rowScopeElementList").on('change', function() {
-			payload.rowTypes = $("#rowScopeElementList").val().map(item => ({"name":item}));
+			if($("#rowScopeElementList").val()){
+				payload.rowTypes = $("#rowScopeElementList").val().map(item => ({"name":item}));
+			}else{
+				payload.rowTypes = [];
+			}
 			gadgets.window.adjustHeight();
 		});
 
 		$("#columnScopeElementList").on('change', function() {
-			payload.columnTypes = $("#columnScopeElementList").val().map(item => ({"name":item}));
+			if($("#columnScopeElementList").val()){
+				payload.columnTypes = $("#columnScopeElementList").val().map(item => ({"name":item}));
+			}else{
+				payload.columnTypes = [];
+			}
 			gadgets.window.adjustHeight();
 		});
 
 		$("#dependencyCriteriaList").on('change', function() {
-			payload.dependencies = $("#dependencyCriteriaList").val().map(item => ({"name":item}));
+			if($("#dependencyCriteriaList").val()){
+				payload.dependencies = $("#dependencyCriteriaList").val().map(item => ({"name":item}));
+			}else{
+				payload.dependencies = [];
+			}
 			gadgets.window.adjustHeight();
 		});
 
@@ -501,7 +521,7 @@ function setFieldOnChange(){
 
 		$("#projectAreaList").on('change', function() {
 			projectArea = this.value;
-			console.log(this.value);
+
 			loadFields(serverURL + "getFields/" + projectArea);
 		});
 }

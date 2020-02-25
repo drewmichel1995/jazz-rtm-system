@@ -125,7 +125,8 @@ class Matrix extends React.Component {
       rowSearchTerm,
       isEmpty,
       fields,
-      payload
+      payload,
+      projectName
     } = this.state;
 
     return (
@@ -141,6 +142,7 @@ class Matrix extends React.Component {
               fields={fields}
               payload={payload}
               reload={this.reload}
+              projectName={projectName}
             />
             {!isEmpty && done ? (
               <Table

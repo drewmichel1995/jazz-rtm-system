@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import MatrixFilterOptions from "./MatrixFilterOptions";
 import SearchFormContainer from "./SearchFilterOptions";
-import { Button, ButtonGroup } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import FadeIn from "react-fade-in";
 
 class OptionsToolbar extends Component {
@@ -54,24 +54,22 @@ class OptionsToolbar extends Component {
       showID,
       payload,
       fields,
-      reload
+      reload,
+      projectName
     } = this.props;
     return (
-      <div style={{ marginBottom: "20px", marginTop: "0px" }}>
-        <ButtonGroup aria-label="Basic example">
-          <Button
-            variant={this.state.matrixVariant}
-            onClick={this.onMatrixChange}
-          >
-            {this.state.matrixText}
-          </Button>
-          <Button
-            variant={this.state.searchVariant}
-            onClick={this.onSearchChange}
-          >
-            {this.state.searchText}
-          </Button>
-        </ButtonGroup>
+      <Container>
+        <Navbar variant="dark">
+          <Navbar.Brand>{projectName}</Navbar.Brand>
+          <Nav>
+            <Nav.Link onClick={this.onMatrixChange}>
+              {this.state.matrixText}
+            </Nav.Link>
+            <Nav.Link onClick={this.onSearchChange}>
+              {this.state.searchText}
+            </Nav.Link>
+          </Nav>
+        </Navbar>
         <div>
           {this.state.showMatrix && (
             <FadeIn>
@@ -93,7 +91,7 @@ class OptionsToolbar extends Component {
             </FadeIn>
           )}
         </div>
-      </div>
+      </Container>
     );
   }
 }

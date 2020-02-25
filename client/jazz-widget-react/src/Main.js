@@ -24,17 +24,6 @@ class Main extends Component {
     return (
       <HashRouter>
         <div>
-          <h1>{this.state.title}</h1>
-          <ul className="header">
-            <li>
-              <NavLink exact to={`/matrix/${this.state.uniqueID}`}>
-                Traceability Matrix
-              </NavLink>
-              <NavLink exact to={`/overview/${this.state.uri}`}>
-                Project Overview
-              </NavLink>
-            </li>
-          </ul>
           <div className="content">
             <Route
               exact
@@ -57,11 +46,6 @@ class Main extends Component {
               render={props => (
                 <Matrix {...props} onTitleChange={this.onTitleChange} />
               )}
-            />
-            <Route
-              exact
-              path="/overview/:projectURI"
-              render={props => <Overview {...props} />}
             />
           </div>
         </div>
