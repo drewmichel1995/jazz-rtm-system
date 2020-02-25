@@ -27,7 +27,10 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    var url = "/server/getAnalytics/" + this.props.match.params.projectURI;
+    var url =
+      process.env.REACT_APP_SERVER_URL +
+      "/server/getAnalytics/" +
+      this.props.match.params.projectURI;
     fetch(url, {
       method: "get"
     })

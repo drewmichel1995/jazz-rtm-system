@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="cb849eb7-7fb2-4658-bb9b-d791377bcd30" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.env" beforeDir="false" afterPath="$PROJECT_DIR$/../.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JazzHTTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JazzHTTP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/Matrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/Matrix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/MatrixFilterOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/matrix/options/MatrixFilterOptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/jazz-widget-react/src/overview/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/jazz-widget-react/src/overview/Overview.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="276" column="52" selection-start-line="276" selection-start-column="52" selection-end-line="276" selection-end-column="52" />
+            <state relative-caret-position="484">
+              <caret line="269" column="5" lean-forward="true" selection-start-line="269" selection-start-column="5" selection-end-line="269" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#readBytes#0;class#JazzHTTP#0" />
@@ -645,8 +646,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="276" column="52" selection-start-line="276" selection-start-column="52" selection-end-line="276" selection-end-column="52" />
+        <state relative-caret-position="484">
+          <caret line="269" column="5" lean-forward="true" selection-start-line="269" selection-start-column="5" selection-end-line="269" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#readBytes#0;class#JazzHTTP#0" />
