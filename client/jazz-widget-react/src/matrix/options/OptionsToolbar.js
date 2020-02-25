@@ -58,7 +58,7 @@ class OptionsToolbar extends Component {
       projectName
     } = this.props;
     return (
-      <Container>
+      <div>
         <Navbar variant="dark">
           <Navbar.Brand>{projectName}</Navbar.Brand>
           <Nav>
@@ -91,7 +91,7 @@ class OptionsToolbar extends Component {
             </FadeIn>
           )}
         </div>
-      </Container>
+      </div>
     );
   }
 }
