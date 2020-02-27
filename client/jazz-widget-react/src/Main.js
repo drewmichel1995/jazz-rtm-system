@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Route, NavLink, HashRouter } from "react-router-dom";
+import { Route, HashRouter } from "react-router-dom";
 import Matrix from "./matrix/Matrix";
-import Overview from "./overview/Overview";
+import Thpace from "../node_modules/thpace/thpace.min.js";
 
 class Main extends Component {
   constructor(props) {
@@ -13,6 +13,11 @@ class Main extends Component {
     };
 
     this.onTitleChange = this.onTitleChange.bind(this);
+    this.setBackground = this.setBackground.bind(this);
+  }
+
+  componentDidMount() {
+    this.setBackground();
   }
 
   onTitleChange = (title, uri, uniqueID) => {
@@ -20,10 +25,25 @@ class Main extends Component {
     window.history.pushState({}, null, "/#/matrix/" + uniqueID);
   };
 
+  setBackground = () => {
+    const canvas = document.getElementById("background");
+
+    const settings = {
+      color1: "#43C6AC",
+      color2: "#191654"
+    };
+
+    Thpace.create(canvas, settings);
+  };
+
   render() {
     return (
       <HashRouter>
         <div>
+          <div id="bg">
+            <canvas id="background"></canvas>
+          </div>
+
           <div className="content">
             <Route
               exact

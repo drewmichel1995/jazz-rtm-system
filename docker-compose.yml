@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   client:
@@ -12,7 +12,7 @@ services:
     dns:
       - 192.0.2.53
     restart: always
-      
+
   server:
     container_name: jazz-widget-server
     build: ./server
@@ -22,21 +22,21 @@ services:
     env_file:
       - .env
     restart: always
-    
+
   db:
     container_name: jazz-widget-mongo
     image: mongo:latest
     expose:
-        - "27017"
+      - "27017"
     restart: always
-      
+
   proxy:
     container_name: jazz-widget-proxy
     image: nginx:1.16.1
     ports:
-      - '80:80'
-      - '443:443'
-      - '27017:27017'
+      - "80:80"
+      - "443:443"
+      - "27017:27017"
     restart: always
 
     volumes:

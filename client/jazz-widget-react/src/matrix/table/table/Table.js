@@ -27,7 +27,7 @@ class Table extends Component {
     return loading ? (
       <Loading loading={loading} />
     ) : (
-      <div style={{ width: "100%", height: "800px" }}>
+      <div style={{ height: "800px" }} className="table-holder">
         <StickyTable stickyHeaderCount={1} stickyColumnCount={1}>
           <Row key="columnHeaders">
             <Cell key="holder">

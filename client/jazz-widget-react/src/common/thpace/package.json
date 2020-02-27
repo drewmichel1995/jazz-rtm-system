@@ -1,0 +1,77 @@
+{
+  "_from": "thpace",
+  "_id": "thpace@1.1.1",
+  "_inBundle": false,
+  "_integrity": "sha512-/gTlQZlXYG/eDa1b2PVjOTp/tPtpW8hxNtrtD1z3if7B6VZDmHPddFnoTsf39y1l/XBPWcw7XrWmBFfyuWEA4Q==",
+  "_location": "/thpace",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "thpace",
+    "name": "thpace",
+    "escapedName": "thpace",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/thpace/-/thpace-1.1.1.tgz",
+  "_shasum": "0ed5148febcaf435bb6de6c44e0dd2659a988259",
+  "_spec": "thpace",
+  "_where": "C:\\Users\\michell\\Development\\jazz-rtm-system\\client\\jazz-widget-react",
+  "author": {
+    "name": "Braedin Jared"
+  },
+  "bugs": {
+    "url": "https://github.com/ImBaedin/Thpace/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "color-interpolate": "^1.0.5",
+    "delaunator": "^4.0.1"
+  },
+  "deprecated": false,
+  "description": "Thpace is a pretty canvas creation of mine. It makes a space animation out of triangles.",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-object-assign": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-typescript": "^7.8.3",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@types/chai": "^4.2.9",
+    "@types/delaunator": "^3.0.0",
+    "@types/mocha": "^7.0.1",
+    "chai": "^4.2.0",
+    "mocha": "^7.0.1",
+    "rollup": "^1.31.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-terser": "^5.2.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "homepage": "https://github.com/ImBaedin/Thpace#readme",
+  "jsdelivr": "thpace.min.js",
+  "license": "ISC",
+  "main": "thpace.js",
+  "module": "lib/index.js",
+  "name": "thpace",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImBaedin/Thpace.git"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "build-ts": "tsc",
+    "start": "rollup -cw",
+    "test": "mocha -r ts-node/register src/**/test.ts"
+  },
+  "types": "lib/index.d.ts",
+  "unpkg": "thpace.min.js",
+  "version": "1.1.1"
+}

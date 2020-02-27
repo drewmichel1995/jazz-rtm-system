@@ -188,9 +188,9 @@ class MatrixFilterOptions extends Component {
       <div style={{ margin: "20px" }}>
         {validCookie && (
           <Form>
-            <Row>
-              <Col>
-                <Form.Label>Column Folders</Form.Label>
+            <Row className="matrix-options-row">
+              <Col sm={4}>
+                <Form.Label className="form-text">Column Folders</Form.Label>
                 <MultiSelect
                   items={parentFolderOptions.map(item => ({
                     label: item.label,
@@ -199,10 +199,11 @@ class MatrixFilterOptions extends Component {
                   onChange={this.handleColumnFolders}
                   selectedItems={columnSelected}
                   generateRandom={this.generateRandom}
+                  showSelectedItems={false}
                 />
               </Col>
-              <Col>
-                <Form.Label>Row Folders</Form.Label>
+              <Col sm={4}>
+                <Form.Label className="form-text">Row Folders</Form.Label>
                 <MultiSelect
                   items={parentFolderOptions.map(item => ({
                     label: item.label,
@@ -211,6 +212,7 @@ class MatrixFilterOptions extends Component {
                   onChange={this.handleRowFolders}
                   selectedItems={rowSelected}
                   generateRandom={this.generateRandom}
+                  showSelectedItems={false}
                 />
               </Col>
               <Col>
@@ -223,6 +225,7 @@ class MatrixFilterOptions extends Component {
                     placeholder="Link Types"
                     isMulti
                     isClearable={true}
+                    className="point"
                   />
                 </Form.Group>
                 <Form.Group>
@@ -230,9 +233,10 @@ class MatrixFilterOptions extends Component {
                     options={artifactTypes}
                     value={columnArtifactTypeSelected}
                     onChange={this.handleColumnTypes}
-                    placeholder="Column Requirement Type"
+                    placeholder="Column Type"
                     isMulti
                     isClearable={true}
+                    className="point"
                   />
                 </Form.Group>
                 <Form.Group>
@@ -240,33 +244,34 @@ class MatrixFilterOptions extends Component {
                     options={artifactTypes}
                     value={rowArtifactTypeSelected}
                     onChange={this.handleRowTypes}
-                    placeholder="Row Requirement Type"
+                    placeholder="Row Type"
                     isMulti
                     isClearable={true}
+                    className="point"
                   />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className="point">
                   <Form.Check
                     type="switch"
                     id="links-only-switch"
                     label="Display Links Only"
                     onChange={this.toggleLinksOnly}
                     checked={linksOnlySelected}
+                    className="form-text"
                   />
                 </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={{ span: 6 }}>
-                <Button variant="success" onClick={this.handleFormSubmit} block>
-                  Submit
-                </Button>
-              </Col>
-
-              <Col md={{ span: 6 }}>
-                <Button variant="danger" onClick={this.handleClearForm} block>
-                  Clear Selected
-                </Button>
+                <Row className="button-row">
+                  <Button
+                    variant="success"
+                    onClick={this.handleFormSubmit}
+                    block
+                  >
+                    Submit
+                  </Button>
+                  <Button variant="danger" onClick={this.handleClearForm} block>
+                    Clear Selected
+                  </Button>
+                </Row>
               </Col>
             </Row>
           </Form>

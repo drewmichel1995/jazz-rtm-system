@@ -1,68 +1,146 @@
 body {
-    background-color: #FFFFFF;
-    padding: 20px;
-    margin: 0;
-  }
-  h1, h2, p, ul, li {
-    font-family: sans-serif;
-  }
-  ul.header li {
-    display: inline;
-    list-style-type: none;
-    margin: 0;
-  }
-  ul.header {
-    background-color: #111;
-    padding: 0;
-  }
-  ul.header li a {
-    color: #FFF;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 20px;
-    display: inline-block;
-  }
-  .content {
-    background-color: #FFF;
-    padding: 20px;
-  }
-  .content h2 {
-    padding: 0;
-    margin: 0;
-  }
-  .content li {
-    margin-bottom: 10px;
-  }
+  background-color: #ffffff;
+  padding: 0px;
+  margin: auto;
+}
+h1,
+h2,
+p,
+ul,
+li {
+  font-family: sans-serif;
+}
+ul.header li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+}
+ul.header {
+  background-color: #111;
+  padding: 0;
+}
+ul.header li a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 20px;
+  display: inline-block;
+}
+.content {
+  background-color: #fff;
+  padding: 10px;
+  margin: 10px;
+  margin-top: 0px;
+}
+.content h2 {
+  padding: 0;
+  margin: 0;
+}
+.content li {
+  margin-bottom: 10px;
+}
 
-  .active {
-    background-color: #0099FF;
-  }
+.active {
+  background-color: #0099ff;
+}
 
-  .datePicker {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+.datePicker {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
-  input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  input[type=submit]:hover {
-    background-color: #45a049;
-  }
+input[type="submit"] {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
-  label {
-    font : .8em "typewriter", sans-serif;
-  }
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+label {
+  font: 0.8em "typewriter", sans-serif;
+}
+
+.nav-bar {
+  padding-bottom: 1rem;
+}
+
+.options {
+  padding: 1px;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.brand {
+  font-size: min(3vw, 25px);
+  text-overflow: ellipsis;
+}
+
+.navbar-toggler {
+  padding: 0;
+  margin-right: 20px;
+}
+
+i {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 20px;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+#bg {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.button-row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.form-text {
+  color: white;
+}
+
+.matrix-options-row {
+  margin-right: 0px !important;
+}
+
+.search-box {
+  margin-left: 0px;
+  margin-bottom: 10px;
+}
+
+.search-col {
+  margin-right: 20px;
+}
+
+.table-holder {
+  margin: 20px;
+}
+
+.point {
+  cursor: pointer;
+}

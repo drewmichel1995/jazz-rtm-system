@@ -127,25 +127,24 @@ class Matrix extends React.Component {
       rowSearchTerm,
       isEmpty,
       fields,
-      payload,
-      projectName
+      payload
     } = this.state;
 
     return (
       <div>
+        <OptionsToolbar
+          onRowChange={this.onRowSearchChange}
+          onColumnChange={this.onColumnSearchChange}
+          triggerShowID={this.triggerShowID}
+          showID={showID}
+          onTitleChange={this.props.onTitleChange}
+          fields={fields}
+          payload={payload}
+          reload={this.reload}
+          projectName={payload.projectName}
+        />
         {done && validCookie && (
           <FadeIn>
-            <OptionsToolbar
-              onRowChange={this.onRowSearchChange}
-              onColumnChange={this.onColumnSearchChange}
-              triggerShowID={this.triggerShowID}
-              showID={showID}
-              onTitleChange={this.props.onTitleChange}
-              fields={fields}
-              payload={payload}
-              reload={this.reload}
-              projectName={projectName}
-            />
             {!isEmpty && done ? (
               <Table
                 payload={payload}

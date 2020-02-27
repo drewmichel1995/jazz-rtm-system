@@ -9,27 +9,25 @@ class SearchFilterOptions extends Component {
         <Form>
           <Form.Group>
             <Row>
-              <Col xs={6} md={4}>
+              <Col className="search-col">
                 <Form.Control
                   onChange={onColumnChange}
                   placeholder="Search Column Requirements"
+                  className="search-box"
                 />
-              </Col>
-              <Col xs={6} md={4}>
+
                 <Form.Control
                   onChange={onRowChange}
                   placeholder="Search Row Requirements"
+                  className="search-box"
                 />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={6} md={4}>
                 <Form.Check
                   type="switch"
                   id="show-id-switch"
                   label="Show Id"
                   onChange={triggerShowID}
                   checked={showID}
+                  className="form-text"
                 />
               </Col>
             </Row>

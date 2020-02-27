@@ -2,7 +2,7 @@
   display: none;
 }
 
-.arrow::after {
+div.arrow::after {
   content: "\2197";
   text-align: center;
   padding: 0px;
@@ -27,6 +27,8 @@
 
   text-align: left;
   empty-cells: show;
+
+  background-color: mintcream !important;
 }
 
 .row-header {
@@ -74,11 +76,11 @@
 }
 
 .normalCell:hover {
-  background-color: gainsboro;
+  background-color: gainsboro !important;
 }
 
 div.rowCountCell {
-  background-color: gainsboro;
+  background-color: gainsboro !important;
   font-size: 15px;
   border-left: ridge;
   border-right: ridge;
@@ -92,7 +94,7 @@ div.rowCountCell {
 }
 
 div.colCountCell {
-  background-color: gainsboro;
+  background-color: gainsboro !important;
   font-size: 15px;
   border-top: ridge;
   border-bottom: ridge;
@@ -107,7 +109,7 @@ div.colCountCell {
 }
 
 div.edgeCountCell {
-  background-color: gainsboro;
+  background-color: gainsboro !important;
   font-size: 15px;
   border-top: ridge;
   border-left: ridge;
