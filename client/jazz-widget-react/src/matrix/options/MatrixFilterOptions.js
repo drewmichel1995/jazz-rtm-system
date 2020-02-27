@@ -63,7 +63,7 @@ class MatrixFilterOptions extends Component {
       projectAreaURI: this.props.payload.projectURI,
       payload: this.state.payload
     };
-    var url = process.env.REACT_APP_SERVER_URL + "/server/storePayload/";
+    var url = "/server/storePayload/";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data)

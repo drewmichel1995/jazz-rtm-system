@@ -65,10 +65,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1412">
+            <state relative-caret-position="223">
               <caret line="225" column="45" lean-forward="true" selection-start-line="225" selection-start-column="45" selection-end-line="225" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -80,7 +80,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Config.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
@@ -261,10 +261,10 @@
     <option name="delegateBuildToMaven" value="true" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="x" value="1676" />
+    <option name="y" value="472" />
+    <option name="width" value="1094" />
+    <option name="height" value="852" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -404,10 +404,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1096" height="1896" extended-state="6" />
-    <editor active="true" />
+    <frame x="1072" y="472" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28957528" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15991472" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -531,13 +530,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ProjectArea.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1241">
@@ -654,7 +646,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/JazzHTTP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1412">
+        <state relative-caret-position="223">
           <caret line="225" column="45" lean-forward="true" selection-start-line="225" selection-start-column="45" selection-end-line="225" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -662,6 +654,13 @@
             <element signature="method#decodeCookie#0;class#JazzHTTP#0" />
             <element signature="method#loadData#0;class#JazzHTTP#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
         </state>
       </provider>
     </entry>
