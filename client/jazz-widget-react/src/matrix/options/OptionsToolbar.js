@@ -49,13 +49,25 @@ export default function OptionsToolbar(props) {
 
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link onClick={onMatrixChange}>{matrixText}</Nav.Link>
-            <Nav.Link onClick={onSearchChange}>{searchText}</Nav.Link>
+            <Nav.Link
+              onClick={onMatrixChange}
+              aria-controls="options"
+              aria-expanded={showMatrix}
+            >
+              {matrixText}
+            </Nav.Link>
+            <Nav.Link
+              onClick={onSearchChange}
+              aria-controls="options"
+              aria-expanded={showSearch}
+            >
+              {searchText}
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
       <Collapse in={showMatrix || showSearch}>
-        <div className="options">
+        <div id="options" className="options">
           {showMatrix && (
             <MatrixFilterOptions
               fields={fields}
