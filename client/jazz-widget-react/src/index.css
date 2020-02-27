@@ -128,17 +128,10 @@ i {
   margin-right: 0px !important;
 }
 
-.search-box {
-  margin-left: 0px;
-  margin-bottom: 10px;
-}
-
-.search-col {
-  margin-right: 20px;
-}
-
 .table-holder {
   margin: 20px;
+  height: 800px;
+  width: fit-content;
 }
 
 .point {

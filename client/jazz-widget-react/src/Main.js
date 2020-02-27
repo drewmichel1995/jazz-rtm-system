@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, HashRouter } from "react-router-dom";
 import Matrix from "./matrix/Matrix";
-import Thpace from "../node_modules/thpace/thpace.min.js";
+import Thpace from "../node_modules/thpace/thpace.js";
 
 class Main extends Component {
   constructor(props) {

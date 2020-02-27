@@ -56,17 +56,16 @@ export default function OptionsToolbar(props) {
             >
               {matrixText}
             </Nav.Link>
-            <Nav.Link
-              onClick={onSearchChange}
-              aria-controls="options"
-              aria-expanded={showSearch}
-            >
-              {searchText}
-            </Nav.Link>
           </Nav>
+          <SearchFormContainer
+            onRowChange={onRowChange}
+            onColumnChange={onColumnChange}
+            triggerShowID={triggerShowID}
+            showID={showID}
+          />
         </Navbar.Collapse>
       </Navbar>
-      <Collapse in={showMatrix || showSearch}>
+      <Collapse in={showMatrix}>
         <div id="options" className="options">
           {showMatrix && (
             <MatrixFilterOptions
@@ -75,15 +74,7 @@ export default function OptionsToolbar(props) {
               reload={reload}
             />
           )}
-          {showSearch && (
-            <SearchFormContainer
-              onRowChange={onRowChange}
-              onColumnChange={onColumnChange}
-              triggerShowID={triggerShowID}
-              showID={showID}
-            />
-          )}
-          {(showSearch || showMatrix) && (
+          {showMatrix && (
             <Row className="justify-content-center">
               <i className="arrow up point" onClick={toggleShow}></i>
             </Row>
