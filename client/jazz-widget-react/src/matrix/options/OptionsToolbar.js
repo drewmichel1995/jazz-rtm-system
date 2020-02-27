@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import MatrixFilterOptions from "./MatrixFilterOptions";
 import SearchFormContainer from "./SearchFilterOptions";
 import { Nav, Navbar, Row, Collapse } from "react-bootstrap";
-import FadeIn from "react-fade-in";
 
 export default function OptionsToolbar(props) {
   const [showSearch, setSearch] = useState(false);
@@ -58,23 +57,19 @@ export default function OptionsToolbar(props) {
       <Collapse in={showMatrix || showSearch}>
         <div className="options">
           {showMatrix && (
-            <FadeIn>
-              <MatrixFilterOptions
-                fields={fields}
-                payload={payload}
-                reload={reload}
-              />
-            </FadeIn>
+            <MatrixFilterOptions
+              fields={fields}
+              payload={payload}
+              reload={reload}
+            />
           )}
           {showSearch && (
-            <FadeIn>
-              <SearchFormContainer
-                onRowChange={onRowChange}
-                onColumnChange={onColumnChange}
-                triggerShowID={triggerShowID}
-                showID={showID}
-              />
-            </FadeIn>
+            <SearchFormContainer
+              onRowChange={onRowChange}
+              onColumnChange={onColumnChange}
+              triggerShowID={triggerShowID}
+              showID={showID}
+            />
           )}
           {(showSearch || showMatrix) && (
             <Row className="justify-content-center">
