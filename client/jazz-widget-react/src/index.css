@@ -40,7 +40,7 @@ ul.header li a {
 }
 
 .brand {
-  font-size: min(2vw, 25px);
+  font-size: min(3vw, 25px);
   text-overflow: ellipsis;
 }
 
