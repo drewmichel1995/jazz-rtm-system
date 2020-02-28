@@ -73,6 +73,7 @@ div.arrow::after {
   padding: 0px !important;
   border-bottom: 0px !important;
   line-height: 29px;
+  opacity: 0.85;
 }
 
 .normalCell:hover {
