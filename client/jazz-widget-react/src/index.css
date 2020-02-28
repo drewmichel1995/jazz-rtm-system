@@ -26,23 +26,6 @@ ul.header li a {
   padding: 20px;
   display: inline-block;
 }
-.content {
-  background-color: #fff;
-  padding: 10px;
-  margin: 10px;
-  margin-top: 0px;
-}
-.content h2 {
-  padding: 0;
-  margin: 0;
-}
-.content li {
-  margin-bottom: 10px;
-}
-
-.active {
-  background-color: #0099ff;
-}
 
 .nav-bar {
   padding-bottom: 1rem;
@@ -57,7 +40,7 @@ ul.header li a {
 }
 
 .brand {
-  font-size: min(3vw, 25px);
+  font-size: min(2vw, 25px);
   text-overflow: ellipsis;
 }
 

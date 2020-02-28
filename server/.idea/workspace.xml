@@ -260,7 +260,7 @@
   <component name="MavenRunner">
     <option name="delegateBuildToMaven" value="true" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1676" />
     <option name="y" value="472" />
     <option name="width" value="1094" />
