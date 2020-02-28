@@ -85,9 +85,12 @@ i {
 .table-holder {
   margin: 20px;
   height: 800px;
-  width: 90%;
 }
 
 .point {
   cursor: pointer;
+}
+
+.search-box {
+  margin: 2px !important;
 }

@@ -7,15 +7,6 @@ class SearchFilterOptions extends Component {
     return (
       <Form inline>
         <Form.Group>
-          <Form.Check
-            type="switch"
-            id="show-id-switch"
-            onChange={triggerShowID}
-            checked={showID}
-            className="form-text"
-            label="Show ID"
-          />
-
           <Form.Control
             onChange={onColumnChange}
             placeholder="Search Columns"
@@ -26,6 +17,15 @@ class SearchFilterOptions extends Component {
             onChange={onRowChange}
             placeholder="Search Rows"
             className="search-box"
+          />
+
+          <Form.Check
+            type="switch"
+            id="show-id-switch"
+            onChange={triggerShowID}
+            checked={showID}
+            className="form-text search-box"
+            label="ID"
           />
         </Form.Group>
       </Form>
