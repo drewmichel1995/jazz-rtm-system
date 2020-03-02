@@ -38,7 +38,8 @@ export default function OptionsToolbar(props) {
     payload,
     fields,
     reload,
-    projectName
+    projectName,
+    validCookie
   } = props;
 
   return (
@@ -53,6 +54,7 @@ export default function OptionsToolbar(props) {
               onClick={onMatrixChange}
               aria-controls="options"
               aria-expanded={showMatrix}
+              disabled={!validCookie}
             >
               {matrixText}
             </Nav.Link>
@@ -62,6 +64,7 @@ export default function OptionsToolbar(props) {
             onColumnChange={onColumnChange}
             triggerShowID={triggerShowID}
             showID={showID}
+            validCookie={validCookie}
           />
         </Navbar.Collapse>
       </Navbar>

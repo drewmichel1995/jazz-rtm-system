@@ -140,6 +140,7 @@ class Matrix extends React.Component {
           payload={payload}
           reload={this.reload}
           projectName={payload.projectName}
+          validCookie={validCookie}
         />
         {done && validCookie && (
           <FadeIn>

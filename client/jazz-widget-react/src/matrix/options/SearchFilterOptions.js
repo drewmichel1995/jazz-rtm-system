@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import { Form, Row, Col } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 class SearchFilterOptions extends Component {
   render() {
-    const { onRowChange, onColumnChange, triggerShowID, showID } = this.props;
+    const {
+      onRowChange,
+      onColumnChange,
+      triggerShowID,
+      showID,
+      validCookie
+    } = this.props;
     return (
       <Form inline>
         <Form.Group>
@@ -11,12 +17,14 @@ class SearchFilterOptions extends Component {
             onChange={onColumnChange}
             placeholder="Search Columns"
             className="search-box"
+            disabled={!validCookie}
           />
 
           <Form.Control
             onChange={onRowChange}
             placeholder="Search Rows"
             className="search-box"
+            disabled={!validCookie}
           />
 
           <Form.Check
@@ -26,6 +34,7 @@ class SearchFilterOptions extends Component {
             checked={showID}
             className="form-text search-box"
             label="ID"
+            disabled={!validCookie}
           />
         </Form.Group>
       </Form>
