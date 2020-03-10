@@ -45,9 +45,9 @@ This application is intended to be ran in an environment that has an IBM Jazz Re
     * Validates secure cookie with Java server
     
   * **NGINX Reverse Proxy**
-   * This application utilizes an NGINX reverse proxy so that the Java Server api and React app can be served over the same port with minimal network configuration.
-   * The proxy utlizes SSL certificates in the /proxy/certs folder
-   * The proxy utilizes nginx.conf located in /proxy/nginx.conf
+    * This application utilizes an NGINX reverse proxy so that the Java Server api and React app can be served over the same port with minimal network configuration.
+    * The proxy utlizes SSL certificates in the /proxy/certs folder
+    * The proxy utilizes nginx.conf located in /proxy/nginx.conf
    
    
 To start the application, configure the .env file of the react app to use your specific parameters and run *docker-compose up -d* from the project's root directory
