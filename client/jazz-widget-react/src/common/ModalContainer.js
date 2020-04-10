@@ -21,11 +21,15 @@ class ModalContainer extends Component {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button href={process.env.REACT_APP_JAZZ_URL} variant="primary">
+          <Button
+            href={process.env.REACT_APP_JAZZ_URL}
+            variant="primary"
+            target="_blank"
+          >
             Go to Jazz Dashboard
           </Button>
           <CopyToClipboard
-            text={process.env.REACT_APP_SERVER_URL + "/getWidget"}
+            text={process.env.REACT_APP_SERVER_URL + "server/getWidget"}
           >
             <Button variant="secondary">Copy Link to Jazz Widget</Button>
           </CopyToClipboard>
