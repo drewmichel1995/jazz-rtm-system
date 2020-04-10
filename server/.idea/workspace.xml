@@ -261,8 +261,8 @@
   <component name="MavenRunner">
     <option name="delegateBuildToMaven" value="true" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="2199" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="279" />
     <option name="width" value="1641" />
     <option name="height" value="1020" />
   </component>
@@ -404,7 +404,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2199" y="0" width="1641" height="1020" extended-state="1" />
+    <frame x="279" y="0" width="1641" height="1020" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16888046" />

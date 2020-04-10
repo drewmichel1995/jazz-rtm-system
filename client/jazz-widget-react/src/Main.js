@@ -9,7 +9,7 @@ class Main extends Component {
     this.state = {
       title: "Jazz Requirements Matrix",
       uri: "xxxxxx",
-      uniqueID: "xxxxxx"
+      uniqueID: "xxxxxx",
     };
 
     this.onTitleChange = this.onTitleChange.bind(this);
@@ -17,7 +17,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    this.setBackground();
+    //this.setBackground();
   }
 
   onTitleChange = (title, uri, uniqueID) => {
@@ -30,7 +30,7 @@ class Main extends Component {
 
     const settings = {
       color1: "#43C6AC",
-      color2: "#191654"
+      color2: "#191654",
     };
 
     Thpace.create(canvas, settings);
@@ -48,7 +48,7 @@ class Main extends Component {
             <Route
               exact
               path="/"
-              render={props => (
+              render={(props) => (
                 <Matrix {...props} onTitleChange={this.onTitleChange} />
               )}
             />
@@ -56,14 +56,14 @@ class Main extends Component {
             <Route
               exact
               path="/matrix"
-              render={props => (
+              render={(props) => (
                 <Matrix {...props} onTitleChange={this.onTitleChange} />
               )}
             />
             <Route
               exact
               path="/matrix/:uniqueID"
-              render={props => (
+              render={(props) => (
                 <Matrix {...props} onTitleChange={this.onTitleChange} />
               )}
             />
