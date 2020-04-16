@@ -484,11 +484,11 @@ $( function() {
     });
 } );
 window.onload = function () {
-		this.loading = true;
+		this.loading = false;
 		initFields();
 		setFieldOnChange();
 		loadProjectAreas();
-		this.loading = false;
+		this.loading = true;
         gadgets.window.adjustHeight();
 }
  </script>]]></Content>
