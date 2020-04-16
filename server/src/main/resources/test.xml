@@ -276,6 +276,7 @@ function httpGet(theUrl) {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
 			document.getElementById('form-container').style.display = 'block'; //Will show
 			document.getElementById('cover').style.display = 'none'; //Will hide
+			gadgets.window.adjustHeight();
             var data = JSON.parse(xmlHttp.responseText);
             actuallyLoadFields(data);
         }else{
@@ -284,7 +285,7 @@ function httpGet(theUrl) {
     };
 	document.getElementById('cover').style.display = 'block'; //Will show
 	document.getElementById('form-container').style.display = 'none'; //Will hide
-	
+	gadgets.window.adjustHeight();
     xmlHttp.open( "GET", theUrl, true );
     xmlHttp.send( null );
 }
@@ -475,10 +476,8 @@ function setFieldOnChange(){
 			}
 		});
 		$("#projectAreaList").on('change', function() {
-			this.loading = true;
 			projectArea = this.value;
 			loadFields(serverURL + "getFields/" + projectArea);
-			this.loading = false;
 		});
 }
 $( function() {
