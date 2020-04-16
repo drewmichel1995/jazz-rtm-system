@@ -507,11 +507,12 @@ $( function() {
     });
 } );
 window.onload = function () {
-		this.loading = false;
+		
+		document.getElementById('dialog-confirm').style.display = 'none'; //Will hide
 		initFields();
 		setFieldOnChange();
 		loadProjectAreas();
-		this.loading = true;
+		document.getElementById('dialog-confirm').style.display = 'block'; //Will show
         gadgets.window.adjustHeight();
 }
  </script>]]></Content>
