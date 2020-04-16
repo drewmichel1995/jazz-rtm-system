@@ -261,34 +261,14 @@ function xml2json(xml) {
 	return obj;
 }
 function httpGet(theUrl) {
-
-    function returnData(xmlData){
-					this.loading = false;
-					var data = JSON.parse(xmlData);
-					return data;
-				}
-				var xhttp = new XMLHttpRequest()
-				xhttp.onreadystatechange = function () {
-					if (this.readyState == 4 && this.status == 200) {
-						console.log("Finished Request");
-						returnData(xhttp.responseText);
-						
-					}
-					else if (this.readyState == 4 && this.status != 200) {
-						console.log("Finished Request with error");
-						returnData(xhttp.responseText);
-					}
-				}
-				
-				this.loading = true;
-				xhttp.open("GET", theUrl, true);
-				xhttp.send(null);
-
-    /*var xmlHttp = new XMLHttpRequest();
+	
+    var xmlHttp = new XMLHttpRequest();
+	this.loading = true;
     xmlHttp.open( "GET", theUrl, false );
     xmlHttp.send( null );
+	this.loading = false;
 	var data = JSON.parse(xmlHttp.responseText);
-    return data;*/
+    return data;
 }
 function httpPostPayload(theUrl) {
     var xmlHttp = new XMLHttpRequest();
