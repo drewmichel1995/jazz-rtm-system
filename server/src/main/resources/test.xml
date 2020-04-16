@@ -269,7 +269,16 @@ function xml2json(xml) {
 	}
 	return obj;
 }
+
 function httpGet(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+	var data = JSON.parse(xmlHttp.responseText);
+    return data;
+}
+
+function httpGetFields(theUrl) {
     var xmlHttp = new XMLHttpRequest();
 
 	xmlHttp.onreadystatechange= function () {
@@ -325,7 +334,7 @@ function getProjectInfo() {
 }
 
 function loadFields(theUrl){
-	httpGet(theUrl);
+	httpGetFields(theUrl);
 }
 
 function actuallyLoadFields(data){
