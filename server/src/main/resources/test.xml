@@ -261,12 +261,12 @@ function xml2json(xml) {
 	return obj;
 }
 function httpGet(theUrl) {
-	
+
     var xmlHttp = new XMLHttpRequest();
-	this.loading = true;
+	
     xmlHttp.open( "GET", theUrl, false );
     xmlHttp.send( null );
-	this.loading = false;
+	
 	var data = JSON.parse(xmlHttp.responseText);
     return data;
 }
@@ -452,8 +452,10 @@ function setFieldOnChange(){
 			}
 		});
 		$("#projectAreaList").on('change', function() {
+			this.loading = true;
 			projectArea = this.value;
 			loadFields(serverURL + "getFields/" + projectArea);
+			this.loading = false;
 		});
 }
 $( function() {
