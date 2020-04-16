@@ -108,7 +108,7 @@ input:checked + .slider:before {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div v-show="loading" id="cover"></div>
+        
         <div id="dialog-confirm" title="Large Matrix Warning!">
             <p id="dialogText">
                 <h4>The requested matrix may cause the application to run sluggishly due to browser limitations.</h4>
@@ -124,6 +124,7 @@ input:checked + .slider:before {
             </p>
         </div>
         <div class="container hold">
+		<div v-show="loading" id="cover"></div>
             <div class="form hold">
                 <div class="form-row">
                     <div class="col">
@@ -483,9 +484,11 @@ $( function() {
     });
 } );
 window.onload = function () {
+		this.loading = true;
 		initFields();
 		setFieldOnChange();
 		loadProjectAreas();
+		this.loading = false;
         gadgets.window.adjustHeight();
 }
  </script>]]></Content>
