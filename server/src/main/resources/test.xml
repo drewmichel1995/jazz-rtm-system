@@ -269,14 +269,20 @@ function xml2json(xml) {
 	return obj;
 }
 function httpGet(theUrl) {
-
     var xmlHttp = new XMLHttpRequest();
-	
-    xmlHttp.open( "GET", theUrl, false );
+
+	xmlHttp.onreadystatechange= function () {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+			this.loading=false;
+            var data = JSON.parse(xmlHttp.responseText);
+            actuallyLoadFields(data);
+        }else{
+
+        }
+    };
+	this.loading = true;
+    xmlHttp.open( "GET", theUrl, true );
     xmlHttp.send( null );
-	
-	var data = JSON.parse(xmlHttp.responseText);
-    return data;
 }
 function httpPostPayload(theUrl) {
     var xmlHttp = new XMLHttpRequest();
@@ -312,9 +318,14 @@ function getProjectInfo() {
 	}));
 	return uris;
 }
+
 function loadFields(theUrl){
+	httpGet(theUrl);
+}
+
+function actuallyLoadFields(data){
 		payload = getPayload();
-		var data = httpGet(theUrl);
+		
 		var $rowDropdown = $("#rowElementList").empty();
 		var $columnDropdown = $("#columnElementList").empty();
 		var $rowScopeDropdown = $("#rowScopeElementList").empty();
