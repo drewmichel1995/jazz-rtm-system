@@ -123,8 +123,9 @@ input:checked + .slider:before {
                 <p><small>To ignore this warning select Proceed to Matrix</small></p>
             </p>
         </div>
-        <div class="container hold">
 		<div v-show="loading" id="cover"></div>
+        <div class="container hold" id="form-container">
+		
             <div class="form hold">
                 <div class="form-row">
                     <div class="col">
@@ -273,14 +274,17 @@ function httpGet(theUrl) {
 
 	xmlHttp.onreadystatechange= function () {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-			this.loading=false;
+			document.getElementById('form-container').style.display = 'block'; //Will show
+			document.getElementById('cover').style.display = 'none'; //Will hide
             var data = JSON.parse(xmlHttp.responseText);
             actuallyLoadFields(data);
         }else{
 
         }
     };
-	this.loading = true;
+	document.getElementById('cover').style.display = 'block'; //Will show
+	document.getElementById('form-container').style.display = 'none'; //Will hide
+	
     xmlHttp.open( "GET", theUrl, true );
     xmlHttp.send( null );
 }
