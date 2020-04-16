@@ -1,0 +1,508 @@
+<style>
+    /*Holds the entire widget*/
+    div.hold {
+        padding: 20px;
+        overflow: visible;
+    }
+
+    .ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
+        display: none;
+    }
+
+    select {
+        width: 100%;
+        overflow: visible;
+    }
+
+    showMe {
+        overflow: visible;
+    }
+
+    .select2-selection--multiple .select2-search__field {
+        overflow: visible;
+    }
+
+    /* The switch - the box around the slider */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+</style>
+<title>Jazz Widget</title>
+
+<head>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    </link>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet">
+    </link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.full.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div v-show="loading" id="cover"></div>
+    <div id="dialog-confirm" title="Large Matrix Warning!">
+        <p id="dialogText">
+            <h4>The requested matrix may cause the application to run sluggishly due to browser limitations.</h4>
+            <h5>To avoid this, narrow the scopes of your matrix.</h5>
+            <p><small><i>It is generally recommended to keep each axis below 500 requirements.</i></small></p>
+            <p><small><i id="linksOnlySuggestion"></i></small></p>
+            <p><small><b>The current number of requirements for each axis is:</b></small></p>
+            <ul>
+                <li>Row Axis: <strong id="rowSize"></strong></li>
+                <li>Column Axis: <strong id="columnSize"></strong></li>
+            </ul>
+            <p><small>To ignore this warning select Proceed to Matrix</small></p>
+        </p>
+    </div>
+    <div class="container hold">
+        <div class="form hold">
+            <div class="form-row">
+                <div class="col">
+                    <label for="projectAreaList"><strong>Project Area:</strong></label>
+                    <div class="input-group mb-3">
+                        <select id="projectAreaList" type="button" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="columnElementList"><strong>Column Folder Scope:</strong></label>
+                    <div class="input-group">
+                        <select id="columnElementList" type="button" multiple="multiple" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="rowElementList"><strong>Row Folder Scope:</strong></label>
+                    <div class="input-group">
+                        <select id="rowElementList" type="button" multiple="multiple" class="form-control"
+                            placeholder="None"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="columnScopeElementList"><strong>Column Requirement Type:</strong></label>
+                    <div class="input-group">
+                        <select id="columnScopeElementList" type="button" multiple="multiple"
+                            class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="rowScopeElementList"><strong>Row Requirement Type:</strong></label>
+                    <div class="input-group">
+                        <select id="rowScopeElementList" type="button" multiple="multiple"
+                            class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="dependencyCriteriaList"><strong>Dependency Criteria:</strong></label>
+                    <div class="input-group">
+                        <select id="dependencyCriteriaList" type="button" multiple="multiple"
+                            class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="linksToggle"><strong>Display Links Only:</strong></label>
+                    <div class="input-group" id="linksToggle">
+                        <label class="switch">
+                            <input type="checkbox" id="linksOnly">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="submitButton"></label>
+                    <div class="input-group">
+                        <button type="button" id="submitButton" style="width: 100%;" class="btn btn-primary"
+                            onClick="onSubmit()">Go to
+                            Matrix</button>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="clearButton"></label>
+                    <div class="input-group">
+                        <button type="button" id="clearButton" style="width: 100%;" class="btn btn-danger"
+                            onClick="onClear()">Clear
+                            Filters</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var payload = getPayload();
+        var projectURI = "";
+        var serverURL = "https://mbse-colldev.saic.com/server/";
+        var url = "";
+        function parseXml(xml) {
+            var dom = null;
+            if (window.DOMParser) {
+                try {
+                    dom = (new DOMParser()).parseFromString(xml, "text/xml");
+                }
+                catch (e) { dom = null; }
+            }
+            else if (window.ActiveXObject) {
+                try {
+                    dom = new ActiveXObject('Microsoft.XMLDOM');
+                    dom.async = false;
+                    if (!dom.loadXML(xml))
+                        window.alert(dom.parseError.reason + dom.parseError.srcText);
+                }
+                catch (e) { dom = null; }
+            }
+            else
+                alert("cannot parse xml string!");
+            return dom;
+        }
+        function xml2json(xml) {
+            var obj = {};
+            if (xml.nodeType == 1) {
+                if (xml.attributes.length > 0) {
+                    obj["@attributes"] = {};
+                    for (var j = 0; j < xml.attributes.length; j++) {
+                        var attribute = xml.attributes.item(j);
+                        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+                    }
+                }
+            } else if (xml.nodeType == 3) {
+                obj = xml.nodeValue;
+            }
+            var textNodes = [].slice.call(xml.childNodes).filter(function (node) {
+                return node.nodeType === 3;
+            });
+            if (xml.hasChildNodes() && xml.childNodes.length === textNodes.length) {
+                obj = [].slice.call(xml.childNodes).reduce(function (text, node) {
+                    return text + node.nodeValue;
+                }, "");
+            } else if (xml.hasChildNodes()) {
+                for (var i = 0; i < xml.childNodes.length; i++) {
+                    var item = xml.childNodes.item(i);
+                    var nodeName = item.nodeName;
+                    if (typeof obj[nodeName] == "undefined") {
+                        obj[nodeName] = xml2json(item);
+                    } else {
+                        if (typeof obj[nodeName].push == "undefined") {
+                            var old = obj[nodeName];
+                            obj[nodeName] = [];
+                            obj[nodeName].push(old);
+                        }
+                        obj[nodeName].push(xml2json(item));
+                    }
+                }
+            }
+            return obj;
+        }
+        function httpGet(theUrl) {
+
+            function returnData(xmlData) {
+                this.loading = false;
+                var data = JSON.parse(xmlData);
+                return data;
+            }
+            var xhttp = new XMLHttpRequest()
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("Finished Request");
+                    returnData(xhttp.responseText);
+
+                }
+                else if (this.readyState == 4 && this.status != 200) {
+                    console.log("Finished Request with error");
+                    returnData(xhttp.responseText);
+                }
+            }
+
+            this.loading = true;
+            xhttp.open("GET", theUrl, true);
+            xhttp.send(null);
+
+            /*var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", theUrl, false );
+            xmlHttp.send( null );
+            var data = JSON.parse(xmlHttp.responseText);
+            return data;*/
+        }
+        function httpPostPayload(theUrl) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("POST", theUrl, false);
+            xmlHttp.send(JSON.stringify({
+                "projectAreaURI": projectArea,
+                "payload": payload
+            }));
+            var data = JSON.parse(xmlHttp.responseText);
+            return data;
+        }
+        function httpPostCookie(theUrl, data) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.withCredentials = true;
+            xmlHttp.open("POST", theUrl, false);
+            xmlHttp.send(JSON.stringify({
+                "projectAreas": data
+            }));
+            document.cookie = xmlHttp.cookie;
+            //return xmlHttp.responseText;
+        }
+        function httpGetXML(theUrl) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", theUrl, false);
+            xmlHttp.send(null);
+            var json = xml2json(parseXml(xmlHttp.responseText));
+            return json;
+        }
+        function getProjectInfo() {
+            var json = httpGetXML("https://" + window.location.host + "/rm/oslc_rm/catalog");
+            var uris = json["oslc_disc:ServiceProviderCatalog"]["oslc_disc:entry"].map(item => ({
+                "uri": item["oslc_disc:ServiceProvider"]["oslc_disc:details"]["@attributes"]["rdf:resource"].split("/")[6],
+                "name": item["oslc_disc:ServiceProvider"]["dcterms:title"]
+            }));
+            return uris;
+        }
+        function loadFields(theUrl) {
+            payload = getPayload();
+            var data = httpGet(theUrl);
+            var $rowDropdown = $("#rowElementList").empty();
+            var $columnDropdown = $("#columnElementList").empty();
+            var $rowScopeDropdown = $("#rowScopeElementList").empty();
+            var $columnScopeDropdown = $("#columnScopeElementList").empty();
+            var $dependencyDropdown = $("#dependencyCriteriaList").empty();
+            $("#linksOnly").attr("checked", false);
+            $.each(data.parentFolders, function () {
+                $rowDropdown.append($("<option />").val(this.label).text(this.label));
+                $columnDropdown.append($("<option />").val(this.label).text(this.label));
+            });
+            $.each(data.artifactTypes, function () {
+                $rowScopeDropdown.append($("<option />").val(this.value).text(this.label));
+                $columnScopeDropdown.append($("<option />").val(this.value).text(this.label));
+            });
+            $.each(data.linkTypes, function () {
+                $dependencyDropdown.append($("<option />").val(this.label).text(this.label));
+            });
+        }
+        function loadProjectAreas() {
+
+            var projects = getProjectInfo();
+
+            httpPostCookie(serverURL + "getCookie/", projects);
+            projects.map(item => (
+                $("#projectAreaList").append($("<option />").val(item.uri).text(item.name))
+            ))
+            projectArea = projects[0].uri;
+            loadFields(serverURL + "getFields/" + projects[0].uri);
+        }
+        function getPayload() {
+            var payload = new Object();
+            payload.columns = [];
+            payload.rows = [];
+            payload.columnTypes = [];
+            payload.rowTypes = [];
+            payload.dependencies = [];
+            payload.showHeader = "";
+            payload.linksOnly = false;
+            return payload;
+        }
+        function initFields() {
+            $("#rowScopeElementList").select2({
+                placeholder: "No Filter Selected",
+                allowClear: true,
+                containerCssClass: "showMe"
+            });
+            $("#columnScopeElementList").select2({
+                placeholder: "No Filter Selected",
+                allowClear: true,
+                containerCssClass: "showMe"
+            });
+            $("#rowElementList").select2({
+                placeholder: "No Filter Selected",
+                allowClear: true,
+                containerCssClass: "showMe"
+            });
+            $("#columnElementList").select2({
+                placeholder: "No Filter Selected",
+                allowClear: true,
+                containerCssClass: "showMe"
+            });
+            $("#dependencyCriteriaList").select2({
+                placeholder: "No Filter Selected",
+                allowClear: true,
+                containerCssClass: "showMe"
+            });
+        }
+        function onSubmit() {
+            var result = httpPostPayload(serverURL + "storePayload/")
+            url = result.url;
+            var uniqueID = result.uniqueID;
+            var size = httpGet(serverURL + "getProjectAreaSize/" + uniqueID);
+            var rowSize = size.rowSize;
+            var columnSize = size.columnSize;
+            if ((rowSize * columnSize) > 10000) {
+                $("#rowSize").text(rowSize);
+                $("#columnSize").text(columnSize);
+                if (!payload.linksOnly) {
+                    $("#linksOnlySuggestion").text("Suggestion: Enable Display Links Only to only view requirements with links in the matrix.");
+                } else {
+                    $("#linksOnlySuggestion").text("");
+                }
+                $("#dialog-confirm").dialog("open");
+                gadgets.window.adjustHeight();
+            } else {
+                window.open(url, '_blank');
+            }
+        }
+        function onClear() {
+            payload = getPayload();
+            $("#rowElementList").val([]).trigger('change');
+            $("#columnElementList").val([]).trigger('change');
+            $("#rowScopeElementList").val([]).trigger('change');
+            $("#columnScopeElementList").val([]).trigger('change');
+            $("#dependencyCriteriaList").val([]).trigger('change');
+            $("#linksOnly").attr("checked", false);
+        }
+        function setFieldOnChange() {
+            $("#rowElementList").on('change', function () {
+                if ($("#rowElementList").val()) {
+                    payload.rows = $("#rowElementList").val().map(item => ({ "name": item }));
+                } else {
+                    payload.rows = [];
+                }
+                gadgets.window.adjustHeight();
+            });
+            $("#columnElementList").on('change', function () {
+                if ($("#columnElementList").val()) {
+                    payload.columns = $("#columnElementList").val().map(item => ({ "name": item }));
+                } else {
+                    payload.columns = [];
+                }
+                gadgets.window.adjustHeight();
+            });
+            $("#rowScopeElementList").on('change', function () {
+                if ($("#rowScopeElementList").val()) {
+                    payload.rowTypes = $("#rowScopeElementList").val().map(item => ({ "name": item }));
+                } else {
+                    payload.rowTypes = [];
+                }
+                gadgets.window.adjustHeight();
+            });
+            $("#columnScopeElementList").on('change', function () {
+                if ($("#columnScopeElementList").val()) {
+                    payload.columnTypes = $("#columnScopeElementList").val().map(item => ({ "name": item }));
+                } else {
+                    payload.columnTypes = [];
+                }
+                gadgets.window.adjustHeight();
+            });
+            $("#dependencyCriteriaList").on('change', function () {
+                if ($("#dependencyCriteriaList").val()) {
+                    payload.dependencies = $("#dependencyCriteriaList").val().map(item => ({ "name": item }));
+                } else {
+                    payload.dependencies = [];
+                }
+                gadgets.window.adjustHeight();
+            });
+            $("#linksOnly").change(function () {
+                payload.linksOnly = false;
+                if (this.checked) {
+                    payload.linksOnly = true;
+                }
+            });
+            $("#projectAreaList").on('change', function () {
+                projectArea = this.value;
+                loadFields(serverURL + "getFields/" + projectArea);
+            });
+        }
+        $(function () {
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+                autoOpen: false,
+                buttons: {
+                    "Proceed to Matrix": function () {
+                        window.open(url, '_blank')
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+        window.onload = function () {
+            initFields();
+            setFieldOnChange();
+            loadProjectAreas();
+            gadgets.window.adjustHeight();
+        }
+    </script>

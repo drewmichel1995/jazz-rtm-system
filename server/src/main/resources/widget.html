@@ -15,6 +15,13 @@
 			display: none;
 		}
 
+		#cover {
+			background: url("http://www.aveva.com/Images/ajax-loader.gif") no-repeat scroll center center rgba(255, 255, 255, 0.5);
+			position: absolute;
+			height: 100%;
+			width: 100%;
+		}
+
 	</style>
 	<title>Jazz Widget</title>
 
@@ -43,6 +50,7 @@
 
 
 	<body>
+		<div v-show="loading" id="cover"></div>
 		<div id="dialog-confirm" title="Large Matrix Warning!" hidden="hidden">
 			<p id="dialogText">
 				<h4>The requested matrix may cause the application to run sluggishly due to browser limitations.</h4>
@@ -132,6 +140,7 @@
 			var serverURL = "https://mbse-colldev.saic.com/server/";
 			var url = "";
 
+
 			function parseXml(xml) {
 				var dom = null;
 				if (window.DOMParser) {
@@ -200,11 +209,31 @@
 			}
 
 			function httpGet(theUrl) {
-				var xmlHttp = new XMLHttpRequest();
+
+				var xhttp = new XMLHttpRequest()
+				xhttp.onreadystatechange = function () {
+					if (this.readyState == 4 && this.status == 200) {
+						this.loading = false;
+						var data = JSON.parse(xhttp.responseText);
+						return data;
+					}
+					else if (this.readyState == 4 && this.status != 200) {
+						console.log("error");
+						this.loading = false;
+						var data = JSON.parse(xhttp.responseText);
+						return data;
+					}
+				}
+				xhttp.open("GET", theUrl, true)
+				xhttp.send(null)
+				this.loading = true
+				return xhttp;
+
+				/*var xmlHttp = new XMLHttpRequest();
 				xmlHttp.open("GET", theUrl, false);
 				xmlHttp.send(null);
 				var data = JSON.parse(xmlHttp.responseText);
-				return data;
+				return data;*/
 			}
 
 			function httpPostPayload(theUrl) {
