@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import org.json.*;
 
 public class ProjectArea {
+    ServiceAccountManager service = new ServiceAccountManager();
+
     String url;
     String name;
     String projectUri;
@@ -10,9 +12,11 @@ public class ProjectArea {
     ArrayList<Artifact> artifacts;
     ArrayList<Artifact> rowArtifacts;
     ArrayList<Artifact> columnArtifacts;
+    ArrayList<Module> modules;
     Boolean linksOnly = false;
 
     public ProjectArea(String url, String name, String projectUri, String lastUpdated){
+
         this.url = url;
         this.name = name;
         this.projectUri = projectUri;
@@ -20,13 +24,16 @@ public class ProjectArea {
         this.artifacts = new ArrayList<>();
         this.rowArtifacts = this.artifacts;
         this.columnArtifacts = this.artifacts;
+        this.modules = new ArrayList<>();
     }
 
     public ProjectArea(String projectUri){
         MongoHelper mongo = MongoHelper.get();
         JSONObject project = mongo.query("ProjectAreaProjectURI", projectUri);
         JSONArray tempArtifacts = project.getJSONArray("artifacts");
+        JSONArray tempModules = project.getJSONArray("modules");
         ArrayList<Artifact> artifacts = new ArrayList<>();
+        ArrayList<Module> modules =  new ArrayList<>();
 
         for(int i = 0; i < tempArtifacts.length(); i++){
             JSONObject temp = tempArtifacts.getJSONObject(i);
@@ -45,6 +52,50 @@ public class ProjectArea {
             artifacts.add(tempArtifact);
         }
 
+        for(int i = 0; i < tempModules.length(); i++){
+            JSONObject tempModule = tempModules.getJSONObject(i);
+            String moduleName =  tempModule.getString("ModuleName");
+            String moduleId = tempModule.getString("ModuleID");
+            String moduleItemId = tempModule.getString("ModuleItemID");
+            String moduleParentFolder = tempModule.getString("ModuleParentFolder");
+            String moduleFormat = tempModule.getString("ModuleFormat");
+            String moduleType = tempModule.getString("ModuleType");
+            String moduleUrl = tempModule.getString("ModuleURL");
+            Module newModule = new Module(moduleName, moduleId, moduleItemId, moduleParentFolder, moduleFormat, moduleType, moduleUrl);
+
+            JSONArray moduleArtifacts = tempModule.getJSONArray("artifacts");
+            for(int j = 0; j < moduleArtifacts.length(); j++){
+                JSONObject tempArtifact = moduleArtifacts.getJSONObject(j);
+                String artifactType = tempArtifact.getString("ArtifactType");
+                String artifactId = tempArtifact.getString("ArtifactID");
+                String artifactItemId = tempArtifact.getString("ArtifactItemID");
+                String artifactName = tempArtifact.getString("ArtifactName");
+                String artifactParentFolder = tempArtifact.getString("ArtifactParentFolder");
+                String artifactModule = moduleName;
+                String artifactUrl = tempArtifact.getString("ArtifactURL");
+                String artifactFormat = tempArtifact.getString("ArtifactFormat");
+
+                Artifact newArtifact = new Artifact(artifactType, artifactId, artifactItemId, artifactName, artifactParentFolder, artifactModule, artifactUrl, artifactFormat);
+
+                JSONArray moduleLinks = tempArtifact.getJSONArray("links");
+                for(int k = 0; k < moduleLinks.length(); k++){
+                    JSONObject tempLink = moduleLinks.getJSONObject(k);
+                    String linkId = tempLink.getString("LinkID");
+                    String linkTitle = tempLink.getString("LinkTitle");
+                    String linkDescription = tempLink.getString("LinkDescription");
+                    String linkFormat = tempLink.getString("LinkFormat");
+                    String linkArtifactFormat = tempLink.getString("LinkArtifactFormat");
+                    String linkType = tempLink.getString("LinkType");
+                    String linkLinkTitle = tempLink.getString("LinkLinkTitle");
+
+                    Link newLink = new Link(linkId, linkTitle, linkDescription, linkFormat, linkArtifactFormat, linkType, linkLinkTitle);
+                    newArtifact.addLink(newLink);
+                }
+                newModule.addArtifact(newArtifact);
+            }
+            modules.add(newModule);
+        }
+
         this.projectUri = project.getString("ProjectAreaProjectURI");
         this.url = project.getString("ProjectAreaURL");
         this.name = project.getString("ProjectAreaName");
@@ -52,6 +103,7 @@ public class ProjectArea {
         this.artifacts = artifacts;
         this.rowArtifacts = artifacts;
         this.columnArtifacts = artifacts;
+        this.modules = modules;
     }
 
     public ProjectArea(String projectUri, Payload payload){
@@ -66,6 +118,11 @@ public class ProjectArea {
     void setArtifacts(ArrayList<Artifact> artifacts){
         this.artifacts = new ArrayList<>();
         this.artifacts = artifacts;
+    }
+
+    void setModules(ArrayList<Module> modules){
+        this.modules = new ArrayList();
+        this.modules = modules;
     }
 
     private void setRowArtifacts(ArrayList<Artifact> tempArtifacts){
@@ -90,6 +147,33 @@ public class ProjectArea {
         return filteredArtifacts;
     }
 
+    private ArrayList<Module> filterModules(ArrayList<String> moduleString){
+        System.out.println("Module Filter Size: " + moduleString.size());
+        ArrayList<Module> filteredModules = new ArrayList<>();
+
+        if(moduleString.size() < 1) return this.modules;
+
+        for(Module a: this.modules)
+            if (moduleString.contains(a.name)  && !filteredModules.contains(a)) filteredModules.add(a);
+
+        System.out.println("Filtered Module Size: " + filteredModules.size());
+        return filteredModules;
+    }
+
+    private ArrayList<Artifact> getModuleArtifacts(ArrayList<Module> tempModules){
+
+        ArrayList<Artifact> artifacts = new ArrayList<>();
+
+        if(tempModules.size() < 1) return artifacts;
+
+        for(Module m: tempModules)
+            for(Artifact a: m.artifacts)
+                artifacts.add(a);
+
+
+        return artifacts;
+    }
+
     private ArrayList<Artifact> filterArtifactTypes(ArrayList<String> artifactTypes, ArrayList<Artifact> tempArtifacts){
         ArrayList<Artifact> filteredArtifacts = new ArrayList<>();
 
@@ -107,21 +191,28 @@ public class ProjectArea {
 
     private void filterRowDependencies(ArrayList<String> dependencies){
         ArrayList<Artifact> filteredArtifacts = new ArrayList<>();
-
+        System.out.println("Dependency Size: " + dependencies.size());
+        dependencies.forEach(d -> {
+            System.out.println(d);
+        });
         ArrayList<String> rowItemIDs =  new ArrayList<>();
+        ArrayList<String> rowIDs =  new ArrayList<>();
         for (Artifact row : this.rowArtifacts) {
             rowItemIDs.add(row.itemId);
+            rowIDs.add(row.id);
         }
 
         ArrayList<String> colItemIDs =  new ArrayList<>();
+        ArrayList<String> colIDs =  new ArrayList<>();
         for (Artifact col : this.columnArtifacts) {
             colItemIDs.add(col.itemId);
+            colIDs.add(col.id);
         }
 
         if(dependencies.size() < 1) return;
         for(Artifact a: rowArtifacts)
             for(Link l: a.links)
-                if (dependencies.contains(getLinkFullName(l.linkType)) && !filteredArtifacts.contains(a)  && (colItemIDs.contains(l.id))) filteredArtifacts.add(a);
+                if (dependencies.contains(getLinkFullName(l.linkType)) && !filteredArtifacts.contains(a)  && (colItemIDs.contains(l.id) || colIDs.contains(l.id))) filteredArtifacts.add(a);
 
         this.setRowArtifacts(filteredArtifacts);
     }
@@ -130,27 +221,37 @@ public class ProjectArea {
         ArrayList<Artifact> filteredArtifacts = new ArrayList<>();
 
         ArrayList<String> rowItemIDs =  new ArrayList<>();
+        ArrayList<String> rowIDs =  new ArrayList<>();
         for (Artifact row : this.rowArtifacts) {
             rowItemIDs.add(row.itemId);
+            rowIDs.add(row.id);
         }
 
         ArrayList<String> colItemIDs =  new ArrayList<>();
+        ArrayList<String> colIDs =  new ArrayList<>();
         for (Artifact col : this.columnArtifacts) {
             colItemIDs.add(col.itemId);
+            colIDs.add(col.id);
         }
 
         if(dependencies.size() < 1) return;
         for(Artifact a: columnArtifacts)
             for(Link l: a.links)
-                if (dependencies.contains(getLinkFullName(l.linkType))  && !filteredArtifacts.contains(a) && (rowItemIDs.contains(l.id))) filteredArtifacts.add(a);
+                if (dependencies.contains(getLinkFullName(l.linkType))  && !filteredArtifacts.contains(a) && (rowItemIDs.contains(l.id) || rowIDs.contains(l.id))) filteredArtifacts.add(a);
 
         this.setColumnArtifacts(filteredArtifacts);
     }
 
     private void filterAll(Payload payload){
         this.linksOnly = payload.linksOnly;
-        this.setColumnArtifacts(filterParentFolders(payload.columns));
-        this.setRowArtifacts(filterParentFolders(payload.rows));
+        if(payload.showModules){
+            this.setColumnArtifacts(getModuleArtifacts(filterModules(payload.columns)));
+            this.setRowArtifacts(getModuleArtifacts(filterModules(payload.rows)));
+        }else{
+            this.setColumnArtifacts(filterParentFolders(payload.columns));
+            this.setRowArtifacts(filterParentFolders(payload.rows));
+        }
+
         this.setColumnArtifacts(filterArtifactTypes(payload.columnTypes, this.columnArtifacts));
         this.setRowArtifacts(filterArtifactTypes(payload.rowTypes, this.rowArtifacts));
 
@@ -222,6 +323,50 @@ public class ProjectArea {
         return parentFolders;
     }
 
+    private JSONObject getModuleNames(){
+        JSONObject moduleData = new JSONObject();
+        JSONArray moduleNames = new JSONArray();
+        JSONArray moduleArtifactTypes = new JSONArray();
+        JSONArray moduleLinkTypes = new JSONArray();
+        ArrayList<String> uniqueModules = new ArrayList<>();
+        ArrayList<String> uniqueArtifactTypes = new ArrayList<>();
+        ArrayList<String> uniqueLinkTypes = new ArrayList<>();
+        int i = 0;
+        for(Module m: this.modules){
+            if(!uniqueModules.contains(m.name)){
+                uniqueModules.add(m.name);
+                JSONObject tempMod = new JSONObject();
+                tempMod.put("label", m.name);
+                tempMod.put("id", this.getModuleIndex(m.name));
+                i++;
+
+                JSONArray tempArts = m.getArtifactTypes();
+                for(int j =0; j < tempArts.length(); j++){
+                    JSONObject art = tempArts.getJSONObject(j);
+                    if(!uniqueArtifactTypes.contains(art.getString("value"))){
+                        uniqueArtifactTypes.add(art.getString("value"));
+                        moduleArtifactTypes.put(art);
+                    }
+                }
+
+                JSONArray tempLinks = m.getLinkTypes();
+                for(int j =0; j < tempLinks.length(); j++){
+                    JSONObject link = tempLinks.getJSONObject(j);
+                    if(!uniqueLinkTypes.contains(link.getString("value"))){
+                        uniqueLinkTypes.add(link.getString("value"));
+                        moduleLinkTypes.put(link);
+                    }
+                }
+
+                moduleNames.put(tempMod);
+            }
+        }
+        moduleData.put("names", moduleNames);
+        moduleData.put("artifactTypes", moduleArtifactTypes);
+        moduleData.put("linkTypes", moduleLinkTypes);
+        return moduleData;
+    }
+
     private static JSONArray getHeaderOptions(){
         return new JSONArray("[\n" +
                 " { \"name\": \"ID\" },\n" +
@@ -229,13 +374,24 @@ public class ProjectArea {
                 "]");
     }
 
-    JSONObject getFields(){
+    JSONObject getFields(Boolean showModules){
         JSONObject fields = new JSONObject();
-        fields.put("parentFolders", getParentFolders());
-        fields.put("linkTypes", getLinkTypes().getJSONArray("linkTypes"));
+       /* if(showModules){
+            JSONObject tempModules = getModuleNames();
+            fields.put("parentFolders", tempModules.getJSONArray("names"));
+            fields.put("artifactTypes", tempModules.getJSONArray("artifactTypes"));
+            fields.put("linkTypes", tempModules.getJSONArray("linkTypes"));
+        }else{*/
+            fields.put("parentFolders", getParentFolders());
+            fields.put("artifactTypes", getArtifactTypes());
+            fields.put("linkTypes", getLinkTypes().getJSONArray("linkTypes"));
+        //}
+
+
         fields.put("legend", getLinkTypes().getJSONArray("legend"));
-        fields.put("artifactTypes", getArtifactTypes());
+
         fields.put("headers", getHeaderOptions());
+        fields.put("modules", getModuleNames());
 
         return fields;
     }
@@ -252,7 +408,7 @@ public class ProjectArea {
         columnHeaderCount.put(edgeCountCell);
 
         //Empty Column Header(first column header - blank)
-        JSONObject emptyColumnHeader = getHeaderObject("","","","","","","rowCounter");
+        JSONObject emptyColumnHeader = getHeaderObject("","","","","", "","","rowCounter");
         columnHeaders.put(emptyColumnHeader);
 
         //Get all column headers and corresponding count cells
@@ -260,19 +416,19 @@ public class ProjectArea {
             JSONObject countCell = getCellObject(Integer.toString(a.links.size()), a.name, a.id, "", "", false, "", "", "", "","colCountCell");
             columnHeaderCount.put(countCell);
 
-            JSONObject temp = getHeaderObject(a.name, a.url, a.id, a.artifactType, a.parentFolder,Integer.toString(a.links.size()), "");
+            JSONObject temp = getHeaderObject(a.name, a.url, a.id, a.artifactType, a.parentFolder, a.module,Integer.toString(a.links.size()), "");
             columnHeaders.put(temp);
         });
 
         //Empty Row Header(first row header - blank)
-        JSONObject emptyRowHeader = getHeaderObject("","","","","","","rowCounter");
+        JSONObject emptyRowHeader = getHeaderObject("","","","","", "","","rowCounter");
         emptyRowHeader.put("cells", columnHeaderCount);
 
         rows.put(emptyRowHeader);
 
         rowArtifacts.forEach(a -> {
             //Get Row Header
-            JSONObject rowHeader = getHeaderObject(a.name, a.url, a.id, a.artifactType, a.parentFolder, Integer.toString(a.links.size()), "");
+            JSONObject rowHeader = getHeaderObject(a.name, a.url, a.id, a.artifactType, a.parentFolder, a.module, Integer.toString(a.links.size()), "");
 
             //Count cell to start row
             JSONObject rowCount = getCellObject(Integer.toString(a.links.size()), "", "", "", "", false, "", "", "", "rowCounter", "rowCountCell");
@@ -288,7 +444,7 @@ public class ProjectArea {
 
                 boolean colAdd = false;
                 for(Link l: j.links){
-                    if(a.itemId.equals(l.id)){
+                    if(a.itemId.equals(l.id) || (a.id.equals(l.id) && a.name.equals(l.title))){
                         if(colAdd){
                             colLinkType = colLinkType + " and " + l.linkType;
                         }else{
@@ -300,7 +456,7 @@ public class ProjectArea {
 
                 boolean rowAdd = false;
                 for(Link l: a.links){
-                    if(j.itemId.equals(l.id)){
+                    if(j.itemId.equals(l.id) || (j.id.equals(l.id) && j.name.equals(l.title))){
                         if(rowAdd){
                             rowLinkType = rowLinkType + " and " + l.linkType;
                         }else{
@@ -350,7 +506,7 @@ public class ProjectArea {
         return cell;
     }
 
-    private JSONObject getHeaderObject(String name, String url, String id, String type, String parentFolder, String numLinks, String tableElemID){
+    private JSONObject getHeaderObject(String name, String url, String id, String type, String parentFolder, String module, String numLinks, String tableElemID){
         JSONObject header = new JSONObject();
 
         header.put("name", name);
@@ -358,6 +514,7 @@ public class ProjectArea {
         header.put("id", id);
         header.put("type", type);
         header.put("parentFolder", parentFolder);
+        header.put("module", module);
         header.put("numLinks", numLinks);
         header.put("tableElemID", tableElemID);
 
@@ -369,13 +526,36 @@ public class ProjectArea {
 
 
         JSONObject formattedPayload = new JSONObject();
+        JSONArray JSONRows = new JSONArray();
+        JSONArray JSONColumns = new JSONArray();
+        JSONArray JSONRowTypes = new JSONArray();
+        JSONArray JSONColumnTypes = new JSONArray();
+        JSONArray JSONDependencies = new JSONArray();
+        if(payload.getBoolean("showModules")){
+            JSONColumns =      payload.getJSONObject("module").getJSONArray("columns");
+            JSONRows =         payload.getJSONObject("module").getJSONArray("rows");
+            JSONRowTypes =     payload.getJSONObject("module").getJSONArray("rowTypes");
+            JSONColumnTypes =  payload.getJSONObject("module").getJSONArray("columnTypes");
+            JSONDependencies = payload.getJSONObject("module").getJSONArray("linkTypes");
 
+        }else{
+            JSONColumns = payload.getJSONArray("columns");
+            JSONRows = payload.getJSONArray("rows");
+            JSONRowTypes = payload.getJSONArray("rowTypes");
+            JSONColumnTypes = payload.getJSONArray("columnTypes");
+            JSONDependencies = payload.getJSONArray("dependencies");
+        }
         JSONArray columns = new JSONArray();
-        for(int i = 0; i < payload.getJSONArray("columns").length(); i++){
+        for(int i = 0; i < JSONColumns.length(); i++){
             JSONObject tempColumn = new JSONObject();
-            String tempName = payload.getJSONArray("columns").getJSONObject(i).getString("name");
+            String tempName = JSONColumns.getJSONObject(i).getString("name");
             tempColumn.put("label", tempName);
-            tempColumn.put("id", "col" + this.getParentFolderIndex(tempName));
+            if(payload.getBoolean("showModules")){
+                tempColumn.put("id", "col" + this.getModuleIndex(tempName));
+            }else{
+                tempColumn.put("id", "col" + this.getParentFolderIndex(tempName));
+            }
+
 
             columns.put(tempColumn);
         }
@@ -383,11 +563,16 @@ public class ProjectArea {
         formattedPayload.put("columns", columns);
 
         JSONArray rows = new JSONArray();
-        for(int i = 0; i < payload.getJSONArray("rows").length(); i++){
+        for(int i = 0; i < JSONRows.length(); i++){
             JSONObject tempRow = new JSONObject();
-            String tempName = payload.getJSONArray("rows").getJSONObject(i).getString("name");
+            String tempName = JSONRows.getJSONObject(i).getString("name");
             tempRow.put("label", tempName);
-            tempRow.put("id", "row" + this.getParentFolderIndex(tempName));
+
+            if(payload.getBoolean("showModules")){
+                tempRow.put("id", "row" + this.getModuleIndex(tempName));
+            }else{
+                tempRow.put("id", "row" + this.getParentFolderIndex(tempName));
+            }
 
             rows.put(tempRow);
         }
@@ -395,9 +580,9 @@ public class ProjectArea {
         formattedPayload.put("rows", rows);
 
         JSONArray rowTypes = new JSONArray();
-        for(int i = 0; i < payload.getJSONArray("rowTypes").length(); i++){
+        for(int i = 0; i < JSONRowTypes.length(); i++){
             JSONObject tempRow = new JSONObject();
-            String tempName = payload.getJSONArray("rowTypes").getJSONObject(i).getString("name");
+            String tempName = JSONRowTypes.getJSONObject(i).getString("name");
             tempRow.put("label", tempName);
             tempRow.put("value", tempName);
 
@@ -407,9 +592,9 @@ public class ProjectArea {
         formattedPayload.put("rowTypes", rowTypes);
 
         JSONArray columnTypes = new JSONArray();
-        for(int i = 0; i < payload.getJSONArray("columnTypes").length(); i++){
+        for(int i = 0; i < JSONColumnTypes.length(); i++){
             JSONObject tempColumnType = new JSONObject();
-            String tempName = payload.getJSONArray("columnTypes").getJSONObject(i).getString("name");
+            String tempName = JSONColumnTypes.getJSONObject(i).getString("name");
             tempColumnType.put("label", tempName);
             tempColumnType.put("value", tempName);
 
@@ -419,9 +604,9 @@ public class ProjectArea {
         formattedPayload.put("columnTypes", columnTypes);
 
         JSONArray dependencies = new JSONArray();
-        for(int i = 0; i < payload.getJSONArray("dependencies").length(); i++){
+        for(int i = 0; i < JSONDependencies.length(); i++){
             JSONObject tempDependencies = new JSONObject();
-            String tempName = payload.getJSONArray("dependencies").getJSONObject(i).getString("name");
+            String tempName = JSONDependencies.getJSONObject(i).getString("name");
             tempDependencies.put("label", tempName);
             tempDependencies.put("value", tempName);
 
@@ -459,13 +644,31 @@ public class ProjectArea {
         return 0;
     }
 
+    private int getModuleIndex(String name){
+
+        ArrayList<String> uniqueModules = new ArrayList<>();
+        for(Module m: this.modules){
+            if(!uniqueModules.contains(m.name)){
+                uniqueModules.add(m.name);
+            }
+        }
+
+        for(int i = 0; i < uniqueModules.size(); i++){
+            if(uniqueModules.get(i).equals(name)){
+
+                return i + 1;
+            }
+        }
+        return 0;
+    }
+
     private ArrayList<Artifact> getOnlyLinks(ArrayList<Artifact> baseList, ArrayList<Artifact> compareList){
         ArrayList<Artifact> artifacts = new ArrayList<>();
         for(Artifact r: baseList){
             boolean add = false;
             for(Link l: r.links){
                 for(Artifact c: compareList){
-                    if(c.itemId.equals(l.id)){
+                    if(c.itemId.equals(l.id) || (c.id.equals(l.id) && c.name.equals(l.title))){
                         add = true;
                     }
                 }
@@ -481,13 +684,17 @@ public class ProjectArea {
         ArrayList<String> uniqueFullLinks = new ArrayList<>();
 
         ArrayList<String> rowItemIDs =  new ArrayList<>();
+        ArrayList<String> rowIDs =  new ArrayList<>();
         for (Artifact row : this.rowArtifacts) {
             rowItemIDs.add(row.itemId);
+            rowIDs.add(row.id);
         }
 
         ArrayList<String> colItemIDs =  new ArrayList<>();
+        ArrayList<String> colIDs =  new ArrayList<>();
         for (Artifact col : this.columnArtifacts) {
             colItemIDs.add(col.itemId);
+            colIDs.add(col.id);
         }
 
         JSONArray legend = new JSONArray();
@@ -495,8 +702,8 @@ public class ProjectArea {
 
             for(Link l: r.links){
                 for(Artifact c: compareList){
-                    if(c.itemId.equals(l.id)){
-                        if(!uniqueFullLinks.contains(getLinkFullName(l.linkType)) && (rowItemIDs.contains(l.id) || colItemIDs.contains(l.id))) {
+                    if(c.itemId.equals(l.id) || (c.id.equals(l.id) && c.name.equals(l.title))){
+                        if(!uniqueFullLinks.contains(getLinkFullName(l.linkType)) && ((rowItemIDs.contains(l.id) || rowIDs.contains(l.id)) || (colItemIDs.contains(l.id) || colIDs.contains(l.id)))) {
                             JSONObject temp = new JSONObject();
                             uniqueFullLinks.add(getLinkFullName(l.linkType));
                             temp.put("name", getLinkFullName(l.linkType));
@@ -539,7 +746,7 @@ public class ProjectArea {
             return "olive";
         else if(linkType.toLowerCase().contains("refine"))
             return "orangered";
-        else if(linkType.toLowerCase().equals("satisfies") || linkType.toLowerCase().equals("satisfied by"))
+        else if(linkType.toLowerCase().contains("satisfie") && !linkType.toLowerCase().contains("architecture"))
             return "blue";
         else if(linkType.toLowerCase().contains("satisfie") && linkType.toLowerCase().contains("architecture"))
             return "orange";
@@ -582,7 +789,7 @@ public class ProjectArea {
             return "References/Referenced By";
         else if(linkType.toLowerCase().contains("refine"))
             return "Refines Architecture Element/Refined By Architecture Element";
-        else if(linkType.toLowerCase().equals("satisfies") || linkType.toLowerCase().equals("satisfied by"))
+        else if((linkType.toLowerCase().contains("satisfie")) && !linkType.toLowerCase().contains("architecture"))
             return "Satisfies/Satisfied By";
         else if(linkType.toLowerCase().contains("satisfie") && linkType.toLowerCase().contains("architecture"))
             return "Satisfies Architecture Element / Satisfied By Architecture Element";
@@ -631,6 +838,55 @@ public class ProjectArea {
             artifactArray.put(artifactObj);
         });
         project.put("artifacts", artifactArray);
+
+        JSONArray modulesArray = new JSONArray();
+        this.modules.forEach(m -> {
+            JSONObject moduleObj = new JSONObject();
+            moduleObj.put("ModuleName", m.name);
+            moduleObj.put("ModuleID", m.id);
+            moduleObj.put("ModuleItemID", m.itemId);
+            moduleObj.put("ModuleParentFolder", m.parentFolder);
+            moduleObj.put("ModuleFormat", m.format);
+            moduleObj.put("ModuleType", m.type);
+            moduleObj.put("ModuleURL", m.url);
+
+            JSONArray moduleArtifactsArray = new JSONArray();
+            m.artifacts.forEach(ma -> {
+                JSONObject moduleArtifact = new JSONObject();
+
+                moduleArtifact.put("ArtifactType", ma.artifactType);
+                moduleArtifact.put("ArtifactID", ma.id);
+                moduleArtifact.put("ArtifactItemID", ma.itemId);
+                moduleArtifact.put("ArtifactName", ma.name);
+                moduleArtifact.put("ArtifactParentFolder", ma.parentFolder);
+                moduleArtifact.put("ArtifactModule", ma.module);
+                moduleArtifact.put("ArtifactURL", ma.url);
+                moduleArtifact.put("ArtifactFormat", ma.format);
+
+                JSONArray linkArray = new JSONArray();
+                ma.links.forEach(l -> {
+                    JSONObject moduleLinkObj = new JSONObject();
+
+                    moduleLinkObj.put("LinkID", l.id);
+                    moduleLinkObj.put("LinkTitle", l.title);
+                    moduleLinkObj.put("LinkDescription", l.description);
+                    moduleLinkObj.put("LinkFormat", l.format);
+                    moduleLinkObj.put("LinkArtifactFormat", l.artifactFormat);
+                    moduleLinkObj.put("LinkType", l.type);
+                    moduleLinkObj.put("LinkLinkTitle", l.linkTitle);
+
+                    linkArray.put(moduleLinkObj);
+                });
+                
+                moduleArtifact.put("links", linkArray);
+                moduleArtifactsArray.put(moduleArtifact);
+            });
+
+            moduleObj.put("artifacts", moduleArtifactsArray);
+            modulesArray.put(moduleObj);
+        });
+
+        project.put("modules", modulesArray);
 
         return project;
     }

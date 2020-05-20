@@ -10,6 +10,7 @@ class HeaderContextArea extends Component {
     const id = artifact.id;
     const numLinks = artifact.numLinks;
     const parentFolder = artifact.parentFolder;
+    const module = artifact.module;
     const url = artifact.url;
 
     return (
@@ -23,10 +24,17 @@ class HeaderContextArea extends Component {
               <strong>{id}</strong>: {name}
             </Popover.Title>
             <Popover.Content>
-              <div>
-                <strong>Parent Folder: </strong>
-                {parentFolder}
-              </div>
+              {module != "" ? (
+                <div>
+                  <strong>Module: </strong>
+                  {module}
+                </div>
+              ) : (
+                <div>
+                  <strong>Parent Folder: </strong>
+                  {parentFolder}
+                </div>
+              )}
               <div>
                 <strong>Artifact Type: </strong>
                 {type}

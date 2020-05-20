@@ -79,6 +79,152 @@ public class ServiceAccountManager {
 
     }
 
+    public ArrayList<Module> getModules(String projectUri){
+        JSONObject data = XML.toJSONObject(executeGet("https://mbse-rmdev.saic.com:9443/rm/publish/modules?projectURI=" + projectUri));
+        JSONArray modulesJSON;
+
+        try{
+            modulesJSON = data.getJSONObject("ds:dataSource").getJSONArray("ds:artifact");
+        }catch(Exception ex){
+            modulesJSON = new JSONArray();
+            try{
+                System.out.println("Attempting Single Artifact");
+                modulesJSON.put(data.getJSONObject("ds:dataSource").getJSONObject("ds:artifact"));
+
+            }catch(Exception ex2){
+                System.out.println("No Artifacts Found");
+                modulesJSON = new JSONArray();
+            }
+        }
+
+        ArrayList<Module> modules = new ArrayList<>();
+
+        for(int i =0; i < modulesJSON.length(); i++){
+            JSONObject moduleJSON = modulesJSON.getJSONObject(i);
+            Module module = getModuleArtifacts(parseModule(moduleJSON));
+
+            modules.add(module);
+        }
+
+        return modules;
+    }
+
+    private Module getModuleArtifacts(Module module){
+        JSONObject moduleData = XML.toJSONObject(executeGet("https://mbse-rmdev.saic.com:9443/rm/publish/resources?moduleURI=" + module.itemId)).getJSONObject("ds:dataSource");
+        JSONArray moduleArtifacts = new JSONArray();
+
+        try{
+            //FileWriter riter = new FileWriter( module.itemId + ".txt", true);
+            //riter.write(moduleData.toString(10));
+            //riter.close();
+            moduleArtifacts = moduleData.getJSONArray("ds:artifact");
+        }catch(Exception ex){
+            try{
+                JSONObject moduleArtifact = moduleData.getJSONObject("ds:artifact");
+                moduleArtifacts.put(moduleArtifact);
+            }catch(Exception ex2){
+                ex2.printStackTrace();
+            }
+        }
+
+        for(int i = 0; i < moduleArtifacts.length(); i++){
+            JSONObject moduleArtifact = moduleArtifacts.getJSONObject(i);
+            Artifact newArtifact = parseModuleArtifact(moduleArtifact);
+
+            try{
+                JSONObject traceability = moduleArtifact.getJSONObject("ds:traceability");
+                ArrayList<Link> links = parseModuleLinks(traceability);
+                links.forEach(l -> {
+                    newArtifact.addLink(l);
+                });
+
+            }catch(Exception ex){
+                System.out.println("No Links found for " + newArtifact.name);
+            }
+
+            module.addArtifact(newArtifact);
+        }
+
+        return module;
+        //JSONArray moduleArtifacts
+    }
+
+    private ArrayList<Link> parseModuleLinks(JSONObject traceability){
+        JSONArray JSONLinks = new JSONArray();
+        try{
+            JSONLinks = traceability.getJSONObject("ds:links").getJSONArray("ds:Link");
+        }catch(Exception ex){
+            try{
+                JSONObject JSONLink = traceability.getJSONObject("ds:links").getJSONObject("ds:Link");
+                JSONLinks.put(JSONLink);
+            }catch(Exception ex2){
+
+            }
+        }
+
+        ArrayList<Link> links = new ArrayList<>();
+
+        for(int i = 0; i < JSONLinks.length(); i++){
+            JSONObject JSONLink = JSONLinks.getJSONObject(i);
+            String id = Integer.toString(JSONLink.getInt("rrm:identifier"));
+            String title = JSONLink.getJSONObject("ds:content").getString("rrm:title");
+            String description = JSONLink.getJSONObject("ds:content").getString("rrm:description");
+            String format = JSONLink.getJSONObject("ds:content").getString("rrm:format");
+            String artifactFormat = JSONLink.getJSONObject("ds:content").getString("ds:artifactFormat");
+            String type = JSONLink.getString("type");
+            String linkTitle = JSONLink.getString("rrm:title");
+
+            links.add(new Link(id, title, description, format, artifactFormat, type, linkTitle));
+        }
+
+        return links;
+    }
+
+    private Artifact parseModuleArtifact(JSONObject moduleArtifact){
+        String name;
+        try{
+            name = moduleArtifact.getJSONObject("rrm:title").getString("content");
+        }catch(Exception ex){
+            name = "Undefined";
+        }
+
+        String artifactType = moduleArtifact.getJSONObject("rrm:collaboration").getJSONObject("rrm:attributes").getJSONObject("attribute:objectType").getString("attribute:name");
+        String id = Integer.toString(moduleArtifact.getJSONObject("rrm:identifier").getInt("content"));
+        String itemId = moduleArtifact.getJSONObject("rrm:title").getString("attribute:itemId");
+        String parentFolder = "";
+        String moduleString = "";
+        String url = moduleArtifact.getString("rrm:about");
+        String format = moduleArtifact.getJSONObject("rrm:format").getString("content");
+
+        return new Artifact(artifactType, id, itemId, name, parentFolder, moduleString, url, format);
+    }
+
+    private Module parseModule(JSONObject moduleJSON){
+        String name;
+        try{
+            name = moduleJSON.getJSONObject("rrm:title").getString("content");
+        }catch(Exception ex){
+            name = moduleJSON.getJSONObject("rrm:title").toString(5);
+        }
+
+        String id = Integer.toString(moduleJSON.getJSONObject("rrm:identifier").getInt("content"));
+        String parentFolder = moduleJSON.getJSONObject("ds:location").getJSONObject("ds:parentFolder").getString("rrm:title");
+        String format = moduleJSON.getJSONObject("rrm:format").getString("content");
+        String moduleItemID = moduleJSON.getString("attribute:itemId");
+        String type;
+        try{
+            type = moduleJSON.getJSONObject("rrm:collaboration").getJSONObject("rrm:attributes").getJSONObject("attributes:objectType").getString("attribute:name");
+        }catch(Exception ex){
+            type = "";
+        }
+
+        String url = moduleJSON.getString("rrm:about");
+
+        Module module = new Module(name, id, moduleItemID, parentFolder, format, type, url);
+
+        return module;
+    }
+
     private static String getJsessionId(){
         try{
             List<HttpCookie> cookies = cookieManager.getCookieStore().getCookies();

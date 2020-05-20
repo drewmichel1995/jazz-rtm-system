@@ -184,13 +184,16 @@ public class DataSync {
 
                 }
 
+                
                 if(!next.equals("")){
                     p.setArtifacts(artifactPagination(p.artifacts, next));
                 }
+
+                
             } catch (Exception e) {
                 //e.printStackTrace();
             }
-
+            p.setModules(service.getModules(p.projectUri));
         });
 
         return projectAreas;

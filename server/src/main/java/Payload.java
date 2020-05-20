@@ -11,16 +11,27 @@ public class Payload {
     ArrayList<String> dependencies;
     String showHeaders;
     Boolean linksOnly;
+    Boolean showModules;
 
 
     public Payload(String body){
         System.out.println(body);
         JSONObject scopes = new JSONObject(body);
-        this.rows = JSONArrayToArrayList(scopes.getJSONArray("rows"));
-        this.columns = JSONArrayToArrayList(scopes.getJSONArray("columns"));
-        this.rowTypes = JSONArrayToArrayList(scopes.getJSONArray("rowTypes"));
-        this.columnTypes = JSONArrayToArrayList(scopes.getJSONArray("columnTypes"));
-        this.dependencies = JSONArrayToArrayList(scopes.getJSONArray("dependencies"));
+        this.showModules = scopes.getBoolean("showModules");
+        if(this.showModules){
+            this.rows = JSONArrayToArrayList(scopes.getJSONObject("module").getJSONArray("rows"));
+            this.columns = JSONArrayToArrayList(scopes.getJSONObject("module").getJSONArray("columns"));
+            this.rowTypes = JSONArrayToArrayList(scopes.getJSONObject("module").getJSONArray("rowTypes"));
+            this.columnTypes = JSONArrayToArrayList(scopes.getJSONObject("module").getJSONArray("columnTypes"));
+            this.dependencies = JSONArrayToArrayList(scopes.getJSONObject("module").getJSONArray("linkTypes"));
+        }else{
+            this.rows = JSONArrayToArrayList(scopes.getJSONArray("rows"));
+            this.columns = JSONArrayToArrayList(scopes.getJSONArray("columns"));
+            this.rowTypes = JSONArrayToArrayList(scopes.getJSONArray("rowTypes"));
+            this.columnTypes = JSONArrayToArrayList(scopes.getJSONArray("columnTypes"));
+            this.dependencies = JSONArrayToArrayList(scopes.getJSONArray("dependencies"));
+        }
+
         this.showHeaders = scopes.getString("showHeader");
         this.linksOnly = scopes.getBoolean("linksOnly");
     }

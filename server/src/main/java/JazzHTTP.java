@@ -87,26 +87,37 @@ public class JazzHTTP {
          * */
         get("/getFields/:projectURI", (req, res) -> {
 
-            System.out.println("Received Request /getFields");
-            ProjectArea project = new ProjectArea(req.params(":projectURI"));
-            getRes(res, "application/json");
+            try{
+                System.out.println("Received Request /getFields");
+                ProjectArea project = new ProjectArea(req.params(":projectURI"));
+                getRes(res, "application/json");
 
-            return project.getFields();
+                return project.getFields(false);
+            }catch(Exception ex){
+                ex.printStackTrace();
+                System.out.println("Received Request /getFields");
+                ProjectArea project = new ProjectArea(req.params(":projectURI"));
+                getRes(res, "application/json");
+
+                return project.getFields(false);
+            }
+
         });
 
         get("/getLoadedTable/:uniqueID", (req, res) -> {
 
             try{
                 System.out.println("Received Request /getLoadedTable");
-                System.out.println("Cookie: " + req.cookie("jazz_rtm_cookie"));
+                //System.out.println("Cookie: " + req.cookie("jazz_rtm_cookie"));
                 ProjectArea project = mongo.getUniqueIDProject(req.params(":uniqueID"), decodeCookie(req.cookie("jazz_rtm_cookie")));
                 getRes(res, "application/json");
 
                 if(!project.name.equals("")){
                     JSONObject temp = new JSONObject();
                     temp.put("success", true);
-                    temp.put("payload", project.getTableJSON(mongo.getUniqueIDPayload(req.params(":uniqueID"))));
-                    temp.put("fields", project.getFields());
+                    JSONObject payload = mongo.getUniqueIDPayload(req.params(":uniqueID"));
+                    temp.put("payload", project.getTableJSON(payload));
+                    temp.put("fields", project.getFields(payload.getBoolean("showModules")));
                     return temp;
                 }else{
                     JSONObject temp = new JSONObject();
@@ -174,7 +185,7 @@ public class JazzHTTP {
         get("/getAnalytics/:projectURI", (req, res) -> {
             JSONObject temp = new JSONObject();
             try{
-                if(decodeCookie(req.cookie("jazz_rtm_cookie")).contains(req.params(":projectURI"))){
+                //if(decodeCookie(req.cookie("jazz_rtm_cookie")).contains(req.params(":projectURI"))){
                     System.out.println("Received Request /getAnalytics");
                     AnalyticsHelper analytics = new AnalyticsHelper(req.params(":projectURI"));
                     getRes(res, "application/json");
@@ -183,7 +194,7 @@ public class JazzHTTP {
                     temp.put("analytics", analytics.toJSON());
 
                     return temp.toString();
-                }
+                //}
             }catch(Exception ex){
 
             }
@@ -273,8 +284,8 @@ public class JazzHTTP {
         res.status(200);
         res.type(type);
         //res.header("Access-Control-Allow-Origin", "http://mbse-appld10.corp.saic.com");
-        res.header("Access-Control-Allow-Origin", "https://mbse-rmdev.saic.com:9443");
-        //res.header("Access-Control-Allow-Origin", "*");
+        //res.header("Access-Control-Allow-Origin", "https://mbse-rmdev.saic.com:9443");
+        res.header("Access-Control-Allow-Origin", "*");
 
         return res;
     }

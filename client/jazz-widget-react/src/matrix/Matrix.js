@@ -24,7 +24,7 @@ class Matrix extends React.Component {
       done: false,
       isEmpty: false,
       fields: {},
-      payload: {}
+      payload: {},
     };
 
     this.onRowSearchChange = this.onRowSearchChange.bind(this);
@@ -35,12 +35,12 @@ class Matrix extends React.Component {
 
   componentDidMount() {
     const { uniqueID } = this.props.match.params;
-    var url = "/server/getLoadedTable/" + uniqueID;
+    var url = "http://localhost" + "/server/getLoadedTable/" + uniqueID;
     fetch(url, {
-      method: "get"
+      method: "get",
     })
-      .then(res => res.json())
-      .then(result => {
+      .then((res) => res.json())
+      .then((result) => {
         if (result.success) {
           let payload = result.payload;
           this.setState({
@@ -48,7 +48,7 @@ class Matrix extends React.Component {
             loading: false,
             isEmpty: payload.rows.length < 2 && payload.columns.length < 3,
             fields: result.fields,
-            payload: payload
+            payload: payload,
           });
           this.props.onTitleChange(
             payload.projectName,
@@ -66,13 +66,13 @@ class Matrix extends React.Component {
 
   onRowSearchChange(event) {
     this.setState({
-      rowSearchTerm: event.target.value
+      rowSearchTerm: event.target.value,
     });
   }
 
   onColumnSearchChange(event) {
     this.setState({
-      columnSearchTerm: event.target.value
+      columnSearchTerm: event.target.value,
     });
   }
 
@@ -82,15 +82,15 @@ class Matrix extends React.Component {
 
   reload(uniqueID) {
     this.setState({
-      loading: true
+      loading: true,
     });
 
-    var url = "/server/getLoadedTable/" + uniqueID;
+    var url = "http://localhost" + "/server/getLoadedTable/" + uniqueID;
     fetch(url, {
-      method: "get"
+      method: "get",
     })
-      .then(res => res.json())
-      .then(result => {
+      .then((res) => res.json())
+      .then((result) => {
         if (result.success) {
           let payload = result.payload;
           this.setState({
@@ -98,7 +98,7 @@ class Matrix extends React.Component {
             loading: false,
             isEmpty: payload.rows.length < 2 && payload.columns.length < 3,
             fields: result.fields,
-            payload: payload
+            payload: payload,
           });
           this.props.onTitleChange(
             payload.projectName,
@@ -125,7 +125,7 @@ class Matrix extends React.Component {
       rowSearchTerm,
       isEmpty,
       fields,
-      payload
+      payload,
     } = this.state;
 
     return (

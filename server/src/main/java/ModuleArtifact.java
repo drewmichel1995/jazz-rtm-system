@@ -1,29 +1,18 @@
 import java.util.ArrayList;
 
-public class Artifact {
+public class ModuleArtifact {
     String artifactType;
     String id;
     String itemId;
     String name;
     String parentFolder;
-    String url;
     String module;
+    String url;
     String format;
-    ArrayList<Link> links;
+    ArrayList<ModuleLink> links;
+    //Boolean links;
 
-    public Artifact(String artifactType, String id, String itemId, String name, String parentFolder, String url){
-        this.artifactType = artifactType;
-        this.id = id;
-        this.itemId = itemId;
-        this.name = name;
-        this.parentFolder = parentFolder;
-        this.url = url;
-        this.module = "";
-        this.format = "";
-        this.links = new ArrayList<>();
-    }
-
-    public Artifact(String artifactType, String id, String itemId, String name, String parentFolder, String module , String url, String format){
+    public ModuleArtifact(String artifactType, String id, String itemId, String name, String parentFolder, String module , String url, String format){
         this.artifactType = artifactType;
         this.id = id;
         this.itemId = itemId;
@@ -35,7 +24,7 @@ public class Artifact {
         this.links = new ArrayList<>();
     }
 
-    void addLink(Link link){
+    void addLink(ModuleLink link){
         this.links.add(link);
     }
 
@@ -50,12 +39,12 @@ public class Artifact {
 
         /* Check if o is an instance of Complex or not
           "null instanceof [type]" also returns false */
-        if (!(o instanceof Artifact)) {
+        if (!(o instanceof ModuleArtifact)) {
             return false;
         }
 
         // typecast o to Complex so that we can compare data members
-        Artifact c = (Artifact) o;
+        ModuleArtifact c = (ModuleArtifact) o;
 
         // Compare the data members and return accordingly
         return ((c.artifactType.equals(this.artifactType)) && (c.itemId.equals(this.itemId)) && (c.id.equals(this.id)) && (c.name.equals(this.name)) && (c.url.equals(this.url)) && (c.parentFolder.equals(this.parentFolder)));

@@ -15,10 +15,13 @@ class MatrixFilterOptions extends Component {
         columnTypes: [],
         rowTypes: [],
         dependencies: [],
+        modules: [],
         showHeader: "",
-        linksOnly: false
+        linksOnly: false,
       },
-
+      fields: {},
+      showModules: true,
+      containerText: "Parent Folders",
       parentFolderOptions: [],
       dependencyOptions: [],
       artifactTypes: [],
@@ -28,7 +31,7 @@ class MatrixFilterOptions extends Component {
       rowArtifactTypeSelected: "",
       columnArtifactTypeSelected: "",
       linksOnlySelected: false,
-      validCookie: true
+      validCookie: true,
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
@@ -38,38 +41,60 @@ class MatrixFilterOptions extends Component {
     this.handleColumnTypes = this.handleColumnTypes.bind(this);
     this.handleRowTypes = this.handleRowTypes.bind(this);
     this.toggleLinksOnly = this.toggleLinksOnly.bind(this);
+    this.toggleShowModule = this.toggleShowModule.bind(this);
   }
 
   componentDidMount() {
     var result = this.props.payload;
-    var fields = this.props.fields;
-    this.setState({
-      payload: result.payload,
-      columnSelected: result.formattedPayload.columns,
-      rowSelected: result.formattedPayload.rows,
-      dependencySelected: result.formattedPayload.dependencies,
-      rowArtifactTypeSelected: result.formattedPayload.rowTypes,
-      columnArtifactTypeSelected: result.formattedPayload.columnTypes,
-      linksOnlySelected: result.formattedPayload.linksOnly,
-      parentFolderOptions: fields.parentFolders,
-      dependencies: fields.linkTypes,
-      artifactTypes: fields.artifactTypes
-    });
+    var propFields = this.props.fields;
+    if (result.payload.showModules) {
+      this.setState({
+        fields: propFields,
+        payload: result.payload,
+        columnSelected: result.formattedPayload.columns,
+        rowSelected: result.formattedPayload.rows,
+        dependencySelected: result.formattedPayload.dependencies,
+        rowArtifactTypeSelected: result.formattedPayload.rowTypes,
+        columnArtifactTypeSelected: result.formattedPayload.columnTypes,
+        linksOnlySelected: result.formattedPayload.linksOnly,
+        parentFolderOptions: propFields.modules.names,
+        dependencies: propFields.modules.linkTypes,
+        artifactTypes: propFields.modules.artifactTypes,
+        showModules: result.payload.showModules,
+      });
+    } else {
+      this.setState({
+        fields: propFields,
+        payload: result.payload,
+        columnSelected: result.formattedPayload.columns,
+        rowSelected: result.formattedPayload.rows,
+        dependencySelected: result.formattedPayload.dependencies,
+        rowArtifactTypeSelected: result.formattedPayload.rowTypes,
+        columnArtifactTypeSelected: result.formattedPayload.columnTypes,
+        linksOnlySelected: result.formattedPayload.linksOnly,
+        parentFolderOptions: propFields.parentFolders,
+        dependencies: propFields.linkTypes,
+        artifactTypes: propFields.artifactTypes,
+        showModules: result.payload.showModules,
+      });
+    }
   }
 
   handleFormSubmit(e) {
     e.preventDefault();
     let data = {
       projectAreaURI: this.props.payload.projectURI,
-      payload: this.state.payload
+      payload: this.state.payload,
     };
-    var url = "/server/storePayload/";
+
+    console.log(JSON.stringify(data));
+    var url = "http://localhost" + "/server/storePayload/";
     fetch(url, {
       method: "POST",
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(result => {
+      .then((res) => res.json())
+      .then((result) => {
         this.props.reload(result.uniqueID);
       });
   }
@@ -84,7 +109,14 @@ class MatrixFilterOptions extends Component {
         rowTypes: [],
         dependencies: [],
         showHeader: "",
-        linksOnly: false
+        linksOnly: false,
+        module: {
+          columns: [],
+          row: [],
+          columnTypes: [],
+          rowTypes: [],
+          dependencies: [],
+        },
       },
 
       columnSelected: [],
@@ -92,83 +124,218 @@ class MatrixFilterOptions extends Component {
       dependencySelected: "",
       rowArtifactTypeSelected: "",
       columnArtifactTypeSelected: "",
-      linksOnlySelected: false
+      linksOnlySelected: false,
     });
   }
 
   handleColumnFolders(data) {
     const name = "columns";
-    var temp = data.map(item => ({ name: item.label }));
-    var tempId = data.map(item => item);
-
-    this.setState(prevState => ({
-      columnSelected: tempId,
-      payload: {
-        ...prevState.payload,
-        [name]: temp
-      }
-    }));
+    var temp;
+    var tempId;
+    if (data) {
+      var temp = data.map((item) => ({ name: item.label }));
+      var tempId = data.map((item) => item);
+    } else {
+      temp = [];
+      tempId = [];
+    }
+    if (this.state.showModules) {
+      this.setState((prevState) => ({
+        columnSelected: tempId,
+        payload: {
+          ...prevState.payload,
+          showModule: true,
+          module: {
+            ...prevState.payload.module,
+            [name]: temp,
+          },
+        },
+      }));
+    } else {
+      this.setState((prevState) => ({
+        columnSelected: tempId,
+        payload: {
+          ...prevState.payload,
+          [name]: temp,
+        },
+      }));
+    }
   }
 
   handleRowFolders(data) {
     const name = "rows";
-    var temp = data.map(item => ({ name: item.label }));
-    var tempId = data.map(item => item);
+    var temp;
+    var tempId;
+    if (data) {
+      var temp = data.map((item) => ({ name: item.label }));
+      var tempId = data.map((item) => item);
+    } else {
+      temp = [];
+      tempId = [];
+    }
 
-    this.setState(prevState => ({
-      rowSelected: tempId,
-      payload: {
-        ...prevState.payload,
-        [name]: temp
-      }
-    }));
+    if (this.state.showModules) {
+      this.setState((prevState) => ({
+        rowSelected: tempId,
+        payload: {
+          ...prevState.payload,
+          module: {
+            ...prevState.payload.module,
+            [name]: temp,
+          },
+        },
+      }));
+    } else {
+      this.setState((prevState) => ({
+        rowSelected: tempId,
+        payload: {
+          ...prevState.payload,
+          [name]: temp,
+        },
+      }));
+    }
   }
 
   handleDependencies(data) {
     const name = "dependencies";
-    var temp = data.map(item => ({ name: item.label }));
-    this.setState(prevState => ({
-      dependencySelected: data,
-      payload: {
-        ...prevState.payload,
-        [name]: temp
-      }
-    }));
+    var temp;
+    if (data) {
+      temp = data.map((item) => ({ name: item.label }));
+    } else {
+      temp = [];
+    }
+
+    if (this.state.showModules) {
+      this.setState((prevState) => ({
+        dependencySelected: data,
+        payload: {
+          ...prevState.payload,
+          module: {
+            ...prevState.payload.module,
+            ["linkTypes"]: temp,
+          },
+        },
+      }));
+    } else {
+      this.setState((prevState) => ({
+        dependencySelected: data,
+        payload: {
+          ...prevState.payload,
+          [name]: temp,
+        },
+      }));
+    }
   }
 
   handleColumnTypes(data) {
     const name = "columnTypes";
-    var temp = data.map(item => ({ name: item.label }));
-    this.setState(prevState => ({
-      columnArtifactTypeSelected: data,
-      payload: {
-        ...prevState.payload,
-        [name]: temp
-      }
-    }));
+    var temp;
+    if (data) {
+      temp = data.map((item) => ({ name: item.label }));
+    } else {
+      temp = [];
+    }
+
+    if (this.state.showModules) {
+      this.setState((prevState) => ({
+        columnArtifactTypeSelected: data,
+        payload: {
+          ...prevState.payload,
+          module: {
+            ...prevState.payload.module,
+            [name]: temp,
+          },
+        },
+      }));
+    } else {
+      this.setState((prevState) => ({
+        columnArtifactTypeSelected: data,
+        payload: {
+          ...prevState.payload,
+          [name]: temp,
+        },
+      }));
+    }
   }
 
   handleRowTypes(data) {
     const name = "rowTypes";
-    var temp = data.map(item => ({ name: item.label }));
-    this.setState(prevState => ({
-      rowArtifactTypeSelected: data,
-      payload: {
-        ...prevState.payload,
-        [name]: temp
-      }
-    }));
+    var temp;
+    if (data) {
+      temp = data.map((item) => ({ name: item.label }));
+    } else {
+      temp = [];
+    }
+
+    if (this.state.showModules) {
+      this.setState((prevState) => ({
+        rowArtifactTypeSelected: data,
+        payload: {
+          ...prevState.payload,
+          module: {
+            ...prevState.payload.module,
+            [name]: temp,
+          },
+        },
+      }));
+    } else {
+      this.setState((prevState) => ({
+        rowArtifactTypeSelected: data,
+        payload: {
+          ...prevState.payload,
+          [name]: temp,
+        },
+      }));
+    }
   }
 
   toggleLinksOnly() {
     const name = "linksOnly";
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       linksOnlySelected: !this.state.linksOnlySelected,
       payload: {
         ...prevState.payload,
-        [name]: !this.state.payload.linksOnly
-      }
+        [name]: !this.state.payload.linksOnly,
+      },
     }));
+  }
+
+  toggleShowModule() {
+    const name = "showModules";
+    console.log(!this.state.showModules);
+    if (!this.state.showModules) {
+      this.setState((prevState) => ({
+        showModules: !this.state.showModules,
+        rowSelected: [],
+        columnSelected: [],
+        rowArtifactTypeSelected: [],
+        columnArtifactTypeSelected: [],
+        dependencySelected: [],
+        parentFolderOptions: this.state.fields.modules.names,
+        artifactTypes: this.state.fields.modules.artifactTypes,
+        dependencyOptions: this.state.fields.modules.linkTypes,
+        payload: {
+          ...prevState.payload,
+          [name]: !this.state.payload.showModules,
+        },
+      }));
+    } else {
+      this.setState((prevState) => ({
+        showModules: !this.state.showModules,
+        rowSelected: [],
+        columnSelected: [],
+        rowArtifactTypeSelected: [],
+        columnArtifactTypeSelected: [],
+        dependencySelected: [],
+        parentFolderOptions: this.state.fields.parentFolders,
+        artifactTypes: this.state.fields.artifactTypes,
+        dependencyOptions: this.state.fields.linkTypes,
+        payload: {
+          ...prevState.payload,
+          [name]: !this.state.payload.showModules,
+        },
+      }));
+    }
   }
 
   render() {
@@ -182,7 +349,8 @@ class MatrixFilterOptions extends Component {
       columnArtifactTypeSelected,
       rowArtifactTypeSelected,
       linksOnlySelected,
-      validCookie
+      validCookie,
+      showModules,
     } = this.state;
     return (
       <div style={{ margin: "20px" }}>
@@ -190,11 +358,13 @@ class MatrixFilterOptions extends Component {
           <Form>
             <Row className="matrix-options-row">
               <Col sm={4}>
-                <Form.Label className="form-text">Column Folders</Form.Label>
+                <Form.Label className="form-text">
+                  {showModules ? "Column Modules" : "Column Folders"}
+                </Form.Label>
                 <MultiSelect
-                  items={parentFolderOptions.map(item => ({
+                  items={parentFolderOptions.map((item) => ({
                     label: item.label,
-                    id: "col" + item.id
+                    id: "col" + item.id,
                   }))}
                   onChange={this.handleColumnFolders}
                   selectedItems={columnSelected}
@@ -203,11 +373,13 @@ class MatrixFilterOptions extends Component {
                 />
               </Col>
               <Col sm={4}>
-                <Form.Label className="form-text">Row Folders</Form.Label>
+                <Form.Label className="form-text">
+                  {showModules ? "Row Modules" : "Row Folders"}
+                </Form.Label>
                 <MultiSelect
-                  items={parentFolderOptions.map(item => ({
+                  items={parentFolderOptions.map((item) => ({
                     label: item.label,
-                    id: "row" + item.id
+                    id: "row" + item.id,
                   }))}
                   onChange={this.handleRowFolders}
                   selectedItems={rowSelected}
@@ -216,7 +388,28 @@ class MatrixFilterOptions extends Component {
                 />
               </Col>
               <Col>
-                <Form.Label> </Form.Label>
+                <Form.Group>
+                  <Col className="point">
+                    <Form.Check
+                      type="switch"
+                      id="show-module-switch"
+                      label="Module Artifacts"
+                      onChange={this.toggleShowModule}
+                      checked={showModules}
+                      className="form-text"
+                    />
+                  </Col>
+                  <Col className="point">
+                    <Form.Check
+                      type="switch"
+                      id="links-only-switch"
+                      label="Links Only"
+                      onChange={this.toggleLinksOnly}
+                      checked={linksOnlySelected}
+                      className="form-text"
+                    />
+                  </Col>
+                </Form.Group>
                 <Form.Group>
                   <Select
                     options={dependencies}
@@ -250,27 +443,26 @@ class MatrixFilterOptions extends Component {
                     className="point"
                   />
                 </Form.Group>
-                <Form.Group className="point">
-                  <Form.Check
-                    type="switch"
-                    id="links-only-switch"
-                    label="Display Links Only"
-                    onChange={this.toggleLinksOnly}
-                    checked={linksOnlySelected}
-                    className="form-text"
-                  />
-                </Form.Group>
+
                 <Row className="button-row">
-                  <Button
-                    variant="success"
-                    onClick={this.handleFormSubmit}
-                    block
-                  >
-                    Submit
-                  </Button>
-                  <Button variant="danger" onClick={this.handleClearForm} block>
-                    Clear Selected
-                  </Button>
+                  <Col>
+                    <Button
+                      variant="success"
+                      onClick={this.handleFormSubmit}
+                      block
+                    >
+                      Submit
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button
+                      variant="danger"
+                      onClick={this.handleClearForm}
+                      block
+                    >
+                      Clear
+                    </Button>
+                  </Col>
                 </Row>
               </Col>
             </Row>
