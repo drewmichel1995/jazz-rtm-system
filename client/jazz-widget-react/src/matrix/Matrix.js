@@ -35,7 +35,7 @@ class Matrix extends React.Component {
 
   componentDidMount() {
     const { uniqueID } = this.props.match.params;
-    var url = "http://localhost" + "/server/getLoadedTable/" + uniqueID;
+    var url = "/server/getLoadedTable/" + uniqueID;
     fetch(url, {
       method: "get",
     })
@@ -85,7 +85,7 @@ class Matrix extends React.Component {
       loading: true,
     });
 
-    var url = "http://localhost" + "/server/getLoadedTable/" + uniqueID;
+    var url = "/server/getLoadedTable/" + uniqueID;
     fetch(url, {
       method: "get",
     })

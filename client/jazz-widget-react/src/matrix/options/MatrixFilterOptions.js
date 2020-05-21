@@ -88,7 +88,7 @@ class MatrixFilterOptions extends Component {
     };
 
     console.log(JSON.stringify(data));
-    var url = "http://localhost" + "/server/storePayload/";
+    var url = "/server/storePayload/";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
