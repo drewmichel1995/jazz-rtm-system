@@ -347,7 +347,7 @@ function httpGetFields(theUrl) {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
 			document.getElementById('form-container').style.display = 'block'; //Will show
 			document.getElementById('cover').style.display = 'none'; //Will hide
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
             var data = JSON.parse(xmlHttp.responseText);
             actuallyLoadFields(data);
         }else{
@@ -356,7 +356,7 @@ function httpGetFields(theUrl) {
     };
 	document.getElementById('cover').style.display = 'block'; //Will show
 	document.getElementById('form-container').style.display = 'none'; //Will hide
-	//gadgets.window.adjustHeight();
+	gadgets.window.adjustHeight();
     xmlHttp.open( "GET", theUrl, true );
     xmlHttp.send( null );
 }
@@ -566,7 +566,7 @@ function setFieldOnChange(){
 			}else{
 				payload.rows = [];
 			}
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
 		});
 		$("#columnElementList").on('change', function() {
 			if($("#columnElementList").val()){
@@ -574,7 +574,7 @@ function setFieldOnChange(){
 			}else{
 				payload.columns = [];
 			}
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
 		});
 		$("#rowScopeElementList").on('change', function() {
 			if($("#rowScopeElementList").val()){
@@ -582,7 +582,7 @@ function setFieldOnChange(){
 			}else{
 				payload.rowTypes = [];
 			}
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
 		});
 		$("#columnScopeElementList").on('change', function() {
 			if($("#columnScopeElementList").val()){
@@ -590,7 +590,7 @@ function setFieldOnChange(){
 			}else{
 				payload.columnTypes = [];
 			}
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
 		});
 		$("#dependencyCriteriaList").on('change', function() {
 			if($("#dependencyCriteriaList").val()){
@@ -598,7 +598,7 @@ function setFieldOnChange(){
 			}else{
 				payload.dependencies = [];
 			}
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
 		});
 		$("#linksOnly").change(function() {
 			payload.linksOnly = false;
@@ -625,7 +625,7 @@ function setFieldOnChange(){
 			}else{
 				payload.module.columns = [];
 			}
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
         });
         
         $("#rowModuleList").on('change', function() {
@@ -634,7 +634,7 @@ function setFieldOnChange(){
 			}else{
 				payload.module.rows = [];
 			}
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
         });
         
         $("#columnArtifactTypeList").on('change', function() {
@@ -643,7 +643,7 @@ function setFieldOnChange(){
 			}else{
 				payload.module.columnTypes = [];
 			}
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
         });
 
         $("#rowArtifactTypeList").on('change', function() {
@@ -652,7 +652,7 @@ function setFieldOnChange(){
 			}else{
 				payload.module.rowTypes = [];
 			}
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
         });
         
         $("#linkTypeList").on('change', function() {
@@ -661,7 +661,7 @@ function setFieldOnChange(){
 			}else{
 				payload.module.linkTypes = [];
 			}
-			//gadgets.window.adjustHeight();
+			gadgets.window.adjustHeight();
         });
 		
 		$("#projectAreaList").on('change', function() {
@@ -694,7 +694,7 @@ window.onload = function () {
 		setFieldOnChange();
 		loadProjectAreas();
 		document.getElementById('dialog-confirm').style.display = 'block'; //Will show
-        //gadgets.window.adjustHeight();
+        gadgets.window.adjustHeight();
 }
  </script>]]></Content>
 </Module>
