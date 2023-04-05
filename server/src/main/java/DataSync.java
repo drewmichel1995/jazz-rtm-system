@@ -57,7 +57,6 @@ public class DataSync {
     void getNewProjects(ProjectArea project){
         MongoCollection collection = mongo.collection();
         String result = service.executeGet(jazzURL + cfg.getProperty("jazzResourcesEndpoint") + project.projectUri);
-        //System.out.println("https://mbse-rmdev.saic.com:9443/rm/publish/resources?projectURI=" + p.projectUri + "&modifiedSince=" + dateFormatGmt.format(new Date()));
         JSONObject data = XML.toJSONObject(result);
 
         try{
